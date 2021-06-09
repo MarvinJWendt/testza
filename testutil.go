@@ -6,13 +6,13 @@ var Use Helper
 // Helper contains every util function in a structured format for easy usage.
 type Helper struct {
 	Assert AssertHelper
-	Input  InputHelper
+	Mock   MockHelper
 }
 
 // AssertHelper contains assertion functions.
 type AssertHelper struct{}
 
-// InputHelper contains helper functions for different input types.
-type InputHelper struct {
+// MockHelper contains helper functions for different input types.
+type MockHelper struct {
 	Strings StringsHelper
 }
