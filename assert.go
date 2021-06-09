@@ -10,10 +10,6 @@ import (
 	"github.com/atomicgo/testutil/internal"
 )
 
-var Assert AssertHelper
-
-type AssertHelper struct{}
-
 func (a AssertHelper) isEqual(expected interface{}, actual interface{}) bool {
 	if expected == nil || actual == nil {
 		return expected == actual

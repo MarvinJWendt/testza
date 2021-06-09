@@ -9,9 +9,9 @@ func TestStrings_Modify(t *testing.T) {
 	stringSlice := []string{"Hello", "World", "TeSt"}
 	expected := []string{"hello", "world", "test"}
 
-	input := Input.Strings.Modify(stringSlice, func(index int, value string) string {
+	input := Use.Input.Strings.Modify(stringSlice, func(index int, value string) string {
 		return s.ToLower(value)
 	})
 
-	Assert.Equal(t, expected, input)
+	Use.Assert.Equal(t, expected, input)
 }

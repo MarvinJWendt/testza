@@ -22,7 +22,7 @@ type assertionTestStructNested struct {
 // var testStructDifferent = assertionTestStruct{Name: "Marvin Wendt", Age: 20, Meta: assertionTestStructNested{ID: 7331, Admin: true}}
 
 func randomString() string {
-	return Input.Strings.GenerateRandom(rand.Intn(10), 1)[0]
+	return Use.Input.Strings.GenerateRandom(rand.Intn(10), 1)[0]
 }
 
 func generateStruct() (ret assertionTestStruct) {
@@ -40,19 +40,19 @@ func testEqual(t *testing.T, expected, actual interface{}) {
 	t.Run("Equal", func(t *testing.T) {
 		t.Helper()
 
-		Assert.Equal(t, expected, actual)
+		Use.Assert.Equal(t, expected, actual)
 	})
 
 	t.Run("EqualValues", func(t *testing.T) {
 		t.Helper()
 
-		Assert.EqualValues(t, expected, actual)
+		Use.Assert.EqualValues(t, expected, actual)
 	})
 }
 
 func TestAssert_Equal(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		Input.Strings.RunTests(t, Input.Strings.All(), func(t *testing.T, index int, str string) {
+		Use.Input.Strings.RunTests(t, Use.Input.Strings.All(), func(t *testing.T, index int, str string) {
 			t.Helper()
 
 			testEqual(t, str, str)
@@ -70,8 +70,8 @@ func TestAssert_Equal(t *testing.T) {
 
 func TestAssert_NotEqual(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		Input.Strings.RunTests(t, Input.Strings.All(), func(t *testing.T, index int, str string) {
-			Assert.NotEqual(t, str, str+" addon")
+		Use.Input.Strings.RunTests(t, Use.Input.Strings.All(), func(t *testing.T, index int, str string) {
+			Use.Assert.NotEqual(t, str, str+" addon")
 		})
 	})
 
@@ -82,10 +82,10 @@ func TestAssert_NotEqual(t *testing.T) {
 			s2 := s
 			s2.Name += " addon"
 			t.Run("NotEqual", func(t *testing.T) {
-				Assert.NotEqual(t, s, s2)
+				Use.Assert.NotEqual(t, s, s2)
 			})
 			t.Run("NotEqualValues", func(t *testing.T) {
-				Assert.NotEqualValues(t, s, s2)
+				Use.Assert.NotEqualValues(t, s, s2)
 			})
 		}
 	})
@@ -93,29 +93,29 @@ func TestAssert_NotEqual(t *testing.T) {
 
 func TestAssert_EqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		Input.Strings.RunTests(t, Input.Strings.All(), func(t *testing.T, index int, str string) {
-			Assert.EqualValues(t, str, str)
+		Use.Input.Strings.RunTests(t, Use.Input.Strings.All(), func(t *testing.T, index int, str string) {
+			Use.Assert.EqualValues(t, str, str)
 		})
 	})
 }
 
 func TestAssert_NotEqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		Input.Strings.RunTests(t, Input.Strings.All(), func(t *testing.T, index int, str string) {
-			Assert.NotEqualValues(t, str, str+" addon")
+		Use.Input.Strings.RunTests(t, Use.Input.Strings.All(), func(t *testing.T, index int, str string) {
+			Use.Assert.NotEqualValues(t, str, str+" addon")
 		})
 	})
 }
 
 func TestAssert_Implements(t *testing.T) {
 	t.Run("ConstImplementsStringer", func(t *testing.T) {
-		Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const))
+		Use.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const))
 	})
 }
 
 func TestAssert_NotImplements(t *testing.T) {
 	t.Run("assertionTestStructNotImplementsFmtStringer", func(t *testing.T) {
-		Assert.NotImplements(t, (*fmt.Stringer)(nil), new(assertionTestStruct))
+		Use.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(assertionTestStruct))
 	})
 }
 
