@@ -15,7 +15,7 @@
 </a>
 
 <a href="https://codecov.io/gh/atomicgo/testutil">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-0-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-170-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
 <a href="https://github.com/atomicgo/testutil/issues">
@@ -64,9 +64,78 @@ import "github.com/atomicgo/testutil"
 
 ## Usage
 
+#### type AssertHelper
+
 ```go
-var AssertHelper assert
+type AssertHelper struct{}
 ```
+
+
+```go
+var Assert AssertHelper
+```
+
+#### func (AssertHelper) Equal
+
+```go
+func (a AssertHelper) Equal(t TestingT, expected interface{}, actual interface{}, msg ...interface{})
+```
+Equal checks if two objects are equal.
+
+#### func (AssertHelper) EqualValues
+
+```go
+func (a AssertHelper) EqualValues(t TestingT, expected interface{}, actual interface{}, msg ...interface{})
+```
+EqualValues checks if two objects have equal values.
+
+#### func (AssertHelper) False
+
+```go
+func (a AssertHelper) False(t TestingT, value interface{}, msg ...interface{})
+```
+False checks if an expression or object resolves to false.
+
+#### func (AssertHelper) Implements
+
+```go
+func (a AssertHelper) Implements(t TestingT, interfaceObject, object interface{}, msg ...interface{})
+```
+Implements checks if an objects implements an interface.
+
+    testutil.Assert.Implements(t, (*YourInterface)(nil), new(YourObject))
+    testutil.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
+
+#### func (AssertHelper) NotEqual
+
+```go
+func (a AssertHelper) NotEqual(t TestingT, expected interface{}, actual interface{}, msg ...interface{})
+```
+NotEqual checks if two objects are not equal.
+
+#### func (AssertHelper) NotEqualValues
+
+```go
+func (a AssertHelper) NotEqualValues(t TestingT, expected interface{}, actual interface{}, msg ...interface{})
+```
+NotEqualValues checks if two objects do not have equal values.
+
+#### func (AssertHelper) NotImplements
+
+```go
+func (a AssertHelper) NotImplements(t TestingT, interfaceObject, object interface{}, msg ...interface{})
+```
+NotImplements checks if an object does not implement an interface.
+
+    testutil.Assert.NotImplements(t, (*YourInterface)(nil), new(YourObject))
+    testutil.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
+
+#### func (AssertHelper) True
+
+```go
+func (a AssertHelper) True(t TestingT, value interface{}, msg ...interface{})
+```
+True checks if an expression or object resolves to true.
 
 #### type InputHelper
 
