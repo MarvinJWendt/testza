@@ -3,8 +3,6 @@ package testutil
 import (
 	"math/rand"
 	"testing"
-	"time"
-	"unsafe"
 
 	"github.com/atomicgo/testutil/internal"
 )
@@ -48,30 +46,16 @@ func (s StringsHelper) Limit(testSet []string, max int) []string {
 
 // GenerateRandom returns random StringsHelper in a test set.
 func (s StringsHelper) GenerateRandom(length, count int) (result []string) {
-	const (
-		letters       = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		letterIdxBits = 6
-		letterIdxMask = 1<<letterIdxBits - 1
-		letterIdxMax  = 63 / letterIdxBits
-	)
+	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 	for i := 0; i < count; i++ {
-		b := make([]byte, length)
-		var src = rand.NewSource(time.Now().UnixNano() + int64(i))
-		for i, cache, remain := length-1, src.Int63(), letterIdxMax; i >= 0; {
-			if remain == 0 {
-				cache, remain = src.Int63(), letterIdxMax
-			}
-			if idx := int(cache & letterIdxMask); idx < len(letters) {
-				b[i] = letters[idx]
-				i--
-			}
-			cache >>= letterIdxBits
-			remain--
-		}
-		result = append(result, *(*string)(unsafe.Pointer(&b)))
-	}
+		str := make([]rune, length)
 
+		for i := range str {
+			str[i] = letters[rand.Intn(len(letters))]
+		}
+		result = append(result, string(str))
+	}
 	return
 }
 

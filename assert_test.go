@@ -122,11 +122,11 @@ func TestAssert_NotImplements(t *testing.T) {
 func TestAssertHelper_Contains(t *testing.T) {
 	s := []string{"Hello", "World"}
 
-	Use.Assert.NotContains(t, s, "World")
+	Use.Assert.Contains(t, s, "World")
 }
 
 func TestAssertHelper_NotContains(t *testing.T) {
 	s := []string{"Hello", "World"}
 
-	Use.Assert.Contains(t, s, "asdasd")
+	Use.Assert.NotContains(t, s, "asdasd")
 }
