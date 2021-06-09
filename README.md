@@ -66,7 +66,7 @@ import "github.com/atomicgo/testutil"
 
 ## Documentation
 
-[**Generated documentation with interactive examples on pkg.go.dev**](https://pkg.go.dev/github.com/atomicgo/testutil#section-documentation)
+[**Documentation with interactive examples on pkg.go.dev**](https://pkg.go.dev/github.com/atomicgo/testutil#section-documentation)
 
 
 
