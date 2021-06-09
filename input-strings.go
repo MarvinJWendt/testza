@@ -9,15 +9,15 @@ import (
 	"github.com/atomicgo/testutil/internal"
 )
 
-type strings struct{}
+type StringsHelper struct{}
 
 // Usernames returns a test set with usernames.
-func (s strings) Usernames() []string {
+func (s StringsHelper) Usernames() []string {
 	return []string{"MarvinJWendt", "Zipper1337", "n00b", "l33t"}
 }
 
 // HtmlTags returns a test set with html tags.
-func (s strings) HtmlTags() []string {
+func (s StringsHelper) HtmlTags() []string {
 	return []string{
 		"<script>alert('XSS')</script>",
 		"<script>",
@@ -27,8 +27,8 @@ func (s strings) HtmlTags() []string {
 	}
 }
 
-// All contains all string test sets plus ten generated random strings.
-func (s strings) All() (ret []string) {
+// All contains all string test sets plus ten generated random StringsHelper.
+func (s StringsHelper) All() (ret []string) {
 	ret = append(ret, s.Usernames()...)
 	ret = append(ret, s.HtmlTags()...)
 	ret = append(ret, s.GenerateRandom(rand.Intn(10), 10)...)
@@ -37,7 +37,7 @@ func (s strings) All() (ret []string) {
 }
 
 // Limit limits a test set in size.
-func (s strings) Limit(testSet []string, max int) []string {
+func (s StringsHelper) Limit(testSet []string, max int) []string {
 	if len(testSet) <= max {
 		return testSet
 	}
@@ -45,8 +45,8 @@ func (s strings) Limit(testSet []string, max int) []string {
 	return testSet[:max]
 }
 
-// GenerateRandom returns random strings in a test set.
-func (s strings) GenerateRandom(lenght, count int) (result []string) {
+// GenerateRandom returns random StringsHelper in a test set.
+func (s StringsHelper) GenerateRandom(length, count int) (result []string) {
 	const (
 		letters       = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		letterIdxBits = 6
@@ -55,9 +55,9 @@ func (s strings) GenerateRandom(lenght, count int) (result []string) {
 	)
 
 	for i := 0; i < count; i++ {
-		b := make([]byte, lenght)
+		b := make([]byte, length)
 		var src = rand.NewSource(time.Now().UnixNano() + int64(i))
-		for i, cache, remain := lenght-1, src.Int63(), letterIdxMax; i >= 0; {
+		for i, cache, remain := length-1, src.Int63(), letterIdxMax; i >= 0; {
 			if remain == 0 {
 				cache, remain = src.Int63(), letterIdxMax
 			}
@@ -75,7 +75,7 @@ func (s strings) GenerateRandom(lenght, count int) (result []string) {
 }
 
 // RunTests runs tests with a specific test set.
-func (s strings) RunTests(t TestingT, testSet []string, testFunc func(t *testing.T, index int, str string)) {
+func (s StringsHelper) RunTests(t TestingT, testSet []string, testFunc func(t *testing.T, index int, str string)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -96,7 +96,7 @@ func (s strings) RunTests(t TestingT, testSet []string, testFunc func(t *testing
 }
 
 // Modify returns a modified version of a test set.
-func (s strings) Modify(inputSlice []string, f func(index int, value string) string) (ret []string) {
+func (s StringsHelper) Modify(inputSlice []string, f func(index int, value string) string) (ret []string) {
 	for i, str := range inputSlice {
 		ret = append(ret, f(i, str))
 	}

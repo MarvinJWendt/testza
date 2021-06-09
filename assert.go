@@ -10,7 +10,7 @@ import (
 	"github.com/atomicgo/testutil/internal"
 )
 
-var Assert assert
+var AssertHelper assert
 
 type assert struct{}
 
@@ -156,8 +156,8 @@ func (a assert) False(t TestingT, value interface{}, msg ...interface{}) {
 
 // Implements checks if an objects implements an interface.
 //
-//	testutil.Assert.Implements(t, (*YourInterface)(nil), new(YourObject))
-//	testutil.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
+//	testutil.AssertHelper.Implements(t, (*YourInterface)(nil), new(YourObject))
+//	testutil.AssertHelper.Implements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
 func (a assert) Implements(t TestingT, interfaceObject, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -175,8 +175,8 @@ func (a assert) Implements(t TestingT, interfaceObject, object interface{}, msg 
 
 // NotImplements checks if an object does not implement an interface.
 //
-//	testutil.Assert.NotImplements(t, (*YourInterface)(nil), new(YourObject))
-//	testutil.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
+//	testutil.AssertHelper.NotImplements(t, (*YourInterface)(nil), new(YourObject))
+//	testutil.AssertHelper.NotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
 func (a assert) NotImplements(t TestingT, interfaceObject, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()

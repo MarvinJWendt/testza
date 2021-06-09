@@ -14,9 +14,6 @@ type helper interface {
 	Helper()
 }
 
-type inputValidator interface {
-}
-
 var green = pterm.NewStyle(pterm.Bold, pterm.FgLightGreen).Sprint
 var red = pterm.NewStyle(pterm.Bold, pterm.FgLightRed).Sprint
 var highlight = red
