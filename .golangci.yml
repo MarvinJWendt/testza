@@ -48,7 +48,6 @@ linters:
     - noctx
     - prealloc
     - predeclared
-    - thelper
     - unconvert
     - unparam
     - wastedassign
