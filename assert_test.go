@@ -40,13 +40,13 @@ func testEqual(t *testing.T, expected, actual interface{}) {
 	t.Run("Equal", func(t *testing.T) {
 		t.Helper()
 
-		AssertHelper.Equal(t, expected, actual)
+		Assert.Equal(t, expected, actual)
 	})
 
 	t.Run("EqualValues", func(t *testing.T) {
 		t.Helper()
 
-		AssertHelper.EqualValues(t, expected, actual)
+		Assert.EqualValues(t, expected, actual)
 	})
 }
 
@@ -71,7 +71,7 @@ func TestAssert_Equal(t *testing.T) {
 func TestAssert_NotEqual(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
 		Input.Strings.RunTests(t, Input.Strings.All(), func(t *testing.T, index int, str string) {
-			AssertHelper.NotEqual(t, str, str+" addon")
+			Assert.NotEqual(t, str, str+" addon")
 		})
 	})
 
@@ -82,10 +82,10 @@ func TestAssert_NotEqual(t *testing.T) {
 			s2 := s
 			s2.Name += " addon"
 			t.Run("NotEqual", func(t *testing.T) {
-				AssertHelper.NotEqual(t, s, s2)
+				Assert.NotEqual(t, s, s2)
 			})
 			t.Run("NotEqualValues", func(t *testing.T) {
-				AssertHelper.NotEqualValues(t, s, s2)
+				Assert.NotEqualValues(t, s, s2)
 			})
 		}
 	})
@@ -94,7 +94,7 @@ func TestAssert_NotEqual(t *testing.T) {
 func TestAssert_EqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
 		Input.Strings.RunTests(t, Input.Strings.All(), func(t *testing.T, index int, str string) {
-			AssertHelper.EqualValues(t, str, str)
+			Assert.EqualValues(t, str, str)
 		})
 	})
 }
@@ -102,20 +102,20 @@ func TestAssert_EqualValues(t *testing.T) {
 func TestAssert_NotEqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
 		Input.Strings.RunTests(t, Input.Strings.All(), func(t *testing.T, index int, str string) {
-			AssertHelper.NotEqualValues(t, str, str+" addon")
+			Assert.NotEqualValues(t, str, str+" addon")
 		})
 	})
 }
 
 func TestAssert_Implements(t *testing.T) {
 	t.Run("ConstImplementsStringer", func(t *testing.T) {
-		AssertHelper.Implements(t, (*fmt.Stringer)(nil), new(types.Const))
+		Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const))
 	})
 }
 
 func TestAssert_NotImplements(t *testing.T) {
 	t.Run("assertionTestStructNotImplementsFmtStringer", func(t *testing.T) {
-		AssertHelper.NotImplements(t, (*fmt.Stringer)(nil), new(assertionTestStruct))
+		Assert.NotImplements(t, (*fmt.Stringer)(nil), new(assertionTestStruct))
 	})
 }
 

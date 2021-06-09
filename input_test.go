@@ -13,5 +13,5 @@ func TestStrings_Modify(t *testing.T) {
 		return s.ToLower(value)
 	})
 
-	AssertHelper.Equal(t, expected, input)
+	Assert.Equal(t, expected, input)
 }
