@@ -15,7 +15,7 @@
 </a>
 
 <a href="https://codecov.io/gh/atomicgo/testutil">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-170-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-0-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
 <a href="https://github.com/atomicgo/testutil/issues">
@@ -65,14 +65,79 @@ import "github.com/atomicgo/testutil"
 ## Usage
 
 ```go
-var Assert assert
+var AssertHelper assert
 ```
 
+#### type InputHelper
+
 ```go
-var Input input
+type InputHelper struct {
+	Strings StringsHelper
+}
+```
+
+
+```go
+var Input InputHelper
 ```
 Input contains test sets, which you can pass to a function as input parameters
 and validate the output.
+
+#### type StringsHelper
+
+```go
+type StringsHelper struct{}
+```
+
+
+#### func (StringsHelper) All
+
+```go
+func (s StringsHelper) All() (ret []string)
+```
+All contains all string test sets plus ten generated random StringsHelper.
+
+#### func (StringsHelper) GenerateRandom
+
+```go
+func (s StringsHelper) GenerateRandom(length, count int) (result []string)
+```
+GenerateRandom returns random StringsHelper in a test set.
+
+#### func (StringsHelper) HtmlTags
+
+```go
+func (s StringsHelper) HtmlTags() []string
+```
+HtmlTags returns a test set with html tags.
+
+#### func (StringsHelper) Limit
+
+```go
+func (s StringsHelper) Limit(testSet []string, max int) []string
+```
+Limit limits a test set in size.
+
+#### func (StringsHelper) Modify
+
+```go
+func (s StringsHelper) Modify(inputSlice []string, f func(index int, value string) string) (ret []string)
+```
+Modify returns a modified version of a test set.
+
+#### func (StringsHelper) RunTests
+
+```go
+func (s StringsHelper) RunTests(t TestingT, testSet []string, testFunc func(t *testing.T, index int, str string))
+```
+RunTests runs tests with a specific test set.
+
+#### func (StringsHelper) Usernames
+
+```go
+func (s StringsHelper) Usernames() []string
+```
+Usernames returns a test set with usernames.
 
 #### type TestingT
 
