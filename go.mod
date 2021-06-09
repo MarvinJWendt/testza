@@ -1,3 +1,3 @@
-module github.com/atomicgo/template
+module github.com/atomicgo/testutil
 
 go 1.15
