@@ -33,7 +33,6 @@ linters:
     - durationcheck
     - errorlint
     - exhaustive
-    - gci
     - gocognit
     - gocritic
     - godot
@@ -44,7 +43,6 @@ linters:
     - goprintffuncname
     - misspell
     - nilerr
-    - nlreturn
     - noctx
     - prealloc
     - predeclared
