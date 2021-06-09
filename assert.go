@@ -63,7 +63,7 @@ func (a AssertHelper) doesImplement(interfaceObject, object interface{}) bool {
 }
 
 // Equal checks if two objects are equal.
-func (a AssertHelper) Equal(t TestingT, expected interface{}, actual interface{}, msg ...interface{}) {
+func (a AssertHelper) Equal(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -74,7 +74,7 @@ func (a AssertHelper) Equal(t TestingT, expected interface{}, actual interface{}
 }
 
 // NotEqual checks if two objects are not equal.
-func (a AssertHelper) NotEqual(t TestingT, expected interface{}, actual interface{}, msg ...interface{}) {
+func (a AssertHelper) NotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -90,7 +90,7 @@ func (a AssertHelper) NotEqual(t TestingT, expected interface{}, actual interfac
 }
 
 // EqualValues checks if two objects have equal values.
-func (a AssertHelper) EqualValues(t TestingT, expected interface{}, actual interface{}, msg ...interface{}) {
+func (a AssertHelper) EqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -101,7 +101,7 @@ func (a AssertHelper) EqualValues(t TestingT, expected interface{}, actual inter
 }
 
 // NotEqualValues checks if two objects do not have equal values.
-func (a AssertHelper) NotEqualValues(t TestingT, expected interface{}, actual interface{}, msg ...interface{}) {
+func (a AssertHelper) NotEqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -117,7 +117,7 @@ func (a AssertHelper) NotEqualValues(t TestingT, expected interface{}, actual in
 }
 
 // True checks if an expression or object resolves to true.
-func (a AssertHelper) True(t TestingT, value interface{}, msg ...interface{}) {
+func (a AssertHelper) True(t testingT, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -134,7 +134,7 @@ func (a AssertHelper) True(t TestingT, value interface{}, msg ...interface{}) {
 }
 
 // False checks if an expression or object resolves to false.
-func (a AssertHelper) False(t TestingT, value interface{}, msg ...interface{}) {
+func (a AssertHelper) False(t testingT, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -154,7 +154,7 @@ func (a AssertHelper) False(t TestingT, value interface{}, msg ...interface{}) {
 //
 //	testutil.Assert.Implements(t, (*YourInterface)(nil), new(YourObject))
 //	testutil.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
-func (a AssertHelper) Implements(t TestingT, interfaceObject, object interface{}, msg ...interface{}) {
+func (a AssertHelper) Implements(t testingT, interfaceObject, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -173,7 +173,7 @@ func (a AssertHelper) Implements(t TestingT, interfaceObject, object interface{}
 //
 //	testutil.Assert.NotImplements(t, (*YourInterface)(nil), new(YourObject))
 //	testutil.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
-func (a AssertHelper) NotImplements(t TestingT, interfaceObject, object interface{}, msg ...interface{}) {
+func (a AssertHelper) NotImplements(t testingT, interfaceObject, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -188,7 +188,11 @@ func (a AssertHelper) NotImplements(t TestingT, interfaceObject, object interfac
 	}
 }
 
-func (a AssertHelper) failNotEqual(t TestingT, expected interface{}, actual interface{}, msg ...interface{}) {
+func (a AssertHelper) failNotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
 	diff := internal.GetDifference(expected, actual)
 	output := generateMsg(
 		msg,

@@ -6,7 +6,7 @@ import (
 	"github.com/pterm/pterm"
 )
 
-type TestingT interface {
+type testingT interface {
 	Error(args ...interface{})
 }
 

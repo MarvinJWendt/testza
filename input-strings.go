@@ -9,6 +9,7 @@ import (
 	"github.com/atomicgo/testutil/internal"
 )
 
+// StringsHelper contains strings test sets.
 type StringsHelper struct{}
 
 // Usernames returns a test set with usernames.
@@ -75,7 +76,7 @@ func (s StringsHelper) GenerateRandom(length, count int) (result []string) {
 }
 
 // RunTests runs tests with a specific test set.
-func (s StringsHelper) RunTests(t TestingT, testSet []string, testFunc func(t *testing.T, index int, str string)) {
+func (s StringsHelper) RunTests(t testingT, testSet []string, testFunc func(t *testing.T, index int, str string)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}

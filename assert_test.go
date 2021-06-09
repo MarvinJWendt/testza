@@ -118,7 +118,3 @@ func TestAssert_NotImplements(t *testing.T) {
 		Use.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(assertionTestStruct))
 	})
 }
-
-func TestFail(t *testing.T) {
-
-}
