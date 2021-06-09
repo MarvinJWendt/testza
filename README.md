@@ -15,7 +15,7 @@
 </a>
 
 <a href="https://codecov.io/gh/atomicgo/testutil">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-170-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-169-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
 <a href="https://github.com/atomicgo/testutil/issues">
