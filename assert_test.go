@@ -118,3 +118,15 @@ func TestAssert_NotImplements(t *testing.T) {
 		Use.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(assertionTestStruct))
 	})
 }
+
+func TestAssertHelper_Contains(t *testing.T) {
+	s := []string{"Hello", "World"}
+
+	Use.Assert.NotContains(t, s, "World")
+}
+
+func TestAssertHelper_NotContains(t *testing.T) {
+	s := []string{"Hello", "World"}
+
+	Use.Assert.Contains(t, s, "asdasd")
+}

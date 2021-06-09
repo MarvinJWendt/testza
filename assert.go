@@ -3,6 +3,7 @@ package testutil
 import (
 	"bytes"
 	"reflect"
+	"strings"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/pterm/pterm"
@@ -184,6 +185,53 @@ func (a AssertHelper) NotImplements(t testingT, interfaceObject, object interfac
 			pterm.Magenta(reflect.TypeOf(interfaceObject)), spew.Sdump(object)),
 		)
 
+		internal.Fail(t, output)
+	}
+}
+
+func (a AssertHelper) doesContain(object, element interface{}) bool {
+	objectValue := reflect.ValueOf(object)
+	objectKind := reflect.TypeOf(object).Kind()
+
+	switch objectKind {
+	case reflect.String:
+		return strings.Contains(objectValue.String(), reflect.ValueOf(element).String())
+	case reflect.Map:
+	default:
+		for i := 0; i < objectValue.Len(); i++ {
+			if a.isEqual(objectValue.Index(i).Interface(), element) {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
+func (a AssertHelper) Contains(t testingT, object, element interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !a.doesContain(object, element) {
+		output := generateMsg(msg,
+			pterm.Sprintfln("Object %s:\n", highlight("should contain")),
+			spew.Sdump(element),
+		)
+		internal.Fail(t, output)
+	}
+}
+
+func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if a.doesContain(object, element) {
+		output := generateMsg(msg,
+			pterm.Sprintfln("Object %s:\n", highlight("should not contain")),
+			spew.Sdump(element),
+		)
 		internal.Fail(t, output)
 	}
 }
