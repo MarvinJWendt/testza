@@ -2,7 +2,7 @@ package testza
 
 // Use util functions of testza directly in the default testing system of Go.
 // Methods in here integrate directly with the default Go testing system, and give detailed output.
-// The methods will trigger the test to fail, if your expected behaviour didn't occur.
+// The methods will trigger the test to fail, if your expected behavior didn't occur.
 // If you want to get the results of those functions, you can use the methods in Getter via testza.Get.
 var Use Helper
 
@@ -14,7 +14,7 @@ var Get Getter
 
 // Helper contains helper methods for the Go testing system.
 // Methods in here integrate directly with the default Go testing system, and give detailed output.
-// The methods will trigger the test to fail, if your expected behaviour didn't occur.
+// The methods will trigger the test to fail, if your expected behavior didn't occur.
 // If you want to get the results of those functions, you can use the methods in Getter via testza.Get.
 type Helper struct {
 	Assert AssertHelper
