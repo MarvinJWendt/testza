@@ -1,25 +1,25 @@
-<h1 align="center">AtomicGo | testutil</h1>
+<h1 align="center">AtomicGo | testza</h1>
 
 <p align="center">
 
-<a href="https://github.com/atomicgo/testutil/releases">
-<img src="https://img.shields.io/github/v/release/atomicgo/testutil?style=flat-square" alt="Latest Release">
+<a href="https://github.com/atomicgo/testza/releases">
+<img src="https://img.shields.io/github/v/release/atomicgo/testza?style=flat-square" alt="Latest Release">
 </a>
 
-<a href="https://codecov.io/gh/atomicgo/testutil" target="_blank">
-<img src="https://img.shields.io/github/workflow/status/atomicgo/testutil/Go?label=tests&style=flat-square" alt="Tests">
+<a href="https://codecov.io/gh/atomicgo/testza" target="_blank">
+<img src="https://img.shields.io/github/workflow/status/atomicgo/testza/Go?label=tests&style=flat-square" alt="Tests">
 </a>
 
-<a href="https://codecov.io/gh/atomicgo/testutil" target="_blank">
-<img src="https://img.shields.io/codecov/c/gh/atomicgo/testutil?color=magenta&logo=codecov&style=flat-square" alt="Coverage">
+<a href="https://codecov.io/gh/atomicgo/testza" target="_blank">
+<img src="https://img.shields.io/codecov/c/gh/atomicgo/testza?color=magenta&logo=codecov&style=flat-square" alt="Coverage">
 </a>
 
-<a href="https://codecov.io/gh/atomicgo/testutil">
+<a href="https://codecov.io/gh/atomicgo/testza">
 <!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-212-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
-<a href="https://github.com/atomicgo/testutil/issues">
-<img src="https://img.shields.io/github/issues/atomicgo/testutil.svg?style=flat-square" alt="Issues">
+<a href="https://github.com/atomicgo/testza/issues">
+<img src="https://img.shields.io/github/issues/atomicgo/testza.svg?style=flat-square" alt="Issues">
 </a>
 
 <a href="https://opensource.org/licenses/MIT" target="_blank">
@@ -33,7 +33,7 @@
 <p align="center">
 <strong><a href="#install">Get The Module</a></strong>
 |
-<strong><a href="https://pkg.go.dev/github.com/atomicgo/testutil#section-documentation" target="_blank">Documentation</a></strong>
+<strong><a href="https://pkg.go.dev/github.com/atomicgo/testza#section-documentation" target="_blank">Documentation</a></strong>
 |
 <strong><a href="https://github.com/atomicgo/atomicgo/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a></strong>
 |
@@ -48,25 +48,25 @@
 
 ## Description
 
-Package testutil contains util functions for writing tests in Go.
+Package testza contains util functions for writing tests in Go.
 
 ## Install
 
 ```console
 # Execute this command inside your project
-go get -u github.com/atomicgo/testutil
+go get -u github.com/atomicgo/testza
 ```
 
 or
 
 ```go
 // Add this to your imports
-import "github.com/atomicgo/testutil"
+import "github.com/atomicgo/testza"
 ```
 
 ## Documentation
 
-[**Documentation with interactive examples on pkg.go.dev**](https://pkg.go.dev/github.com/atomicgo/testutil#section-documentation)
+[**Documentation with interactive examples on pkg.go.dev**](https://pkg.go.dev/github.com/atomicgo/testza#section-documentation)
 
 
 

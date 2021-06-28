@@ -1,6 +1,6 @@
 package testza
 
-// Use util functions of testutil.
+// Use util functions of testza.
 var Use Helper
 
 // Helper contains every util function in a structured format for easy usage.
