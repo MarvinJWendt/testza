@@ -32,7 +32,7 @@ linters:
     - dupl
     - durationcheck
     - errorlint
-    - exhaustive
+#    - exhaustive
     - gocognit
     - gocritic
     - godot
