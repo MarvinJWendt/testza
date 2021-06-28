@@ -1,4 +1,4 @@
-module github.com/atomicgo/testutil
+module github.com/atomicgo/testza
 
 go 1.15
 
