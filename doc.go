@@ -1,4 +1,4 @@
 /*
-Package testutil contains util functions for writing tests in Go.
+Package testza contains util functions for writing tests in Go.
 */
-package testutil
+package testza

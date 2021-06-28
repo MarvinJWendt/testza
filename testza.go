@@ -1,4 +1,4 @@
-package testutil
+package testza
 
 // Use util functions of testutil.
 var Use Helper
@@ -10,7 +10,8 @@ type Helper struct {
 }
 
 // AssertHelper contains assertion functions.
-type AssertHelper struct{}
+type AssertHelper struct {
+}
 
 // MockHelper contains helper functions for different input types.
 type MockHelper struct {
