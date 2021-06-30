@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go/types"
 	"math/rand"
+	"reflect"
 	"testing"
 )
 
@@ -48,6 +49,58 @@ func testEqual(t *testing.T, expected, actual interface{}) {
 
 		Use.Assert.EqualValues(t, expected, actual)
 	})
+}
+
+func TestAssertHelper_KindOf(t *testing.T) {
+	tests := []struct {
+		kind  reflect.Kind
+		value interface{}
+	}{
+		{kind: reflect.String, value: "Hello, World!"},
+		{kind: reflect.Int, value: 1337},
+		{kind: reflect.Bool, value: true},
+		{kind: reflect.Bool, value: false},
+		{kind: reflect.Map, value: make(map[string]int)},
+		{kind: reflect.Func, value: func() {}},
+		{kind: reflect.Struct, value: testing.T{}},
+		{kind: reflect.Slice, value: []string{}},
+		{kind: reflect.Slice, value: []int{}},
+		{kind: reflect.Slice, value: []float64{}},
+		{kind: reflect.Slice, value: []float32{}},
+		{kind: reflect.Float64, value: 13.37},
+		{kind: reflect.Float32, value: float32(13.37)},
+	}
+	for _, test := range tests {
+		t.Run(test.kind.String(), func(t *testing.T) {
+			Use.Assert.KindOf(t, test.kind, test.value)
+		})
+	}
+}
+
+func TestAssertHelper_NotKindOf(t *testing.T) {
+	tests := []struct {
+		kind  reflect.Kind
+		value interface{}
+	}{
+		{kind: reflect.Int, value: "Hello, World!"},
+		{kind: reflect.Bool, value: 1337},
+		{kind: reflect.Float64, value: true},
+		{kind: reflect.Float32, value: false},
+		{kind: reflect.Struct, value: make(map[string]int)},
+		{kind: reflect.Map, value: func() {}},
+		{kind: reflect.Slice, value: testing.T{}},
+		{kind: reflect.Struct, value: []string{}},
+		{kind: reflect.Array, value: []int{}},
+		{kind: reflect.Chan, value: []float64{}},
+		{kind: reflect.Complex64, value: []float32{}},
+		{kind: reflect.Complex128, value: 13.37},
+		{kind: reflect.Float64, value: float32(13.37)},
+	}
+	for _, test := range tests {
+		t.Run(test.kind.String(), func(t *testing.T) {
+			Use.Assert.NotKindOf(t, test.kind, test.value)
+		})
+	}
 }
 
 func TestAssertHelper_Zero(t *testing.T) {

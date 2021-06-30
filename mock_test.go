@@ -18,15 +18,23 @@ func TestStrings_Modify(t *testing.T) {
 }
 
 func TestStringsHelper_GenerateRandom(t *testing.T) {
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 100; i++ {
 		t.Run(fmt.Sprintf("Length=%d", i), func(t *testing.T) {
 			Use.Assert.Equal(t, i, len(Use.Mock.Strings.GenerateRandom(1, i)[0]))
 		})
 	}
 
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 100; i++ {
 		t.Run(fmt.Sprintf("Count=%d", i), func(t *testing.T) {
 			Use.Assert.Equal(t, i, len(Use.Mock.Strings.GenerateRandom(i, 5)))
 		})
 	}
 }
+
+// func TestIntsHelper_GenerateRandomPositive(t *testing.T) {
+// 	for i := 0; i < 100; i++ {
+// 		t.Run(fmt.Sprintf("Max=%d", i), func(t *testing.T) {
+// 			Use.Assert.Equal(t, i, len(Use.Mock.Floats64.GenerateRandom(1, i)[0]))
+// 		})
+// 	}
+// }

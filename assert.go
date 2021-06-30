@@ -13,6 +13,18 @@ import (
 
 // ** Getter Methods **
 
+func (a AssertHelper) isKind(expectedKind reflect.Kind, value interface{}) bool {
+	return reflect.TypeOf(value).Kind() == expectedKind
+}
+
+func (a AssertHelper) isNumber(value interface{}) {
+
+}
+
+func (a AssertHelper) isGreater(base, value interface{}) {
+
+}
+
 func (a AssertHelper) isZero(value interface{}) bool {
 	return value == nil || reflect.DeepEqual(value, reflect.Zero(reflect.TypeOf(value)).Interface())
 }
@@ -89,6 +101,32 @@ func (a AssertHelper) doesContain(object, element interface{}) bool {
 }
 
 // ** Helper Methods **
+
+func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, value interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !a.isKind(expectedKind, value) {
+		internal.Fail(t, generateMsg(msg,
+			pterm.Sprintfln("A value that %s is a type of kind %s", highlight(pterm.Sprintf("should be a type of kind %s", expectedKind.String())), highlight(reflect.TypeOf(value).Kind())),
+			spew.Sdump(value),
+		))
+	}
+}
+
+func (a AssertHelper) NotKindOf(t testingT, expectedKind reflect.Kind, value interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if a.isKind(expectedKind, value) {
+		internal.Fail(t, generateMsg(msg,
+			pterm.Sprintfln("A value that %s is a type of kind %s", highlight(pterm.Sprintf("should not be a type of kind %s", expectedKind.String())), highlight(reflect.TypeOf(value).Kind())),
+			spew.Sdump(value),
+		))
+	}
+}
 
 func (a AssertHelper) Zero(t testingT, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {

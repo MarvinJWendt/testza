@@ -29,6 +29,7 @@ type AssertHelper struct {
 
 // MockHelper contains mocking methods for the Go testing system.
 type MockHelper struct {
-	Strings StringsHelper
-	Ints    IntsHelper
+	Strings  StringsHelper
+	Floats64 Floats64Helper
+	Ints     IntsHelper
 }
