@@ -20,13 +20,13 @@ func TestStrings_Modify(t *testing.T) {
 func TestStringsHelper_GenerateRandom(t *testing.T) {
 	for i := 0; i < 20; i++ {
 		t.Run(fmt.Sprintf("Length=%d", i), func(t *testing.T) {
-			Use.Assert.Equal(t, i, len(Use.Mock.Strings.GenerateRandom(i, 1)[0]))
+			Use.Assert.Equal(t, i, len(Use.Mock.Strings.GenerateRandom(1, i)[0]))
 		})
 	}
 
 	for i := 0; i < 20; i++ {
 		t.Run(fmt.Sprintf("Count=%d", i), func(t *testing.T) {
-			Use.Assert.Equal(t, i, len(Use.Mock.Strings.GenerateRandom(5, i)))
+			Use.Assert.Equal(t, i, len(Use.Mock.Strings.GenerateRandom(i, 5)))
 		})
 	}
 }

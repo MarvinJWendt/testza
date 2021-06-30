@@ -13,7 +13,11 @@ import (
 
 // ** Getter Methods **
 
-func (a AssertGetter) IsEqual(expected interface{}, actual interface{}) bool {
+func (a AssertHelper) isZero(value interface{}) bool {
+	return value == nil || reflect.DeepEqual(value, reflect.Zero(reflect.TypeOf(value)).Interface())
+}
+
+func (a AssertHelper) isEqual(expected interface{}, actual interface{}) bool {
 	if expected == nil || actual == nil {
 		return expected == actual
 	}
@@ -34,8 +38,8 @@ func (a AssertGetter) IsEqual(expected interface{}, actual interface{}) bool {
 	return bytes.Equal(expectedB, actualB)
 }
 
-func (a AssertGetter) HasEqualValues(expected interface{}, actual interface{}) bool {
-	if a.IsEqual(expected, actual) {
+func (a AssertHelper) hasEqualValues(expected interface{}, actual interface{}) bool {
+	if a.isEqual(expected, actual) {
 		return true
 	}
 
@@ -52,7 +56,7 @@ func (a AssertGetter) HasEqualValues(expected interface{}, actual interface{}) b
 	return false
 }
 
-func (a AssertGetter) DoesImplement(interfaceObject, object interface{}) bool {
+func (a AssertHelper) doesImplement(interfaceObject, object interface{}) bool {
 	interfaceType := reflect.TypeOf(interfaceObject).Elem()
 
 	if object == nil {
@@ -65,7 +69,7 @@ func (a AssertGetter) DoesImplement(interfaceObject, object interface{}) bool {
 	return true
 }
 
-func (a AssertGetter) DoesContain(object, element interface{}) bool {
+func (a AssertHelper) doesContain(object, element interface{}) bool {
 	objectValue := reflect.ValueOf(object)
 	objectKind := reflect.TypeOf(object).Kind()
 
@@ -75,7 +79,7 @@ func (a AssertGetter) DoesContain(object, element interface{}) bool {
 	case reflect.Map:
 	default:
 		for i := 0; i < objectValue.Len(); i++ {
-			if Get.Assert.IsEqual(objectValue.Index(i).Interface(), element) {
+			if Use.Assert.isEqual(objectValue.Index(i).Interface(), element) {
 				return true
 			}
 		}
@@ -86,13 +90,43 @@ func (a AssertGetter) DoesContain(object, element interface{}) bool {
 
 // ** Helper Methods **
 
+func (a AssertHelper) Zero(t testingT, value interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !a.isZero(value) {
+		output := generateMsg(msg,
+			pterm.Sprintfln("A value that %s is not zero.", highlight("should be zero")),
+			pterm.Sprintfln("Actual value:"),
+			spew.Sdump(value),
+		)
+		internal.Fail(t, output)
+	}
+}
+
+func (a AssertHelper) NotZero(t testingT, value interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if a.isZero(value) {
+		output := generateMsg(msg,
+			pterm.Sprintfln("A value that %s is zero.", highlight("should not be zero")),
+			pterm.Sprintfln("Actual value:"),
+			spew.Sdump(value),
+		)
+		internal.Fail(t, output)
+	}
+}
+
 // Equal checks if two objects are equal.
 func (a AssertHelper) Equal(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
 
-	if !Get.Assert.IsEqual(expected, actual) {
+	if !Use.Assert.isEqual(expected, actual) {
 		a.failNotEqual(t, expected, actual, msg...)
 	}
 }
@@ -103,7 +137,7 @@ func (a AssertHelper) NotEqual(t testingT, expected interface{}, actual interfac
 		test.Helper()
 	}
 
-	if Get.Assert.IsEqual(expected, actual) {
+	if Use.Assert.isEqual(expected, actual) {
 		output := generateMsg(msg,
 			pterm.Sprintfln("Two values that %s are equal:", highlight("should not be equal")),
 			pterm.Sprintfln("Expected and actual both have the value(s):"),
@@ -119,7 +153,7 @@ func (a AssertHelper) EqualValues(t testingT, expected interface{}, actual inter
 		test.Helper()
 	}
 
-	if !Get.Assert.HasEqualValues(expected, actual) {
+	if !Use.Assert.hasEqualValues(expected, actual) {
 		a.failNotEqual(t, expected, actual, msg...)
 	}
 }
@@ -130,7 +164,7 @@ func (a AssertHelper) NotEqualValues(t testingT, expected interface{}, actual in
 		test.Helper()
 	}
 
-	if Get.Assert.HasEqualValues(expected, actual) {
+	if Use.Assert.hasEqualValues(expected, actual) {
 		output := generateMsg(msg,
 			pterm.Sprintfln("Two values that %s are equal:", highlight("should not be equal")),
 			pterm.Sprintfln("Expected and actual both have the value(s):"),
@@ -176,14 +210,14 @@ func (a AssertHelper) False(t testingT, value interface{}, msg ...interface{}) {
 
 // Implements checks if an objects implements an interface.
 //
-//	testza.Assert.Implements(t, (*YourInterface)(nil), new(YourObject))
-//	testza.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
+//	testza.Use.Assert.Implements(t, (*YourInterface)(nil), new(YourObject))
+//	testza.Use.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
 func (a AssertHelper) Implements(t testingT, interfaceObject, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
 
-	if !Get.Assert.DoesImplement(interfaceObject, object) {
+	if !Use.Assert.doesImplement(interfaceObject, object) {
 		output := generateMsg(msg, pterm.Sprintfln("The object %s %s %v:\nObject:\n%s", pterm.Magenta(reflect.TypeOf(object)),
 			highlight("should implement"),
 			pterm.Magenta(reflect.TypeOf(interfaceObject)),
@@ -195,14 +229,14 @@ func (a AssertHelper) Implements(t testingT, interfaceObject, object interface{}
 
 // NotImplements checks if an object does not implement an interface.
 //
-//	testza.Assert.NotImplements(t, (*YourInterface)(nil), new(YourObject))
-//	testza.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
+//	testza.Use.Assert.NotImplements(t, (*YourInterface)(nil), new(YourObject))
+//	testza.Use.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
 func (a AssertHelper) NotImplements(t testingT, interfaceObject, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
 
-	if Get.Assert.DoesImplement(interfaceObject, object) {
+	if Use.Assert.doesImplement(interfaceObject, object) {
 		output := generateMsg(msg, pterm.Sprintfln("The object %s %s %v:\nObject:\n%s",
 			pterm.Magenta(reflect.TypeOf(object)), highlight("should not implement"),
 			pterm.Magenta(reflect.TypeOf(interfaceObject)), spew.Sdump(object)),
@@ -217,7 +251,7 @@ func (a AssertHelper) Contains(t testingT, object, element interface{}, msg ...i
 		test.Helper()
 	}
 
-	if !Get.Assert.DoesContain(object, element) {
+	if !Use.Assert.doesContain(object, element) {
 		output := generateMsg(msg,
 			pterm.Sprintfln("Object %s:\n", highlight("should contain")),
 			spew.Sdump(element),
@@ -231,7 +265,7 @@ func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg .
 		test.Helper()
 	}
 
-	if Get.Assert.DoesContain(object, element) {
+	if Use.Assert.doesContain(object, element) {
 		output := generateMsg(msg,
 			pterm.Sprintfln("Object %s:\n", highlight("should not contain")),
 			spew.Sdump(element),

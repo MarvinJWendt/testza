@@ -22,7 +22,7 @@ type assertionTestStructNested struct {
 // var testStructDifferent = assertionTestStruct{Name: "Marvin Wendt", Age: 20, Meta: assertionTestStructNested{ID: 7331, Admin: true}}
 
 func randomString() string {
-	return Use.Mock.Strings.GenerateRandom(rand.Intn(10), 1)[0]
+	return Use.Mock.Strings.GenerateRandom(1, rand.Intn(10))[0]
 }
 
 func generateStruct() (ret assertionTestStruct) {
@@ -50,9 +50,31 @@ func testEqual(t *testing.T, expected, actual interface{}) {
 	})
 }
 
-func TestAssert_Equal(t *testing.T) {
+func TestAssertHelper_Zero(t *testing.T) {
+	var zeroValues []interface{}
+	zeroValues = append(zeroValues, 0, "", false, nil)
+
+	for i, value := range zeroValues {
+		t.Run(fmt.Sprint(i), func(t *testing.T) {
+			Use.Assert.Zero(t, value)
+		})
+	}
+}
+
+func TestAssertHelper_NotZero(t *testing.T) {
+	var zeroValues []interface{}
+	zeroValues = append(zeroValues, true, "asd", 123, 1.5, 'a')
+
+	for i, value := range zeroValues {
+		t.Run(fmt.Sprint(i), func(t *testing.T) {
+			Use.Assert.NotZero(t, value)
+		})
+	}
+}
+
+func TestAssertHelper_Equal(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		Use.Mock.Strings.RunTests(t, Use.Mock.Strings.All(), func(t *testing.T, index int, str string) {
+		Use.Mock.Strings.RunTests(t, Use.Mock.Strings.Full(), func(t *testing.T, index int, str string) {
 			t.Helper()
 
 			testEqual(t, str, str)
@@ -68,9 +90,9 @@ func TestAssert_Equal(t *testing.T) {
 	})
 }
 
-func TestAssert_NotEqual(t *testing.T) {
+func TestAssertHelper_NotEqual(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		Use.Mock.Strings.RunTests(t, Use.Mock.Strings.All(), func(t *testing.T, index int, str string) {
+		Use.Mock.Strings.RunTests(t, Use.Mock.Strings.Full(), func(t *testing.T, index int, str string) {
 			Use.Assert.NotEqual(t, str, str+" addon")
 		})
 	})
@@ -93,7 +115,7 @@ func TestAssert_NotEqual(t *testing.T) {
 
 func TestAssert_EqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		Use.Mock.Strings.RunTests(t, Use.Mock.Strings.All(), func(t *testing.T, index int, str string) {
+		Use.Mock.Strings.RunTests(t, Use.Mock.Strings.Full(), func(t *testing.T, index int, str string) {
 			Use.Assert.EqualValues(t, str, str)
 		})
 	})
@@ -101,7 +123,7 @@ func TestAssert_EqualValues(t *testing.T) {
 
 func TestAssert_NotEqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		Use.Mock.Strings.RunTests(t, Use.Mock.Strings.All(), func(t *testing.T, index int, str string) {
+		Use.Mock.Strings.RunTests(t, Use.Mock.Strings.Full(), func(t *testing.T, index int, str string) {
 			Use.Assert.NotEqualValues(t, str, str+" addon")
 		})
 	})

@@ -26,11 +26,14 @@ func (s StringsHelper) HtmlTags() []string {
 	}
 }
 
-// All contains all string test sets plus ten generated random StringsHelper.
-func (s StringsHelper) All() (ret []string) {
+// Full contains all string test sets plus ten generated random strings.
+func (s StringsHelper) Full() (ret []string) {
 	ret = append(ret, s.Usernames()...)
 	ret = append(ret, s.HtmlTags()...)
-	ret = append(ret, s.GenerateRandom(rand.Intn(10), 10)...)
+
+	for i := 0; i < 10; i++ {
+		ret = append(ret, s.GenerateRandom(1, i)...)
+	}
 
 	return
 }
@@ -41,11 +44,15 @@ func (s StringsHelper) Limit(testSet []string, max int) []string {
 		return testSet
 	}
 
+	if max <= 0 {
+		return []string{}
+	}
+
 	return testSet[:max]
 }
 
 // GenerateRandom returns random StringsHelper in a test set.
-func (s StringsHelper) GenerateRandom(length, count int) (result []string) {
+func (s StringsHelper) GenerateRandom(count, length int) (result []string) {
 	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 	for i := 0; i < count; i++ {
@@ -67,7 +74,7 @@ func (s StringsHelper) RunTests(t testingT, testSet []string, testFunc func(t *t
 
 	test := internal.GetTest(t)
 	if test == nil {
-		t.Error("Cannot run sub tests for test that is not a type of *testing.T")
+		t.Error(internal.ErrCanNotRunIfNotBuiltinTesting)
 		return
 	}
 
