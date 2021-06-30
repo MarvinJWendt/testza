@@ -17,8 +17,31 @@ func (a AssertHelper) isKind(expectedKind reflect.Kind, value interface{}) bool 
 	return reflect.TypeOf(value).Kind() == expectedKind
 }
 
-func (a AssertHelper) isNumber(value interface{}) {
+func (a AssertHelper) isNumber(value interface{}) bool {
+	numberKinds := []reflect.Kind{
+		reflect.Int,
+		reflect.Int8,
+		reflect.Int16,
+		reflect.Int32,
+		reflect.Int64,
+		reflect.Float32,
+		reflect.Float64,
+		reflect.Uint,
+		reflect.Uint8,
+		reflect.Uint16,
+		reflect.Uint32,
+		reflect.Uint64,
+		reflect.Complex64,
+		reflect.Complex128,
+	}
 
+	for _, k := range numberKinds {
+		if a.isKind(k, value) {
+			return true
+		}
+	}
+
+	return false
 }
 
 func (a AssertHelper) isGreater(base, value interface{}) {
@@ -102,15 +125,33 @@ func (a AssertHelper) doesContain(object, element interface{}) bool {
 
 // ** Helper Methods **
 
-func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, value interface{}, msg ...interface{}) {
+func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
 
-	if !a.isKind(expectedKind, value) {
+	if !a.isKind(expectedKind, object) {
 		internal.Fail(t, generateMsg(msg,
-			pterm.Sprintfln("A value that %s is a type of kind %s", highlight(pterm.Sprintf("should be a type of kind %s", expectedKind.String())), highlight(reflect.TypeOf(value).Kind())),
-			spew.Sdump(value),
+			pterm.Sprintfln("An object that %s is a type of kind %s", highlight(pterm.Sprintf("should be a type of kind %s", expectedKind.String())), highlight(reflect.TypeOf(object).Kind())),
+			spew.Sdump(object),
+		))
+	}
+}
+
+func (a AssertHelper) Number(t testingT, object interface{}, msg ...interface{}) {
+	if !a.isNumber(object) {
+		internal.Fail(t, generateMsg(msg,
+			pterm.Sprintfln("An object that %s is not a number", highlight("should be a number")),
+			spew.Sdump(object),
+		))
+	}
+}
+
+func (a AssertHelper) NotNumber(t testingT, object interface{}, msg ...interface{}) {
+	if a.isNumber(object) {
+		internal.Fail(t, generateMsg(msg,
+			pterm.Sprintfln("An object that %s is a number", highlight("should not be a number")),
+			spew.Sdump(object),
 		))
 	}
 }

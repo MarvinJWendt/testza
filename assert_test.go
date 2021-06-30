@@ -6,6 +6,8 @@ import (
 	"math/rand"
 	"reflect"
 	"testing"
+
+	"github.com/pterm/pterm"
 )
 
 type assertionTestStruct struct {
@@ -99,6 +101,46 @@ func TestAssertHelper_NotKindOf(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.kind.String(), func(t *testing.T) {
 			Use.Assert.NotKindOf(t, test.kind, test.value)
+		})
+	}
+}
+
+func TestAssertHelper_Number(t *testing.T) {
+	var numbers []interface{}
+
+	for i := 0; i < 10; i++ {
+		numbers = append(numbers,
+			i,
+			int8(i),
+			int16(i),
+			int32(i),
+			int64(i),
+			uint(i),
+			uint8(i),
+			uint16(i),
+			uint32(i),
+			uint64(i),
+			float32(i)+0.25,
+			float32(i)+0.5,
+			float64(i)+0.25,
+			float64(i)+0.5,
+			complex64(complex(float64(i), 2)),
+			complex(float64(i), 2),
+		)
+	}
+
+	for _, number := range numbers {
+		t.Run(pterm.Sprintf("Type=%s;Value=%#v", reflect.TypeOf(number).Kind().String(), number), func(t *testing.T) {
+			Use.Assert.Number(t, number)
+		})
+	}
+}
+
+func TestAssertHelper_NotNumber(t *testing.T) {
+	noNumbers := []interface{}{"Hello, World!", true, false}
+	for _, number := range noNumbers {
+		t.Run(pterm.Sprintf("Type=%s;Value=%#v", reflect.TypeOf(number).Kind().String(), number), func(t *testing.T) {
+			Use.Assert.NotNumber(t, number)
 		})
 	}
 }
