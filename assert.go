@@ -353,6 +353,36 @@ func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg .
 	}
 }
 
+// Nil asserts that an object is nil.
+func (a AssertHelper) Nil(t testingT, object interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if object != nil {
+		output := generateMsg(msg,
+			pterm.Sprintfln("An object %s is not nil:", highlight("should be nil")),
+			spew.Sdump(object),
+		)
+		internal.Fail(t, output)
+	}
+}
+
+// NotNil assertsthat an object is not nil.
+func (a AssertHelper) NotNil(t testingT, object interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if object == nil {
+		output := generateMsg(msg,
+			pterm.Sprintfln("An object %s is nil:", highlight("that should not be nil")),
+			spew.Sdump(object),
+		)
+		internal.Fail(t, output)
+	}
+}
+
 // ** Helper Methods **
 
 func (a AssertHelper) failNotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {

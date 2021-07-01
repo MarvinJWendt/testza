@@ -21,9 +21,6 @@ type assertionTestStructNested struct {
 	Admin bool
 }
 
-// var testStruct = assertionTestStruct{Name: "Marvin Wendt", Age: 20, Meta: assertionTestStructNested{ID: 1337, Admin: true}}
-// var testStructDifferent = assertionTestStruct{Name: "Marvin Wendt", Age: 20, Meta: assertionTestStructNested{ID: 7331, Admin: true}}
-
 func randomString() string {
 	return Use.Mock.Strings.GenerateRandom(1, rand.Intn(10))[0]
 }
@@ -246,4 +243,18 @@ func TestAssertHelper_NotContains(t *testing.T) {
 	s := []string{"Hello", "World"}
 
 	Use.Assert.NotContains(t, s, "asdasd")
+}
+
+func TestAssertHelper_Nil(t *testing.T) {
+	Use.Assert.Nil(t, nil)
+}
+
+func TestAssertHelper_NotNil(t *testing.T) {
+	objectsNotNil := []interface{}{"asd", 0, false, true, 'c', "", []int{1, 2, 3}}
+
+	for _, v := range objectsNotNil {
+		t.Run(pterm.Sprintf("Value=%#v", v), func(t *testing.T) {
+			Use.Assert.NotNil(t, v)
+		})
+	}
 }
