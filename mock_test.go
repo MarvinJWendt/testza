@@ -2,7 +2,7 @@ package testza
 
 import (
 	"fmt"
-	s "strings"
+	"strings"
 	"testing"
 )
 
@@ -11,7 +11,7 @@ func TestStrings_Modify(t *testing.T) {
 	expected := []string{"hello", "world", "test"}
 
 	input := Use.Mock.Strings.Modify(stringSlice, func(index int, value string) string {
-		return s.ToLower(value)
+		return strings.ToLower(value)
 	})
 
 	Use.Assert.Equal(t, expected, input)
