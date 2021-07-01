@@ -368,3 +368,39 @@ func (a AssertHelper) failNotEqual(t testingT, expected interface{}, actual inte
 	)
 	internal.Fail(t, output)
 }
+
+// Panic checks if a function panics.
+func (a AssertHelper) Panic(t testingT, f func(), msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	defer func() {
+		if r := recover(); r == nil {
+			output := generateMsg(msg,
+				pterm.Sprintfln("The function %s, but does not panic", highlight("should panic")),
+			)
+			internal.Fail(t, output)
+		}
+	}()
+
+	f()
+}
+
+// NotPanic checks if a function does not panic.
+func (a AssertHelper) NotPanic(t testingT, f func(), msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	defer func() {
+		if r := recover(); r != nil {
+			output := generateMsg(msg,
+				pterm.Sprintfln("The function %s, but it panics:\n%s", highlight("should not panic"), r),
+			)
+			internal.Fail(t, output)
+		}
+	}()
+
+	f()
+}

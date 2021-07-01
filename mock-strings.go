@@ -12,7 +12,7 @@ type StringsHelper struct{}
 
 // Usernames returns a test set with usernames.
 func (s StringsHelper) Usernames() []string {
-	return []string{"MarvinJWendt", "Zipper1337", "n00b", "l33t"}
+	return []string{"MarvinJWendt", "Zipper1337", "n00b", "l33t", "j0rgan", "test", "test123", "TEST", "test_", "TEST_"}
 }
 
 // HtmlTags returns a test set with html tags.
