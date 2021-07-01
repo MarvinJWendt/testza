@@ -125,6 +125,7 @@ func (a AssertHelper) doesContain(object, element interface{}) bool {
 
 // ** Helper Methods **
 
+// KindOf asserts that the object is a type of kind exptectedKind.
 func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -138,6 +139,23 @@ func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, object inter
 	}
 }
 
+// NotKindOf asserts that the object is not a type of kind `kind`.
+func (a AssertHelper) NotKindOf(t testingT, kind reflect.Kind, value interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if a.isKind(kind, value) {
+		internal.Fail(t, generateMsg(msg,
+			pterm.Sprintfln("A value that %s is a type of kind %s", highlight(pterm.Sprintf("should not be a type of kind %s", kind.String())), highlight(reflect.TypeOf(value).Kind())),
+			spew.Sdump(value),
+		))
+	}
+}
+
+// Number asserts that the object is a numeric type.
+// Numeric types are:
+// Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32, Uint64, Complex64 and Complex128.
 func (a AssertHelper) Number(t testingT, object interface{}, msg ...interface{}) {
 	if !a.isNumber(object) {
 		internal.Fail(t, generateMsg(msg,
@@ -147,6 +165,9 @@ func (a AssertHelper) Number(t testingT, object interface{}, msg ...interface{})
 	}
 }
 
+// Number checks if the object is not a numeric type.
+// Numeric types are:
+// Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32, Uint64, Complex64 and Complex128.
 func (a AssertHelper) NotNumber(t testingT, object interface{}, msg ...interface{}) {
 	if a.isNumber(object) {
 		internal.Fail(t, generateMsg(msg,
@@ -156,19 +177,10 @@ func (a AssertHelper) NotNumber(t testingT, object interface{}, msg ...interface
 	}
 }
 
-func (a AssertHelper) NotKindOf(t testingT, expectedKind reflect.Kind, value interface{}, msg ...interface{}) {
-	if test, ok := t.(helper); ok {
-		test.Helper()
-	}
-
-	if a.isKind(expectedKind, value) {
-		internal.Fail(t, generateMsg(msg,
-			pterm.Sprintfln("A value that %s is a type of kind %s", highlight(pterm.Sprintf("should not be a type of kind %s", expectedKind.String())), highlight(reflect.TypeOf(value).Kind())),
-			spew.Sdump(value),
-		))
-	}
-}
-
+// Zero asserts that the value is the zero value for it's type.
+//     assert.Zero(t, 0)
+//     assert.Zero(t, false)
+//     assert.Zero(t, "")
 func (a AssertHelper) Zero(t testingT, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -184,6 +196,10 @@ func (a AssertHelper) Zero(t testingT, value interface{}, msg ...interface{}) {
 	}
 }
 
+// NotZero asserts that the value is not the zero value for it's type.
+//     assert.NotZero(t, 1337)
+//     assert.NotZero(t, true)
+//     assert.NotZero(t, "Hello, World")
 func (a AssertHelper) NotZero(t testingT, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -199,7 +215,7 @@ func (a AssertHelper) NotZero(t testingT, value interface{}, msg ...interface{})
 	}
 }
 
-// Equal checks if two objects are equal.
+// Equal asserts that two objects are equal.
 func (a AssertHelper) Equal(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -210,7 +226,7 @@ func (a AssertHelper) Equal(t testingT, expected interface{}, actual interface{}
 	}
 }
 
-// NotEqual checks if two objects are not equal.
+// NotEqual asserts that two objects are not equal.
 func (a AssertHelper) NotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -226,7 +242,7 @@ func (a AssertHelper) NotEqual(t testingT, expected interface{}, actual interfac
 	}
 }
 
-// EqualValues checks if two objects have equal values.
+// EqualValues asserts that two objects have equal values.
 func (a AssertHelper) EqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -237,7 +253,7 @@ func (a AssertHelper) EqualValues(t testingT, expected interface{}, actual inter
 	}
 }
 
-// NotEqualValues checks if two objects do not have equal values.
+// NotEqualValues asserts that two objects do not have equal values.
 func (a AssertHelper) NotEqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -253,7 +269,7 @@ func (a AssertHelper) NotEqualValues(t testingT, expected interface{}, actual in
 	}
 }
 
-// True checks if an expression or object resolves to true.
+// True asserts that an expression or object resolves to true.
 func (a AssertHelper) True(t testingT, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -270,7 +286,7 @@ func (a AssertHelper) True(t testingT, value interface{}, msg ...interface{}) {
 	}
 }
 
-// False checks if an expression or object resolves to false.
+// False asserts that an expression or object resolves to false.
 func (a AssertHelper) False(t testingT, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -351,6 +367,42 @@ func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg .
 		)
 		internal.Fail(t, output)
 	}
+}
+
+// Panic asserts that a function panics.
+func (a AssertHelper) Panic(t testingT, f func(), msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	defer func() {
+		if r := recover(); r == nil {
+			output := generateMsg(msg,
+				pterm.Sprintfln("The function %s, but does not panic", highlight("should panic")),
+			)
+			internal.Fail(t, output)
+		}
+	}()
+
+	f()
+}
+
+// NotPanic asserts that a function does not panic.
+func (a AssertHelper) NotPanic(t testingT, f func(), msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	defer func() {
+		if r := recover(); r != nil {
+			output := generateMsg(msg,
+				pterm.Sprintfln("The function %s, but it panics:\n%s", highlight("should not panic"), r),
+			)
+			internal.Fail(t, output)
+		}
+	}()
+
+	f()
 }
 
 // Nil asserts that an object is nil.

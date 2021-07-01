@@ -31,6 +31,11 @@ func TestStringsHelper_GenerateRandom(t *testing.T) {
 	}
 }
 
+func TestBoolsHelper_Full(t *testing.T) {
+	Use.Assert.Contains(t, Use.Mock.Bools.Full(), true)
+	Use.Assert.Contains(t, Use.Mock.Bools.Full(), false)
+}
+
 // func TestIntsHelper_GenerateRandomPositive(t *testing.T) {
 // 	for i := 0; i < 100; i++ {
 // 		t.Run(fmt.Sprintf("Max=%d", i), func(t *testing.T) {

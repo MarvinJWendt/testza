@@ -33,4 +33,5 @@ type MockHelper struct {
 	Strings  StringsHelper
 	Floats64 Floats64Helper
 	Ints     IntsHelper
+	Bools    BoolsHelper
 }

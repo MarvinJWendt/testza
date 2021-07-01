@@ -245,6 +245,18 @@ func TestAssertHelper_NotContains(t *testing.T) {
 	Use.Assert.NotContains(t, s, "asdasd")
 }
 
+func TestAssertHelper_Panic(t *testing.T) {
+	Use.Assert.Panic(t, func() {
+		panic("TestPanic")
+	})
+}
+
+func TestAssertHelper_NotPanic(t *testing.T) {
+	Use.Assert.NotPanic(t, func() {
+		// If we do nothing here it can't panic ;)
+	})
+}
+
 func TestAssertHelper_Nil(t *testing.T) {
 	Use.Assert.Nil(t, nil)
 }
