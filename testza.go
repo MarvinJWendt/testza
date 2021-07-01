@@ -19,8 +19,9 @@ var Use Helper
 // Methods in here integrate directly with the default Go testing system, and give detailed output.
 // The methods will trigger the test to fail, if your expected behavior didn't occur.
 type Helper struct {
-	Assert AssertHelper
-	Mock   MockHelper
+	Assert  AssertHelper
+	Mock    MockHelper
+	Capture CaptureHelper
 }
 
 // AssertHelper contains assertion methods for the Go testing system.
