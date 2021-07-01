@@ -256,6 +256,6 @@ func TestAssertHelper_Panic(t *testing.T) {
 
 func TestAssertHelper_NotPanic(t *testing.T) {
 	Use.Assert.NotPanic(t, func() {
-		fmt.Sprint("Hello, World")
+		// If we do nothing here it can't panic ;)
 	})
 }
