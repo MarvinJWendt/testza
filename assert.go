@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/pterm/pterm"
@@ -44,8 +45,20 @@ func (a AssertHelper) isNumber(value interface{}) bool {
 	return false
 }
 
-func (a AssertHelper) isGreater(base, value interface{}) {
+// completesIn returns if a function completes in a specific time.
+func (a AssertHelper) completesIn(duration time.Duration, f func()) bool {
+	done := make(chan bool)
+	go func() {
+		f()
+		done <- true
+	}()
 
+	select {
+	case <-time.After(duration):
+		return false
+	case <-done:
+		return true
+	}
 }
 
 func (a AssertHelper) isZero(value interface{}) bool {
@@ -432,6 +445,41 @@ func (a AssertHelper) NotNil(t testingT, object interface{}, msg ...interface{})
 			spew.Sdump(object),
 		)
 		internal.Fail(t, output)
+	}
+}
+
+// CompletesIn asserts that a function completes in a given time.
+// Use this function to test that functions do not take too long to complete.
+//
+// NOTE: Every system takes a different amount of time to complete a function.
+// Do not set the duration too low, if you want consistent results.
+func (a AssertHelper) CompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !a.completesIn(duration, f) {
+		internal.Fail(t, generateMsg(msg,
+			pterm.Sprintfln("The function %s, but it does not.", highlight("should complete in ", duration)),
+		))
+	}
+}
+
+// NotCompletesIn asserts that a function does not complete in a given time.
+// Use this function to test that functions do not complete to quickly.
+// For example if your database connection completes in under a millisecond, there might be something wrong.
+//
+// NOTE: Every system takes a different amount of time to complete a function.
+// Do not set the duration too high, if you want consistent results.
+func (a AssertHelper) NotCompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if a.completesIn(duration, f) {
+		internal.Fail(t, generateMsg(msg,
+			pterm.Sprintfln("The function %s, but it does.", highlight("should not complete in ", duration)),
+		))
 	}
 }
 

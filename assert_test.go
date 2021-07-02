@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/pterm/pterm"
 )
@@ -269,4 +270,16 @@ func TestAssertHelper_NotNil(t *testing.T) {
 			Use.Assert.NotNil(t, v)
 		})
 	}
+}
+
+func TestAssertHelper_CompletesIn(t *testing.T) {
+	Use.Assert.CompletesIn(t, 10*time.Millisecond, func() {
+		time.Sleep(5 * time.Millisecond)
+	})
+}
+
+func TestAssertHelper_NotCompletesIn(t *testing.T) {
+	Use.Assert.NotCompletesIn(t, 10*time.Millisecond, func() {
+		time.Sleep(15 * time.Millisecond)
+	})
 }
