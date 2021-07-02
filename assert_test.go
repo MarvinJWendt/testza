@@ -222,6 +222,14 @@ func TestAssert_NotEqualValues(t *testing.T) {
 	})
 }
 
+func TestAssertHelper_True(t *testing.T) {
+	Use.Assert.True(t, true)
+}
+
+func TestAssertHelper_False(t *testing.T) {
+	Use.Assert.False(t, false)
+}
+
 func TestAssert_Implements(t *testing.T) {
 	t.Run("ConstImplementsStringer", func(t *testing.T) {
 		Use.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const))
@@ -273,7 +281,7 @@ func TestAssertHelper_NotNil(t *testing.T) {
 }
 
 func TestAssertHelper_CompletesIn(t *testing.T) {
-	Use.Assert.CompletesIn(t, 10*time.Millisecond, func() {
+	Use.Assert.CompletesIn(t, 50*time.Millisecond, func() {
 		time.Sleep(5 * time.Millisecond)
 	})
 }
