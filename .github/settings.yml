@@ -1,10 +1,10 @@
-_extends: .github
+hore_extends: .github
 
 repository:
   # See https://developer.github.com/v3/repos/#edit for all available settings.
 
   # A short description of the repository that will show up on GitHub
-  description: 🔹 Util functions for tests in Go
+  description: 🔹 Full featured test framework for Go! Assertions, mocking, input testing, output capturing, and many more! 🍕
 
   # A comma-separated list of topics to set on the repository
   topics: atomicgo, go, golang, golang-library, testing, unit-testing
