@@ -2,12 +2,10 @@ package testza
 
 import (
 	"bytes"
+	"fmt"
 	"reflect"
 	"strings"
 	"time"
-
-	"github.com/davecgh/go-spew/spew"
-	"github.com/pterm/pterm"
 
 	"github.com/atomicgo/testza/internal"
 )
@@ -145,24 +143,26 @@ func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, object inter
 	}
 
 	if !a.isKind(expectedKind, object) {
-		internal.Fail(t, generateMsg(msg,
-			pterm.Sprintfln("An object that %s is a type of kind %s", highlight(pterm.Sprintf("should be a type of kind %s", expectedKind.String())), highlight(reflect.TypeOf(object).Kind())),
-			spew.Sdump(object),
-		))
+		internal.Fail(t,
+			fmt.Sprintf("A value that !!should be a type of kind %s!! is a type of kind %s.", expectedKind.String(), reflect.TypeOf(object).Kind().String()),
+			internal.NewObjectsExpectedActual(expectedKind, object),
+			msg...,
+		)
 	}
 }
 
 // NotKindOf asserts that the object is not a type of kind `kind`.
-func (a AssertHelper) NotKindOf(t testingT, kind reflect.Kind, value interface{}, msg ...interface{}) {
+func (a AssertHelper) NotKindOf(t testingT, kind reflect.Kind, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
 
-	if a.isKind(kind, value) {
-		internal.Fail(t, generateMsg(msg,
-			pterm.Sprintfln("A value that %s is a type of kind %s", highlight(pterm.Sprintf("should not be a type of kind %s", kind.String())), highlight(reflect.TypeOf(value).Kind())),
-			spew.Sdump(value),
-		))
+	if a.isKind(kind, object) {
+		internal.Fail(t,
+			fmt.Sprintf("A value that !!should not be a type of kind %s!! is a type of kind %s.", kind.String(), reflect.TypeOf(object).Kind().String()),
+			internal.NewObjectsExpectedActual(kind, object),
+			msg...,
+		)
 	}
 }
 
@@ -171,10 +171,7 @@ func (a AssertHelper) NotKindOf(t testingT, kind reflect.Kind, value interface{}
 // Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32, Uint64, Complex64 and Complex128.
 func (a AssertHelper) Number(t testingT, object interface{}, msg ...interface{}) {
 	if !a.isNumber(object) {
-		internal.Fail(t, generateMsg(msg,
-			pterm.Sprintfln("An object that %s is not a number", highlight("should be a number")),
-			spew.Sdump(object),
-		))
+		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object))
 	}
 }
 
@@ -183,10 +180,7 @@ func (a AssertHelper) Number(t testingT, object interface{}, msg ...interface{})
 // Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32, Uint64, Complex64 and Complex128.
 func (a AssertHelper) NotNumber(t testingT, object interface{}, msg ...interface{}) {
 	if a.isNumber(object) {
-		internal.Fail(t, generateMsg(msg,
-			pterm.Sprintfln("An object that %s is a number", highlight("should not be a number")),
-			spew.Sdump(object),
-		))
+		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object))
 	}
 }
 
@@ -200,12 +194,7 @@ func (a AssertHelper) Zero(t testingT, value interface{}, msg ...interface{}) {
 	}
 
 	if !a.isZero(value) {
-		output := generateMsg(msg,
-			pterm.Sprintfln("A value that %s is not zero.", highlight("should be zero")),
-			pterm.Sprintfln("Actual value:"),
-			spew.Sdump(value),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "An object that !!should have it's zero value!!, does not have it's zero value.", internal.NewObjectsSingleNamed("object", value))
 	}
 }
 
@@ -219,12 +208,7 @@ func (a AssertHelper) NotZero(t testingT, value interface{}, msg ...interface{})
 	}
 
 	if a.isZero(value) {
-		output := generateMsg(msg,
-			pterm.Sprintfln("A value that %s is zero.", highlight("should not be zero")),
-			pterm.Sprintfln("Actual value:"),
-			spew.Sdump(value),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "An object that !!should not have it's zero value!!, does have it's zero value.", internal.NewObjectsSingleNamed("object", value))
 	}
 }
 
@@ -235,7 +219,7 @@ func (a AssertHelper) Equal(t testingT, expected interface{}, actual interface{}
 	}
 
 	if !Use.Assert.isEqual(expected, actual) {
-		a.failNotEqual(t, expected, actual, msg...)
+		internal.Fail(t, "Two objects that !!should be equal!!, are not equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
 
@@ -246,12 +230,7 @@ func (a AssertHelper) NotEqual(t testingT, expected interface{}, actual interfac
 	}
 
 	if Use.Assert.isEqual(expected, actual) {
-		output := generateMsg(msg,
-			pterm.Sprintfln("Two values that %s are equal:", highlight("should not be equal")),
-			pterm.Sprintfln("Expected and actual both have the value(s):"),
-			spew.Sdump(expected),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "Two objects that !!should not be equal!!, are equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
 
@@ -262,7 +241,7 @@ func (a AssertHelper) EqualValues(t testingT, expected interface{}, actual inter
 	}
 
 	if !Use.Assert.hasEqualValues(expected, actual) {
-		a.failNotEqual(t, expected, actual, msg...)
+		internal.Fail(t, "Two objects that !!should have equal values!!, do not have equal values.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
 
@@ -273,12 +252,7 @@ func (a AssertHelper) NotEqualValues(t testingT, expected interface{}, actual in
 	}
 
 	if Use.Assert.hasEqualValues(expected, actual) {
-		output := generateMsg(msg,
-			pterm.Sprintfln("Two values that %s are equal:", highlight("should not be equal")),
-			pterm.Sprintfln("Expected and actual both have the value(s):"),
-			spew.Sdump(expected),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "Two objects that !!should not have equal values!!, do have equal values.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
 
@@ -289,13 +263,7 @@ func (a AssertHelper) True(t testingT, value interface{}, msg ...interface{}) {
 	}
 
 	if value != true {
-		output := generateMsg(
-			msg,
-			pterm.Sprintfln("Value that %s is not true:", highlight("should be true")),
-			pterm.Sprintfln("Expected value: %s", green("true")),
-			pterm.Sprintfln("Actual value: %s", red(pterm.Sprintf("%#v", value))),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "Value !!should be true!! but is not.", internal.NewObjectsExpectedActual(true, value))
 	}
 }
 
@@ -306,13 +274,7 @@ func (a AssertHelper) False(t testingT, value interface{}, msg ...interface{}) {
 	}
 
 	if value == true {
-		output := generateMsg(
-			msg,
-			pterm.Sprintfln("Value that %s is not true:", highlight("should be false")),
-			pterm.Sprintfln("Expected value: %s", green("false")),
-			pterm.Sprintfln("Actual value: %s", red(pterm.Sprintf("%#v", value))),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "Value !!should be false!! but is not.", internal.NewObjectsExpectedActual(false, value))
 	}
 }
 
@@ -326,12 +288,7 @@ func (a AssertHelper) Implements(t testingT, interfaceObject, object interface{}
 	}
 
 	if !Use.Assert.doesImplement(interfaceObject, object) {
-		output := generateMsg(msg, pterm.Sprintfln("The object %s %s %v:\nObject:\n%s", pterm.Magenta(reflect.TypeOf(object)),
-			highlight("should implement"),
-			pterm.Magenta(reflect.TypeOf(interfaceObject)),
-			spew.Sdump(object)),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, fmt.Sprintf("An object that !!should implement %s!! does not implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
 
@@ -345,12 +302,7 @@ func (a AssertHelper) NotImplements(t testingT, interfaceObject, object interfac
 	}
 
 	if Use.Assert.doesImplement(interfaceObject, object) {
-		output := generateMsg(msg, pterm.Sprintfln("The object %s %s %v:\nObject:\n%s",
-			pterm.Magenta(reflect.TypeOf(object)), highlight("should not implement"),
-			pterm.Magenta(reflect.TypeOf(interfaceObject)), spew.Sdump(object)),
-		)
-
-		internal.Fail(t, output)
+		internal.Fail(t, fmt.Sprintf("An object that !!should not implement %s!! does implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
 
@@ -360,11 +312,7 @@ func (a AssertHelper) Contains(t testingT, object, element interface{}, msg ...i
 	}
 
 	if !Use.Assert.doesContain(object, element) {
-		output := generateMsg(msg,
-			pterm.Sprintfln("Object %s:\n", highlight("should contain")),
-			spew.Sdump(element),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{"object": object, "element that is missing in object": element})
 	}
 }
 
@@ -374,11 +322,7 @@ func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg .
 	}
 
 	if Use.Assert.doesContain(object, element) {
-		output := generateMsg(msg,
-			pterm.Sprintfln("Object %s:\n", highlight("should not contain")),
-			spew.Sdump(element),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{"object": object, "element that should not be in object": element})
 	}
 }
 
@@ -390,10 +334,7 @@ func (a AssertHelper) Panic(t testingT, f func(), msg ...interface{}) {
 
 	defer func() {
 		if r := recover(); r == nil {
-			output := generateMsg(msg,
-				pterm.Sprintfln("The function %s, but does not panic", highlight("should panic")),
-			)
-			internal.Fail(t, output)
+			internal.Fail(t, "A function that !!should panic!! did not panic.", internal.Objects{}, msg...)
 		}
 	}()
 
@@ -408,10 +349,7 @@ func (a AssertHelper) NotPanic(t testingT, f func(), msg ...interface{}) {
 
 	defer func() {
 		if r := recover(); r != nil {
-			output := generateMsg(msg,
-				pterm.Sprintfln("The function %s, but it panics:\n%s", highlight("should not panic"), r),
-			)
-			internal.Fail(t, output)
+			internal.Fail(t, "A function that !!should not panic!! did panic.", internal.Objects{}, msg...)
 		}
 	}()
 
@@ -425,11 +363,7 @@ func (a AssertHelper) Nil(t testingT, object interface{}, msg ...interface{}) {
 	}
 
 	if object != nil {
-		output := generateMsg(msg,
-			pterm.Sprintfln("An object %s is not nil:", highlight("should be nil")),
-			spew.Sdump(object),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "An object that !!should be nil!! is not nil.", internal.NewObjectsExpectedActual(nil, object))
 	}
 }
 
@@ -440,11 +374,7 @@ func (a AssertHelper) NotNil(t testingT, object interface{}, msg ...interface{})
 	}
 
 	if object == nil {
-		output := generateMsg(msg,
-			pterm.Sprintfln("An object %s is nil:", highlight("that should not be nil")),
-			spew.Sdump(object),
-		)
-		internal.Fail(t, output)
+		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleNamed("object", object))
 	}
 }
 
@@ -459,9 +389,7 @@ func (a AssertHelper) CompletesIn(t testingT, duration time.Duration, f func(), 
 	}
 
 	if !a.completesIn(duration, f) {
-		internal.Fail(t, generateMsg(msg,
-			pterm.Sprintfln("The function %s, but it does not.", highlight("should complete in ", duration)),
-		))
+		internal.Fail(t, fmt.Sprintf("The function !!should complete in %s!!, but it did not.", duration), internal.Objects{}, msg...)
 	}
 }
 
@@ -477,24 +405,6 @@ func (a AssertHelper) NotCompletesIn(t testingT, duration time.Duration, f func(
 	}
 
 	if a.completesIn(duration, f) {
-		internal.Fail(t, generateMsg(msg,
-			pterm.Sprintfln("The function %s, but it does.", highlight("should not complete in ", duration)),
-		))
+		internal.Fail(t, fmt.Sprintf("The function !!should not complete in %s!!, but it did.", duration), internal.Objects{}, msg...)
 	}
-}
-
-// ** Helper Methods **
-
-func (a AssertHelper) failNotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
-	if test, ok := t.(helper); ok {
-		test.Helper()
-	}
-
-	diff := internal.GetDifference(expected, actual)
-	output := generateMsg(
-		msg,
-		pterm.Sprintfln("Two values that %s are not equal:", highlight("should be equal")),
-		pterm.Sprint(diff),
-	)
-	internal.Fail(t, output)
 }
