@@ -43,31 +43,66 @@
 
 ---
 
-## Description
-
-Package testza contains util functions for writing tests in Go.
-
-## Install
+## Installation
 
 ```console
 # Execute this command inside your project
-go get -u github.com/MarvinJWendt/testza
+go get github.com/MarvinJWendt/testza
 ```
 
-or
+## Description
+
+Testza is a full-featured testing framework for Go.
+It integrates with the default test runner, so you can use it with the standard `go test` tool.
+Testza contains easy to use methods, like assertions, output capturing, mocking, and much more.
+
+Testza is structured in a different way than you might be used to in Go, but we think that it makes writing tests as easy and efficient as possible.
+
+## Getting Started
+
+Testza is very IDE friendly and was made to integrate with your IDE to increase your productivity.  
 
 ```go
-// Add this to your imports
-import "github.com/MarvinJWendt/testza"
+   ┌ Testza package
+   |    ┌ Container for all testza modules
+   |    |     ┌ The module you want to use (Press Ctrl+Space to see a list of all modules)
+testza.Use.
+
+
+// --- Example Usage ---
+
+// - Some assertions -
+testza.Use.Assert.True(t, true) // -> Pass
+testza.Use.Assert.NoError(t, err) // -> Pass
+testza.Use.Assert.Equal(t, object, object) // -> Pass
+// ...
+
+// - Testing console output -
+terminalOutput, _ := testza.Use.Capture.Stdout(func(w io.Writer) error {fmt.Println("Hello"); return nil})
+testza.Use.Assert.Equal(t, terminalOutput, "Hello\n") // -> Pass
+
+// - Mocking -
+
+// Testing a function that accepts email addresses as a parameter:
+
+// Testset of many different email addresses
+emailAddresses := testza.Use.Mock.Strings.EmailAddresses()
+
+// Run a test for every string in the test set
+testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int, str string) {
+  user, domain, err := internal.ParseEmailAddress(str) // Use your function
+  testza.Use.Assert.NoError(t, err) // Assert that your function does not return an error
+  testza.Use.Assert.NotZero(t, user) // Assert that the user is returned
+  testza.Use.Assert.NotZero(t, domain) // Assert that the domain is returned
+})
 ```
 
 ## Documentation
 
-[**Documentation with interactive examples on pkg.go.dev**](https://pkg.go.dev/github.com/MarvinJWendt/testza#section-documentation)
-
+Soon!
 
 
 ---
 
-> With ❤️ by [@MarvinJWendt](https://github.com/MarvinJWendt) and all the contributors! |
+> Made with ❤️ by [@MarvinJWendt](https://github.com/MarvinJWendt) and contributors! |
 > [MarvinJWendt.com](https://marvinjwendt.com)
