@@ -15,6 +15,13 @@ func (s StringsHelper) Empty() []string {
 	return []string{""}
 }
 
+// Numeric returns a test set with strings that are numeric.
+// The highest number in here is "9223372036854775807", which is equal to the maxmim int64.
+func (s StringsHelper) Numeric() []string {
+	positiveNumbers := []string{"0", "1", "2", "3", "100", "1.1", "1337", "13.37", "0.000000000001", "9223372036854775807"}
+	negativeNumbers := s.Modify(positiveNumbers, func(index int, value string) string { return "-" + value })
+	return append(positiveNumbers, negativeNumbers...)
+}
 
 // Usernames returns a test set with usernames.
 func (s StringsHelper) Usernames() []string {
@@ -43,6 +50,7 @@ func (s StringsHelper) Full() (ret []string) {
 	ret = append(ret, s.HtmlTags()...)
 	ret = append(ret, s.EmailAddresses()...)
 	ret = append(ret, s.Empty()...)
+	ret = append(ret, s.Numeric()...)
 
 	for i := 0; i < 10; i++ {
 		ret = append(ret, s.GenerateRandom(1, i)...)

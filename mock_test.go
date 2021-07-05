@@ -2,6 +2,7 @@ package testza
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"testing"
 )
@@ -27,6 +28,16 @@ func TestStringsHelper_GenerateRandom(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		t.Run(fmt.Sprintf("Count=%d", i), func(t *testing.T) {
 			Use.Assert.Equal(t, i, len(Use.Mock.Strings.GenerateRandom(i, 5)))
+		})
+	}
+}
+
+func TestStringsHelper_Numeric(t *testing.T) {
+	for _, v := range Use.Mock.Strings.Numeric() {
+		t.Run(v, func(t *testing.T) {
+			f, err := strconv.ParseFloat(v, 64)
+			Use.Assert.Numeric(t, f)
+			Use.Assert.NoError(t, err)
 		})
 	}
 }
