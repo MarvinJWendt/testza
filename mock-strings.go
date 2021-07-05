@@ -10,9 +10,20 @@ import (
 // StringsHelper contains strings test sets.
 type StringsHelper struct{}
 
+// Empty returns a test set with a single empty string.
+func (s StringsHelper) Empty() []string {
+	return []string{""}
+}
+
+
 // Usernames returns a test set with usernames.
 func (s StringsHelper) Usernames() []string {
 	return []string{"MarvinJWendt", "Zipper1337", "n00b", "l33t", "j0rgan", "test", "test123", "TEST", "test_", "TEST_"}
+}
+
+// EmailAddresses returns a test set with valid email addresses.
+func (s StringsHelper) EmailAddresses() []string {
+	return []string{"hello@world.com", "hello+world@example.com", "hello.world@example.com", "a@a.xyz", "test@127.0.0.1", "test@[127.0.0.1]", "1@example.com", "_____@example.com", "test@subdomain.domain.xyz", `valid.”email\ address@example.com`}
 }
 
 // HtmlTags returns a test set with html tags.
@@ -30,6 +41,8 @@ func (s StringsHelper) HtmlTags() []string {
 func (s StringsHelper) Full() (ret []string) {
 	ret = append(ret, s.Usernames()...)
 	ret = append(ret, s.HtmlTags()...)
+	ret = append(ret, s.EmailAddresses()...)
+	ret = append(ret, s.Empty()...)
 
 	for i := 0; i < 10; i++ {
 		ret = append(ret, s.GenerateRandom(1, i)...)
