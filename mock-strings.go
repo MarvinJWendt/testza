@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/atomicgo/testza/internal"
+	"github.com/MarvinJWendt/testza/internal"
 )
 
 // StringsHelper contains strings test sets.
@@ -38,7 +38,7 @@ func (s StringsHelper) HtmlTags() []string {
 	return []string{
 		"<script>alert('XSS')</script>",
 		"<script>",
-		`<a href="https://github.com/atomicgo/testza">link</a>`,
+		`<a href="https://github.com/MarvinJWendt/testza">link</a>`,
 		`</body>`,
 		`</html>`,
 	}

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/atomicgo/testza/internal"
+	"github.com/MarvinJWendt/testza/internal"
 	"github.com/pterm/pterm"
 )
 
