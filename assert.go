@@ -166,10 +166,10 @@ func (a AssertHelper) NotKindOf(t testingT, kind reflect.Kind, object interface{
 	}
 }
 
-// Number asserts that the object is a numeric type.
+// Numeric asserts that the object is a numeric type.
 // Numeric types are:
 // Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32, Uint64, Complex64 and Complex128.
-func (a AssertHelper) Number(t testingT, object interface{}, msg ...interface{}) {
+func (a AssertHelper) Numeric(t testingT, object interface{}, msg ...interface{}) {
 	if !a.isNumber(object) {
 		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object))
 	}
@@ -178,7 +178,7 @@ func (a AssertHelper) Number(t testingT, object interface{}, msg ...interface{})
 // Number checks if the object is not a numeric type.
 // Numeric types are:
 // Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32, Uint64, Complex64 and Complex128.
-func (a AssertHelper) NotNumber(t testingT, object interface{}, msg ...interface{}) {
+func (a AssertHelper) NotNumeric(t testingT, object interface{}, msg ...interface{}) {
 	if a.isNumber(object) {
 		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object))
 	}

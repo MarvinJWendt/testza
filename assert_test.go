@@ -103,7 +103,7 @@ func TestAssertHelper_NotKindOf(t *testing.T) {
 	}
 }
 
-func TestAssertHelper_Number(t *testing.T) {
+func TestAssertHelper_Numeric(t *testing.T) {
 	var numbers []interface{}
 
 	for i := 0; i < 10; i++ {
@@ -129,7 +129,7 @@ func TestAssertHelper_Number(t *testing.T) {
 
 	for _, number := range numbers {
 		t.Run(pterm.Sprintf("Type=%s;Value=%#v", reflect.TypeOf(number).Kind().String(), number), func(t *testing.T) {
-			Use.Assert.Number(t, number)
+			Use.Assert.Numeric(t, number)
 		})
 	}
 }
@@ -138,7 +138,7 @@ func TestAssertHelper_NotNumber(t *testing.T) {
 	noNumbers := []interface{}{"Hello, World!", true, false}
 	for _, number := range noNumbers {
 		t.Run(pterm.Sprintf("Type=%s;Value=%#v", reflect.TypeOf(number).Kind().String(), number), func(t *testing.T) {
-			Use.Assert.NotNumber(t, number)
+			Use.Assert.NotNumeric(t, number)
 		})
 	}
 }
