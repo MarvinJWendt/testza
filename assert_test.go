@@ -287,7 +287,7 @@ func TestAssertHelper_CompletesIn(t *testing.T) {
 }
 
 func TestAssertHelper_NotCompletesIn(t *testing.T) {
-	Use.Assert.NotCompletesIn(t, 10*time.Millisecond, func() {
+	Use.Assert.NotCompletesIn(t, 3*time.Millisecond, func() {
 		time.Sleep(15 * time.Millisecond)
 	})
 }
