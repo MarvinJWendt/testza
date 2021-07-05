@@ -1,4 +1,4 @@
-<h1 align="center">testza</h1>
+<h1 align="center">testza 🍕</h1>
 <p align="center">Testza is like pizza for Go - you could life without it, but why should you?</p>
 
 <p align="center">
@@ -43,10 +43,6 @@
 
 ---
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/atomicgo/atomicgo/main/assets/header.png" alt="AtomicGo">
-</p>
-
 ## Description
 
 Package testza contains util functions for writing tests in Go.
@@ -73,6 +69,5 @@ import "github.com/MarvinJWendt/testza"
 
 ---
 
-> [AtomicGo.dev](https://atomicgo.dev) &nbsp;&middot;&nbsp;
-> with ❤️ by [@MarvinJWendt](https://github.com/MarvinJWendt) |
+> With ❤️ by [@MarvinJWendt](https://github.com/MarvinJWendt) and all the contributors! |
 > [MarvinJWendt.com](https://marvinjwendt.com)
