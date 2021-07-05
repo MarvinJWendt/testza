@@ -84,6 +84,7 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 	}
 
 	message = "\n" + strings.Join(strings.Split(message, "\n"), "\n"+pterm.FgRed.Sprint("| "))
+	message = strings.Join(strings.Split(message, "\n")[:strings.Count(message, "\n")], "\n") + pterm.Reset.Sprint("")
 
 	return message
 }
