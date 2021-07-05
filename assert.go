@@ -312,7 +312,7 @@ func (a AssertHelper) Contains(t testingT, object, element interface{}, msg ...i
 	}
 
 	if !Use.Assert.doesContain(object, element) {
-		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{"object": object, "element that is missing in object": element})
+		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that is missing in object", Data: element}})
 	}
 }
 
@@ -322,7 +322,7 @@ func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg .
 	}
 
 	if Use.Assert.doesContain(object, element) {
-		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{"object": object, "element that should not be in object": element})
+		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that should not be in object", Data: element}})
 	}
 }
 
