@@ -69,7 +69,7 @@ Testza is very IDE friendly and was made to integrate with your IDE to increase 
 testza.Use.
 
 
-// --- Some Examples! ---
+// --- Some Examples ---
 
 // - Some assertions -
 testza.Use.Assert.True(t, true) // -> Pass
