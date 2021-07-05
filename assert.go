@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/atomicgo/testza/internal"
+	"github.com/pterm/pterm"
 )
 
 // ** Getter Methods **
@@ -406,5 +407,21 @@ func (a AssertHelper) NotCompletesIn(t testingT, duration time.Duration, f func(
 
 	if a.completesIn(duration, f) {
 		internal.Fail(t, fmt.Sprintf("The function !!should not complete in %s!!, but it did.", duration), internal.Objects{}, msg...)
+	}
+}
+
+// NoError asserts that an error is nil.
+func (a AssertHelper) NoError(t testingT, err interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if err != nil {
+		internal.Fail(t, "An error that !!should be nil!! is not nil.", internal.Objects{{
+			Name:      "Error",
+			NameStyle: pterm.NewStyle(pterm.FgRed),
+			Data:      err,
+			DataStyle: pterm.NewStyle(pterm.FgRed),
+		}}, msg...)
 	}
 }
