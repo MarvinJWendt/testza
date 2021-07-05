@@ -69,7 +69,7 @@ Testza is very IDE friendly and was made to integrate with your IDE to increase 
 testza.Use.
 
 
-// --- Example Usage ---
+// --- Some Examples! ---
 
 // - Some assertions -
 testza.Use.Assert.True(t, true) // -> Pass
@@ -78,11 +78,11 @@ testza.Use.Assert.Equal(t, object, object) // -> Pass
 // ...
 
 // - Testing console output -
+// Test the output of your CLI tool easily!
 terminalOutput, _ := testza.Use.Capture.Stdout(func(w io.Writer) error {fmt.Println("Hello"); return nil})
 testza.Use.Assert.Equal(t, terminalOutput, "Hello\n") // -> Pass
 
 // - Mocking -
-
 // Testing a function that accepts email addresses as a parameter:
 
 // Testset of many different email addresses
@@ -95,6 +95,8 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
   testza.Use.Assert.NotZero(t, user) // Assert that the user is returned
   testza.Use.Assert.NotZero(t, domain) // Assert that the domain is returned
 })
+
+// And that's just a few examples of what you can do with Testza!
 ```
 
 ## Documentation
