@@ -69,7 +69,7 @@ Testza is very IDE friendly and was made to integrate with your IDE to increase 
    ┌ Testza package
    |    ┌ Container for all testza modules
    |    |     ┌ The module you want to use (Press Ctrl+Space to see a list of all modules)
-testza.Use.
+testza.Use.XXXXXXX
 
 
 // --- Some Examples ---
