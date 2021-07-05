@@ -56,7 +56,10 @@ Testza is a full-featured testing framework for Go.
 It integrates with the default test runner, so you can use it with the standard `go test` tool.
 Testza contains easy to use methods, like assertions, output capturing, mocking, and much more.
 
-Testza is structured in a different way than you might be used to in Go, but we think that it makes writing tests as easy and efficient as possible.
+Testza is structured a bit differently than you might be used to in Go, but we think that it makes writing tests as easy and efficient as possible.  
+After all, writing tests should be very simple and should not require you to study a whole framework.  
+That's why we made testza to integrates perfectly with your IDE.
+You don't even have to lookup the documentation, as testza is self-explanatory.
 
 ## Getting Started
 
@@ -102,7 +105,6 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 ## Documentation
 
 Soon!
-
 
 ---
 
