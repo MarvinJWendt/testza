@@ -8,7 +8,7 @@ import (
 	"github.com/pterm/pterm"
 )
 
-var Highlight = pterm.NewStyle(pterm.Bold, pterm.FgLightRed).Sprint
+var Highlight = pterm.NewStyle(pterm.FgLightRed).Sprint
 
 type Object struct {
 	Name      string
@@ -80,11 +80,18 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 		if v.NameStyle == nil {
 			v.NameStyle = pterm.NewStyle(pterm.FgCyan)
 		}
-		message += pterm.Sprintf("\n%s\n%s", v.NameStyle.Add(*pterm.NewStyle(pterm.Bold)).Sprint(v.Name+":"), v.DataStyle.Sprint(spew.Sdump(v.Data)))
+		message += "\n" + v.NameStyle.Add(*pterm.NewStyle(pterm.Bold)).Sprint(v.Name+":") + "\n"
+		message += v.DataStyle.Sprint(spew.Sdump(v.Data))
 	}
 
-	message = "\n" + strings.Join(strings.Split(message, "\n"), "\n"+pterm.FgRed.Sprint("| "))
-	message = strings.Join(strings.Split(message, "\n")[:strings.Count(message, "\n")], "\n") + pterm.Reset.Sprint("")
+	newMessage := "\n"
+	lines := strings.Split(message, "\n")
+	for i, line := range lines {
+		if i > 0 && i < len(lines)-1 {
+			newMessage += pterm.FgGray.Sprintf("%4d| ", i) + line + "\n" + pterm.Reset.Sprint()
+		}
+	}
+	message = "\n" + newMessage + "\n"
 
 	return message
 }
