@@ -1,4 +1,5 @@
-<h1 align="center">AtomicGo | testza</h1>
+<h1 align="center">testza</h1>
+<p align="center">Testza is like pizza for Go - you could life without it, but why should you?</p>
 
 <p align="center">
 
