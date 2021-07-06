@@ -1,6 +1,3 @@
-
-
-
 <h1 align="center">testza 🍕</h1>
 <p align="center">Testza is like pizza for Go - you could life without it, but why should you?</p>
 
@@ -38,7 +35,7 @@
 <p align="center">
 <strong><a href="#install">Get The Module</a></strong>
 |
-<strong><a href="https://pkg.go.dev/github.com/MarvinJWendt/testza#section-documentation" target="_blank">Documentation</a></strong>
+<strong><a href="https://github.com/MarvinJWendt/testza#documentation" target="_blank">Documentation</a></strong>
 |
 <strong><a href="https://github.com/atomicgo/atomicgo/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a></strong>
 |
@@ -525,6 +522,3 @@ RunTests runs tests with a specific test set.
 
 > Made with ❤️ by [@MarvinJWendt](https://github.com/MarvinJWendt) and contributors! |
 > [MarvinJWendt.com](https://marvinjwendt.com)
-
-
-
