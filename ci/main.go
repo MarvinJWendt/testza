@@ -22,7 +22,7 @@ var Modules = []Module{
 	{Name: "Mock.Strings", StructName: "StringsHelper", Path: "testza.Use.Mock.Strings"},
 	{Name: "Mock.Bools", StructName: "BoolsHelper", Path: "testza.Use.Mock.Bools"},
 	{Name: "Mock.Floats64", StructName: "Floats64Helper", Path: "testza.Use.Mock.Floats64"},
-	{Name: "Mock.Ints", StructName: "IntsHelper", Path: "testza.Use.Mock.Floats64"},
+	{Name: "Mock.Ints", StructName: "IntsHelper", Path: "testza.Use.Mock.Ints"},
 }
 
 func main() {
