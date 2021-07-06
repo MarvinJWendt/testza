@@ -207,10 +207,6 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
   - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomPositive)
   - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomRange)
   - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Modify)
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Full)
-  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomNegative)
-  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomPositive)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Modify)
 </td>
 
 </details>
@@ -223,15 +219,10 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 <details>
 <summary>Click to expand</summary>
 
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Full)
-  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomNegative)
-  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomPositive)
-  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomRange)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Modify)
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Full)
-  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomNegative)
-  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomPositive)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Modify)
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockIntsFull)
+  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockIntsGenerateRandomNegative)
+  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockIntsGenerateRandomPositive)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockIntsModify)
 </td>
 
 </details>
@@ -533,7 +524,7 @@ Modify returns a modified version of a test set.
 
 ### Mock.Ints
 
-#### testza.Use.Mock.Floats64.Full
+#### testza.Use.Mock.Ints.Full
 
 ```go
 func (h IntsHelper) Full() (ints []int)
@@ -541,7 +532,7 @@ func (h IntsHelper) Full() (ints []int)
 
 
 
-#### testza.Use.Mock.Floats64.GenerateRandomNegative
+#### testza.Use.Mock.Ints.GenerateRandomNegative
 
 ```go
 func (h IntsHelper) GenerateRandomNegative(count, min int) (ints []int)
@@ -551,7 +542,7 @@ GenerateRandomNegative generates random negative integers with a minimum of
 min. If the minimum is 0, or above, the maximum will be set to
 math.MinInt64.
 
-#### testza.Use.Mock.Floats64.GenerateRandomPositive
+#### testza.Use.Mock.Ints.GenerateRandomPositive
 
 ```go
 func (h IntsHelper) GenerateRandomPositive(count, max int) (ints []int)
@@ -561,7 +552,7 @@ GenerateRandomPositive generates random positive integers with a maximum of
 max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### testza.Use.Mock.Floats64.Modify
+#### testza.Use.Mock.Ints.Modify
 
 ```go
 func (h IntsHelper) Modify(inputSlice []int, f func(index int, value int) int) (ints []int)
