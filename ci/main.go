@@ -143,7 +143,7 @@ func getMarkdown() (md string) {
 		md += "</tr>\n"
 	}
 
-	md += "</table>"
+	md += "</table>\n\n"
 
 	for _, f := range Functions {
 		if strings.TrimSpace(f.Head) == "" {
