@@ -16,13 +16,13 @@ var goDoc string
 var Functions []Function
 
 var Modules = []Module{
-	{Name: "Assertions", StructName: "AssertHelper", Path: "testza.Use.Assert"},
+	{Name: "Assert", StructName: "AssertHelper", Path: "testza.Use.Assert"},
 	{Name: "Capture", StructName: "CaptureHelper", Path: "testza.Use.Capture"},
-	{Name: "Mocking", StructName: "MockHelper", Path: "testza.Use.Mock"},
-	{Name: "Mock Strings", StructName: "StringsHelper", Path: "testza.Use.Mock.Strings"},
-	{Name: "Mock Booleans", StructName: "BoolsHelper", Path: "testza.Use.Mock.Bools"},
-	{Name: "Mock Floats64", StructName: "Floats64Helper", Path: "testza.Use.Mock.Floats64"},
-	{Name: "Mock Integers", StructName: "IntsHelper", Path: "testza.Use.Mock.Floats64"},
+	{Name: "Mock", StructName: "MockHelper", Path: "testza.Use.Mock"},
+	{Name: "Mock.Strings", StructName: "StringsHelper", Path: "testza.Use.Mock.Strings"},
+	{Name: "Mock.Bools", StructName: "BoolsHelper", Path: "testza.Use.Mock.Bools"},
+	{Name: "Mock.Floats64", StructName: "Floats64Helper", Path: "testza.Use.Mock.Floats64"},
+	{Name: "Mock.Ints", StructName: "IntsHelper", Path: "testza.Use.Mock.Floats64"},
 }
 
 func main() {
@@ -38,6 +38,7 @@ type Module struct {
 	Name       string
 	StructName string
 	Path       string
+	HasMethods bool
 }
 
 type Function struct {
@@ -104,8 +105,45 @@ func getModuleOfObject(head string) Module {
 	return Module{}
 }
 
+func pathToMarkdownLink(path string) string {
+	path = strings.ReplaceAll(path, " ", "")
+	path = strings.ReplaceAll(path, ".", "")
+
+	return path
+}
+
 func getMarkdown() (md string) {
 	var lastModule Module
+
+	md += `<table>
+  <tr>
+    <th>Module</th>
+    <th>Methods</th>
+  </tr>`
+
+	for _, module := range Modules {
+		path := module.Name
+		path = pathToMarkdownLink(path)
+		md += "<tr>\n"
+		md += fmt.Sprintf(`<td><a href="https://github.com/MarvinJWendt/testza#%s">%s</a></td>`+"\n", path, module.Name)
+		// md += fmt.Sprintf("\n- [%s](https://github.com/MarvinJWendt/testza#%s)\n", module.Name, path)
+
+		md += "<td>\n\n<details>\n<summary>Click to expand</summary>\n\n"
+		for _, f := range Functions {
+			if strings.TrimSpace(f.Head) == "" {
+				continue
+			}
+
+			if getModuleOfObject(f.Head).Path == module.Path {
+				md += fmt.Sprintf("  - [%s](https://github.com/MarvinJWendt/testza#%s)\n", f.Name, pathToMarkdownLink(module.Path+f.Name))
+				// md += fmt.Sprintf("  - [%s](https://github.com/MarvinJWendt/testza#%s)\n", f.Name, pathToMarkdownLink(module.Path+f.Name))
+			}
+		}
+		md += "</td>\n\n</details>\n\n"
+		md += "</tr>\n"
+	}
+
+	md += "</table>"
 
 	for _, f := range Functions {
 		if strings.TrimSpace(f.Head) == "" {
