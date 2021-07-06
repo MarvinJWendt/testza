@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
 
@@ -15,6 +16,7 @@ type Object struct {
 	NameStyle *pterm.Style
 	Data      interface{}
 	DataStyle *pterm.Style
+	Raw       bool
 }
 
 type Objects []Object
@@ -76,12 +78,27 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 		message += "\n"
 	}
 
+	if len(objects) == 2 {
+		if strings.Count(spew.Sdump(objects[0].Data), "\n")+strings.Count(spew.Sdump(objects[1].Data), "\n") > 4 {
+			objects = append(Objects{{
+				Name:      "Difference",
+				NameStyle: pterm.NewStyle(pterm.FgYellow),
+				Data:      GetDifference(objects[0].Data, objects[1].Data),
+				Raw:       true,
+			}}, objects...)
+		}
+	}
+
 	for _, v := range objects {
 		if v.NameStyle == nil {
 			v.NameStyle = pterm.NewStyle(pterm.FgCyan)
 		}
 		message += "\n" + v.NameStyle.Add(*pterm.NewStyle(pterm.Bold)).Sprint(v.Name+":") + "\n"
-		message += v.DataStyle.Sprint(spew.Sdump(v.Data))
+		if !v.Raw {
+			message += v.DataStyle.Sprint(spew.Sdump(v.Data))
+		} else {
+			message += fmt.Sprint(v.Data)
+		}
 	}
 
 	newMessage := "\n"
