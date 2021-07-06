@@ -44,9 +44,9 @@
 
 ---
 
-## Installation
-
 <img align="right" height="400" alt="Screenshot of an example test message" src="https://user-images.githubusercontent.com/31022056/124531029-ea31b780-de0d-11eb-8984-74e679f84aec.png" />
+
+## Installation
 
 ```console
 # Execute this command inside your project
