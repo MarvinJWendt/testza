@@ -29,6 +29,7 @@
 
 </p>
 
+
 ---
 
 <p align="center">
@@ -45,6 +46,8 @@
 
 ## Installation
 
+<img align="right" height="450" alt="Screenshot of an example test message" src="https://user-images.githubusercontent.com/31022056/124531029-ea31b780-de0d-11eb-8984-74e679f84aec.png" />
+
 ```console
 # Execute this command inside your project
 go get github.com/MarvinJWendt/testza
@@ -58,7 +61,7 @@ Testza contains easy to use methods, like assertions, output capturing, mocking,
 
 Testza is structured a bit differently than you might be used to in Go, but we think that it makes writing tests as easy and efficient as possible.  
 After all, writing tests should be very simple and should not require you to study a whole framework.  
-That's why we made testza to integrates perfectly with your IDE.
+That's why we made testza to integrate perfectly with your IDE.
 You don't even have to lookup the documentation, as testza is self-explanatory.
 
 ## Getting Started
