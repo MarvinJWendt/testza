@@ -18,7 +18,7 @@ var Functions []Function
 var Modules = []Module{
 	{Name: "Assert", StructName: "AssertHelper", Path: "testza.Use.Assert"},
 	{Name: "Capture", StructName: "CaptureHelper", Path: "testza.Use.Capture"},
-	{Name: "Mock", StructName: "MockHelper", Path: "testza.Use.Mock"},
+	// {Name: "Mock", StructName: "MockHelper", Path: "testza.Use.Mock"},
 	{Name: "Mock.Strings", StructName: "StringsHelper", Path: "testza.Use.Mock.Strings"},
 	{Name: "Mock.Bools", StructName: "BoolsHelper", Path: "testza.Use.Mock.Bools"},
 	{Name: "Mock.Floats64", StructName: "Floats64Helper", Path: "testza.Use.Mock.Floats64"},
