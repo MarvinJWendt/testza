@@ -78,7 +78,7 @@ func parseGoDoc() {
 			continue
 		}
 
-		var re = regexp.MustCompile(`(?m)(?:\))(( (?P<name>.*?)\())`)
+		var re = regexp.MustCompile(`(?m)\)( (?P<name>.*?)\()`)
 		Functions[i].Name = regexGroupsToMap(re, f.Head)["name"]
 
 		var newBody string
