@@ -108,7 +108,148 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 ## Documentation
 
 <!-- docs:start -->
-### Assertions
+<table>
+  <tr>
+    <th>Module</th>
+    <th>Methods</th>
+  </tr><tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Assert">Assert</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [CompletesIn](https://github.com/MarvinJWendt/testza#testzaUseAssertCompletesIn)
+  - [Contains](https://github.com/MarvinJWendt/testza#testzaUseAssertContains)
+  - [Equal](https://github.com/MarvinJWendt/testza#testzaUseAssertEqual)
+  - [EqualValues](https://github.com/MarvinJWendt/testza#testzaUseAssertEqualValues)
+  - [False](https://github.com/MarvinJWendt/testza#testzaUseAssertFalse)
+  - [Implements](https://github.com/MarvinJWendt/testza#testzaUseAssertImplements)
+  - [KindOf](https://github.com/MarvinJWendt/testza#testzaUseAssertKindOf)
+  - [Nil](https://github.com/MarvinJWendt/testza#testzaUseAssertNil)
+  - [NoError](https://github.com/MarvinJWendt/testza#testzaUseAssertNoError)
+  - [NotCompletesIn](https://github.com/MarvinJWendt/testza#testzaUseAssertNotCompletesIn)
+  - [NotContains](https://github.com/MarvinJWendt/testza#testzaUseAssertNotContains)
+  - [NotEqual](https://github.com/MarvinJWendt/testza#testzaUseAssertNotEqual)
+  - [NotEqualValues](https://github.com/MarvinJWendt/testza#testzaUseAssertNotEqualValues)
+  - [NotImplements](https://github.com/MarvinJWendt/testza#testzaUseAssertNotImplements)
+  - [NotKindOf](https://github.com/MarvinJWendt/testza#testzaUseAssertNotKindOf)
+  - [NotNil](https://github.com/MarvinJWendt/testza#testzaUseAssertNotNil)
+  - [NotNumeric](https://github.com/MarvinJWendt/testza#testzaUseAssertNotNumeric)
+  - [NotPanic](https://github.com/MarvinJWendt/testza#testzaUseAssertNotPanic)
+  - [NotZero](https://github.com/MarvinJWendt/testza#testzaUseAssertNotZero)
+  - [Numeric](https://github.com/MarvinJWendt/testza#testzaUseAssertNumeric)
+  - [Panic](https://github.com/MarvinJWendt/testza#testzaUseAssertPanic)
+  - [True](https://github.com/MarvinJWendt/testza#testzaUseAssertTrue)
+  - [Zero](https://github.com/MarvinJWendt/testza#testzaUseAssertZero)
+</td>
+
+</details>
+
+</tr>
+<tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Capture">Capture</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [Stderr](https://github.com/MarvinJWendt/testza#testzaUseCaptureStderr)
+  - [Stdout](https://github.com/MarvinJWendt/testza#testzaUseCaptureStdout)
+</td>
+
+</details>
+
+</tr>
+<tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock">Mock</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+</td>
+
+</details>
+
+</tr>
+<tr>
+<td><a href="https://github.com/MarvinJWendt/testza#MockStrings">Mock.Strings</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [EmailAddresses](https://github.com/MarvinJWendt/testza#testzaUseMockStringsEmailAddresses)
+  - [Empty](https://github.com/MarvinJWendt/testza#testzaUseMockStringsEmpty)
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockStringsFull)
+  - [GenerateRandom](https://github.com/MarvinJWendt/testza#testzaUseMockStringsGenerateRandom)
+  - [HtmlTags](https://github.com/MarvinJWendt/testza#testzaUseMockStringsHtmlTags)
+  - [Limit](https://github.com/MarvinJWendt/testza#testzaUseMockStringsLimit)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockStringsModify)
+  - [Numeric](https://github.com/MarvinJWendt/testza#testzaUseMockStringsNumeric)
+  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockStringsRunTests)
+</td>
+
+</details>
+
+</tr>
+<tr>
+<td><a href="https://github.com/MarvinJWendt/testza#MockBools">Mock.Bools</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockBoolsFull)
+</td>
+
+</details>
+
+</tr>
+<tr>
+<td><a href="https://github.com/MarvinJWendt/testza#MockFloats64">Mock.Floats64</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Full)
+  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomNegative)
+  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomPositive)
+  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomRange)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Modify)
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Full)
+  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomNegative)
+  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomPositive)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Modify)
+</td>
+
+</details>
+
+</tr>
+<tr>
+<td><a href="https://github.com/MarvinJWendt/testza#MockInts">Mock.Ints</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Full)
+  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomNegative)
+  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomPositive)
+  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomRange)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Modify)
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Full)
+  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomNegative)
+  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomPositive)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Modify)
+</td>
+
+</details>
+
+</tr>
+</table>### Assert
 
 #### testza.Use.Assert.CompletesIn
 
@@ -322,7 +463,7 @@ Zero asserts that the value is the zero value for it's type.
     assert.Zero(t, false)
     assert.Zero(t, "")
 
-### Mock Booleans
+### Mock.Bools
 
 #### testza.Use.Mock.Bools.Full
 
@@ -354,7 +495,7 @@ Stdout captures everything written to stdout from a specific function. You
 can use this method in tests, to validate that your functions writes a
 string to the terminal.
 
-### Mock Floats64
+### Mock.Floats64
 
 #### testza.Use.Mock.Floats64.Full
 
@@ -402,7 +543,7 @@ func (h Floats64Helper) Modify(inputSlice []float64, f func(index int, value flo
 
 Modify returns a modified version of a test set.
 
-### Mock Integers
+### Mock.Ints
 
 #### testza.Use.Mock.Floats64.Full
 
@@ -440,7 +581,7 @@ func (h IntsHelper) Modify(inputSlice []int, f func(index int, value int) int) (
 
 Modify returns a modified version of a test set.
 
-### Mock Strings
+### Mock.Strings
 
 #### testza.Use.Mock.Strings.EmailAddresses
 
