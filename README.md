@@ -1,3 +1,6 @@
+
+
+
 <h1 align="center">testza 🍕</h1>
 <p align="center">Testza is like pizza for Go - you could life without it, but why should you?</p>
 
@@ -107,9 +110,15 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 
 ## Documentation
 
-Soon!
+<!-- docs:start -->
+
+
+<!-- docs:end -->
 
 ---
 
 > Made with ❤️ by [@MarvinJWendt](https://github.com/MarvinJWendt) and contributors! |
 > [MarvinJWendt.com](https://marvinjwendt.com)
+
+
+

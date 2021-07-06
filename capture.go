@@ -10,7 +10,7 @@ import (
 // CaptureHelper contains methods to capture terminal output.
 type CaptureHelper struct{}
 
-// CaptureStdout captures everything written to stdout from a specific function.
+// Stdout captures everything written to stdout from a specific function.
 // You can use this method in tests, to validate that your functions writes a string to the terminal.
 func (h *CaptureHelper) Stdout(capture func(w io.Writer) error) (string, error) {
 	originalStdout := os.Stdout
@@ -42,7 +42,7 @@ func (h *CaptureHelper) Stdout(capture func(w io.Writer) error) (string, error) 
 	return string(out), nil
 }
 
-// CaptureStderr captures everything written to stderr from a specific function.
+// Stderr captures everything written to stderr from a specific function.
 // You can use this method in tests, to validate that your functions writes a string to the terminal.
 func (h *CaptureHelper) Stderr(capture func(w io.Writer) error) (string, error) {
 	originalStderr := os.Stderr

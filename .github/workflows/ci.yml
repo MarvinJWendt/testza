@@ -1,0 +1,32 @@
+name: update-docs
+
+on: [ push ]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+      - name: Run PTerm-CI
+        run: |
+          go get
+          go mod tidy
+          go run ./ci
+      - name: Push changes
+        run: |
+          git config --global user.name 'MarvinJWendt' || exit 0
+          git config --global user.email 'git@marvinjwendt.com' || exit 0
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY || exit 0
+          git checkout "${GITHUB_REF:11}" || exit 0
+          git add . || exit 0
+          git commit -am "docs: autoupdate" || exit 0
+          git push || exit 0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
