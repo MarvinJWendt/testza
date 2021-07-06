@@ -111,6 +111,412 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 ## Documentation
 
 <!-- docs:start -->
+### Assertions
+
+#### testza.Use.Assert.CompletesIn
+
+```go
+func (a AssertHelper) CompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{})
+```
+
+CompletesIn asserts that a function completes in a given time. Use this
+function to test that functions do not take too long to complete.
+
+NOTE: Every system takes a different amount of time to complete a function.
+Do not set the duration too low, if you want consistent results.
+
+#### testza.Use.Assert.Contains
+
+```go
+func (a AssertHelper) Contains(t testingT, object, element interface{}, msg ...interface{})
+```
+
+
+
+#### testza.Use.Assert.Equal
+
+```go
+func (a AssertHelper) Equal(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+```
+
+Equal asserts that two objects are equal.
+
+#### testza.Use.Assert.EqualValues
+
+```go
+func (a AssertHelper) EqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+```
+
+EqualValues asserts that two objects have equal values.
+
+#### testza.Use.Assert.False
+
+```go
+func (a AssertHelper) False(t testingT, value interface{}, msg ...interface{})
+```
+
+False asserts that an expression or object resolves to false.
+
+#### testza.Use.Assert.Implements
+
+```go
+func (a AssertHelper) Implements(t testingT, interfaceObject, object interface{}, msg ...interface{})
+```
+
+Implements checks if an objects implements an interface.
+
+    testza.Use.Assert.Implements(t, (*YourInterface)(nil), new(YourObject))
+    testza.Use.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
+
+#### testza.Use.Assert.KindOf
+
+```go
+func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, object interface{}, msg ...interface{})
+```
+
+KindOf asserts that the object is a type of kind exptectedKind.
+
+#### testza.Use.Assert.Nil
+
+```go
+func (a AssertHelper) Nil(t testingT, object interface{}, msg ...interface{})
+```
+
+Nil asserts that an object is nil.
+
+#### testza.Use.Assert.NoError
+
+```go
+func (a AssertHelper) NoError(t testingT, err interface{}, msg ...interface{})
+```
+
+NoError asserts that an error is nil.
+
+#### testza.Use.Assert.NotCompletesIn
+
+```go
+func (a AssertHelper) NotCompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{})
+```
+
+NotCompletesIn asserts that a function does not complete in a given time.
+Use this function to test that functions do not complete to quickly. For
+example if your database connection completes in under a millisecond, there
+might be something wrong.
+
+NOTE: Every system takes a different amount of time to complete a function.
+Do not set the duration too high, if you want consistent results.
+
+#### testza.Use.Assert.NotContains
+
+```go
+func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg ...interface{})
+```
+
+
+
+#### testza.Use.Assert.NotEqual
+
+```go
+func (a AssertHelper) NotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+```
+
+NotEqual asserts that two objects are not equal.
+
+#### testza.Use.Assert.NotEqualValues
+
+```go
+func (a AssertHelper) NotEqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+```
+
+NotEqualValues asserts that two objects do not have equal values.
+
+#### testza.Use.Assert.NotImplements
+
+```go
+func (a AssertHelper) NotImplements(t testingT, interfaceObject, object interface{}, msg ...interface{})
+```
+
+NotImplements checks if an object does not implement an interface.
+
+    testza.Use.Assert.NotImplements(t, (*YourInterface)(nil), new(YourObject))
+    testza.Use.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
+
+#### testza.Use.Assert.NotKindOf
+
+```go
+func (a AssertHelper) NotKindOf(t testingT, kind reflect.Kind, object interface{}, msg ...interface{})
+```
+
+NotKindOf asserts that the object is not a type of kind `kind`.
+
+#### testza.Use.Assert.NotNil
+
+```go
+func (a AssertHelper) NotNil(t testingT, object interface{}, msg ...interface{})
+```
+
+NotNil assertsthat an object is not nil.
+
+#### testza.Use.Assert.NotNumeric
+
+```go
+func (a AssertHelper) NotNumeric(t testingT, object interface{}, msg ...interface{})
+```
+
+Number checks if the object is not a numeric type. Numeric types are: Int,
+Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32,
+Uint64, Complex64 and Complex128.
+
+#### testza.Use.Assert.NotPanic
+
+```go
+func (a AssertHelper) NotPanic(t testingT, f func(), msg ...interface{})
+```
+
+NotPanic asserts that a function does not panic.
+
+#### testza.Use.Assert.NotZero
+
+```go
+func (a AssertHelper) NotZero(t testingT, value interface{}, msg ...interface{})
+```
+
+NotZero asserts that the value is not the zero value for it's type.
+
+    assert.NotZero(t, 1337)
+    assert.NotZero(t, true)
+    assert.NotZero(t, "Hello, World")
+
+#### testza.Use.Assert.Numeric
+
+```go
+func (a AssertHelper) Numeric(t testingT, object interface{}, msg ...interface{})
+```
+
+Numeric asserts that the object is a numeric type. Numeric types are: Int,
+Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32,
+Uint64, Complex64 and Complex128.
+
+#### testza.Use.Assert.Panic
+
+```go
+func (a AssertHelper) Panic(t testingT, f func(), msg ...interface{})
+```
+
+Panic asserts that a function panics.
+
+#### testza.Use.Assert.True
+
+```go
+func (a AssertHelper) True(t testingT, value interface{}, msg ...interface{})
+```
+
+True asserts that an expression or object resolves to true.
+
+#### testza.Use.Assert.Zero
+
+```go
+func (a AssertHelper) Zero(t testingT, value interface{}, msg ...interface{})
+```
+
+Zero asserts that the value is the zero value for it's type.
+
+    assert.Zero(t, 0)
+    assert.Zero(t, false)
+    assert.Zero(t, "")
+
+### Mock Booleans
+
+#### testza.Use.Mock.Bools.Full
+
+```go
+func (BoolsHelper) Full() []bool
+```
+
+Full returns true and false in a boolean slice.
+
+### Capture
+
+#### testza.Use.Capture.Stderr
+
+```go
+func (h *CaptureHelper) Stderr(capture func(w io.Writer) error) (string, error)
+```
+
+Stderr captures everything written to stderr from a specific function. You
+can use this method in tests, to validate that your functions writes a
+string to the terminal.
+
+#### testza.Use.Capture.Stdout
+
+```go
+func (h *CaptureHelper) Stdout(capture func(w io.Writer) error) (string, error)
+```
+
+Stdout captures everything written to stdout from a specific function. You
+can use this method in tests, to validate that your functions writes a
+string to the terminal.
+
+### Mock Floats64
+
+#### testza.Use.Mock.Floats64.Full
+
+```go
+func (h Floats64Helper) Full() (floats []float64)
+```
+
+
+
+#### testza.Use.Mock.Floats64.GenerateRandomNegative
+
+```go
+func (h Floats64Helper) GenerateRandomNegative(count int, min float64) (floats []float64)
+```
+
+GenerateRandomNegative generates random negative integers with a minimum of
+min. If the minimum is positive, it will be converted to a negative number.
+If it is set to 0, there is no limit.
+
+#### testza.Use.Mock.Floats64.GenerateRandomPositive
+
+```go
+func (h Floats64Helper) GenerateRandomPositive(count int, max float64) (floats []float64)
+```
+
+GenerateRandomPositive generates random positive integers with a maximum of
+max. If the maximum is 0, or below, the maximum will be set to
+math.MaxInt64.
+
+#### testza.Use.Mock.Floats64.GenerateRandomRange
+
+```go
+func (h Floats64Helper) GenerateRandomRange(count int, min, max float64) (floats []float64)
+```
+
+GenerateRandomRange generates random positive integers with a maximum of
+max. If the maximum is 0, or below, the maximum will be set to
+math.MaxInt64.
+
+#### testza.Use.Mock.Floats64.Modify
+
+```go
+func (h Floats64Helper) Modify(inputSlice []float64, f func(index int, value float64) float64) (floats []float64)
+```
+
+Modify returns a modified version of a test set.
+
+### Mock Integers
+
+#### testza.Use.Mock.Floats64.Full
+
+```go
+func (h IntsHelper) Full() (ints []int)
+```
+
+
+
+#### testza.Use.Mock.Floats64.GenerateRandomNegative
+
+```go
+func (h IntsHelper) GenerateRandomNegative(count, min int) (ints []int)
+```
+
+GenerateRandomNegative generates random negative integers with a minimum of
+min. If the minimum is 0, or above, the maximum will be set to
+math.MinInt64.
+
+#### testza.Use.Mock.Floats64.GenerateRandomPositive
+
+```go
+func (h IntsHelper) GenerateRandomPositive(count, max int) (ints []int)
+```
+
+GenerateRandomPositive generates random positive integers with a maximum of
+max. If the maximum is 0, or below, the maximum will be set to
+math.MaxInt64.
+
+#### testza.Use.Mock.Floats64.Modify
+
+```go
+func (h IntsHelper) Modify(inputSlice []int, f func(index int, value int) int) (ints []int)
+```
+
+Modify returns a modified version of a test set.
+
+### Mock Strings
+
+#### testza.Use.Mock.Strings.EmailAddresses
+
+```go
+func (s StringsHelper) EmailAddresses() []string
+```
+
+EmailAddresses returns a test set with valid email addresses.
+
+#### testza.Use.Mock.Strings.Empty
+
+```go
+func (s StringsHelper) Empty() []string
+```
+
+Empty returns a test set with a single empty string.
+
+#### testza.Use.Mock.Strings.Full
+
+```go
+func (s StringsHelper) Full() (ret []string)
+```
+
+Full contains all string test sets plus ten generated random strings.
+
+#### testza.Use.Mock.Strings.GenerateRandom
+
+```go
+func (s StringsHelper) GenerateRandom(count, length int) (result []string)
+```
+
+GenerateRandom returns random StringsHelper in a test set.
+
+#### testza.Use.Mock.Strings.HtmlTags
+
+```go
+func (s StringsHelper) HtmlTags() []string
+```
+
+HtmlTags returns a test set with html tags.
+
+#### testza.Use.Mock.Strings.Limit
+
+```go
+func (s StringsHelper) Limit(testSet []string, max int) []string
+```
+
+Limit limits a test set in size.
+
+#### testza.Use.Mock.Strings.Modify
+
+```go
+func (s StringsHelper) Modify(inputSlice []string, f func(index int, value string) string) (ret []string)
+```
+
+Modify returns a modified version of a test set.
+
+#### testza.Use.Mock.Strings.Numeric
+
+```go
+func (s StringsHelper) Numeric() []string
+```
+
+Numeric returns a test set with strings that are numeric. The highest number
+in here is "9223372036854775807", which is equal to the maxmim int64.
+
+#### testza.Use.Mock.Strings.RunTests
+
+```go
+func (s StringsHelper) RunTests(t testingT, testSet []string, testFunc func(t *testing.T, index int, str string))
+```
+
+RunTests runs tests with a specific test set.
 
 
 <!-- docs:end -->
