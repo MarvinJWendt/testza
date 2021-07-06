@@ -162,18 +162,6 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Mock">Mock</a></td>
-<td>
-
-<details>
-<summary>Click to expand</summary>
-
-</td>
-
-</details>
-
-</tr>
-<tr>
 <td><a href="https://github.com/MarvinJWendt/testza#MockStrings">Mock.Strings</a></td>
 <td>
 
