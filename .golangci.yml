@@ -65,4 +65,4 @@ issues:
         - gocritic
       text: "unnecessaryDefer:"
 service:
-  golangci-lint-version: 1.39.x # use the fixed version to not introduce new linters unexpectedly
+  golangci-lint-version: 1.41.x # use the fixed version to not introduce new linters unexpectedly
