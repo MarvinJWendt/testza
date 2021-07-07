@@ -238,7 +238,7 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 #### testza.Use.Assert.CompletesIn
 
 ```go
-func CompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{})
+func CompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{})
 ```
 
 CompletesIn asserts that a function completes in a given time. Use this
@@ -250,7 +250,7 @@ Do not set the duration too low, if you want consistent results.
 #### testza.Use.Assert.Contains
 
 ```go
-func Contains(t testingT, object, element interface{}, msg ...interface{})
+func Contains(t testRunner, object, element interface{}, msg ...interface{})
 ```
 
 
@@ -258,7 +258,7 @@ func Contains(t testingT, object, element interface{}, msg ...interface{})
 #### testza.Use.Assert.Equal
 
 ```go
-func Equal(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+func Equal(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
 Equal asserts that two objects are equal.
@@ -266,7 +266,7 @@ Equal asserts that two objects are equal.
 #### testza.Use.Assert.EqualValues
 
 ```go
-func EqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+func EqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
 EqualValues asserts that two objects have equal values.
@@ -274,7 +274,7 @@ EqualValues asserts that two objects have equal values.
 #### testza.Use.Assert.False
 
 ```go
-func False(t testingT, value interface{}, msg ...interface{})
+func False(t testRunner, value interface{}, msg ...interface{})
 ```
 
 False asserts that an expression or object resolves to false.
@@ -282,7 +282,7 @@ False asserts that an expression or object resolves to false.
 #### testza.Use.Assert.Greater
 
 ```go
-func Greater(t testingT, object1, object2 interface{}, msg ...interface{})
+func Greater(t testRunner, object1, object2 interface{}, msg ...interface{})
 ```
 
 Greater asserts that the first object is greater than the second.
@@ -290,7 +290,7 @@ Greater asserts that the first object is greater than the second.
 #### testza.Use.Assert.Implements
 
 ```go
-func Implements(t testingT, interfaceObject, object interface{}, msg ...interface{})
+func Implements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
 ```
 
 Implements checks if an objects implements an interface.
@@ -301,7 +301,7 @@ Implements checks if an objects implements an interface.
 #### testza.Use.Assert.KindOf
 
 ```go
-func KindOf(t testingT, expectedKind reflect.Kind, object interface{}, msg ...interface{})
+func KindOf(t testRunner, expectedKind reflect.Kind, object interface{}, msg ...interface{})
 ```
 
 KindOf asserts that the object is a type of kind exptectedKind.
@@ -309,7 +309,7 @@ KindOf asserts that the object is a type of kind exptectedKind.
 #### testza.Use.Assert.Less
 
 ```go
-func Less(t testingT, object1, object2 interface{}, msg ...interface{})
+func Less(t testRunner, object1, object2 interface{}, msg ...interface{})
 ```
 
 Less asserts that the first object is less than the second.
@@ -317,7 +317,7 @@ Less asserts that the first object is less than the second.
 #### testza.Use.Assert.Nil
 
 ```go
-func Nil(t testingT, object interface{}, msg ...interface{})
+func Nil(t testRunner, object interface{}, msg ...interface{})
 ```
 
 Nil asserts that an object is nil.
@@ -325,7 +325,7 @@ Nil asserts that an object is nil.
 #### testza.Use.Assert.NoError
 
 ```go
-func NoError(t testingT, err interface{}, msg ...interface{})
+func NoError(t testRunner, err interface{}, msg ...interface{})
 ```
 
 NoError asserts that an error is nil.
@@ -333,7 +333,7 @@ NoError asserts that an error is nil.
 #### testza.Use.Assert.NotCompletesIn
 
 ```go
-func NotCompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{})
+func NotCompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{})
 ```
 
 NotCompletesIn asserts that a function does not complete in a given time.
@@ -347,7 +347,7 @@ Do not set the duration too high, if you want consistent results.
 #### testza.Use.Assert.NotContains
 
 ```go
-func NotContains(t testingT, object, element interface{}, msg ...interface{})
+func NotContains(t testRunner, object, element interface{}, msg ...interface{})
 ```
 
 
@@ -355,7 +355,7 @@ func NotContains(t testingT, object, element interface{}, msg ...interface{})
 #### testza.Use.Assert.NotEqual
 
 ```go
-func NotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+func NotEqual(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
 NotEqual asserts that two objects are not equal.
@@ -363,7 +363,7 @@ NotEqual asserts that two objects are not equal.
 #### testza.Use.Assert.NotEqualValues
 
 ```go
-func NotEqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+func NotEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
 NotEqualValues asserts that two objects do not have equal values.
@@ -371,7 +371,7 @@ NotEqualValues asserts that two objects do not have equal values.
 #### testza.Use.Assert.NotImplements
 
 ```go
-func NotImplements(t testingT, interfaceObject, object interface{}, msg ...interface{})
+func NotImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
 ```
 
 NotImplements checks if an object does not implement an interface.
@@ -382,7 +382,7 @@ NotImplements checks if an object does not implement an interface.
 #### testza.Use.Assert.NotKindOf
 
 ```go
-func NotKindOf(t testingT, kind reflect.Kind, object interface{}, msg ...interface{})
+func NotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ...interface{})
 ```
 
 NotKindOf asserts that the object is not a type of kind `kind`.
@@ -390,7 +390,7 @@ NotKindOf asserts that the object is not a type of kind `kind`.
 #### testza.Use.Assert.NotNil
 
 ```go
-func NotNil(t testingT, object interface{}, msg ...interface{})
+func NotNil(t testRunner, object interface{}, msg ...interface{})
 ```
 
 NotNil assertsthat an object is not nil.
@@ -398,7 +398,7 @@ NotNil assertsthat an object is not nil.
 #### testza.Use.Assert.NotNumeric
 
 ```go
-func NotNumeric(t testingT, object interface{}, msg ...interface{})
+func NotNumeric(t testRunner, object interface{}, msg ...interface{})
 ```
 
 Number checks if the object is not a numeric type. Numeric types are: Int,
@@ -408,7 +408,7 @@ Uint64, Complex64 and Complex128.
 #### testza.Use.Assert.NotPanic
 
 ```go
-func NotPanic(t testingT, f func(), msg ...interface{})
+func NotPanic(t testRunner, f func(), msg ...interface{})
 ```
 
 NotPanic asserts that a function does not panic.
@@ -416,7 +416,7 @@ NotPanic asserts that a function does not panic.
 #### testza.Use.Assert.NotZero
 
 ```go
-func NotZero(t testingT, value interface{}, msg ...interface{})
+func NotZero(t testRunner, value interface{}, msg ...interface{})
 ```
 
 NotZero asserts that the value is not the zero value for it's type.
@@ -428,7 +428,7 @@ NotZero asserts that the value is not the zero value for it's type.
 #### testza.Use.Assert.Numeric
 
 ```go
-func Numeric(t testingT, object interface{}, msg ...interface{})
+func Numeric(t testRunner, object interface{}, msg ...interface{})
 ```
 
 Numeric asserts that the object is a numeric type. Numeric types are: Int,
@@ -438,7 +438,7 @@ Uint64, Complex64 and Complex128.
 #### testza.Use.Assert.Panic
 
 ```go
-func Panic(t testingT, f func(), msg ...interface{})
+func Panic(t testRunner, f func(), msg ...interface{})
 ```
 
 Panic asserts that a function panics.
@@ -446,7 +446,7 @@ Panic asserts that a function panics.
 #### testza.Use.Assert.True
 
 ```go
-func True(t testingT, value interface{}, msg ...interface{})
+func True(t testRunner, value interface{}, msg ...interface{})
 ```
 
 True asserts that an expression or object resolves to true.
@@ -454,7 +454,7 @@ True asserts that an expression or object resolves to true.
 #### testza.Use.Assert.Zero
 
 ```go
-func Zero(t testingT, value interface{}, msg ...interface{})
+func Zero(t testRunner, value interface{}, msg ...interface{})
 ```
 
 Zero asserts that the value is the zero value for it's type.
@@ -660,7 +660,7 @@ in here is "9223372036854775807", which is equal to the maxmim int64.
 #### testza.Use.Mock.Inputs.Inputs.Strings.RunTests
 
 ```go
-func RunTests(t testingT, testSet []string, testFunc func(t *testing.T, index int, str string))
+func RunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string))
 ```
 
 RunTests runs tests with a specific test set.
