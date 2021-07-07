@@ -38,6 +38,16 @@ func NewObjectsExpectedActual(expected, actual interface{}) Objects {
 	}
 }
 
+func NewObjectsUnknown(objs ...interface{}) Objects {
+	return Objects{
+		{
+			Name:      "Object",
+			NameStyle: pterm.NewStyle(pterm.FgYellow),
+			Data:      objs,
+		},
+	}
+}
+
 func NewObjectsSingleUnknown(obj interface{}) Objects {
 	return Objects{
 		{
