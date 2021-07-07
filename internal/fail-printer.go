@@ -99,6 +99,16 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 		}
 	}
 
+	for i, v := range objects {
+		if v.DataStyle == nil {
+			objects[i].DataStyle = pterm.NewStyle()
+		}
+
+		if v.NameStyle == nil {
+			objects[i].NameStyle = pterm.NewStyle()
+		}
+	}
+
 	for _, v := range objects {
 		if v.NameStyle == nil {
 			v.NameStyle = pterm.NewStyle(pterm.FgCyan)
