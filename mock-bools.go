@@ -1,8 +1,8 @@
 package testza
 
-type BoolsHelper struct{}
+type MockInputsBoolsHelper struct{}
 
 // Full returns true and false in a boolean slice.
-func (BoolsHelper) Full() []bool {
+func (MockInputsBoolsHelper) Full() []bool {
 	return []bool{true, false}
 }

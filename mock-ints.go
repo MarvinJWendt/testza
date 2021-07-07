@@ -5,11 +5,11 @@ import (
 	"math/rand"
 )
 
-// IntsHelper contains integer test sets.
-type IntsHelper struct{}
+// MockInputsIntsHelper contains integer test sets.
+type MockInputsIntsHelper struct{}
 
 // Full returns a combination of every integer testset and some random integers (positive and negative).
-func (h IntsHelper) Full() (ints []int) {
+func (h MockInputsIntsHelper) Full() (ints []int) {
 	for i := 0; i < 50; i++ {
 		ints = append(ints,
 			h.GenerateRandomPositive(1, i*1000)[0],
@@ -20,7 +20,7 @@ func (h IntsHelper) Full() (ints []int) {
 }
 
 // GenerateRandomRange generates random integers with a range of min to max.
-func (h IntsHelper) GenerateRandomRange(count, min, max int) (ints []int) {
+func (h MockInputsIntsHelper) GenerateRandomRange(count, min, max int) (ints []int) {
 	for i := 0; i < count; i++ {
 		ints = append(ints, rand.Intn(max-min)+min)
 	}
@@ -30,7 +30,7 @@ func (h IntsHelper) GenerateRandomRange(count, min, max int) (ints []int) {
 
 // GenerateRandomPositive generates random positive integers with a maximum of max.
 // If the maximum is 0, or below, the maximum will be set to math.MaxInt64.
-func (h IntsHelper) GenerateRandomPositive(count, max int) (ints []int) {
+func (h MockInputsIntsHelper) GenerateRandomPositive(count, max int) (ints []int) {
 	if max <= 0 {
 		max = math.MaxInt64
 	}
@@ -42,7 +42,7 @@ func (h IntsHelper) GenerateRandomPositive(count, max int) (ints []int) {
 
 // GenerateRandomNegative generates random negative integers with a minimum of min.
 // If the minimum is 0, or above, the maximum will be set to math.MinInt64.
-func (h IntsHelper) GenerateRandomNegative(count, min int) (ints []int) {
+func (h MockInputsIntsHelper) GenerateRandomNegative(count, min int) (ints []int) {
 	if min >= 0 {
 		min = math.MinInt64
 	}
@@ -59,7 +59,7 @@ func (h IntsHelper) GenerateRandomNegative(count, min int) (ints []int) {
 }
 
 // Modify returns a modified version of a test set.
-func (h IntsHelper) Modify(inputSlice []int, f func(index int, value int) int) (ints []int) {
+func (h MockInputsIntsHelper) Modify(inputSlice []int, f func(index int, value int) int) (ints []int) {
 	for i, input := range inputSlice {
 		ints = append(ints, f(i, input))
 	}

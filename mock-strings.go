@@ -7,34 +7,34 @@ import (
 	"github.com/MarvinJWendt/testza/internal"
 )
 
-// StringsHelper contains strings test sets.
-type StringsHelper struct{}
+// MockInputsStringsHelper contains strings test sets.
+type MockInputsStringsHelper struct{}
 
 // Empty returns a test set with a single empty string.
-func (s StringsHelper) Empty() []string {
+func (s MockInputsStringsHelper) Empty() []string {
 	return []string{""}
 }
 
 // Numeric returns a test set with strings that are numeric.
 // The highest number in here is "9223372036854775807", which is equal to the maxmim int64.
-func (s StringsHelper) Numeric() []string {
+func (s MockInputsStringsHelper) Numeric() []string {
 	positiveNumbers := []string{"0", "1", "2", "3", "100", "1.1", "1337", "13.37", "0.000000000001", "9223372036854775807"}
 	negativeNumbers := s.Modify(positiveNumbers, func(index int, value string) string { return "-" + value })
 	return append(positiveNumbers, negativeNumbers...)
 }
 
 // Usernames returns a test set with usernames.
-func (s StringsHelper) Usernames() []string {
+func (s MockInputsStringsHelper) Usernames() []string {
 	return []string{"MarvinJWendt", "Zipper1337", "n00b", "l33t", "j0rgan", "test", "test123", "TEST", "test_", "TEST_"}
 }
 
 // EmailAddresses returns a test set with valid email addresses.
-func (s StringsHelper) EmailAddresses() []string {
+func (s MockInputsStringsHelper) EmailAddresses() []string {
 	return []string{"hello@world.com", "hello+world@example.com", "hello.world@example.com", "a@a.xyz", "test@127.0.0.1", "test@[127.0.0.1]", "1@example.com", "_____@example.com", "test@subdomain.domain.xyz", `valid.”email\ address@example.com`}
 }
 
 // HtmlTags returns a test set with html tags.
-func (s StringsHelper) HtmlTags() []string {
+func (s MockInputsStringsHelper) HtmlTags() []string {
 	return []string{
 		"<script>alert('XSS')</script>",
 		"<script>",
@@ -45,7 +45,7 @@ func (s StringsHelper) HtmlTags() []string {
 }
 
 // Full contains all string test sets plus ten generated random strings.
-func (s StringsHelper) Full() (ret []string) {
+func (s MockInputsStringsHelper) Full() (ret []string) {
 	ret = append(ret, s.Usernames()...)
 	ret = append(ret, s.HtmlTags()...)
 	ret = append(ret, s.EmailAddresses()...)
@@ -60,7 +60,7 @@ func (s StringsHelper) Full() (ret []string) {
 }
 
 // Limit limits a test set in size.
-func (s StringsHelper) Limit(testSet []string, max int) []string {
+func (s MockInputsStringsHelper) Limit(testSet []string, max int) []string {
 	if len(testSet) <= max {
 		return testSet
 	}
@@ -73,7 +73,7 @@ func (s StringsHelper) Limit(testSet []string, max int) []string {
 }
 
 // GenerateRandom returns random StringsHelper in a test set.
-func (s StringsHelper) GenerateRandom(count, length int) (result []string) {
+func (s MockInputsStringsHelper) GenerateRandom(count, length int) (result []string) {
 	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 	for i := 0; i < count; i++ {
@@ -88,7 +88,7 @@ func (s StringsHelper) GenerateRandom(count, length int) (result []string) {
 }
 
 // RunTests runs tests with a specific test set.
-func (s StringsHelper) RunTests(t testingT, testSet []string, testFunc func(t *testing.T, index int, str string)) {
+func (s MockInputsStringsHelper) RunTests(t testingT, testSet []string, testFunc func(t *testing.T, index int, str string)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -109,7 +109,7 @@ func (s StringsHelper) RunTests(t testingT, testSet []string, testFunc func(t *t
 }
 
 // Modify returns a modified version of a test set.
-func (s StringsHelper) Modify(inputSlice []string, f func(index int, value string) string) (ret []string) {
+func (s MockInputsStringsHelper) Modify(inputSlice []string, f func(index int, value string) string) (ret []string) {
 	for i, str := range inputSlice {
 		ret = append(ret, f(i, str))
 	}
