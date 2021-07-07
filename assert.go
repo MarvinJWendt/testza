@@ -139,7 +139,7 @@ func (a AssertHelper) doesContain(object, element interface{}) bool {
 // ** Helper Methods **
 
 // KindOf asserts that the object is a type of kind exptectedKind.
-func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, object interface{}, msg ...interface{}) {
+func (a AssertHelper) KindOf(t testRunner, expectedKind reflect.Kind, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -154,7 +154,7 @@ func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, object inter
 }
 
 // NotKindOf asserts that the object is not a type of kind `kind`.
-func (a AssertHelper) NotKindOf(t testingT, kind reflect.Kind, object interface{}, msg ...interface{}) {
+func (a AssertHelper) NotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -171,7 +171,7 @@ func (a AssertHelper) NotKindOf(t testingT, kind reflect.Kind, object interface{
 // Numeric asserts that the object is a numeric type.
 // Numeric types are:
 // Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32, Uint64, Complex64 and Complex128.
-func (a AssertHelper) Numeric(t testingT, object interface{}, msg ...interface{}) {
+func (a AssertHelper) Numeric(t testRunner, object interface{}, msg ...interface{}) {
 	if !a.isNumber(object) {
 		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object))
 	}
@@ -180,7 +180,7 @@ func (a AssertHelper) Numeric(t testingT, object interface{}, msg ...interface{}
 // Number checks if the object is not a numeric type.
 // Numeric types are:
 // Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32, Uint64, Complex64 and Complex128.
-func (a AssertHelper) NotNumeric(t testingT, object interface{}, msg ...interface{}) {
+func (a AssertHelper) NotNumeric(t testRunner, object interface{}, msg ...interface{}) {
 	if a.isNumber(object) {
 		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object))
 	}
@@ -190,7 +190,7 @@ func (a AssertHelper) NotNumeric(t testingT, object interface{}, msg ...interfac
 //     assert.Zero(t, 0)
 //     assert.Zero(t, false)
 //     assert.Zero(t, "")
-func (a AssertHelper) Zero(t testingT, value interface{}, msg ...interface{}) {
+func (a AssertHelper) Zero(t testRunner, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -204,7 +204,7 @@ func (a AssertHelper) Zero(t testingT, value interface{}, msg ...interface{}) {
 //     assert.NotZero(t, 1337)
 //     assert.NotZero(t, true)
 //     assert.NotZero(t, "Hello, World")
-func (a AssertHelper) NotZero(t testingT, value interface{}, msg ...interface{}) {
+func (a AssertHelper) NotZero(t testRunner, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -215,7 +215,7 @@ func (a AssertHelper) NotZero(t testingT, value interface{}, msg ...interface{})
 }
 
 // Equal asserts that two objects are equal.
-func (a AssertHelper) Equal(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
+func (a AssertHelper) Equal(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -226,7 +226,7 @@ func (a AssertHelper) Equal(t testingT, expected interface{}, actual interface{}
 }
 
 // NotEqual asserts that two objects are not equal.
-func (a AssertHelper) NotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
+func (a AssertHelper) NotEqual(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -237,7 +237,7 @@ func (a AssertHelper) NotEqual(t testingT, expected interface{}, actual interfac
 }
 
 // EqualValues asserts that two objects have equal values.
-func (a AssertHelper) EqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
+func (a AssertHelper) EqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -248,7 +248,7 @@ func (a AssertHelper) EqualValues(t testingT, expected interface{}, actual inter
 }
 
 // NotEqualValues asserts that two objects do not have equal values.
-func (a AssertHelper) NotEqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{}) {
+func (a AssertHelper) NotEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -259,7 +259,7 @@ func (a AssertHelper) NotEqualValues(t testingT, expected interface{}, actual in
 }
 
 // True asserts that an expression or object resolves to true.
-func (a AssertHelper) True(t testingT, value interface{}, msg ...interface{}) {
+func (a AssertHelper) True(t testRunner, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -270,7 +270,7 @@ func (a AssertHelper) True(t testingT, value interface{}, msg ...interface{}) {
 }
 
 // False asserts that an expression or object resolves to false.
-func (a AssertHelper) False(t testingT, value interface{}, msg ...interface{}) {
+func (a AssertHelper) False(t testRunner, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -284,7 +284,7 @@ func (a AssertHelper) False(t testingT, value interface{}, msg ...interface{}) {
 //
 //	testza.Use.Assert.Implements(t, (*YourInterface)(nil), new(YourObject))
 //	testza.Use.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
-func (a AssertHelper) Implements(t testingT, interfaceObject, object interface{}, msg ...interface{}) {
+func (a AssertHelper) Implements(t testRunner, interfaceObject, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -298,7 +298,7 @@ func (a AssertHelper) Implements(t testingT, interfaceObject, object interface{}
 //
 //	testza.Use.Assert.NotImplements(t, (*YourInterface)(nil), new(YourObject))
 //	testza.Use.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
-func (a AssertHelper) NotImplements(t testingT, interfaceObject, object interface{}, msg ...interface{}) {
+func (a AssertHelper) NotImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -308,7 +308,7 @@ func (a AssertHelper) NotImplements(t testingT, interfaceObject, object interfac
 	}
 }
 
-func (a AssertHelper) Contains(t testingT, object, element interface{}, msg ...interface{}) {
+func (a AssertHelper) Contains(t testRunner, object, element interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -318,7 +318,7 @@ func (a AssertHelper) Contains(t testingT, object, element interface{}, msg ...i
 	}
 }
 
-func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg ...interface{}) {
+func (a AssertHelper) NotContains(t testRunner, object, element interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -329,7 +329,7 @@ func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg .
 }
 
 // Panic asserts that a function panics.
-func (a AssertHelper) Panic(t testingT, f func(), msg ...interface{}) {
+func (a AssertHelper) Panic(t testRunner, f func(), msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -344,7 +344,7 @@ func (a AssertHelper) Panic(t testingT, f func(), msg ...interface{}) {
 }
 
 // NotPanic asserts that a function does not panic.
-func (a AssertHelper) NotPanic(t testingT, f func(), msg ...interface{}) {
+func (a AssertHelper) NotPanic(t testRunner, f func(), msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -359,7 +359,7 @@ func (a AssertHelper) NotPanic(t testingT, f func(), msg ...interface{}) {
 }
 
 // Nil asserts that an object is nil.
-func (a AssertHelper) Nil(t testingT, object interface{}, msg ...interface{}) {
+func (a AssertHelper) Nil(t testRunner, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -370,7 +370,7 @@ func (a AssertHelper) Nil(t testingT, object interface{}, msg ...interface{}) {
 }
 
 // NotNil assertsthat an object is not nil.
-func (a AssertHelper) NotNil(t testingT, object interface{}, msg ...interface{}) {
+func (a AssertHelper) NotNil(t testRunner, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -385,7 +385,7 @@ func (a AssertHelper) NotNil(t testingT, object interface{}, msg ...interface{})
 //
 // NOTE: Every system takes a different amount of time to complete a function.
 // Do not set the duration too low, if you want consistent results.
-func (a AssertHelper) CompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{}) {
+func (a AssertHelper) CompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -401,7 +401,7 @@ func (a AssertHelper) CompletesIn(t testingT, duration time.Duration, f func(), 
 //
 // NOTE: Every system takes a different amount of time to complete a function.
 // Do not set the duration too high, if you want consistent results.
-func (a AssertHelper) NotCompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{}) {
+func (a AssertHelper) NotCompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -412,7 +412,7 @@ func (a AssertHelper) NotCompletesIn(t testingT, duration time.Duration, f func(
 }
 
 // NoError asserts that an error is nil.
-func (a AssertHelper) NoError(t testingT, err interface{}, msg ...interface{}) {
+func (a AssertHelper) NoError(t testRunner, err interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -428,7 +428,7 @@ func (a AssertHelper) NoError(t testingT, err interface{}, msg ...interface{}) {
 }
 
 // Greater asserts that the first object is greater than the second.
-func (a AssertHelper) Greater(t testingT, object1, object2 interface{}, msg ...interface{}) {
+func (a AssertHelper) Greater(t testRunner, object1, object2 interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -446,7 +446,7 @@ func (a AssertHelper) Greater(t testingT, object1, object2 interface{}, msg ...i
 }
 
 // Less asserts that the first object is less than the second.
-func (a AssertHelper) Less(t testingT, object1, object2 interface{}, msg ...interface{}) {
+func (a AssertHelper) Less(t testRunner, object1, object2 interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}

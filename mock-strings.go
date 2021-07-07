@@ -88,7 +88,7 @@ func (s MockInputsStringsHelper) GenerateRandom(count, length int) (result []str
 }
 
 // RunTests runs tests with a specific test set.
-func (s MockInputsStringsHelper) RunTests(t testingT, testSet []string, testFunc func(t *testing.T, index int, str string)) {
+func (s MockInputsStringsHelper) RunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
