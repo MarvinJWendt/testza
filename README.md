@@ -124,8 +124,10 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
   - [Equal](https://github.com/MarvinJWendt/testza#testzaUseAssertEqual)
   - [EqualValues](https://github.com/MarvinJWendt/testza#testzaUseAssertEqualValues)
   - [False](https://github.com/MarvinJWendt/testza#testzaUseAssertFalse)
+  - [Greater](https://github.com/MarvinJWendt/testza#testzaUseAssertGreater)
   - [Implements](https://github.com/MarvinJWendt/testza#testzaUseAssertImplements)
   - [KindOf](https://github.com/MarvinJWendt/testza#testzaUseAssertKindOf)
+  - [Less](https://github.com/MarvinJWendt/testza#testzaUseAssertLess)
   - [Nil](https://github.com/MarvinJWendt/testza#testzaUseAssertNil)
   - [NoError](https://github.com/MarvinJWendt/testza#testzaUseAssertNoError)
   - [NotCompletesIn](https://github.com/MarvinJWendt/testza#testzaUseAssertNotCompletesIn)
@@ -222,6 +224,7 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
   - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockIntsFull)
   - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockIntsGenerateRandomNegative)
   - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockIntsGenerateRandomPositive)
+  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockIntsGenerateRandomRange)
   - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockIntsModify)
 </td>
 
@@ -276,6 +279,14 @@ func (a AssertHelper) False(t testingT, value interface{}, msg ...interface{})
 
 False asserts that an expression or object resolves to false.
 
+#### testza.Use.Assert.Greater
+
+```go
+func (a AssertHelper) Greater(t testingT, object1, object2 interface{}, msg ...interface{})
+```
+
+Greater asserts that the first object is greater than the second.
+
 #### testza.Use.Assert.Implements
 
 ```go
@@ -294,6 +305,14 @@ func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, object inter
 ```
 
 KindOf asserts that the object is a type of kind exptectedKind.
+
+#### testza.Use.Assert.Less
+
+```go
+func (a AssertHelper) Less(t testingT, object1, object2 interface{}, msg ...interface{})
+```
+
+Less asserts that the first object is less than the second.
 
 #### testza.Use.Assert.Nil
 
@@ -532,7 +551,8 @@ Modify returns a modified version of a test set.
 func (h IntsHelper) Full() (ints []int)
 ```
 
-
+Full returns a combination of every integer testset and some random integers
+(positive and negative).
 
 #### testza.Use.Mock.Ints.GenerateRandomNegative
 
@@ -553,6 +573,14 @@ func (h IntsHelper) GenerateRandomPositive(count, max int) (ints []int)
 GenerateRandomPositive generates random positive integers with a maximum of
 max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
+
+#### testza.Use.Mock.Ints.GenerateRandomRange
+
+```go
+func (h IntsHelper) GenerateRandomRange(count, min, max int) (ints []int)
+```
+
+GenerateRandomRange generates random integers with a range of min to max.
 
 #### testza.Use.Mock.Ints.Modify
 
