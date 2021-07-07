@@ -164,68 +164,68 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockStrings">Mock.Strings</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#MockInputsStrings">Mock.Inputs.Strings</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [EmailAddresses](https://github.com/MarvinJWendt/testza#testzaUseMockStringsEmailAddresses)
-  - [Empty](https://github.com/MarvinJWendt/testza#testzaUseMockStringsEmpty)
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockStringsFull)
-  - [GenerateRandom](https://github.com/MarvinJWendt/testza#testzaUseMockStringsGenerateRandom)
-  - [HtmlTags](https://github.com/MarvinJWendt/testza#testzaUseMockStringsHtmlTags)
-  - [Limit](https://github.com/MarvinJWendt/testza#testzaUseMockStringsLimit)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockStringsModify)
-  - [Numeric](https://github.com/MarvinJWendt/testza#testzaUseMockStringsNumeric)
-  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockStringsRunTests)
+  - [EmailAddresses](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsEmailAddresses)
+  - [Empty](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsEmpty)
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsFull)
+  - [GenerateRandom](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsGenerateRandom)
+  - [HtmlTags](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsHtmlTags)
+  - [Limit](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsLimit)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsModify)
+  - [Numeric](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsNumeric)
+  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsRunTests)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockBools">Mock.Bools</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#MockInputsBools">Mock.Inputs.Bools</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockBoolsFull)
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockInputsBoolsFull)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockFloats64">Mock.Floats64</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#MockInputsFloats64">Mock.Inputs.Floats64</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Full)
-  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomNegative)
-  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomPositive)
-  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64GenerateRandomRange)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockFloats64Modify)
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64Full)
+  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64GenerateRandomNegative)
+  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64GenerateRandomPositive)
+  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64GenerateRandomRange)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64Modify)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInts">Mock.Ints</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#MockInputsInts">Mock.Inputs.Ints</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockIntsFull)
-  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockIntsGenerateRandomNegative)
-  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockIntsGenerateRandomPositive)
-  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockIntsGenerateRandomRange)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockIntsModify)
+  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsFull)
+  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsGenerateRandomNegative)
+  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsGenerateRandomPositive)
+  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsGenerateRandomRange)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsModify)
 </td>
 
 </details>
@@ -238,7 +238,7 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 #### testza.Use.Assert.CompletesIn
 
 ```go
-func (a AssertHelper) CompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{})
+func CompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{})
 ```
 
 CompletesIn asserts that a function completes in a given time. Use this
@@ -250,7 +250,7 @@ Do not set the duration too low, if you want consistent results.
 #### testza.Use.Assert.Contains
 
 ```go
-func (a AssertHelper) Contains(t testingT, object, element interface{}, msg ...interface{})
+func Contains(t testingT, object, element interface{}, msg ...interface{})
 ```
 
 
@@ -258,7 +258,7 @@ func (a AssertHelper) Contains(t testingT, object, element interface{}, msg ...i
 #### testza.Use.Assert.Equal
 
 ```go
-func (a AssertHelper) Equal(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+func Equal(t testingT, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
 Equal asserts that two objects are equal.
@@ -266,7 +266,7 @@ Equal asserts that two objects are equal.
 #### testza.Use.Assert.EqualValues
 
 ```go
-func (a AssertHelper) EqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+func EqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
 EqualValues asserts that two objects have equal values.
@@ -274,7 +274,7 @@ EqualValues asserts that two objects have equal values.
 #### testza.Use.Assert.False
 
 ```go
-func (a AssertHelper) False(t testingT, value interface{}, msg ...interface{})
+func False(t testingT, value interface{}, msg ...interface{})
 ```
 
 False asserts that an expression or object resolves to false.
@@ -282,7 +282,7 @@ False asserts that an expression or object resolves to false.
 #### testza.Use.Assert.Greater
 
 ```go
-func (a AssertHelper) Greater(t testingT, object1, object2 interface{}, msg ...interface{})
+func Greater(t testingT, object1, object2 interface{}, msg ...interface{})
 ```
 
 Greater asserts that the first object is greater than the second.
@@ -290,7 +290,7 @@ Greater asserts that the first object is greater than the second.
 #### testza.Use.Assert.Implements
 
 ```go
-func (a AssertHelper) Implements(t testingT, interfaceObject, object interface{}, msg ...interface{})
+func Implements(t testingT, interfaceObject, object interface{}, msg ...interface{})
 ```
 
 Implements checks if an objects implements an interface.
@@ -301,7 +301,7 @@ Implements checks if an objects implements an interface.
 #### testza.Use.Assert.KindOf
 
 ```go
-func (a AssertHelper) KindOf(t testingT, expectedKind reflect.Kind, object interface{}, msg ...interface{})
+func KindOf(t testingT, expectedKind reflect.Kind, object interface{}, msg ...interface{})
 ```
 
 KindOf asserts that the object is a type of kind exptectedKind.
@@ -309,7 +309,7 @@ KindOf asserts that the object is a type of kind exptectedKind.
 #### testza.Use.Assert.Less
 
 ```go
-func (a AssertHelper) Less(t testingT, object1, object2 interface{}, msg ...interface{})
+func Less(t testingT, object1, object2 interface{}, msg ...interface{})
 ```
 
 Less asserts that the first object is less than the second.
@@ -317,7 +317,7 @@ Less asserts that the first object is less than the second.
 #### testza.Use.Assert.Nil
 
 ```go
-func (a AssertHelper) Nil(t testingT, object interface{}, msg ...interface{})
+func Nil(t testingT, object interface{}, msg ...interface{})
 ```
 
 Nil asserts that an object is nil.
@@ -325,7 +325,7 @@ Nil asserts that an object is nil.
 #### testza.Use.Assert.NoError
 
 ```go
-func (a AssertHelper) NoError(t testingT, err interface{}, msg ...interface{})
+func NoError(t testingT, err interface{}, msg ...interface{})
 ```
 
 NoError asserts that an error is nil.
@@ -333,7 +333,7 @@ NoError asserts that an error is nil.
 #### testza.Use.Assert.NotCompletesIn
 
 ```go
-func (a AssertHelper) NotCompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{})
+func NotCompletesIn(t testingT, duration time.Duration, f func(), msg ...interface{})
 ```
 
 NotCompletesIn asserts that a function does not complete in a given time.
@@ -347,7 +347,7 @@ Do not set the duration too high, if you want consistent results.
 #### testza.Use.Assert.NotContains
 
 ```go
-func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg ...interface{})
+func NotContains(t testingT, object, element interface{}, msg ...interface{})
 ```
 
 
@@ -355,7 +355,7 @@ func (a AssertHelper) NotContains(t testingT, object, element interface{}, msg .
 #### testza.Use.Assert.NotEqual
 
 ```go
-func (a AssertHelper) NotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+func NotEqual(t testingT, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
 NotEqual asserts that two objects are not equal.
@@ -363,7 +363,7 @@ NotEqual asserts that two objects are not equal.
 #### testza.Use.Assert.NotEqualValues
 
 ```go
-func (a AssertHelper) NotEqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{})
+func NotEqualValues(t testingT, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
 NotEqualValues asserts that two objects do not have equal values.
@@ -371,7 +371,7 @@ NotEqualValues asserts that two objects do not have equal values.
 #### testza.Use.Assert.NotImplements
 
 ```go
-func (a AssertHelper) NotImplements(t testingT, interfaceObject, object interface{}, msg ...interface{})
+func NotImplements(t testingT, interfaceObject, object interface{}, msg ...interface{})
 ```
 
 NotImplements checks if an object does not implement an interface.
@@ -382,7 +382,7 @@ NotImplements checks if an object does not implement an interface.
 #### testza.Use.Assert.NotKindOf
 
 ```go
-func (a AssertHelper) NotKindOf(t testingT, kind reflect.Kind, object interface{}, msg ...interface{})
+func NotKindOf(t testingT, kind reflect.Kind, object interface{}, msg ...interface{})
 ```
 
 NotKindOf asserts that the object is not a type of kind `kind`.
@@ -390,7 +390,7 @@ NotKindOf asserts that the object is not a type of kind `kind`.
 #### testza.Use.Assert.NotNil
 
 ```go
-func (a AssertHelper) NotNil(t testingT, object interface{}, msg ...interface{})
+func NotNil(t testingT, object interface{}, msg ...interface{})
 ```
 
 NotNil assertsthat an object is not nil.
@@ -398,7 +398,7 @@ NotNil assertsthat an object is not nil.
 #### testza.Use.Assert.NotNumeric
 
 ```go
-func (a AssertHelper) NotNumeric(t testingT, object interface{}, msg ...interface{})
+func NotNumeric(t testingT, object interface{}, msg ...interface{})
 ```
 
 Number checks if the object is not a numeric type. Numeric types are: Int,
@@ -408,7 +408,7 @@ Uint64, Complex64 and Complex128.
 #### testza.Use.Assert.NotPanic
 
 ```go
-func (a AssertHelper) NotPanic(t testingT, f func(), msg ...interface{})
+func NotPanic(t testingT, f func(), msg ...interface{})
 ```
 
 NotPanic asserts that a function does not panic.
@@ -416,7 +416,7 @@ NotPanic asserts that a function does not panic.
 #### testza.Use.Assert.NotZero
 
 ```go
-func (a AssertHelper) NotZero(t testingT, value interface{}, msg ...interface{})
+func NotZero(t testingT, value interface{}, msg ...interface{})
 ```
 
 NotZero asserts that the value is not the zero value for it's type.
@@ -428,7 +428,7 @@ NotZero asserts that the value is not the zero value for it's type.
 #### testza.Use.Assert.Numeric
 
 ```go
-func (a AssertHelper) Numeric(t testingT, object interface{}, msg ...interface{})
+func Numeric(t testingT, object interface{}, msg ...interface{})
 ```
 
 Numeric asserts that the object is a numeric type. Numeric types are: Int,
@@ -438,7 +438,7 @@ Uint64, Complex64 and Complex128.
 #### testza.Use.Assert.Panic
 
 ```go
-func (a AssertHelper) Panic(t testingT, f func(), msg ...interface{})
+func Panic(t testingT, f func(), msg ...interface{})
 ```
 
 Panic asserts that a function panics.
@@ -446,7 +446,7 @@ Panic asserts that a function panics.
 #### testza.Use.Assert.True
 
 ```go
-func (a AssertHelper) True(t testingT, value interface{}, msg ...interface{})
+func True(t testingT, value interface{}, msg ...interface{})
 ```
 
 True asserts that an expression or object resolves to true.
@@ -454,7 +454,7 @@ True asserts that an expression or object resolves to true.
 #### testza.Use.Assert.Zero
 
 ```go
-func (a AssertHelper) Zero(t testingT, value interface{}, msg ...interface{})
+func Zero(t testingT, value interface{}, msg ...interface{})
 ```
 
 Zero asserts that the value is the zero value for it's type.
@@ -463,22 +463,12 @@ Zero asserts that the value is the zero value for it's type.
     assert.Zero(t, false)
     assert.Zero(t, "")
 
-### Mock.Bools
-
-#### testza.Use.Mock.Bools.Full
-
-```go
-func (BoolsHelper) Full() []bool
-```
-
-Full returns true and false in a boolean slice.
-
 ### Capture
 
 #### testza.Use.Capture.Stderr
 
 ```go
-func (h *CaptureHelper) Stderr(capture func(w io.Writer) error) (string, error)
+func Stderr(capture func(w io.Writer) error) (string, error)
 ```
 
 Stderr captures everything written to stderr from a specific function. You
@@ -488,179 +478,189 @@ string to the terminal.
 #### testza.Use.Capture.Stdout
 
 ```go
-func (h *CaptureHelper) Stdout(capture func(w io.Writer) error) (string, error)
+func Stdout(capture func(w io.Writer) error) (string, error)
 ```
 
 Stdout captures everything written to stdout from a specific function. You
 can use this method in tests, to validate that your functions writes a
 string to the terminal.
 
-### Mock.Floats64
+### Mock.Inputs.Bools
 
-#### testza.Use.Mock.Floats64.Full
+#### testza.Use.Mock.Inputs.Bools.Full
 
 ```go
-func (h Floats64Helper) Full() (floats []float64)
+func Full() []bool
+```
+
+Full returns true and false in a boolean slice.
+
+### Mock.Inputs.Floats64
+
+#### testza.Use.Mock.Inputs.Floats64.Full
+
+```go
+func Full() (floats []float64)
 ```
 
 
 
-#### testza.Use.Mock.Floats64.GenerateRandomNegative
+#### testza.Use.Mock.Inputs.Floats64.GenerateRandomNegative
 
 ```go
-func (h Floats64Helper) GenerateRandomNegative(count int, min float64) (floats []float64)
+func GenerateRandomNegative(count int, min float64) (floats []float64)
 ```
 
 GenerateRandomNegative generates random negative integers with a minimum of
 min. If the minimum is positive, it will be converted to a negative number.
 If it is set to 0, there is no limit.
 
-#### testza.Use.Mock.Floats64.GenerateRandomPositive
+#### testza.Use.Mock.Inputs.Floats64.GenerateRandomPositive
 
 ```go
-func (h Floats64Helper) GenerateRandomPositive(count int, max float64) (floats []float64)
+func GenerateRandomPositive(count int, max float64) (floats []float64)
 ```
 
 GenerateRandomPositive generates random positive integers with a maximum of
 max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### testza.Use.Mock.Floats64.GenerateRandomRange
+#### testza.Use.Mock.Inputs.Floats64.GenerateRandomRange
 
 ```go
-func (h Floats64Helper) GenerateRandomRange(count int, min, max float64) (floats []float64)
+func GenerateRandomRange(count int, min, max float64) (floats []float64)
 ```
 
 GenerateRandomRange generates random positive integers with a maximum of
 max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### testza.Use.Mock.Floats64.Modify
+#### testza.Use.Mock.Inputs.Floats64.Modify
 
 ```go
-func (h Floats64Helper) Modify(inputSlice []float64, f func(index int, value float64) float64) (floats []float64)
+func Modify(inputSlice []float64, f func(index int, value float64) float64) (floats []float64)
 ```
 
 Modify returns a modified version of a test set.
 
-### Mock.Ints
+### Mock.Inputs.Ints
 
-#### testza.Use.Mock.Ints.Full
+#### testza.Use.Mock.Inputs.Ints.Full
 
 ```go
-func (h IntsHelper) Full() (ints []int)
+func Full() (ints []int)
 ```
 
 Full returns a combination of every integer testset and some random integers
 (positive and negative).
 
-#### testza.Use.Mock.Ints.GenerateRandomNegative
+#### testza.Use.Mock.Inputs.Ints.GenerateRandomNegative
 
 ```go
-func (h IntsHelper) GenerateRandomNegative(count, min int) (ints []int)
+func GenerateRandomNegative(count, min int) (ints []int)
 ```
 
 GenerateRandomNegative generates random negative integers with a minimum of
 min. If the minimum is 0, or above, the maximum will be set to
 math.MinInt64.
 
-#### testza.Use.Mock.Ints.GenerateRandomPositive
+#### testza.Use.Mock.Inputs.Ints.GenerateRandomPositive
 
 ```go
-func (h IntsHelper) GenerateRandomPositive(count, max int) (ints []int)
+func GenerateRandomPositive(count, max int) (ints []int)
 ```
 
 GenerateRandomPositive generates random positive integers with a maximum of
 max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### testza.Use.Mock.Ints.GenerateRandomRange
+#### testza.Use.Mock.Inputs.Ints.GenerateRandomRange
 
 ```go
-func (h IntsHelper) GenerateRandomRange(count, min, max int) (ints []int)
+func GenerateRandomRange(count, min, max int) (ints []int)
 ```
 
 GenerateRandomRange generates random integers with a range of min to max.
 
-#### testza.Use.Mock.Ints.Modify
+#### testza.Use.Mock.Inputs.Ints.Modify
 
 ```go
-func (h IntsHelper) Modify(inputSlice []int, f func(index int, value int) int) (ints []int)
+func Modify(inputSlice []int, f func(index int, value int) int) (ints []int)
 ```
 
 Modify returns a modified version of a test set.
 
-### Mock.Strings
+### Mock.Inputs.Strings
 
-#### testza.Use.Mock.Strings.EmailAddresses
+#### testza.Use.Mock.Inputs.Inputs.Strings.EmailAddresses
 
 ```go
-func (s StringsHelper) EmailAddresses() []string
+func EmailAddresses() []string
 ```
 
 EmailAddresses returns a test set with valid email addresses.
 
-#### testza.Use.Mock.Strings.Empty
+#### testza.Use.Mock.Inputs.Inputs.Strings.Empty
 
 ```go
-func (s StringsHelper) Empty() []string
+func Empty() []string
 ```
 
 Empty returns a test set with a single empty string.
 
-#### testza.Use.Mock.Strings.Full
+#### testza.Use.Mock.Inputs.Inputs.Strings.Full
 
 ```go
-func (s StringsHelper) Full() (ret []string)
+func Full() (ret []string)
 ```
 
 Full contains all string test sets plus ten generated random strings.
 
-#### testza.Use.Mock.Strings.GenerateRandom
+#### testza.Use.Mock.Inputs.Inputs.Strings.GenerateRandom
 
 ```go
-func (s StringsHelper) GenerateRandom(count, length int) (result []string)
+func GenerateRandom(count, length int) (result []string)
 ```
 
 GenerateRandom returns random StringsHelper in a test set.
 
-#### testza.Use.Mock.Strings.HtmlTags
+#### testza.Use.Mock.Inputs.Inputs.Strings.HtmlTags
 
 ```go
-func (s StringsHelper) HtmlTags() []string
+func HtmlTags() []string
 ```
 
 HtmlTags returns a test set with html tags.
 
-#### testza.Use.Mock.Strings.Limit
+#### testza.Use.Mock.Inputs.Inputs.Strings.Limit
 
 ```go
-func (s StringsHelper) Limit(testSet []string, max int) []string
+func Limit(testSet []string, max int) []string
 ```
 
 Limit limits a test set in size.
 
-#### testza.Use.Mock.Strings.Modify
+#### testza.Use.Mock.Inputs.Inputs.Strings.Modify
 
 ```go
-func (s StringsHelper) Modify(inputSlice []string, f func(index int, value string) string) (ret []string)
+func Modify(inputSlice []string, f func(index int, value string) string) (ret []string)
 ```
 
 Modify returns a modified version of a test set.
 
-#### testza.Use.Mock.Strings.Numeric
+#### testza.Use.Mock.Inputs.Inputs.Strings.Numeric
 
 ```go
-func (s StringsHelper) Numeric() []string
+func Numeric() []string
 ```
 
 Numeric returns a test set with strings that are numeric. The highest number
 in here is "9223372036854775807", which is equal to the maxmim int64.
 
-#### testza.Use.Mock.Strings.RunTests
+#### testza.Use.Mock.Inputs.Inputs.Strings.RunTests
 
 ```go
-func (s StringsHelper) RunTests(t testingT, testSet []string, testFunc func(t *testing.T, index int, str string))
+func RunTests(t testingT, testSet []string, testFunc func(t *testing.T, index int, str string))
 ```
 
 RunTests runs tests with a specific test set.
