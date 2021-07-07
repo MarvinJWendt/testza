@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
 
@@ -423,5 +424,41 @@ func (a AssertHelper) NoError(t testingT, err interface{}, msg ...interface{}) {
 			Data:      err,
 			DataStyle: pterm.NewStyle(pterm.FgRed),
 		}}, msg...)
+	}
+}
+
+// Greater asserts that the first object is greater than the second.
+func (a AssertHelper) Greater(t testingT, object1, object2 interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	v1, err := strconv.ParseFloat(fmt.Sprint(object1), 64)
+	v2, err := strconv.ParseFloat(fmt.Sprint(object2), 64)
+
+	if err != nil {
+		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2))
+	}
+
+	if !(v1 > v2) {
+		internal.Fail(t, "An object that !!should be greater!! than the second object is not.", internal.Objects{{Name: "Object 1", Data: object1}, {Name: "Should be greater than object 2", Data: object2}}, msg...)
+	}
+}
+
+// Less asserts that the first object is less than the second.
+func (a AssertHelper) Less(t testingT, object1, object2 interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	v1, err := strconv.ParseFloat(fmt.Sprint(object1), 64)
+	v2, err := strconv.ParseFloat(fmt.Sprint(object2), 64)
+
+	if err != nil {
+		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2))
+	}
+
+	if !(v1 < v2) {
+		internal.Fail(t, "An object that !!should be less!! than the second object is not.", internal.Objects{{Name: "Object 1", Data: object1}, {Name: "Should be less than object 2", Data: object2}}, msg...)
 	}
 }

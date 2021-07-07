@@ -291,3 +291,13 @@ func TestAssertHelper_NotCompletesIn(t *testing.T) {
 		time.Sleep(15 * time.Millisecond)
 	})
 }
+
+func TestAssertHelper_Greater(t *testing.T) {
+	Use.Assert.Greater(t, 2, 1)
+	Use.Assert.Greater(t, 5, 4)
+}
+
+func TestAssertHelper_Less(t *testing.T) {
+	Use.Assert.Less(t, 1, 2)
+	Use.Assert.Less(t, 4, 5)
+}
