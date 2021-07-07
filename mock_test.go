@@ -47,10 +47,14 @@ func TestBoolsHelper_Full(t *testing.T) {
 	Use.Assert.Contains(t, Use.Mock.Bools.Full(), false)
 }
 
-// func TestIntsHelper_GenerateRandomPositive(t *testing.T) {
-// 	for i := 0; i < 100; i++ {
-// 		t.Run(fmt.Sprintf("Max=%d", i), func(t *testing.T) {
-// 			Use.Assert.Equal(t, i, len(Use.Mock.Floats64.GenerateRandom(1, i)[0]))
-// 		})
-// 	}
-// }
+func TestIntsHelper_GenerateRandomPositive(t *testing.T) {
+	for i := 0; i < 100; i++ {
+		t.Run("GenerateRandomPositive generates positive numbers only", func(t *testing.T) {
+			Use.Assert.Greater(t, Use.Mock.Ints.GenerateRandomPositive(1, 100)[0], 0)
+		})
+
+		t.Run("GenerateRandomNegative generates negative numbers only", func(t *testing.T) {
+			Use.Assert.Less(t, Use.Mock.Ints.GenerateRandomNegative(1, 100)[0], 0)
+		})
+	}
+}

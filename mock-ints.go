@@ -8,6 +8,7 @@ import (
 // IntsHelper contains integer test sets.
 type IntsHelper struct{}
 
+// Full returns a combination of every integer testset and some random integers (positive and negative).
 func (h IntsHelper) Full() (ints []int) {
 	for i := 0; i < 50; i++ {
 		ints = append(ints,
@@ -18,6 +19,15 @@ func (h IntsHelper) Full() (ints []int) {
 	return
 }
 
+// GenerateRandomRange generates random integers with a range of min to max.
+func (h IntsHelper) GenerateRandomRange(count, min, max int) (ints []int) {
+	for i := 0; i < count; i++ {
+		ints = append(ints, rand.Intn(max-min)+min)
+	}
+
+	return
+}
+
 // GenerateRandomPositive generates random positive integers with a maximum of max.
 // If the maximum is 0, or below, the maximum will be set to math.MaxInt64.
 func (h IntsHelper) GenerateRandomPositive(count, max int) (ints []int) {
@@ -25,9 +35,7 @@ func (h IntsHelper) GenerateRandomPositive(count, max int) (ints []int) {
 		max = math.MaxInt64
 	}
 
-	for i := 0; i < count; i++ {
-		ints = append(ints, rand.Intn(max))
-	}
+	ints = append(ints, h.GenerateRandomRange(count, 1, max)...)
 
 	return
 }
