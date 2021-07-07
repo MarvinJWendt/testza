@@ -452,9 +452,9 @@ func (a AssertHelper) Less(t testingT, object1, object2 interface{}, msg ...inte
 	}
 
 	v1, err := strconv.ParseFloat(fmt.Sprint(object1), 64)
-	v2, err := strconv.ParseFloat(fmt.Sprint(object2), 64)
+	v2, err2 := strconv.ParseFloat(fmt.Sprint(object2), 64)
 
-	if err != nil {
+	if err != nil || err2 != nil {
 		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2))
 	}
 
