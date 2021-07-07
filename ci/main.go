@@ -19,10 +19,10 @@ var Modules = []Module{
 	{Name: "Assert", StructName: "AssertHelper", Path: "testza.Use.Assert"},
 	{Name: "Capture", StructName: "CaptureHelper", Path: "testza.Use.Capture"},
 	// {Name: "Mock", StructName: "MockHelper", Path: "testza.Use.Mock"},
-	{Name: "Mock.Strings", StructName: "StringsHelper", Path: "testza.Use.Mock.Strings"},
-	{Name: "Mock.Bools", StructName: "BoolsHelper", Path: "testza.Use.Mock.Bools"},
-	{Name: "Mock.Floats64", StructName: "Floats64Helper", Path: "testza.Use.Mock.Floats64"},
-	{Name: "Mock.Ints", StructName: "IntsHelper", Path: "testza.Use.Mock.Ints"},
+	{Name: "Mock.Inputs.Strings", StructName: "MockInputsStringsHelper", Path: "testza.Use.Mock.Inputs.Inputs.Strings"},
+	{Name: "Mock.Inputs.Bools", StructName: "MockInputsBoolsHelper", Path: "testza.Use.Mock.Inputs.Bools"},
+	{Name: "Mock.Inputs.Floats64", StructName: "MockInputsFloats64Helper", Path: "testza.Use.Mock.Inputs.Floats64"},
+	{Name: "Mock.Inputs.Ints", StructName: "MockInputsIntsHelper", Path: "testza.Use.Mock.Inputs.Ints"},
 }
 
 func main() {
@@ -157,7 +157,8 @@ func getMarkdown() (md string) {
 		lastModule = module
 
 		md += "#### " + module.Path + "." + f.Name + "\n\n"
-		md += "```go\n" + f.Head + "\n```\n\n"
+		var re = regexp.MustCompile(`(?m)func \(.*?\)`)
+		md += "```go\n" + re.ReplaceAllString(f.Head, "func") + "\n```\n\n"
 		md += f.Body + "\n"
 
 		md += "\n"
