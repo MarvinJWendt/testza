@@ -228,7 +228,9 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 </details>
 
 </tr>
-</table>### Assert
+</table>
+
+### Assert
 
 #### testza.Use.Assert.CompletesIn
 
