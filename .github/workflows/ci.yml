@@ -1,4 +1,4 @@
-name: update-docs
+i:name: update-docs
 
 on: [ push ]
 
@@ -20,6 +20,10 @@ jobs:
           go get
           go mod tidy
           go run ./ci
+      - name: Generate Changelog
+        run: |
+          go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest || true
+          /github/home/go/bin/git-chglog -o CHANGELOG.md --config /.chglog/config.yml || true
       - name: Push changes
         run: |
           git config --global user.name 'MarvinJWendt' || exit 0
