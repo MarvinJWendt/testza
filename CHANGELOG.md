@@ -2,7 +2,10 @@
 ## [Unreleased]
 
 ### Ci
+- fix workflow file
 - add changelog generation
+
+### Documentation Changes
 
 
 <a name="v0.0.1"></a>
