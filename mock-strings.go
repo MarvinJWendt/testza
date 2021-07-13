@@ -87,7 +87,9 @@ func (s MockInputsStringsHelper) GenerateRandom(count, length int) (result []str
 	return
 }
 
-// RunTests runs tests with a specific test set.
+// RunTests runs a test for every value in a testset.
+// You can use the value as input parameter for your functions, to sanity test against many different cases.
+// This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
 func (s MockInputsStringsHelper) RunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()

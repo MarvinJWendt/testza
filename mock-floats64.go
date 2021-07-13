@@ -1,11 +1,16 @@
 package testza
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
+	"testing"
+
+	"github.com/MarvinJWendt/testza/internal"
 )
 
 // MockInputsFloats64Helper contains integer test sets.
+// Use testza.Use.Mock.Inputs.Floats64.
 type MockInputsFloats64Helper struct{}
 
 func (h MockInputsFloats64Helper) Full() (floats []float64) {
@@ -53,6 +58,29 @@ func (h MockInputsFloats64Helper) GenerateRandomNegative(count int, min float64)
 	floats = append(floats, h.GenerateRandomRange(count, min, 0)...)
 
 	return
+}
+
+// RunTests runs a test for every value in a testset.
+// You can use the value as input parameter for your functions, to sanity test against many different cases.
+// This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
+func (s MockInputsFloats64Helper) RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64)) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	test := internal.GetTest(t)
+	if test == nil {
+		t.Error(internal.ErrCanNotRunIfNotBuiltinTesting)
+		return
+	}
+
+	for i, v := range testSet {
+		test.Run(fmt.Sprint(v), func(t *testing.T) {
+			t.Helper()
+
+			testFunc(t, i, v)
+		})
+	}
 }
 
 // Modify returns a modified version of a test set.

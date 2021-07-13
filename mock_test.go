@@ -42,9 +42,19 @@ func TestStringsHelper_Numeric(t *testing.T) {
 	}
 }
 
+func TestStringsHelper_Full(t *testing.T) {
+	Use.Assert.Greater(t, len(Use.Mock.Inputs.Strings.Full()), 0)
+}
+
 func TestBoolsHelper_Full(t *testing.T) {
 	Use.Assert.Contains(t, Use.Mock.Inputs.Bools.Full(), true)
 	Use.Assert.Contains(t, Use.Mock.Inputs.Bools.Full(), false)
+}
+
+func TestBoolsHelper_RunTests(t *testing.T) {
+	Use.Mock.Inputs.Bools.RunTests(t, Use.Mock.Inputs.Bools.Full(), func(t *testing.T, index int, f bool) {
+		Use.Assert.NotNil(t, f)
+	})
 }
 
 func TestIntsHelper_GenerateRandomPositive(t *testing.T) {
@@ -57,4 +67,24 @@ func TestIntsHelper_GenerateRandomPositive(t *testing.T) {
 			Use.Assert.Less(t, Use.Mock.Inputs.Ints.GenerateRandomNegative(1, 100)[0], 0)
 		})
 	}
+}
+
+func TestIntsHelper_Full(t *testing.T) {
+	Use.Assert.Greater(t, len(Use.Mock.Inputs.Ints.Full()), 0)
+}
+
+func TestIntsHelper_RunTests(t *testing.T) {
+	Use.Mock.Inputs.Ints.RunTests(t, Use.Mock.Inputs.Ints.Full(), func(t *testing.T, index int, f int) {
+		Use.Assert.NotNil(t, f)
+	})
+}
+
+func TestFloats64Helper_Full(t *testing.T) {
+	Use.Assert.Greater(t, len(Use.Mock.Inputs.Floats64.Full()), 0)
+}
+
+func TestFloats64Helper_RunTests(t *testing.T) {
+	Use.Mock.Inputs.Floats64.RunTests(t, Use.Mock.Inputs.Floats64.Full(), func(t *testing.T, index int, f float64) {
+		Use.Assert.NotNil(t, f)
+	})
 }

@@ -187,9 +187,9 @@ func (a AssertHelper) NotNumeric(t testRunner, object interface{}, msg ...interf
 }
 
 // Zero asserts that the value is the zero value for it's type.
-//     assert.Zero(t, 0)
-//     assert.Zero(t, false)
-//     assert.Zero(t, "")
+//     testza.Use.Assert.Zero(t, 0)
+//     testza.Use.Assert.Zero(t, false)
+//     testza.Use.Assert.Zero(t, "")
 func (a AssertHelper) Zero(t testRunner, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -201,9 +201,9 @@ func (a AssertHelper) Zero(t testRunner, value interface{}, msg ...interface{}) 
 }
 
 // NotZero asserts that the value is not the zero value for it's type.
-//     assert.NotZero(t, 1337)
-//     assert.NotZero(t, true)
-//     assert.NotZero(t, "Hello, World")
+//     testza.Use.Assert.NotZero(t, 1337)
+//     testza.Use.Assert.NotZero(t, true)
+//     testza.Use.Assert.NotZero(t, "Hello, World")
 func (a AssertHelper) NotZero(t testRunner, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()

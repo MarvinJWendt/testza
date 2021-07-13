@@ -1,8 +1,12 @@
 package testza
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
+	"testing"
+
+	"github.com/MarvinJWendt/testza/internal"
 )
 
 // MockInputsIntsHelper contains integer test sets.
@@ -56,6 +60,29 @@ func (h MockInputsIntsHelper) GenerateRandomNegative(count, min int) (ints []int
 	}
 
 	return
+}
+
+// RunTests runs a test for every value in a testset.
+// You can use the value as input parameter for your functions, to sanity test against many different cases.
+// This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
+func (s MockInputsIntsHelper) RunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int)) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	test := internal.GetTest(t)
+	if test == nil {
+		t.Error(internal.ErrCanNotRunIfNotBuiltinTesting)
+		return
+	}
+
+	for i, v := range testSet {
+		test.Run(fmt.Sprint(v), func(t *testing.T) {
+			t.Helper()
+
+			testFunc(t, i, v)
+		})
+	}
 }
 
 // Modify returns a modified version of a test set.
