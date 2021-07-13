@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-1050-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-1258-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
 <a href="https://github.com/MarvinJWendt/testza/issues">
@@ -192,6 +192,8 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
 <summary>Click to expand</summary>
 
   - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockInputsBoolsFull)
+  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsBoolsModify)
+  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockInputsBoolsRunTests)
 </td>
 
 </details>
@@ -209,6 +211,7 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
   - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64GenerateRandomPositive)
   - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64GenerateRandomRange)
   - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64Modify)
+  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64RunTests)
 </td>
 
 </details>
@@ -226,6 +229,7 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
   - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsGenerateRandomPositive)
   - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsGenerateRandomRange)
   - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsModify)
+  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsRunTests)
 </td>
 
 </details>
@@ -421,9 +425,9 @@ func NotZero(t testRunner, value interface{}, msg ...interface{})
 
 NotZero asserts that the value is not the zero value for it's type.
 
-    assert.NotZero(t, 1337)
-    assert.NotZero(t, true)
-    assert.NotZero(t, "Hello, World")
+    testza.Use.Assert.NotZero(t, 1337)
+    testza.Use.Assert.NotZero(t, true)
+    testza.Use.Assert.NotZero(t, "Hello, World")
 
 #### testza.Use.Assert.Numeric
 
@@ -459,9 +463,9 @@ func Zero(t testRunner, value interface{}, msg ...interface{})
 
 Zero asserts that the value is the zero value for it's type.
 
-    assert.Zero(t, 0)
-    assert.Zero(t, false)
-    assert.Zero(t, "")
+    testza.Use.Assert.Zero(t, 0)
+    testza.Use.Assert.Zero(t, false)
+    testza.Use.Assert.Zero(t, "")
 
 ### Capture
 
@@ -494,6 +498,25 @@ func Full() []bool
 ```
 
 Full returns true and false in a boolean slice.
+
+#### testza.Use.Mock.Inputs.Bools.Modify
+
+```go
+func Modify(inputSlice []bool, f func(index int, value bool) bool) (floats []bool)
+```
+
+Modify returns a modified version of a test set.
+
+#### testza.Use.Mock.Inputs.Bools.RunTests
+
+```go
+func RunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
+```
+
+RunTests runs a test for every value in a testset. You can use the value as
+input parameter for your functions, to sanity test against many different
+cases. This ensures that your functions have a correct error handling and
+enables you to test against hunderts of cases easily.
 
 ### Mock.Inputs.Floats64
 
@@ -543,6 +566,17 @@ func Modify(inputSlice []float64, f func(index int, value float64) float64) (flo
 
 Modify returns a modified version of a test set.
 
+#### testza.Use.Mock.Inputs.Floats64.RunTests
+
+```go
+func RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64))
+```
+
+RunTests runs a test for every value in a testset. You can use the value as
+input parameter for your functions, to sanity test against many different
+cases. This ensures that your functions have a correct error handling and
+enables you to test against hunderts of cases easily.
+
 ### Mock.Inputs.Ints
 
 #### testza.Use.Mock.Inputs.Ints.Full
@@ -589,6 +623,17 @@ func Modify(inputSlice []int, f func(index int, value int) int) (ints []int)
 ```
 
 Modify returns a modified version of a test set.
+
+#### testza.Use.Mock.Inputs.Ints.RunTests
+
+```go
+func RunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int))
+```
+
+RunTests runs a test for every value in a testset. You can use the value as
+input parameter for your functions, to sanity test against many different
+cases. This ensures that your functions have a correct error handling and
+enables you to test against hunderts of cases easily.
 
 ### Mock.Inputs.Strings
 
@@ -663,7 +708,10 @@ in here is "9223372036854775807", which is equal to the maxmim int64.
 func RunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string))
 ```
 
-RunTests runs tests with a specific test set.
+RunTests runs a test for every value in a testset. You can use the value as
+input parameter for your functions, to sanity test against many different
+cases. This ensures that your functions have a correct error handling and
+enables you to test against hunderts of cases easily.
 
 
 <!-- docs:end -->
