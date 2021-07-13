@@ -2,6 +2,7 @@
 ## [Unreleased]
 
 ### Ci
+- better changelog generation
 - fix workflow file
 - add changelog generation
 
