@@ -1,4 +1,4 @@
-i:name: update-docs
+name: update-docs
 
 on: [ push ]
 
@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.16
-      - name: Run PTerm-CI
+      - name: Run CI
         run: |
           go get
           go mod tidy
