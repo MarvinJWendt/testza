@@ -102,6 +102,13 @@ testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int
   testza.Use.Assert.NotZero(t, domain) // Assert that the domain is returned
 })
 
+// - Aliases -
+// You can use aliases to shorten the usage of testza for modules that you use often!
+
+var assert = testza.Use.Assert
+var stringTests = testza.Use.Mock.Strings
+// ...
+
 // And that's just a few examples of what you can do with Testza!
 ```
 
