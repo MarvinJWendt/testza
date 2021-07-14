@@ -4,6 +4,9 @@
 ### Features
 - **mock-inputs-string:** add `Long` test set
 
+### Test
+- **mock-input-strings:** add tests for `Limit`
+
 
 <a name="v0.0.1"></a>
 ## v0.0.1 - 2021-07-13
