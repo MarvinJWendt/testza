@@ -35,7 +35,7 @@ linters:
 #    - exhaustive
     - gocognit
     - gocritic
-    - godot
+    # - godot
     - godox
     - goerr113
     - gofmt
