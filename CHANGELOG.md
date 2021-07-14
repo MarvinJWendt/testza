@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- **mock-inputs-string:** add `Long` test set
+
 
 <a name="v0.0.1"></a>
 ## v0.0.1 - 2021-07-13
