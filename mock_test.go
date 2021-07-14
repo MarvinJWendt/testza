@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestStrings_Modify(t *testing.T) {
+func TestStringsHelper_Modify(t *testing.T) {
 	stringSlice := []string{"Hello", "World", "TeSt"}
 	expected := []string{"hello", "world", "test"}
 
@@ -16,6 +16,14 @@ func TestStrings_Modify(t *testing.T) {
 	})
 
 	Use.Assert.Equal(t, expected, input)
+}
+
+func TestStringsHelper_Limit(t *testing.T) {
+	for i := 0; i < 10; i++ {
+		t.Run(fmt.Sprintf("Limit=%d", i), func(t *testing.T) {
+			Use.Assert.Equal(t, i, len(Use.Mock.Inputs.Strings.Limit(Use.Mock.Inputs.Strings.Full(), i)))
+		})
+	}
 }
 
 func TestStringsHelper_GenerateRandom(t *testing.T) {
