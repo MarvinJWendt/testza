@@ -35,4 +35,5 @@ jobs:
 
       - name: Upload coverage to Codecov
         if: success() && matrix.go == 1.16 && matrix.os == 'ubuntu-latest'
-        uses: codecov/codecov-action@v1
+        # uses: codecov/codecov-action@v1
+        run: bash <(curl -s https://codecov.io/bash)
