@@ -15,6 +15,23 @@ func (s MockInputsStringsHelper) Empty() []string {
 	return []string{""}
 }
 
+// Long returns a test set with long random strings.
+// Returns:
+// - Random string (length: 25)
+// - Random string (length: 50)
+// - Random string (length: 100)
+// - Random string (length: 1,000)
+// - Random string (length: 100,000)
+func (s MockInputsStringsHelper) Long() (testSet []string) {
+	testSet = append(testSet, s.GenerateRandom(1, 25)...)
+	testSet = append(testSet, s.GenerateRandom(1, 50)...)
+	testSet = append(testSet, s.GenerateRandom(1, 100)...)
+	testSet = append(testSet, s.GenerateRandom(1, 1_000)...)
+	testSet = append(testSet, s.GenerateRandom(1, 100_000)...)
+
+	return
+}
+
 // Numeric returns a test set with strings that are numeric.
 // The highest number in here is "9223372036854775807", which is equal to the maxmim int64.
 func (s MockInputsStringsHelper) Numeric() []string {
@@ -51,6 +68,7 @@ func (s MockInputsStringsHelper) Full() (ret []string) {
 	ret = append(ret, s.EmailAddresses()...)
 	ret = append(ret, s.Empty()...)
 	ret = append(ret, s.Numeric()...)
+	ret = append(ret, s.Long()...)
 
 	for i := 0; i < 10; i++ {
 		ret = append(ret, s.GenerateRandom(1, i)...)
