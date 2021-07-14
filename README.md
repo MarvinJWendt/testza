@@ -183,6 +183,7 @@ var stringTests = testza.Use.Mock.Strings
   - [GenerateRandom](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsGenerateRandom)
   - [HtmlTags](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsHtmlTags)
   - [Limit](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsLimit)
+  - [Long](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsLong)
   - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsModify)
   - [Numeric](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsNumeric)
   - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsRunTests)
@@ -691,6 +692,16 @@ func Limit(testSet []string, max int) []string
 ```
 
 Limit limits a test set in size.
+
+#### testza.Use.Mock.Inputs.Inputs.Strings.Long
+
+```go
+func Long() (testSet []string)
+```
+
+Long returns a test set with long random strings. Returns: - Random string
+(length: 25) - Random string (length: 50) - Random string (length: 100) -
+Random string (length: 1,000) - Random string (length: 100,000)
 
 #### testza.Use.Mock.Inputs.Inputs.Strings.Modify
 
