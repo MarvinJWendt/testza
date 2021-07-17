@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 ### Features
+- **mock-input-strings:** add more email addresses
+
+
+<a name="v0.0.2"></a>
+## [v0.0.2] - 2021-07-14
+### Features
 - **mock-inputs-string:** add `Long` test set
 
 ### Test
@@ -67,4 +73,5 @@
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.0.2...HEAD
+[v0.0.2]: https://github.com/MarvinJWendt/testza/compare/v0.0.1...v0.0.2
