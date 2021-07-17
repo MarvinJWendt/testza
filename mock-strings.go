@@ -47,7 +47,46 @@ func (s MockInputsStringsHelper) Usernames() []string {
 
 // EmailAddresses returns a test set with valid email addresses.
 func (s MockInputsStringsHelper) EmailAddresses() []string {
-	return []string{"hello@world.com", "hello+world@example.com", "hello.world@example.com", "a@a.xyz", "test@127.0.0.1", "test@[127.0.0.1]", "1@example.com", "_____@example.com", "test@subdomain.domain.xyz", `valid.”email\ address@example.com`}
+	return []string{
+		"hello@world.com",
+		"hello+world@example.com",
+		"hello.world@example.com",
+		"a@a.xyz",
+		"test@127.0.0.1",
+		"test@[127.0.0.1]",
+		"1@example.com",
+		"_____@example.com",
+		"test@subdomain.domain.xyz",
+		`valid.”email\ address@example.com`,
+		`first.last@iana.org`,
+		`1234567890123456789012345678901234567890123456789012345678901234@iana.org`,
+		`"first\"last"@iana.org`,
+		`"first@last"@iana.org`,
+		`"first\\last"@iana.org`,
+		`x@x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x23456789.x2`,
+		`1234567890123456789012345678901234567890123456789012345678@12345678901234567890123456789012345678901234567890123456789.12345678901234567890123456789012345678901234567890123456789.123456789012345678901234567890123456789012345678901234567890123.iana.org`,
+		`first.last@[12.34.56.78]`,
+		`first.last@[IPv6:::12.34.56.78]`,
+		`first.last@[IPv6:::b3:b4]`,
+		`first.last@[IPv6:::]`,
+		`first.last@[IPv6:1111:2222:3333::4444:12.34.56.78]`,
+		`"first\last"@iana.org`,
+		`user+mailbox@iana.org`,
+		`customer/department@iana.org `,
+		`customer/department=shipping@iana.org`,
+		`"Doug \"Ace\" L."@iana.org`,
+		`+1~1+@iana.org`,
+		`{_test_}@iana.org`,
+		`"[[ test ]]"@iana.org`,
+		`"test&#13;&#10; blah"@iana.org`,
+		`(foo)cal(bar)@(baz)iamcal.com(quux)`,
+		`cal(woo(yay)hoopla)@iamcal.com`,
+		`cal(foo\@bar)@iamcal.com`,
+		`cal(foo\)bar)@iamcal.com`,
+		`first(Welcome to&#13;&#10; the ("wonderful" (!)) world&#13;&#10; of email)@iana.org`,
+		`pete(his account)@silly.test(his host)`,
+		`c@(Chris's host.)public.example`,
+	}
 }
 
 // HtmlTags returns a test set with html tags.
