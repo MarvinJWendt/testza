@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v0.0.3"></a>
+## [v0.0.3] - 2021-07-17
 ### Features
 - **mock-input-strings:** add more email addresses
 
@@ -73,5 +76,6 @@
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.0.3...HEAD
+[v0.0.3]: https://github.com/MarvinJWendt/testza/compare/v0.0.2...v0.0.3
 [v0.0.2]: https://github.com/MarvinJWendt/testza/compare/v0.0.1...v0.0.2
