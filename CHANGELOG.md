@@ -1,9 +1,19 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Test
+- rename test functions to new structure
+
+
+<a name="v0.1.0"></a>
+## [v0.1.0] - 2021-07-19
 ### Code Refactoring
 - rewrite CI to new structure
 - change structure
+
+### BREAKING CHANGE
+
+Functions have a new structure.
 
 
 <a name="v0.0.3"></a>
@@ -80,6 +90,7 @@
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.0.3...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.1.0...HEAD
+[v0.1.0]: https://github.com/MarvinJWendt/testza/compare/v0.0.3...v0.1.0
 [v0.0.3]: https://github.com/MarvinJWendt/testza/compare/v0.0.2...v0.0.3
 [v0.0.2]: https://github.com/MarvinJWendt/testza/compare/v0.0.1...v0.0.2
