@@ -55,8 +55,7 @@ func TestMockInputStringFull(t *testing.T) {
 }
 
 func TestMockInputBoolFull(t *testing.T) {
-	AssertContains(t, MockInputBoolFull(), true)
-	AssertContains(t, MockInputBoolFull(), false)
+	AssertEqual(t, []bool{true, false}, MockInputBoolFull())
 }
 
 func TestMockInputBoolRunTests(t *testing.T) {
@@ -95,6 +94,24 @@ func TestMockInputFloat64RunTests(t *testing.T) {
 	MockInputFloat64RunTests(t, MockInputFloat64Full(), func(t *testing.T, index int, f float64) {
 		AssertNotNil(t, f)
 	})
+}
+
+func TestMockInputFloat64GenerateRandomNegative(t *testing.T) {
+	for i := 0; i < 100; i++ {
+		n := MockInputFloat64GenerateRandomNegative(1, 0)[0]
+		t.Run(fmt.Sprintf("%v must be negative", n), func(t *testing.T) {
+			AssertLess(t, n, 0)
+		})
+	}
+}
+
+func TestMockInputFloat64GenerateRandomPositive(t *testing.T) {
+	for i := 0; i < 100; i++ {
+		n := MockInputFloat64GenerateRandomPositive(1, 0)[0]
+		t.Run(fmt.Sprintf("%v must be positive", n), func(t *testing.T) {
+			AssertGreater(t, n, 0)
+		})
+	}
 }
 
 func TestMockInputBoolModify(t *testing.T) {
