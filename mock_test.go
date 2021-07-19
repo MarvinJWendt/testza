@@ -86,6 +86,19 @@ func TestMockInputIntRunTests(t *testing.T) {
 	})
 }
 
+func TestMockInputIntModify(t *testing.T) {
+	testSet := MockInputIntFull()
+	s := MockInputIntModify(testSet, func(index int, value int) int {
+		return value * -1
+	})
+
+	for i, f := range testSet {
+		t.Run("Number should be inverted", func(t *testing.T) {
+			AssertEqual(t, f, s[i]*-1)
+		})
+	}
+}
+
 func TestMockInputFloat64Full(t *testing.T) {
 	AssertGreater(t, len(MockInputFloat64Full()), 0)
 }
