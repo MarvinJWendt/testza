@@ -15,14 +15,13 @@ var goDoc string
 
 var Functions []Function
 
-var Modules = []Module{
-	{Name: "Assert", StructName: "AssertHelper", Path: "testza.Use.Assert"},
-	{Name: "Capture", StructName: "CaptureHelper", Path: "testza.Use.Capture"},
-	// {Name: "Mock", StructName: "MockHelper", Path: "testza.Use.Mock"},
-	{Name: "Mock.Inputs.Strings", StructName: "MockInputsStringsHelper", Path: "testza.Use.Mock.Inputs.Inputs.Strings"},
-	{Name: "Mock.Inputs.Bools", StructName: "MockInputsBoolsHelper", Path: "testza.Use.Mock.Inputs.Bools"},
-	{Name: "Mock.Inputs.Floats64", StructName: "MockInputsFloats64Helper", Path: "testza.Use.Mock.Inputs.Floats64"},
-	{Name: "Mock.Inputs.Ints", StructName: "MockInputsIntsHelper", Path: "testza.Use.Mock.Inputs.Ints"},
+var Categories = []Category{
+	{Name: "Assert", Prefix: "Assert"},
+	{Name: "Capture", Prefix: "Capture"},
+	{Name: "Mock Input Bool", Prefix: "MockInputBool"},
+	{Name: "Mock Input String", Prefix: "MockInputString"},
+	{Name: "Mock Input Float64", Prefix: "MockInputFloat64"},
+	{Name: "Mock Input Int", Prefix: "MockInputInt"},
 }
 
 func main() {
@@ -34,11 +33,9 @@ func main() {
 	writeBetween("README.md", "docs", getMarkdown())
 }
 
-type Module struct {
-	Name       string
-	StructName string
-	Path       string
-	HasMethods bool
+type Category struct {
+	Name   string
+	Prefix string
 }
 
 type Function struct {
@@ -79,7 +76,7 @@ func parseGoDoc() {
 			continue
 		}
 
-		var re = regexp.MustCompile(`(?m)\)( (?P<name>.*?)\()`)
+		var re = regexp.MustCompile(`(?m)func (?P<name>[a-zA-Z0-9]*)`)
 		Functions[i].Name = regexGroupsToMap(re, f.Head)["name"]
 
 		var newBody string
@@ -90,21 +87,6 @@ func parseGoDoc() {
 	}
 }
 
-func getModuleOfObject(head string) Module {
-	head = strings.TrimLeft(head, "*")
-
-	var re = regexp.MustCompile(`(?m)(?P<name>[a-zA-Z1-9]*)?\)`)
-	parent := regexGroupsToMap(re, head)["name"]
-
-	for _, module := range Modules {
-		if module.StructName == parent {
-			return module
-		}
-	}
-
-	return Module{}
-}
-
 func pathToMarkdownLink(path string) string {
 	path = strings.ReplaceAll(path, " ", "")
 	path = strings.ReplaceAll(path, ".", "")
@@ -112,8 +94,19 @@ func pathToMarkdownLink(path string) string {
 	return path
 }
 
+func getCategoryOfFunctionName(name string) (c Category) {
+
+	for _, category := range Categories {
+		if strings.HasPrefix(name, category.Prefix) {
+			c = category
+		}
+	}
+
+	return
+}
+
 func getMarkdown() (md string) {
-	var lastModule Module
+	var lastCategory Category
 
 	md += `<table>
   <tr>
@@ -121,12 +114,12 @@ func getMarkdown() (md string) {
     <th>Methods</th>
   </tr>`
 
-	for _, module := range Modules {
-		path := module.Name
+	for _, category := range Categories {
+		path := category.Name
 		path = pathToMarkdownLink(path)
 		md += "<tr>\n"
-		md += fmt.Sprintf(`<td><a href="https://github.com/MarvinJWendt/testza#%s">%s</a></td>`+"\n", path, module.Name)
-		// md += fmt.Sprintf("\n- [%s](https://github.com/MarvinJWendt/testza#%s)\n", module.Name, path)
+		md += fmt.Sprintf(`<td><a href="https://github.com/MarvinJWendt/testza#%s">%s</a></td>`+"\n", path, category.Name)
+		// md += fmt.Sprintf("\n- [%s](https://github.com/MarvinJWendt/testza#%s)\n", category.Name, path)
 
 		md += "<td>\n\n<details>\n<summary>Click to expand</summary>\n\n"
 		for _, f := range Functions {
@@ -134,9 +127,8 @@ func getMarkdown() (md string) {
 				continue
 			}
 
-			if getModuleOfObject(f.Head).Path == module.Path {
-				md += fmt.Sprintf("  - [%s](https://github.com/MarvinJWendt/testza#%s)\n", f.Name, pathToMarkdownLink(module.Path+f.Name))
-				// md += fmt.Sprintf("  - [%s](https://github.com/MarvinJWendt/testza#%s)\n", f.Name, pathToMarkdownLink(module.Path+f.Name))
+			if strings.HasPrefix(f.Name, category.Prefix) {
+				md += fmt.Sprintf("  - [%s](https://github.com/MarvinJWendt/testza#%s)\n", f.Name, pathToMarkdownLink(f.Name))
 			}
 		}
 		md += "</td>\n\n</details>\n\n"
@@ -150,13 +142,13 @@ func getMarkdown() (md string) {
 			continue
 		}
 
-		module := getModuleOfObject(f.Head)
-		if module.StructName != lastModule.StructName {
-			md += fmt.Sprintf("### %s\n\n", module.Name)
+		category := getCategoryOfFunctionName(f.Name)
+		if category != lastCategory {
+			md += fmt.Sprintf("### %s\n\n", category.Name)
 		}
-		lastModule = module
+		lastCategory = category
 
-		md += "#### " + module.Path + "." + f.Name + "\n\n"
+		md += "#### " + f.Name + "\n\n"
 		var re = regexp.MustCompile(`(?m)func \(.*?\)`)
 		md += "```go\n" + re.ReplaceAllString(f.Head, "func") + "\n```\n\n"
 		md += f.Body + "\n"
