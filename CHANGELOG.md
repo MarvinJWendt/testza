@@ -3,6 +3,7 @@
 
 ### Test
 - rename test functions to new structure
+- **mock:** add test for `MockInputBoolModify`
 
 
 <a name="v0.1.0"></a>
