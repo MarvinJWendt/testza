@@ -3,6 +3,9 @@
 
 ### Test
 - rename test functions to new structure
+- **mock:** add test for `MockInputIntModify`
+- **mock:** add test for `MockInputFloat64Modify`
+- **mock:** add test for `MockInputFloat64GenerateRandomPositive` and `MockInputFloat64GenerateRandomNegative`
 - **mock:** add test for `MockInputBoolModify`
 
 
