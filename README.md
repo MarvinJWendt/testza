@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-1467-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-1469-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
 <a href="https://github.com/MarvinJWendt/testza/issues">
@@ -59,55 +59,40 @@ Testza is a full-featured testing framework for Go.
 It integrates with the default test runner, so you can use it with the standard `go test` tool.
 Testza contains easy to use methods, like assertions, output capturing, mocking, and much more.
 
-Testza is structured a bit differently than you might be used to in Go, but we think that it makes writing tests as easy and efficient as possible.  
-After all, writing tests should be very simple and should not require you to study a whole framework.  
-That's why we made testza to integrate perfectly with your IDE.
-You don't even have to lookup the documentation, as testza is self-explanatory.
+The main goal of testza is to provide an easy and fun experience writing tests and providing a nice, user-friendly output.
+Even developers who never used testza, will get into it quickly.
 
 ## Getting Started
 
 Testza is very IDE friendly and was made to integrate with your IDE to increase your productivity.  
 
 ```go
-   ┌ Testza package
-   |    ┌ Container for all testza modules
-   |    |     ┌ The module you want to use (Press Ctrl+Space to see a list of all modules)
-testza.Use.XXXXXXX
-
-
 // --- Some Examples ---
 
 // - Some assertions -
-testza.Use.Assert.True(t, true) // -> Pass
-testza.Use.Assert.NoError(t, err) // -> Pass
-testza.Use.Assert.Equal(t, object, object) // -> Pass
+testza.AssertTrue(t, true) // -> Pass
+testza.AssertNoError(t, err) // -> Pass
+testza.AssertEqual(t, object, object) // -> Pass
 // ...
 
 // - Testing console output -
 // Test the output of your CLI tool easily!
-terminalOutput, _ := testza.Use.Capture.Stdout(func(w io.Writer) error {fmt.Println("Hello"); return nil})
-testza.Use.Assert.Equal(t, terminalOutput, "Hello\n") // -> Pass
+terminalOutput, _ := testza.CaptureStdout(func(w io.Writer) error {fmt.Println("Hello"); return nil})
+testza.AssertEqual(t, terminalOutput, "Hello\n") // -> Pass
 
 // - Mocking -
 // Testing a function that accepts email addresses as a parameter:
 
 // Testset of many different email addresses
-emailAddresses := testza.Use.Mock.Strings.EmailAddresses()
+emailAddresses := testza.MockStringEmailAddresses()
 
 // Run a test for every string in the test set
-testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int, str string) {
+testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str string) {
   user, domain, err := internal.ParseEmailAddress(str) // Use your function
-  testza.Use.Assert.NoError(t, err) // Assert that your function does not return an error
-  testza.Use.Assert.NotZero(t, user) // Assert that the user is returned
-  testza.Use.Assert.NotZero(t, domain) // Assert that the domain is returned
+  testza.AssertNoError(t, err) // Assert that your function does not return an error
+  testza.AssertNotZero(t, user) // Assert that the user is returned
+  testza.AssertNotZero(t, domain) // Assert that the domain is returned
 })
-
-// - Aliases -
-// You can use aliases to shorten the usage of testza for modules that you use often!
-
-var assert = testza.Use.Assert
-var stringTests = testza.Use.Mock.Strings
-// ...
 
 // And that's just a few examples of what you can do with Testza!
 ```
@@ -126,31 +111,31 @@ var stringTests = testza.Use.Mock.Strings
 <details>
 <summary>Click to expand</summary>
 
-  - [CompletesIn](https://github.com/MarvinJWendt/testza#testzaUseAssertCompletesIn)
-  - [Contains](https://github.com/MarvinJWendt/testza#testzaUseAssertContains)
-  - [Equal](https://github.com/MarvinJWendt/testza#testzaUseAssertEqual)
-  - [EqualValues](https://github.com/MarvinJWendt/testza#testzaUseAssertEqualValues)
-  - [False](https://github.com/MarvinJWendt/testza#testzaUseAssertFalse)
-  - [Greater](https://github.com/MarvinJWendt/testza#testzaUseAssertGreater)
-  - [Implements](https://github.com/MarvinJWendt/testza#testzaUseAssertImplements)
-  - [KindOf](https://github.com/MarvinJWendt/testza#testzaUseAssertKindOf)
-  - [Less](https://github.com/MarvinJWendt/testza#testzaUseAssertLess)
-  - [Nil](https://github.com/MarvinJWendt/testza#testzaUseAssertNil)
-  - [NoError](https://github.com/MarvinJWendt/testza#testzaUseAssertNoError)
-  - [NotCompletesIn](https://github.com/MarvinJWendt/testza#testzaUseAssertNotCompletesIn)
-  - [NotContains](https://github.com/MarvinJWendt/testza#testzaUseAssertNotContains)
-  - [NotEqual](https://github.com/MarvinJWendt/testza#testzaUseAssertNotEqual)
-  - [NotEqualValues](https://github.com/MarvinJWendt/testza#testzaUseAssertNotEqualValues)
-  - [NotImplements](https://github.com/MarvinJWendt/testza#testzaUseAssertNotImplements)
-  - [NotKindOf](https://github.com/MarvinJWendt/testza#testzaUseAssertNotKindOf)
-  - [NotNil](https://github.com/MarvinJWendt/testza#testzaUseAssertNotNil)
-  - [NotNumeric](https://github.com/MarvinJWendt/testza#testzaUseAssertNotNumeric)
-  - [NotPanic](https://github.com/MarvinJWendt/testza#testzaUseAssertNotPanic)
-  - [NotZero](https://github.com/MarvinJWendt/testza#testzaUseAssertNotZero)
-  - [Numeric](https://github.com/MarvinJWendt/testza#testzaUseAssertNumeric)
-  - [Panic](https://github.com/MarvinJWendt/testza#testzaUseAssertPanic)
-  - [True](https://github.com/MarvinJWendt/testza#testzaUseAssertTrue)
-  - [Zero](https://github.com/MarvinJWendt/testza#testzaUseAssertZero)
+  - [AssertCompletesIn](https://github.com/MarvinJWendt/testza#AssertCompletesIn)
+  - [AssertContains](https://github.com/MarvinJWendt/testza#AssertContains)
+  - [AssertEqual](https://github.com/MarvinJWendt/testza#AssertEqual)
+  - [AssertEqualValues](https://github.com/MarvinJWendt/testza#AssertEqualValues)
+  - [AssertFalse](https://github.com/MarvinJWendt/testza#AssertFalse)
+  - [AssertGreater](https://github.com/MarvinJWendt/testza#AssertGreater)
+  - [AssertImplements](https://github.com/MarvinJWendt/testza#AssertImplements)
+  - [AssertKindOf](https://github.com/MarvinJWendt/testza#AssertKindOf)
+  - [AssertLess](https://github.com/MarvinJWendt/testza#AssertLess)
+  - [AssertNil](https://github.com/MarvinJWendt/testza#AssertNil)
+  - [AssertNoError](https://github.com/MarvinJWendt/testza#AssertNoError)
+  - [AssertNotCompletesIn](https://github.com/MarvinJWendt/testza#AssertNotCompletesIn)
+  - [AssertNotContains](https://github.com/MarvinJWendt/testza#AssertNotContains)
+  - [AssertNotEqual](https://github.com/MarvinJWendt/testza#AssertNotEqual)
+  - [AssertNotEqualValues](https://github.com/MarvinJWendt/testza#AssertNotEqualValues)
+  - [AssertNotImplements](https://github.com/MarvinJWendt/testza#AssertNotImplements)
+  - [AssertNotKindOf](https://github.com/MarvinJWendt/testza#AssertNotKindOf)
+  - [AssertNotNil](https://github.com/MarvinJWendt/testza#AssertNotNil)
+  - [AssertNotNumeric](https://github.com/MarvinJWendt/testza#AssertNotNumeric)
+  - [AssertNotPanic](https://github.com/MarvinJWendt/testza#AssertNotPanic)
+  - [AssertNotZero](https://github.com/MarvinJWendt/testza#AssertNotZero)
+  - [AssertNumeric](https://github.com/MarvinJWendt/testza#AssertNumeric)
+  - [AssertPanic](https://github.com/MarvinJWendt/testza#AssertPanic)
+  - [AssertTrue](https://github.com/MarvinJWendt/testza#AssertTrue)
+  - [AssertZero](https://github.com/MarvinJWendt/testza#AssertZero)
 </td>
 
 </details>
@@ -163,81 +148,81 @@ var stringTests = testza.Use.Mock.Strings
 <details>
 <summary>Click to expand</summary>
 
-  - [Stderr](https://github.com/MarvinJWendt/testza#testzaUseCaptureStderr)
-  - [Stdout](https://github.com/MarvinJWendt/testza#testzaUseCaptureStdout)
+  - [CaptureStderr](https://github.com/MarvinJWendt/testza#CaptureStderr)
+  - [CaptureStdout](https://github.com/MarvinJWendt/testza#CaptureStdout)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputsStrings">Mock.Inputs.Strings</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#MockInputBool">Mock Input Bool</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [EmailAddresses](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsEmailAddresses)
-  - [Empty](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsEmpty)
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsFull)
-  - [GenerateRandom](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsGenerateRandom)
-  - [HtmlTags](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsHtmlTags)
-  - [Limit](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsLimit)
-  - [Long](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsLong)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsModify)
-  - [Numeric](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsNumeric)
-  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockInputsInputsStringsRunTests)
+  - [MockInputBoolFull](https://github.com/MarvinJWendt/testza#MockInputBoolFull)
+  - [MockInputBoolModify](https://github.com/MarvinJWendt/testza#MockInputBoolModify)
+  - [MockInputBoolRunTests](https://github.com/MarvinJWendt/testza#MockInputBoolRunTests)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputsBools">Mock.Inputs.Bools</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#MockInputString">Mock Input String</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockInputsBoolsFull)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsBoolsModify)
-  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockInputsBoolsRunTests)
+  - [MockInputStringEmailAddresses](https://github.com/MarvinJWendt/testza#MockInputStringEmailAddresses)
+  - [MockInputStringEmpty](https://github.com/MarvinJWendt/testza#MockInputStringEmpty)
+  - [MockInputStringFull](https://github.com/MarvinJWendt/testza#MockInputStringFull)
+  - [MockInputStringGenerateRandom](https://github.com/MarvinJWendt/testza#MockInputStringGenerateRandom)
+  - [MockInputStringHtmlTags](https://github.com/MarvinJWendt/testza#MockInputStringHtmlTags)
+  - [MockInputStringLimit](https://github.com/MarvinJWendt/testza#MockInputStringLimit)
+  - [MockInputStringLong](https://github.com/MarvinJWendt/testza#MockInputStringLong)
+  - [MockInputStringModify](https://github.com/MarvinJWendt/testza#MockInputStringModify)
+  - [MockInputStringNumeric](https://github.com/MarvinJWendt/testza#MockInputStringNumeric)
+  - [MockInputStringRunTests](https://github.com/MarvinJWendt/testza#MockInputStringRunTests)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputsFloats64">Mock.Inputs.Floats64</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#MockInputFloat64">Mock Input Float64</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64Full)
-  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64GenerateRandomNegative)
-  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64GenerateRandomPositive)
-  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64GenerateRandomRange)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64Modify)
-  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockInputsFloats64RunTests)
+  - [MockInputFloat64Full](https://github.com/MarvinJWendt/testza#MockInputFloat64Full)
+  - [MockInputFloat64GenerateRandomNegative](https://github.com/MarvinJWendt/testza#MockInputFloat64GenerateRandomNegative)
+  - [MockInputFloat64GenerateRandomPositive](https://github.com/MarvinJWendt/testza#MockInputFloat64GenerateRandomPositive)
+  - [MockInputFloat64GenerateRandomRange](https://github.com/MarvinJWendt/testza#MockInputFloat64GenerateRandomRange)
+  - [MockInputFloat64Modify](https://github.com/MarvinJWendt/testza#MockInputFloat64Modify)
+  - [MockInputFloat64RunTests](https://github.com/MarvinJWendt/testza#MockInputFloat64RunTests)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputsInts">Mock.Inputs.Ints</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#MockInputInt">Mock Input Int</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [Full](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsFull)
-  - [GenerateRandomNegative](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsGenerateRandomNegative)
-  - [GenerateRandomPositive](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsGenerateRandomPositive)
-  - [GenerateRandomRange](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsGenerateRandomRange)
-  - [Modify](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsModify)
-  - [RunTests](https://github.com/MarvinJWendt/testza#testzaUseMockInputsIntsRunTests)
+  - [MockInputIntFull](https://github.com/MarvinJWendt/testza#MockInputIntFull)
+  - [MockInputIntGenerateRandomNegative](https://github.com/MarvinJWendt/testza#MockInputIntGenerateRandomNegative)
+  - [MockInputIntGenerateRandomPositive](https://github.com/MarvinJWendt/testza#MockInputIntGenerateRandomPositive)
+  - [MockInputIntGenerateRandomRange](https://github.com/MarvinJWendt/testza#MockInputIntGenerateRandomRange)
+  - [MockInputIntModify](https://github.com/MarvinJWendt/testza#MockInputIntModify)
+  - [MockInputIntRunTests](https://github.com/MarvinJWendt/testza#MockInputIntRunTests)
 </td>
 
 </details>
@@ -247,489 +232,496 @@ var stringTests = testza.Use.Mock.Strings
 
 ### Assert
 
-#### testza.Use.Assert.CompletesIn
+#### AssertCompletesIn
 
 ```go
-func CompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{})
+func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{})
 ```
 
-CompletesIn asserts that a function completes in a given time. Use this
-function to test that functions do not take too long to complete.
+AssertCompletesIn asserts that a function completes in a given time. Use
+this function to test that functions do not take too long to complete.
 
 NOTE: Every system takes a different amount of time to complete a function.
 Do not set the duration too low, if you want consistent results.
 
-#### testza.Use.Assert.Contains
+#### AssertContains
 
 ```go
-func Contains(t testRunner, object, element interface{}, msg ...interface{})
+func AssertContains(t testRunner, object, element interface{}, msg ...interface{})
 ```
 
+AssertContains asserts that a string/list/array/slice/map contains the
+specified element.
 
-
-#### testza.Use.Assert.Equal
+#### AssertEqual
 
 ```go
-func Equal(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertEqual(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
-Equal asserts that two objects are equal.
+AssertEqual asserts that two objects are equal.
 
-#### testza.Use.Assert.EqualValues
+#### AssertEqualValues
 
 ```go
-func EqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
-EqualValues asserts that two objects have equal values.
+AssertEqualValues asserts that two objects have equal values.
 
-#### testza.Use.Assert.False
+#### AssertFalse
 
 ```go
-func False(t testRunner, value interface{}, msg ...interface{})
+func AssertFalse(t testRunner, value interface{}, msg ...interface{})
 ```
 
-False asserts that an expression or object resolves to false.
+AssertFalse asserts that an expression or object resolves to false.
 
-#### testza.Use.Assert.Greater
+#### AssertGreater
 
 ```go
-func Greater(t testRunner, object1, object2 interface{}, msg ...interface{})
+func AssertGreater(t testRunner, object1, object2 interface{}, msg ...interface{})
 ```
 
-Greater asserts that the first object is greater than the second.
+AssertGreater asserts that the first object is greater than the second.
 
-#### testza.Use.Assert.Implements
+#### AssertImplements
 
 ```go
-func Implements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
+func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
 ```
 
-Implements checks if an objects implements an interface.
+AssertImplements asserts that an objects implements an interface.
 
-    testza.Use.Assert.Implements(t, (*YourInterface)(nil), new(YourObject))
-    testza.Use.Assert.Implements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
+    testza.AssertImplements(t, (*YourInterface)(nil), new(YourObject))
+    testza.AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
 
-#### testza.Use.Assert.KindOf
+#### AssertKindOf
 
 ```go
-func KindOf(t testRunner, expectedKind reflect.Kind, object interface{}, msg ...interface{})
+func AssertKindOf(t testRunner, expectedKind reflect.Kind, object interface{}, msg ...interface{})
 ```
 
-KindOf asserts that the object is a type of kind exptectedKind.
+AssertKindOf asserts that the object is a type of kind exptectedKind.
 
-#### testza.Use.Assert.Less
+#### AssertLess
 
 ```go
-func Less(t testRunner, object1, object2 interface{}, msg ...interface{})
+func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{})
 ```
 
-Less asserts that the first object is less than the second.
+AssertLess asserts that the first object is less than the second.
 
-#### testza.Use.Assert.Nil
+#### AssertNil
 
 ```go
-func Nil(t testRunner, object interface{}, msg ...interface{})
+func AssertNil(t testRunner, object interface{}, msg ...interface{})
 ```
 
-Nil asserts that an object is nil.
+AssertNil asserts that an object is nil.
 
-#### testza.Use.Assert.NoError
+#### AssertNoError
 
 ```go
-func NoError(t testRunner, err interface{}, msg ...interface{})
+func AssertNoError(t testRunner, err interface{}, msg ...interface{})
 ```
 
-NoError asserts that an error is nil.
+AssertNoError asserts that an error is nil.
 
-#### testza.Use.Assert.NotCompletesIn
+#### AssertNotCompletesIn
 
 ```go
-func NotCompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{})
+func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{})
 ```
 
-NotCompletesIn asserts that a function does not complete in a given time.
-Use this function to test that functions do not complete to quickly. For
-example if your database connection completes in under a millisecond, there
-might be something wrong.
+AssertNotCompletesIn asserts that a function does not complete in a given
+time. Use this function to test that functions do not complete to quickly.
+For example if your database connection completes in under a millisecond,
+there might be something wrong.
 
 NOTE: Every system takes a different amount of time to complete a function.
 Do not set the duration too high, if you want consistent results.
 
-#### testza.Use.Assert.NotContains
+#### AssertNotContains
 
 ```go
-func NotContains(t testRunner, object, element interface{}, msg ...interface{})
+func AssertNotContains(t testRunner, object, element interface{}, msg ...interface{})
 ```
 
+AssertNotContains asserts that a string/list/array/slice/map does not
+contain the specified element.
 
-
-#### testza.Use.Assert.NotEqual
+#### AssertNotEqual
 
 ```go
-func NotEqual(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
-NotEqual asserts that two objects are not equal.
+AssertNotEqual asserts that two objects are not equal.
 
-#### testza.Use.Assert.NotEqualValues
+#### AssertNotEqualValues
 
 ```go
-func NotEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
-NotEqualValues asserts that two objects do not have equal values.
+AssertNotEqualValues asserts that two objects do not have equal values.
 
-#### testza.Use.Assert.NotImplements
+#### AssertNotImplements
 
 ```go
-func NotImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
+func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
 ```
 
-NotImplements checks if an object does not implement an interface.
+AssertNotImplements asserts that an object does not implement an interface.
 
-    testza.Use.Assert.NotImplements(t, (*YourInterface)(nil), new(YourObject))
-    testza.Use.Assert.NotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
+    testza.AssertNotImplements(t, (*YourInterface)(nil), new(YourObject))
+    testza.AssertNotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
 
-#### testza.Use.Assert.NotKindOf
+#### AssertNotKindOf
 
 ```go
-func NotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ...interface{})
+func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ...interface{})
 ```
 
-NotKindOf asserts that the object is not a type of kind `kind`.
+AssertNotKindOf asserts that the object is not a type of kind `kind`.
 
-#### testza.Use.Assert.NotNil
+#### AssertNotNil
 
 ```go
-func NotNil(t testRunner, object interface{}, msg ...interface{})
+func AssertNotNil(t testRunner, object interface{}, msg ...interface{})
 ```
 
-NotNil assertsthat an object is not nil.
+AssertNotNil asserts that an object is not nil.
 
-#### testza.Use.Assert.NotNumeric
+#### AssertNotNumeric
 
 ```go
-func NotNumeric(t testRunner, object interface{}, msg ...interface{})
+func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{})
 ```
 
-Number checks if the object is not a numeric type. Numeric types are: Int,
-Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32,
-Uint64, Complex64 and Complex128.
+AssertNotNumeric checks if the object is not a numeric type. Numeric types
+are: Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16,
+Uint32, Uint64, Complex64 and Complex128.
 
-#### testza.Use.Assert.NotPanic
+#### AssertNotPanic
 
 ```go
-func NotPanic(t testRunner, f func(), msg ...interface{})
+func AssertNotPanic(t testRunner, f func(), msg ...interface{})
 ```
 
-NotPanic asserts that a function does not panic.
+AssertNotPanic asserts that a function does not panic.
 
-#### testza.Use.Assert.NotZero
+#### AssertNotZero
 
 ```go
-func NotZero(t testRunner, value interface{}, msg ...interface{})
+func AssertNotZero(t testRunner, value interface{}, msg ...interface{})
 ```
 
-NotZero asserts that the value is not the zero value for it's type.
+AssertNotZero asserts that the value is not the zero value for it's type.
 
-    testza.Use.Assert.NotZero(t, 1337)
-    testza.Use.Assert.NotZero(t, true)
-    testza.Use.Assert.NotZero(t, "Hello, World")
+    testza.AssertNotZero(t, 1337)
+    testza.AssertNotZero(t, true)
+    testza.AssertNotZero(t, "Hello, World")
 
-#### testza.Use.Assert.Numeric
+#### AssertNumeric
 
 ```go
-func Numeric(t testRunner, object interface{}, msg ...interface{})
+func AssertNumeric(t testRunner, object interface{}, msg ...interface{})
 ```
 
-Numeric asserts that the object is a numeric type. Numeric types are: Int,
-Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16, Uint32,
-Uint64, Complex64 and Complex128.
+AssertNumeric asserts that the object is a numeric type. Numeric types are:
+Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16,
+Uint32, Uint64, Complex64 and Complex128.
 
-#### testza.Use.Assert.Panic
+#### AssertPanic
 
 ```go
-func Panic(t testRunner, f func(), msg ...interface{})
+func AssertPanic(t testRunner, f func(), msg ...interface{})
 ```
 
-Panic asserts that a function panics.
+AssertPanic asserts that a function panics.
 
-#### testza.Use.Assert.True
+#### AssertTrue
 
 ```go
-func True(t testRunner, value interface{}, msg ...interface{})
+func AssertTrue(t testRunner, value interface{}, msg ...interface{})
 ```
 
-True asserts that an expression or object resolves to true.
+AssertTrue asserts that an expression or object resolves to true.
 
-#### testza.Use.Assert.Zero
+#### AssertZero
 
 ```go
-func Zero(t testRunner, value interface{}, msg ...interface{})
+func AssertZero(t testRunner, value interface{}, msg ...interface{})
 ```
 
-Zero asserts that the value is the zero value for it's type.
+AssertZero asserts that the value is the zero value for it's type.
 
-    testza.Use.Assert.Zero(t, 0)
-    testza.Use.Assert.Zero(t, false)
-    testza.Use.Assert.Zero(t, "")
+    testza.AssertZero(t, 0)
+    testza.AssertZero(t, false)
+    testza.AssertZero(t, "")
 
 ### Capture
 
-#### testza.Use.Capture.Stderr
+#### CaptureStderr
 
 ```go
-func Stderr(capture func(w io.Writer) error) (string, error)
+func CaptureStderr(capture func(w io.Writer) error) (string, error)
 ```
 
-Stderr captures everything written to stderr from a specific function. You
-can use this method in tests, to validate that your functions writes a
-string to the terminal.
+CaptureStderr captures everything written to stderr from a specific
+function. You can use this method in tests, to validate that your functions
+writes a string to the terminal.
 
-#### testza.Use.Capture.Stdout
+#### CaptureStdout
 
 ```go
-func Stdout(capture func(w io.Writer) error) (string, error)
+func CaptureStdout(capture func(w io.Writer) error) (string, error)
 ```
 
-Stdout captures everything written to stdout from a specific function. You
-can use this method in tests, to validate that your functions writes a
-string to the terminal.
+CaptureStdout captures everything written to stdout from a specific
+function. You can use this method in tests, to validate that your functions
+writes a string to the terminal.
 
-### Mock.Inputs.Bools
+### Mock Input Bool
 
-#### testza.Use.Mock.Inputs.Bools.Full
+#### MockInputBoolFull
 
 ```go
-func Full() []bool
+func MockInputBoolFull() []bool
 ```
 
-Full returns true and false in a boolean slice.
+MockInputBoolFull returns true and false in a boolean slice.
 
-#### testza.Use.Mock.Inputs.Bools.Modify
+#### MockInputBoolModify
 
 ```go
-func Modify(inputSlice []bool, f func(index int, value bool) bool) (floats []bool)
+func MockInputBoolModify(inputSlice []bool, f func(index int, value bool) bool) (floats []bool)
 ```
 
-Modify returns a modified version of a test set.
+MockInputBoolModify returns a modified version of a test set.
 
-#### testza.Use.Mock.Inputs.Bools.RunTests
+#### MockInputBoolRunTests
 
 ```go
-func RunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
+func MockInputBoolRunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
 ```
 
-RunTests runs a test for every value in a testset. You can use the value as
-input parameter for your functions, to sanity test against many different
-cases. This ensures that your functions have a correct error handling and
-enables you to test against hunderts of cases easily.
+MockInputBoolRunTests runs a test for every value in a testset. You can use
+the value as input parameter for your functions, to sanity test against many
+different cases. This ensures that your functions have a correct error
+handling and enables you to test against hunderts of cases easily.
 
-### Mock.Inputs.Floats64
+### Mock Input Float64
 
-#### testza.Use.Mock.Inputs.Floats64.Full
+#### MockInputFloat64Full
 
 ```go
-func Full() (floats []float64)
+func MockInputFloat64Full() (floats []float64)
 ```
 
+MockInputFloat64Full returns a combination of every float64 testset and some
+random float64s (positive and negative).
 
-
-#### testza.Use.Mock.Inputs.Floats64.GenerateRandomNegative
+#### MockInputFloat64GenerateRandomNegative
 
 ```go
-func GenerateRandomNegative(count int, min float64) (floats []float64)
+func MockInputFloat64GenerateRandomNegative(count int, min float64) (floats []float64)
 ```
 
-GenerateRandomNegative generates random negative integers with a minimum of
-min. If the minimum is positive, it will be converted to a negative number.
-If it is set to 0, there is no limit.
+MockInputFloat64GenerateRandomNegative generates random negative integers
+with a minimum of min. If the minimum is positive, it will be converted to a
+negative number. If it is set to 0, there is no limit.
 
-#### testza.Use.Mock.Inputs.Floats64.GenerateRandomPositive
+#### MockInputFloat64GenerateRandomPositive
 
 ```go
-func GenerateRandomPositive(count int, max float64) (floats []float64)
+func MockInputFloat64GenerateRandomPositive(count int, max float64) (floats []float64)
 ```
 
-GenerateRandomPositive generates random positive integers with a maximum of
-max. If the maximum is 0, or below, the maximum will be set to
+MockInputFloat64GenerateRandomPositive generates random positive integers
+with a maximum of max. If the maximum is 0, or below, the maximum will be
+set to math.MaxInt64.
+
+#### MockInputFloat64GenerateRandomRange
+
+```go
+func MockInputFloat64GenerateRandomRange(count int, min, max float64) (floats []float64)
+```
+
+MockInputFloat64GenerateRandomRange generates random positive integers with
+a maximum of max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### testza.Use.Mock.Inputs.Floats64.GenerateRandomRange
+#### MockInputFloat64Modify
 
 ```go
-func GenerateRandomRange(count int, min, max float64) (floats []float64)
+func MockInputFloat64Modify(inputSlice []float64, f func(index int, value float64) float64) (floats []float64)
 ```
 
-GenerateRandomRange generates random positive integers with a maximum of
-max. If the maximum is 0, or below, the maximum will be set to
-math.MaxInt64.
+MockInputFloat64Modify returns a modified version of a test set.
 
-#### testza.Use.Mock.Inputs.Floats64.Modify
+#### MockInputFloat64RunTests
 
 ```go
-func Modify(inputSlice []float64, f func(index int, value float64) float64) (floats []float64)
+func MockInputFloat64RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64))
 ```
 
-Modify returns a modified version of a test set.
+MockInputFloat64RunTests runs a test for every value in a testset. You can
+use the value as input parameter for your functions, to sanity test against
+many different cases. This ensures that your functions have a correct error
+handling and enables you to test against hunderts of cases easily.
 
-#### testza.Use.Mock.Inputs.Floats64.RunTests
+### Mock Input Int
+
+#### MockInputIntFull
 
 ```go
-func RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64))
+func MockInputIntFull() (ints []int)
 ```
 
-RunTests runs a test for every value in a testset. You can use the value as
-input parameter for your functions, to sanity test against many different
-cases. This ensures that your functions have a correct error handling and
-enables you to test against hunderts of cases easily.
+MockInputIntFull returns a combination of every integer testset and some
+random integers (positive and negative).
 
-### Mock.Inputs.Ints
-
-#### testza.Use.Mock.Inputs.Ints.Full
+#### MockInputIntGenerateRandomNegative
 
 ```go
-func Full() (ints []int)
+func MockInputIntGenerateRandomNegative(count, min int) (ints []int)
 ```
 
-Full returns a combination of every integer testset and some random integers
-(positive and negative).
-
-#### testza.Use.Mock.Inputs.Ints.GenerateRandomNegative
-
-```go
-func GenerateRandomNegative(count, min int) (ints []int)
-```
-
-GenerateRandomNegative generates random negative integers with a minimum of
-min. If the minimum is 0, or above, the maximum will be set to
+MockInputIntGenerateRandomNegative generates random negative integers with a
+minimum of min. If the minimum is 0, or above, the maximum will be set to
 math.MinInt64.
 
-#### testza.Use.Mock.Inputs.Ints.GenerateRandomPositive
+#### MockInputIntGenerateRandomPositive
 
 ```go
-func GenerateRandomPositive(count, max int) (ints []int)
+func MockInputIntGenerateRandomPositive(count, max int) (ints []int)
 ```
 
-GenerateRandomPositive generates random positive integers with a maximum of
-max. If the maximum is 0, or below, the maximum will be set to
+MockInputIntGenerateRandomPositive generates random positive integers with a
+maximum of max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### testza.Use.Mock.Inputs.Ints.GenerateRandomRange
+#### MockInputIntGenerateRandomRange
 
 ```go
-func GenerateRandomRange(count, min, max int) (ints []int)
+func MockInputIntGenerateRandomRange(count, min, max int) (ints []int)
 ```
 
-GenerateRandomRange generates random integers with a range of min to max.
+MockInputIntGenerateRandomRange generates random integers with a range of
+min to max.
 
-#### testza.Use.Mock.Inputs.Ints.Modify
+#### MockInputIntModify
 
 ```go
-func Modify(inputSlice []int, f func(index int, value int) int) (ints []int)
+func MockInputIntModify(inputSlice []int, f func(index int, value int) int) (ints []int)
 ```
 
-Modify returns a modified version of a test set.
+MockInputIntModify returns a modified version of a test set.
 
-#### testza.Use.Mock.Inputs.Ints.RunTests
+#### MockInputIntRunTests
 
 ```go
-func RunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int))
+func MockInputIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int))
 ```
 
-RunTests runs a test for every value in a testset. You can use the value as
-input parameter for your functions, to sanity test against many different
-cases. This ensures that your functions have a correct error handling and
-enables you to test against hunderts of cases easily.
+MockInputIntRunTests runs a test for every value in a testset. You can use
+the value as input parameter for your functions, to sanity test against many
+different cases. This ensures that your functions have a correct error
+handling and enables you to test against hunderts of cases easily.
 
-### Mock.Inputs.Strings
+### Mock Input String
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.EmailAddresses
+#### MockInputStringEmailAddresses
 
 ```go
-func EmailAddresses() []string
+func MockInputStringEmailAddresses() []string
 ```
 
-EmailAddresses returns a test set with valid email addresses.
+MockInputStringEmailAddresses returns a test set with valid email addresses.
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.Empty
+#### MockInputStringEmpty
 
 ```go
-func Empty() []string
+func MockInputStringEmpty() []string
 ```
 
-Empty returns a test set with a single empty string.
+MockInputStringEmpty returns a test set with a single empty string.
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.Full
+#### MockInputStringFull
 
 ```go
-func Full() (ret []string)
+func MockInputStringFull() (ret []string)
 ```
 
-Full contains all string test sets plus ten generated random strings.
+MockInputStringFull contains all string test sets plus ten generated random
+strings.
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.GenerateRandom
+#### MockInputStringGenerateRandom
 
 ```go
-func GenerateRandom(count, length int) (result []string)
+func MockInputStringGenerateRandom(count, length int) (result []string)
 ```
 
-GenerateRandom returns random StringsHelper in a test set.
+MockInputStringGenerateRandom returns random StringsHelper in a test set.
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.HtmlTags
+#### MockInputStringHtmlTags
 
 ```go
-func HtmlTags() []string
+func MockInputStringHtmlTags() []string
 ```
 
-HtmlTags returns a test set with html tags.
+MockInputStringHtmlTags returns a test set with html tags.
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.Limit
+#### MockInputStringLimit
 
 ```go
-func Limit(testSet []string, max int) []string
+func MockInputStringLimit(testSet []string, max int) []string
 ```
 
-Limit limits a test set in size.
+MockInputStringLimit limits a test set in size.
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.Long
+#### MockInputStringLong
 
 ```go
-func Long() (testSet []string)
+func MockInputStringLong() (testSet []string)
 ```
 
-Long returns a test set with long random strings. Returns: - Random string
-(length: 25) - Random string (length: 50) - Random string (length: 100) -
-Random string (length: 1,000) - Random string (length: 100,000)
+MockInputStringLong returns a test set with long random strings. Returns: -
+Random string (length: 25) - Random string (length: 50) - Random string
+(length: 100) - Random string (length: 1,000) - Random string (length:
+100,000)
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.Modify
+#### MockInputStringModify
 
 ```go
-func Modify(inputSlice []string, f func(index int, value string) string) (ret []string)
+func MockInputStringModify(inputSlice []string, f func(index int, value string) string) (ret []string)
 ```
 
-Modify returns a modified version of a test set.
+MockInputStringModify returns a modified version of a test set.
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.Numeric
+#### MockInputStringNumeric
 
 ```go
-func Numeric() []string
+func MockInputStringNumeric() []string
 ```
 
-Numeric returns a test set with strings that are numeric. The highest number
-in here is "9223372036854775807", which is equal to the maxmim int64.
+MockInputStringNumeric returns a test set with strings that are numeric. The
+highest number in here is "9223372036854775807", which is equal to the
+maxmim int64.
 
-#### testza.Use.Mock.Inputs.Inputs.Strings.RunTests
+#### MockInputStringRunTests
 
 ```go
-func RunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string))
+func MockInputStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string))
 ```
 
-RunTests runs a test for every value in a testset. You can use the value as
-input parameter for your functions, to sanity test against many different
-cases. This ensures that your functions have a correct error handling and
-enables you to test against hunderts of cases easily.
+MockInputStringRunTests runs a test for every value in a testset. You can
+use the value as input parameter for your functions, to sanity test against
+many different cases. This ensures that your functions have a correct error
+handling and enables you to test against hunderts of cases easily.
 
 
 <!-- docs:end -->
