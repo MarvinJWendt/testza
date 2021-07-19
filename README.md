@@ -59,55 +59,40 @@ Testza is a full-featured testing framework for Go.
 It integrates with the default test runner, so you can use it with the standard `go test` tool.
 Testza contains easy to use methods, like assertions, output capturing, mocking, and much more.
 
-Testza is structured a bit differently than you might be used to in Go, but we think that it makes writing tests as easy and efficient as possible.  
-After all, writing tests should be very simple and should not require you to study a whole framework.  
-That's why we made testza to integrate perfectly with your IDE.
-You don't even have to lookup the documentation, as testza is self-explanatory.
+The main goal of testza is to provide an easy and fun experience writing tests and providing a nice, user-friendly output.
+Even developers who never used testza, will get into it quickly.
 
 ## Getting Started
 
 Testza is very IDE friendly and was made to integrate with your IDE to increase your productivity.  
 
 ```go
-   ┌ Testza package
-   |    ┌ Container for all testza modules
-   |    |     ┌ The module you want to use (Press Ctrl+Space to see a list of all modules)
-testza.Use.XXXXXXX
-
-
 // --- Some Examples ---
 
 // - Some assertions -
-testza.Use.Assert.True(t, true) // -> Pass
-testza.Use.Assert.NoError(t, err) // -> Pass
-testza.Use.Assert.Equal(t, object, object) // -> Pass
+testza.AssertTrue(t, true) // -> Pass
+testza.AssertNoError(t, err) // -> Pass
+testza.AssertEqual(t, object, object) // -> Pass
 // ...
 
 // - Testing console output -
 // Test the output of your CLI tool easily!
-terminalOutput, _ := testza.Use.Capture.Stdout(func(w io.Writer) error {fmt.Println("Hello"); return nil})
-testza.Use.Assert.Equal(t, terminalOutput, "Hello\n") // -> Pass
+terminalOutput, _ := testza.CaptureStdout(func(w io.Writer) error {fmt.Println("Hello"); return nil})
+testza.AssertEqual(t, terminalOutput, "Hello\n") // -> Pass
 
 // - Mocking -
 // Testing a function that accepts email addresses as a parameter:
 
 // Testset of many different email addresses
-emailAddresses := testza.Use.Mock.Strings.EmailAddresses()
+emailAddresses := testza.MockStringEmailAddresses()
 
 // Run a test for every string in the test set
-testza.Use.Mock.Strings.RunTests(t, emailAddresses, func(t *testing.T, index int, str string) {
+testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str string) {
   user, domain, err := internal.ParseEmailAddress(str) // Use your function
-  testza.Use.Assert.NoError(t, err) // Assert that your function does not return an error
-  testza.Use.Assert.NotZero(t, user) // Assert that the user is returned
-  testza.Use.Assert.NotZero(t, domain) // Assert that the domain is returned
+  testza.AssertNoError(t, err) // Assert that your function does not return an error
+  testza.AssertNotZero(t, user) // Assert that the user is returned
+  testza.AssertNotZero(t, domain) // Assert that the domain is returned
 })
-
-// - Aliases -
-// You can use aliases to shorten the usage of testza for modules that you use often!
-
-var assert = testza.Use.Assert
-var stringTests = testza.Use.Mock.Strings
-// ...
 
 // And that's just a few examples of what you can do with Testza!
 ```
