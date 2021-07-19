@@ -175,6 +175,21 @@ func TestAssertEqual(t *testing.T) {
 		})
 	})
 
+	t.Run("Nil and Nil are equal", func(t *testing.T) {
+		AssertEqual(t, nil, nil)
+	})
+
+	t.Run("Equal pointers to same struct", func(t *testing.T) {
+		s := generateStruct()
+		AssertEqual(t, &s, &s)
+	})
+
+	t.Run("Equal dereference to same pointer struct", func(t *testing.T) {
+		s := generateStruct()
+		s2 := &s
+		AssertEqual(t, *s2, *s2)
+	})
+
 	t.Run("Structs", func(t *testing.T) {
 		// Test ten random structs for equality.
 		for i := 0; i < 10; i++ {
