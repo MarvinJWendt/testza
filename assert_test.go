@@ -51,7 +51,7 @@ func testEqual(t *testing.T, expected, actual interface{}) {
 	})
 }
 
-func TestAssertHelper_KindOf(t *testing.T) {
+func TestAssertKindOf(t *testing.T) {
 	tests := []struct {
 		kind  reflect.Kind
 		value interface{}
@@ -77,7 +77,7 @@ func TestAssertHelper_KindOf(t *testing.T) {
 	}
 }
 
-func TestAssertHelper_NotKindOf(t *testing.T) {
+func TestAssertNotKindOf(t *testing.T) {
 	tests := []struct {
 		kind  reflect.Kind
 		value interface{}
@@ -103,7 +103,7 @@ func TestAssertHelper_NotKindOf(t *testing.T) {
 	}
 }
 
-func TestAssertHelper_Numeric(t *testing.T) {
+func TestAssertNumeric(t *testing.T) {
 	var numbers []interface{}
 
 	for i := 0; i < 10; i++ {
@@ -134,7 +134,7 @@ func TestAssertHelper_Numeric(t *testing.T) {
 	}
 }
 
-func TestAssertHelper_NotNumber(t *testing.T) {
+func TestAssertNotNumeric(t *testing.T) {
 	noNumbers := []interface{}{"Hello, World!", true, false}
 	for _, number := range noNumbers {
 		t.Run(pterm.Sprintf("Type=%s;Value=%#v", reflect.TypeOf(number).Kind().String(), number), func(t *testing.T) {
@@ -143,7 +143,7 @@ func TestAssertHelper_NotNumber(t *testing.T) {
 	}
 }
 
-func TestAssertHelper_Zero(t *testing.T) {
+func TestAssertZero(t *testing.T) {
 	var zeroValues []interface{}
 	zeroValues = append(zeroValues, 0, "", false, nil)
 
@@ -154,7 +154,7 @@ func TestAssertHelper_Zero(t *testing.T) {
 	}
 }
 
-func TestAssertHelper_NotZero(t *testing.T) {
+func TestAssertNotZero(t *testing.T) {
 	var zeroValues []interface{}
 	zeroValues = append(zeroValues, true, "asd", 123, 1.5, 'a')
 
@@ -165,7 +165,7 @@ func TestAssertHelper_NotZero(t *testing.T) {
 	}
 }
 
-func TestAssertHelper_Equal(t *testing.T) {
+func TestAssertEqual(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
 		MockInputStringRunTests(t, MockInputStringFull(), func(t *testing.T, index int, str string) {
 			t.Helper()
@@ -183,7 +183,7 @@ func TestAssertHelper_Equal(t *testing.T) {
 	})
 }
 
-func TestAssertHelper_NotEqual(t *testing.T) {
+func TestAssertNotEqual(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
 		MockInputStringRunTests(t, MockInputStringFull(), func(t *testing.T, index int, str string) {
 			AssertNotEqual(t, str, str+" addon")
@@ -206,7 +206,7 @@ func TestAssertHelper_NotEqual(t *testing.T) {
 	})
 }
 
-func TestAssert_EqualValues(t *testing.T) {
+func TestAssertEqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
 		MockInputStringRunTests(t, MockInputStringFull(), func(t *testing.T, index int, str string) {
 			AssertEqualValues(t, str, str)
@@ -214,7 +214,7 @@ func TestAssert_EqualValues(t *testing.T) {
 	})
 }
 
-func TestAssert_NotEqualValues(t *testing.T) {
+func TestAssertNotEqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
 		MockInputStringRunTests(t, MockInputStringFull(), func(t *testing.T, index int, str string) {
 			AssertNotEqualValues(t, str, str+" addon")
@@ -222,55 +222,55 @@ func TestAssert_NotEqualValues(t *testing.T) {
 	})
 }
 
-func TestAssertHelper_True(t *testing.T) {
+func TestAssertTrue(t *testing.T) {
 	AssertTrue(t, true)
 }
 
-func TestAssertHelper_False(t *testing.T) {
+func TestAssertFalse(t *testing.T) {
 	AssertFalse(t, false)
 }
 
-func TestAssert_Implements(t *testing.T) {
+func TestAssertImplements(t *testing.T) {
 	t.Run("ConstImplementsStringer", func(t *testing.T) {
 		AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const))
 	})
 }
 
-func TestAssert_NotImplements(t *testing.T) {
+func TestAssertNotImplements(t *testing.T) {
 	t.Run("assertionTestStructNotImplementsFmtStringer", func(t *testing.T) {
 		AssertNotImplements(t, (*fmt.Stringer)(nil), new(assertionTestStruct))
 	})
 }
 
-func TestAssertHelper_Contains(t *testing.T) {
+func TestAssertContains(t *testing.T) {
 	s := []string{"Hello", "World"}
 
 	AssertContains(t, s, "World")
 }
 
-func TestAssertHelper_NotContains(t *testing.T) {
+func TestAssertNotContains(t *testing.T) {
 	s := []string{"Hello", "World"}
 
 	AssertNotContains(t, s, "asdasd")
 }
 
-func TestAssertHelper_Panic(t *testing.T) {
+func TestAssertPanic(t *testing.T) {
 	AssertPanic(t, func() {
 		panic("TestPanic")
 	})
 }
 
-func TestAssertHelper_NotPanic(t *testing.T) {
+func TestAssertNotPanic(t *testing.T) {
 	AssertNotPanic(t, func() {
 		// If we do nothing here it can't panic ;)
 	})
 }
 
-func TestAssertHelper_Nil(t *testing.T) {
+func TestAssertNil(t *testing.T) {
 	AssertNil(t, nil)
 }
 
-func TestAssertHelper_NotNil(t *testing.T) {
+func TestAssertNotNil(t *testing.T) {
 	objectsNotNil := []interface{}{"asd", 0, false, true, 'c', "", []int{1, 2, 3}}
 
 	for _, v := range objectsNotNil {
@@ -280,24 +280,24 @@ func TestAssertHelper_NotNil(t *testing.T) {
 	}
 }
 
-func TestAssertHelper_CompletesIn(t *testing.T) {
+func TestAssertCompletesIn(t *testing.T) {
 	AssertCompletesIn(t, 50*time.Millisecond, func() {
 		time.Sleep(5 * time.Millisecond)
 	})
 }
 
-func TestAssertHelper_NotCompletesIn(t *testing.T) {
+func TestAssertNotCompletesIn(t *testing.T) {
 	AssertNotCompletesIn(t, 10*time.Microsecond, func() {
 		time.Sleep(15 * time.Millisecond)
 	})
 }
 
-func TestAssertHelper_Greater(t *testing.T) {
+func TestAssertGreater(t *testing.T) {
 	AssertGreater(t, 2, 1)
 	AssertGreater(t, 5, 4)
 }
 
-func TestAssertHelper_Less(t *testing.T) {
+func TestAssertLess(t *testing.T) {
 	AssertLess(t, 1, 2)
 	AssertLess(t, 4, 5)
 }

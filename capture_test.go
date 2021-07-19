@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestCaptureHelper_Stdout(t *testing.T) {
+func TestCaptureStdout(t *testing.T) {
 	type args struct {
 		capture func(w io.Writer) error
 	}
@@ -32,7 +32,7 @@ func TestCaptureHelper_Stdout(t *testing.T) {
 	}
 }
 
-func TestCaptureHelper_Stderr(t *testing.T) {
+func TestCaptureStderr(t *testing.T) {
 	type args struct {
 		capture func(w io.Writer) error
 	}
