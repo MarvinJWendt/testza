@@ -7,46 +7,43 @@ import (
 	"github.com/MarvinJWendt/testza/internal"
 )
 
-// MockInputsStringsHelper contains strings test sets.
-type MockInputsStringsHelper struct{}
-
-// Empty returns a test set with a single empty string.
-func (s MockInputsStringsHelper) Empty() []string {
+// MockInputStringEmpty returns a test set with a single empty string.
+func MockInputStringEmpty() []string {
 	return []string{""}
 }
 
-// Long returns a test set with long random strings.
+// MockInputStringLong returns a test set with long random strings.
 // Returns:
 // - Random string (length: 25)
 // - Random string (length: 50)
 // - Random string (length: 100)
 // - Random string (length: 1,000)
 // - Random string (length: 100,000)
-func (s MockInputsStringsHelper) Long() (testSet []string) {
-	testSet = append(testSet, s.GenerateRandom(1, 25)...)
-	testSet = append(testSet, s.GenerateRandom(1, 50)...)
-	testSet = append(testSet, s.GenerateRandom(1, 100)...)
-	testSet = append(testSet, s.GenerateRandom(1, 1_000)...)
-	testSet = append(testSet, s.GenerateRandom(1, 100_000)...)
+func MockInputStringLong() (testSet []string) {
+	testSet = append(testSet, MockInputStringGenerateRandom(1, 25)...)
+	testSet = append(testSet, MockInputStringGenerateRandom(1, 50)...)
+	testSet = append(testSet, MockInputStringGenerateRandom(1, 100)...)
+	testSet = append(testSet, MockInputStringGenerateRandom(1, 1_000)...)
+	testSet = append(testSet, MockInputStringGenerateRandom(1, 100_000)...)
 
 	return
 }
 
-// Numeric returns a test set with strings that are numeric.
+// MockInputStringNumeric returns a test set with strings that are numeric.
 // The highest number in here is "9223372036854775807", which is equal to the maxmim int64.
-func (s MockInputsStringsHelper) Numeric() []string {
+func MockInputStringNumeric() []string {
 	positiveNumbers := []string{"0", "1", "2", "3", "100", "1.1", "1337", "13.37", "0.000000000001", "9223372036854775807"}
-	negativeNumbers := s.Modify(positiveNumbers, func(index int, value string) string { return "-" + value })
+	negativeNumbers := MockInputStringModify(positiveNumbers, func(index int, value string) string { return "-" + value })
 	return append(positiveNumbers, negativeNumbers...)
 }
 
-// Usernames returns a test set with usernames.
-func (s MockInputsStringsHelper) Usernames() []string {
+// MockInputStringUsernames returns a test set with usernames.
+func MockInputStringUsernames() []string {
 	return []string{"MarvinJWendt", "Zipper1337", "n00b", "l33t", "j0rgan", "test", "test123", "TEST", "test_", "TEST_"}
 }
 
-// EmailAddresses returns a test set with valid email addresses.
-func (s MockInputsStringsHelper) EmailAddresses() []string {
+// MockInputStringEmailAddresses returns a test set with valid email addresses.
+func MockInputStringEmailAddresses() []string {
 	return []string{
 		"hello@world.com",
 		"hello+world@example.com",
@@ -89,8 +86,8 @@ func (s MockInputsStringsHelper) EmailAddresses() []string {
 	}
 }
 
-// HtmlTags returns a test set with html tags.
-func (s MockInputsStringsHelper) HtmlTags() []string {
+// MockInputStringHtmlTags returns a test set with html tags.
+func MockInputStringHtmlTags() []string {
 	return []string{
 		"<script>alert('XSS')</script>",
 		"<script>",
@@ -100,24 +97,24 @@ func (s MockInputsStringsHelper) HtmlTags() []string {
 	}
 }
 
-// Full contains all string test sets plus ten generated random strings.
-func (s MockInputsStringsHelper) Full() (ret []string) {
-	ret = append(ret, s.Usernames()...)
-	ret = append(ret, s.HtmlTags()...)
-	ret = append(ret, s.EmailAddresses()...)
-	ret = append(ret, s.Empty()...)
-	ret = append(ret, s.Numeric()...)
-	ret = append(ret, s.Long()...)
+// MockInputStringFull contains all string test sets plus ten generated random strings.
+func MockInputStringFull() (ret []string) {
+	ret = append(ret, MockInputStringUsernames()...)
+	ret = append(ret, MockInputStringHtmlTags()...)
+	ret = append(ret, MockInputStringEmailAddresses()...)
+	ret = append(ret, MockInputStringEmpty()...)
+	ret = append(ret, MockInputStringNumeric()...)
+	ret = append(ret, MockInputStringLong()...)
 
 	for i := 0; i < 10; i++ {
-		ret = append(ret, s.GenerateRandom(1, i)...)
+		ret = append(ret, MockInputStringGenerateRandom(1, i)...)
 	}
 
 	return
 }
 
-// Limit limits a test set in size.
-func (s MockInputsStringsHelper) Limit(testSet []string, max int) []string {
+// MockInputStringLimit limits a test set in size.
+func MockInputStringLimit(testSet []string, max int) []string {
 	if len(testSet) <= max {
 		return testSet
 	}
@@ -129,8 +126,8 @@ func (s MockInputsStringsHelper) Limit(testSet []string, max int) []string {
 	return testSet[:max]
 }
 
-// GenerateRandom returns random StringsHelper in a test set.
-func (s MockInputsStringsHelper) GenerateRandom(count, length int) (result []string) {
+// MockInputStringGenerateRandom returns random StringsHelper in a test set.
+func MockInputStringGenerateRandom(count, length int) (result []string) {
 	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 	for i := 0; i < count; i++ {
@@ -144,10 +141,10 @@ func (s MockInputsStringsHelper) GenerateRandom(count, length int) (result []str
 	return
 }
 
-// RunTests runs a test for every value in a testset.
+// MockInputStringRunTests runs a test for every value in a testset.
 // You can use the value as input parameter for your functions, to sanity test against many different cases.
 // This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
-func (s MockInputsStringsHelper) RunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string)) {
+func MockInputStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -167,8 +164,8 @@ func (s MockInputsStringsHelper) RunTests(t testRunner, testSet []string, testFu
 	}
 }
 
-// Modify returns a modified version of a test set.
-func (s MockInputsStringsHelper) Modify(inputSlice []string, f func(index int, value string) string) (ret []string) {
+// MockInputStringModify returns a modified version of a test set.
+func MockInputStringModify(inputSlice []string, f func(index int, value string) string) (ret []string) {
 	for i, str := range inputSlice {
 		ret = append(ret, f(i, str))
 	}

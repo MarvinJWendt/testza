@@ -25,9 +25,9 @@ func TestCaptureHelper_Stdout(t *testing.T) {
 
 	for i, tt := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			got, err := Use.Capture.Stdout(tt.args.capture)
-			Use.Assert.Nil(t, err)
-			Use.Assert.Equal(t, got, tt.want)
+			got, err := CaptureStdout(tt.args.capture)
+			AssertNil(t, err)
+			AssertEqual(t, got, tt.want)
 		})
 	}
 }
@@ -49,9 +49,9 @@ func TestCaptureHelper_Stderr(t *testing.T) {
 
 	for i, tt := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			got, err := Use.Capture.Stderr(tt.args.capture)
-			Use.Assert.Nil(t, err)
-			Use.Assert.Equal(t, got, tt.want)
+			got, err := CaptureStderr(tt.args.capture)
+			AssertNil(t, err)
+			AssertEqual(t, got, tt.want)
 		})
 	}
 }

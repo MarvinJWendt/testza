@@ -7,12 +7,9 @@ import (
 	"os"
 )
 
-// CaptureHelper contains methods to capture terminal output.
-type CaptureHelper struct{}
-
-// Stdout captures everything written to stdout from a specific function.
+// CaptureStdout captures everything written to stdout from a specific function.
 // You can use this method in tests, to validate that your functions writes a string to the terminal.
-func (h *CaptureHelper) Stdout(capture func(w io.Writer) error) (string, error) {
+func CaptureStdout(capture func(w io.Writer) error) (string, error) {
 	originalStdout := os.Stdout
 	r, w, err := os.Pipe()
 	if err != nil {
@@ -42,9 +39,9 @@ func (h *CaptureHelper) Stdout(capture func(w io.Writer) error) (string, error) 
 	return string(out), nil
 }
 
-// Stderr captures everything written to stderr from a specific function.
+// CaptureStderr captures everything written to stderr from a specific function.
 // You can use this method in tests, to validate that your functions writes a string to the terminal.
-func (h *CaptureHelper) Stderr(capture func(w io.Writer) error) (string, error) {
+func CaptureStderr(capture func(w io.Writer) error) (string, error) {
 	originalStderr := os.Stderr
 	r, w, err := os.Pipe()
 	if err != nil {
