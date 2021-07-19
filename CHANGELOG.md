@@ -8,6 +8,9 @@
 - **mock:** add test for `MockInputFloat64GenerateRandomPositive` and `MockInputFloat64GenerateRandomNegative`
 - **mock:** add test for `MockInputBoolModify`
 
+### Code Refactoring
+- move tests into own package
+
 
 <a name="v0.1.0"></a>
 ## [v0.1.0] - 2021-07-19
