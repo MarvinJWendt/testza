@@ -2,6 +2,7 @@
 ## [Unreleased]
 
 ### Code Refactoring
+- rewrite CI to new structure
 - change structure
 
 
