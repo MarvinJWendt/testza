@@ -250,7 +250,8 @@ Do not set the duration too low, if you want consistent results.
 func AssertContains(t testRunner, object, element interface{}, msg ...interface{})
 ```
 
-
+AssertContains asserts that a string/list/array/slice/map contains the
+specified element.
 
 #### AssertEqual
 
@@ -290,7 +291,7 @@ AssertGreater asserts that the first object is greater than the second.
 func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
 ```
 
-AssertImplements checks if an objects implements an interface.
+AssertImplements asserts that an objects implements an interface.
 
     testza.AssertImplements(t, (*YourInterface)(nil), new(YourObject))
     testza.AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
@@ -347,7 +348,8 @@ Do not set the duration too high, if you want consistent results.
 func AssertNotContains(t testRunner, object, element interface{}, msg ...interface{})
 ```
 
-
+AssertNotContains asserts that a string/list/array/slice/map does not
+contain the specified element.
 
 #### AssertNotEqual
 
@@ -371,7 +373,7 @@ AssertNotEqualValues asserts that two objects do not have equal values.
 func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
 ```
 
-AssertNotImplements checks if an object does not implement an interface.
+AssertNotImplements asserts that an object does not implement an interface.
 
     testza.AssertNotImplements(t, (*YourInterface)(nil), new(YourObject))
     testza.AssertNotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
@@ -418,9 +420,9 @@ func AssertNotZero(t testRunner, value interface{}, msg ...interface{})
 
 AssertNotZero asserts that the value is not the zero value for it's type.
 
-    testzNotZero(t, 1337)
-    testzNotZero(t, true)
-    testzNotZero(t, "Hello, World")
+    testza.AssertNotZero(t, 1337)
+    testza.AssertNotZero(t, true)
+    testza.AssertNotZero(t, "Hello, World")
 
 #### AssertNumeric
 
@@ -456,9 +458,9 @@ func AssertZero(t testRunner, value interface{}, msg ...interface{})
 
 AssertZero asserts that the value is the zero value for it's type.
 
-    testzZero(t, 0)
-    testzZero(t, false)
-    testzZero(t, "")
+    testza.AssertZero(t, 0)
+    testza.AssertZero(t, false)
+    testza.AssertZero(t, "")
 
 ### Capture
 
@@ -519,7 +521,8 @@ handling and enables you to test against hunderts of cases easily.
 func MockInputFloat64Full() (floats []float64)
 ```
 
-
+MockInputFloat64Full returns a combination of every float64 testset and some
+random float64s (positive and negative).
 
 #### MockInputFloat64GenerateRandomNegative
 
