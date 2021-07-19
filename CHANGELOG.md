@@ -3,6 +3,7 @@
 
 ### Test
 - rename test functions to new structure
+- **assert:** add more tests to `AssertEqual`
 - **mock:** add test for `MockInputIntModify`
 - **mock:** add test for `MockInputFloat64Modify`
 - **mock:** add test for `MockInputFloat64GenerateRandomPositive` and `MockInputFloat64GenerateRandomNegative`
