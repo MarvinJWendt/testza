@@ -96,3 +96,10 @@ func TestMockInputFloat64RunTests(t *testing.T) {
 		AssertNotNil(t, f)
 	})
 }
+
+func TestMockInputBoolModify(t *testing.T) {
+	s := MockInputBoolModify(MockInputBoolFull(), func(index int, value bool) bool {
+		return !value
+	})
+	AssertEqual(t, []bool{false, true}, s)
+}
