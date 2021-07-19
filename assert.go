@@ -187,9 +187,9 @@ func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{}) {
 }
 
 // AssertZero asserts that the value is the zero value for it's type.
-//     testzZero(t, 0)
-//     testzZero(t, false)
-//     testzZero(t, "")
+//     testza.AssertZero(t, 0)
+//     testza.AssertZero(t, false)
+//     testza.AssertZero(t, "")
 func AssertZero(t testRunner, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -201,9 +201,9 @@ func AssertZero(t testRunner, value interface{}, msg ...interface{}) {
 }
 
 // AssertNotZero asserts that the value is not the zero value for it's type.
-//     testzNotZero(t, 1337)
-//     testzNotZero(t, true)
-//     testzNotZero(t, "Hello, World")
+//     testza.AssertNotZero(t, 1337)
+//     testza.AssertNotZero(t, true)
+//     testza.AssertNotZero(t, "Hello, World")
 func AssertNotZero(t testRunner, value interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -280,7 +280,7 @@ func AssertFalse(t testRunner, value interface{}, msg ...interface{}) {
 	}
 }
 
-// AssertImplements checks if an objects implements an interface.
+// AssertImplements asserts that an objects implements an interface.
 //
 //	testza.AssertImplements(t, (*YourInterface)(nil), new(YourObject))
 //	testza.AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
@@ -294,7 +294,7 @@ func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...
 	}
 }
 
-// AssertNotImplements checks if an object does not implement an interface.
+// AssertNotImplements asserts that an object does not implement an interface.
 //
 //	testza.AssertNotImplements(t, (*YourInterface)(nil), new(YourObject))
 //	testza.AssertNotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
@@ -308,6 +308,7 @@ func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg 
 	}
 }
 
+// AssertContains asserts that a string/list/array/slice/map contains the specified element.
 func AssertContains(t testRunner, object, element interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -318,6 +319,7 @@ func AssertContains(t testRunner, object, element interface{}, msg ...interface{
 	}
 }
 
+// AssertNotContains asserts that a string/list/array/slice/map does not contain the specified element.
 func AssertNotContains(t testRunner, object, element interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()

@@ -9,6 +9,7 @@ import (
 	"github.com/MarvinJWendt/testza/internal"
 )
 
+// MockInputFloat64Full returns a combination of every float64 testset and some random float64s (positive and negative).
 func MockInputFloat64Full() (floats []float64) {
 	for i := 0; i < 50; i++ {
 		floats = append(floats,
