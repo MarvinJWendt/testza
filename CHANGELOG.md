@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Code Refactoring
+- change structure
+
 
 <a name="v0.0.3"></a>
 ## [v0.0.3] - 2021-07-17
