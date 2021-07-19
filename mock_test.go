@@ -114,6 +114,19 @@ func TestMockInputFloat64GenerateRandomPositive(t *testing.T) {
 	}
 }
 
+func TestMockInputFloat64Modify(t *testing.T) {
+	testSet := MockInputFloat64Full()
+	s := MockInputFloat64Modify(testSet, func(index int, value float64) float64 {
+		return value * -1
+	})
+
+	for i, f := range testSet {
+		t.Run("Number should be inverted", func(t *testing.T) {
+			AssertEqual(t, f, s[i]*-1)
+		})
+	}
+}
+
 func TestMockInputBoolModify(t *testing.T) {
 	s := MockInputBoolModify(MockInputBoolFull(), func(index int, value bool) bool {
 		return !value
