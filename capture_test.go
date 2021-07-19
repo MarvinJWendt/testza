@@ -1,4 +1,4 @@
-package testza
+package testza_test
 
 import (
 	"fmt"
@@ -6,6 +6,8 @@ import (
 	"os"
 	"strconv"
 	"testing"
+
+	. "github.com/MarvinJWendt/testza"
 )
 
 func TestCaptureStdout(t *testing.T) {

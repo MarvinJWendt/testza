@@ -1,4 +1,4 @@
-package testza
+package testza_test
 
 import (
 	"fmt"
@@ -8,6 +8,7 @@ import (
 	"testing"
 	"time"
 
+	. "github.com/MarvinJWendt/testza"
 	"github.com/pterm/pterm"
 )
 

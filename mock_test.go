@@ -1,10 +1,12 @@
-package testza
+package testza_test
 
 import (
 	"fmt"
 	"strconv"
 	"strings"
 	"testing"
+
+	. "github.com/MarvinJWendt/testza"
 )
 
 func TestMockInputStringModify(t *testing.T) {
