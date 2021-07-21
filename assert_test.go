@@ -317,3 +317,68 @@ func TestAssertLess(t *testing.T) {
 	AssertLess(t, 1, 2)
 	AssertLess(t, 4, 5)
 }
+
+func TestAssertTestFails(t *testing.T) {
+	t.Run("Wrong assertion should fail", func(t *testing.T) {
+		_, err := AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+			AssertTrue(t, false)
+
+			return nil
+		})
+		AssertNoError(t, err)
+	})
+
+	t.Run(".Error should make the test pass", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+			t.Error()
+			return nil
+		})
+	})
+
+	t.Run(".Errorf should make the test pass", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+			t.Errorf("")
+			return nil
+		})
+	})
+
+	t.Run(".Fail should make the test pass", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+			t.Fail()
+			return nil
+		})
+	})
+
+	t.Run(".FailNow should make the test pass", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+			t.FailNow()
+			return nil
+		})
+	})
+
+	t.Run(".Fatal should make the test pass", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+			t.Fatal()
+			return nil
+		})
+	})
+
+	t.Run(".Fatalf should make the test pass", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+			t.Fatalf("")
+			return nil
+		})
+	})
+}
+
+func TestAssertTestFails_fails(t *testing.T) {
+	_, err := AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+			AssertTrue(t, true)
+			return nil
+		})
+
+		return nil
+	})
+	AssertNoError(t, err)
+}
