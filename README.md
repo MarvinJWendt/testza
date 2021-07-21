@@ -26,6 +26,10 @@
 <a href="https://opensource.org/licenses/MIT" target="_blank">
 <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT">
 </a>
+  
+<a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
+<img src="https://pkg.go.dev/badge/github.com/MarvinJWendt/testza.svg" alt="Go Reference">
+</a>
 
 </p>
 
