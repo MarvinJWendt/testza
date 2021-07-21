@@ -138,10 +138,11 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertNotKindOf](https://github.com/MarvinJWendt/testza#AssertNotKindOf)
   - [AssertNotNil](https://github.com/MarvinJWendt/testza#AssertNotNil)
   - [AssertNotNumeric](https://github.com/MarvinJWendt/testza#AssertNotNumeric)
-  - [AssertNotPanic](https://github.com/MarvinJWendt/testza#AssertNotPanic)
+  - [AssertNotPanics](https://github.com/MarvinJWendt/testza#AssertNotPanics)
   - [AssertNotZero](https://github.com/MarvinJWendt/testza#AssertNotZero)
   - [AssertNumeric](https://github.com/MarvinJWendt/testza#AssertNumeric)
-  - [AssertPanic](https://github.com/MarvinJWendt/testza#AssertPanic)
+  - [AssertPanics](https://github.com/MarvinJWendt/testza#AssertPanics)
+  - [AssertTestFails](https://github.com/MarvinJWendt/testza#AssertTestFails)
   - [AssertTrue](https://github.com/MarvinJWendt/testza#AssertTrue)
   - [AssertZero](https://github.com/MarvinJWendt/testza#AssertZero)
 </td>
@@ -412,13 +413,13 @@ AssertNotNumeric checks if the object is not a numeric type. Numeric types
 are: Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16,
 Uint32, Uint64, Complex64 and Complex128.
 
-#### AssertNotPanic
+#### AssertNotPanics
 
 ```go
-func AssertNotPanic(t testRunner, f func(), msg ...interface{})
+func AssertNotPanics(t testRunner, f func(), msg ...interface{})
 ```
 
-AssertNotPanic asserts that a function does not panic.
+AssertNotPanics asserts that a function does not panic.
 
 #### AssertNotZero
 
@@ -442,13 +443,23 @@ AssertNumeric asserts that the object is a numeric type. Numeric types are:
 Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16,
 Uint32, Uint64, Complex64 and Complex128.
 
-#### AssertPanic
+#### AssertPanics
 
 ```go
-func AssertPanic(t testRunner, f func(), msg ...interface{})
+func AssertPanics(t testRunner, f func(), msg ...interface{})
 ```
 
-AssertPanic asserts that a function panics.
+AssertPanics asserts that a function panics.
+
+#### AssertTestFails
+
+```go
+func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions), msg ...interface{})
+```
+
+AssertTestFails asserts that a unit test fails. A unit test fails if one of
+the following methods is called in the test function: - Error - Errorf -
+Fail - FailNow - Fatal - Fatalf
 
 #### AssertTrue
 
