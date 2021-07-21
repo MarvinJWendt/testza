@@ -464,3 +464,72 @@ func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{}) 
 		internal.Fail(t, "An object that !!should be less!! than the second object is not.", internal.Objects{{Name: "Object 1", Data: object1}, {Name: "Should be less than object 2", Data: object2}}, msg...)
 	}
 }
+
+type testMock struct {
+	ErrorCalled  bool
+	ErrorMessage string
+}
+
+func (m *testMock) fail(msg ...interface{}) {
+	m.ErrorCalled = true
+	m.ErrorMessage = fmt.Sprint(msg...)
+}
+
+func (m *testMock) Error(args ...interface{}) {
+	m.fail(args...)
+}
+
+// Errorf is a mock of testing.T.
+func (m *testMock) Errorf(format string, args ...interface{}) {
+	m.fail(args...)
+}
+
+// Fail is a mock of testing.T.
+func (m *testMock) Fail() {
+	m.fail()
+}
+
+// FailNow is a mock of testing.T.
+func (m *testMock) FailNow() {
+	m.fail()
+}
+
+// Fatal is a mock of testing.T.
+func (m *testMock) Fatal(args ...interface{}) {
+	m.fail(args...)
+}
+
+// Fatalf is a mock of testing.T.
+func (m *testMock) Fatalf(format string, args ...interface{}) {
+	m.fail(args...)
+}
+
+// AssertTestFails asserts that a unit test fails.
+// A unit test fails if one of the following methods is called in the test function:
+// - Error
+// - Errorf
+// - Fail
+// - FailNow
+// - Fatal
+// - Fatalf
+//
+// If an error is returned in the test function, AssertTestFails will return it for further error handling.
+// The returned boolean is true if the test passed and can be used for further assertions.
+func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions) error, msg ...interface{}) (bool, error) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	var mock testMock
+	err := test(&mock)
+	if err != nil {
+		return false, err
+	}
+
+	if !mock.ErrorCalled {
+		internal.Fail(t, "A test that !!should fail!! did not fail.", []internal.Object{}, msg...)
+		return false, nil
+	}
+
+	return true, nil
+}

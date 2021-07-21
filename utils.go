@@ -10,6 +10,15 @@ type testRunner interface {
 	Error(args ...interface{})
 }
 
+type TestingPackageWithFailFunctions interface {
+	Error(args ...interface{})
+	Errorf(format string, args ...interface{})
+	Fail()
+	FailNow()
+	Fatal(args ...interface{})
+	Fatalf(format string, args ...interface{})
+}
+
 type helper interface {
 	Helper()
 }
