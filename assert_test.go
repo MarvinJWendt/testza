@@ -523,29 +523,29 @@ func TestAssertNotContains_fails(t *testing.T) {
 	})
 }
 
-func TestAssertPanic(t *testing.T) {
-	AssertPanic(t, func() {
+func TestAssertPanics(t *testing.T) {
+	AssertPanics(t, func() {
 		panic("TestPanic")
 	})
 }
 
-func TestAssertPanic_fails(t *testing.T) {
+func TestAssertPanics_fails(t *testing.T) {
 	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
-		AssertPanic(t, func() {
+		AssertPanics(t, func() {
 			// If we do nothing here it can't panic ;)
 		})
 	})
 }
 
-func TestAssertNotPanic(t *testing.T) {
-	AssertNotPanic(t, func() {
+func TestAssertNotPanics(t *testing.T) {
+	AssertNotPanics(t, func() {
 		// If we do nothing here it can't panic ;)
 	})
 }
 
-func TestAssertNotPanic_fails(t *testing.T) {
+func TestAssertNotPanics_fails(t *testing.T) {
 	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
-		AssertNotPanic(t, func() {
+		AssertNotPanics(t, func() {
 			panic("TestPanic")
 		})
 	})

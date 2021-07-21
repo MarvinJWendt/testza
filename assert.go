@@ -330,8 +330,8 @@ func AssertNotContains(t testRunner, object, element interface{}, msg ...interfa
 	}
 }
 
-// AssertPanic asserts that a function panics.
-func AssertPanic(t testRunner, f func(), msg ...interface{}) {
+// AssertPanics asserts that a function panics.
+func AssertPanics(t testRunner, f func(), msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -345,8 +345,8 @@ func AssertPanic(t testRunner, f func(), msg ...interface{}) {
 	f()
 }
 
-// AssertNotPanic asserts that a function does not panic.
-func AssertNotPanic(t testRunner, f func(), msg ...interface{}) {
+// AssertNotPanics asserts that a function does not panic.
+func AssertNotPanics(t testRunner, f func(), msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
