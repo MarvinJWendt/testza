@@ -320,12 +320,10 @@ func TestAssertLess(t *testing.T) {
 
 func TestAssertTestFails(t *testing.T) {
 	t.Run("Wrong assertion should fail", func(t *testing.T) {
-		_, err := AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
 			AssertTrue(t, false)
-
 			return nil
 		})
-		AssertNoError(t, err)
 	})
 
 	t.Run(".Error should make the test pass", func(t *testing.T) {
@@ -372,13 +370,11 @@ func TestAssertTestFails(t *testing.T) {
 }
 
 func TestAssertTestFails_fails(t *testing.T) {
-	_, err := AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
 		AssertTestFails(t, func(t TestingPackageWithFailFunctions) error {
 			AssertTrue(t, true)
 			return nil
 		})
-
 		return nil
 	})
-	AssertNoError(t, err)
 }
