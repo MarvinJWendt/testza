@@ -10,6 +10,7 @@ type testRunner interface {
 	Error(args ...interface{})
 }
 
+// TestingPackageWithFailFunctions contains every function that fails a test in testing.T.
 type TestingPackageWithFailFunctions interface {
 	Error(args ...interface{})
 	Errorf(format string, args ...interface{})
