@@ -31,6 +31,10 @@
 <img src="https://pkg.go.dev/badge/github.com/MarvinJWendt/testza.svg" alt="Go Reference">
 </a>
 
+<a href="https://goreportcard.com/report/github.com/MarvinJWendt/testza" target="_blank">
+<img src="https://goreportcard.com/badge/github.com/MarvinJWendt/testza" alt="Go report">
+</a>  
+
 </p>
 
 
