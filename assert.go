@@ -512,24 +512,15 @@ func (m *testMock) Fatalf(format string, args ...interface{}) {
 // - FailNow
 // - Fatal
 // - Fatalf
-//
-// If an error is returned in the test function, AssertTestFails will return it for further error handling.
-// The returned boolean is true if the test passed and can be used for further assertions.
-func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions) error, msg ...interface{}) (bool, error) {
+func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions), msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
 
 	var mock testMock
-	err := test(&mock)
-	if err != nil {
-		return false, err
-	}
+	test(&mock)
 
 	if !mock.ErrorCalled {
 		internal.Fail(t, "A test that !!should fail!! did not fail.", []internal.Object{}, msg...)
-		return false, nil
 	}
-
-	return true, nil
 }
