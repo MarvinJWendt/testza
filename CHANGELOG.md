@@ -1,9 +1,15 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- **assert:** add `AssertTestFails`
+
 ### Test
 - rename test functions to new structure
+- **assert:** test that assertions fail when they should
+- **assert:** cleanup tests for `AssertTestFails`
 - **assert:** add more tests to `AssertEqual`
+- **assert:** add tests for `AssertTestFails`
 - **mock:** add test for `MockInputIntModify`
 - **mock:** add test for `MockInputFloat64Modify`
 - **mock:** add test for `MockInputFloat64GenerateRandomPositive` and `MockInputFloat64GenerateRandomNegative`
@@ -11,6 +17,7 @@
 
 ### Code Refactoring
 - move tests into own package
+- **assert:** change `AssertPanic` to `AssertPanics`
 
 
 <a name="v0.1.0"></a>
