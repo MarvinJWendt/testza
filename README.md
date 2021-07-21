@@ -18,14 +18,6 @@
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
 <!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2514-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
-
-<a href="https://github.com/MarvinJWendt/testza/issues">
-<img src="https://img.shields.io/github/issues/MarvinJWendt/testza.svg?style=flat-square" alt="Issues">
-</a>
-
-<a href="https://opensource.org/licenses/MIT" target="_blank">
-<img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT">
-</a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
 <img src="https://pkg.go.dev/badge/github.com/MarvinJWendt/testza.svg" alt="Go Reference">
