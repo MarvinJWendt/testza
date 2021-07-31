@@ -450,8 +450,8 @@ func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions),
 ```
 
 AssertTestFails asserts that a unit test fails. A unit test fails if one of
-the following methods is called in the test function: - Error - Errorf -
-Fail - FailNow - Fatal - Fatalf
+the following methods is called in the test function: Error, Errorf, Fail,
+FailNow, Fatal, Fatalf
 
 #### AssertTrue
 
