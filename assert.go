@@ -505,13 +505,7 @@ func (m *testMock) Fatalf(format string, args ...interface{}) {
 }
 
 // AssertTestFails asserts that a unit test fails.
-// A unit test fails if one of the following methods is called in the test function:
-// - Error
-// - Errorf
-// - Fail
-// - FailNow
-// - Fatal
-// - Fatalf
+// A unit test fails if one of the following methods is called in the test function: Error, Errorf, Fail, FailNow, Fatal, Fatalf
 func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions), msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
