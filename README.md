@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2498-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2504-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -450,8 +450,8 @@ func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions),
 ```
 
 AssertTestFails asserts that a unit test fails. A unit test fails if one of
-the following methods is called in the test function: - Error - Errorf -
-Fail - FailNow - Fatal - Fatalf
+the following methods is called in the test function: Error, Errorf, Fail,
+FailNow, Fatal, Fatalf
 
 #### AssertTrue
 
