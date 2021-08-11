@@ -157,6 +157,20 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Snapshot">Snapshot</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [SnapshotCreate](https://github.com/MarvinJWendt/testza#SnapshotCreate)
+  - [SnapshotCreateOrValidate](https://github.com/MarvinJWendt/testza#SnapshotCreateOrValidate)
+</td>
+
+</details>
+
+</tr>
+<tr>
 <td><a href="https://github.com/MarvinJWendt/testza#MockInputBool">Mock Input Bool</a></td>
 <td>
 
@@ -743,7 +757,7 @@ func MockInputStringUsernames() []string
 
 MockInputStringUsernames returns a test set with usernames.
 
-### 
+### Snapshot
 
 #### SnapshotCreate
 
