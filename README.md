@@ -760,7 +760,9 @@ future test runs.
 func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg ...interface{}) error
 ```
 
-
+SnapshotCreateOrValidate creates a snapshot of an object which can be used
+in future test runs. If a snapshot already exists, the method will not
+create a new one, but validate the exisiting one.
 
 
 <!-- docs:end -->
