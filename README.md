@@ -157,20 +157,6 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Snapshot">Snapshot</a></td>
-<td>
-
-<details>
-<summary>Click to expand</summary>
-
-  - [SnapshotCreate](https://github.com/MarvinJWendt/testza#SnapshotCreate)
-  - [SnapshotCreateOrValidate](https://github.com/MarvinJWendt/testza#SnapshotCreateOrValidate)
-</td>
-
-</details>
-
-</tr>
-<tr>
 <td><a href="https://github.com/MarvinJWendt/testza#MockInputBool">Mock Input Bool</a></td>
 <td>
 
@@ -239,6 +225,21 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [MockInputIntGenerateRandomRange](https://github.com/MarvinJWendt/testza#MockInputIntGenerateRandomRange)
   - [MockInputIntModify](https://github.com/MarvinJWendt/testza#MockInputIntModify)
   - [MockInputIntRunTests](https://github.com/MarvinJWendt/testza#MockInputIntRunTests)
+</td>
+
+</details>
+
+</tr>
+<tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Snapshot">Snapshot</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [SnapshotCreate](https://github.com/MarvinJWendt/testza#SnapshotCreate)
+  - [SnapshotCreateOrValidate](https://github.com/MarvinJWendt/testza#SnapshotCreateOrValidate)
+  - [SnapshotValidate](https://github.com/MarvinJWendt/testza#SnapshotValidate)
 </td>
 
 </details>
@@ -777,6 +778,14 @@ func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg
 SnapshotCreateOrValidate creates a snapshot of an object which can be used
 in future test runs. If a snapshot already exists, the method will not
 create a new one, but validate the exisiting one.
+
+#### SnapshotValidate
+
+```go
+func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error
+```
+
+SnapshotValidate validates an already exisiting snapshot of an object.
 
 
 <!-- docs:end -->
