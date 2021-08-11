@@ -23,7 +23,6 @@ func GetDifference(a, b interface{}, raw ...bool) string {
 			B: difflib.SplitLines(fmt.Sprint(b)),
 		}
 	}
-	
 
 	text, _ := difflib.GetUnifiedDiffString(diff)
 

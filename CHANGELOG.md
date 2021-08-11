@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- **snapshot:** add snapshot functionality
+
 
 <a name="v0.2.0"></a>
 ## [v0.2.0] - 2021-07-21
