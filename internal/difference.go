@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/davecgh/go-spew/spew"
@@ -9,11 +10,20 @@ import (
 )
 
 // GetDifference returns the diff for two projects.
-func GetDifference(a, b interface{}) string {
-	diff := difflib.UnifiedDiff{
-		A: difflib.SplitLines(spew.Sdump(a)),
-		B: difflib.SplitLines(spew.Sdump(b)),
+func GetDifference(a, b interface{}, raw ...bool) string {
+	var diff difflib.UnifiedDiff
+	if len(raw) == 0 || !raw[0] {
+		diff = difflib.UnifiedDiff{
+			A: difflib.SplitLines(spew.Sdump(a)),
+			B: difflib.SplitLines(spew.Sdump(b)),
+		}
+	} else {
+		diff = difflib.UnifiedDiff{
+			A: difflib.SplitLines(fmt.Sprint(a)),
+			B: difflib.SplitLines(fmt.Sprint(b)),
+		}
 	}
+	
 
 	text, _ := difflib.GetUnifiedDiffString(diff)
 
