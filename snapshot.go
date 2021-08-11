@@ -30,6 +30,7 @@ func SnapshotCreate(name string, snapshotObject interface{}) error {
 	return nil
 }
 
+// SnapshotValidate validates an already exisiting snapshot of an object.
 func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
@@ -74,6 +75,7 @@ func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...inte
 	return nil
 }
 
+// SnapshotCreateOrValidate creates a snapshot of an object which can be used in future test runs. If a snapshot already exists, the method will not create a new one, but validate the exisiting one.
 func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
