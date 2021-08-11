@@ -188,6 +188,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [MockInputStringModify](https://github.com/MarvinJWendt/testza#MockInputStringModify)
   - [MockInputStringNumeric](https://github.com/MarvinJWendt/testza#MockInputStringNumeric)
   - [MockInputStringRunTests](https://github.com/MarvinJWendt/testza#MockInputStringRunTests)
+  - [MockInputStringUsernames](https://github.com/MarvinJWendt/testza#MockInputStringUsernames)
 </td>
 
 </details>
@@ -733,6 +734,33 @@ MockInputStringRunTests runs a test for every value in a testset. You can
 use the value as input parameter for your functions, to sanity test against
 many different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
+
+#### MockInputStringUsernames
+
+```go
+func MockInputStringUsernames() []string
+```
+
+MockInputStringUsernames returns a test set with usernames.
+
+### 
+
+#### SnapshotCreate
+
+```go
+func SnapshotCreate(name string, snapshotObject interface{}) error
+```
+
+SnapshotCreate creates a snapshot of an object, which can be validated in
+future test runs.
+
+#### SnapshotCreateOrValidate
+
+```go
+func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg ...interface{}) error
+```
+
+
 
 
 <!-- docs:end -->
