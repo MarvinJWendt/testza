@@ -18,6 +18,7 @@ var Functions []Function
 var Categories = []Category{
 	{Name: "Assert", Prefix: "Assert"},
 	{Name: "Capture", Prefix: "Capture"},
+	{Name: "Snapshot", Prefix: "Snapshot"},
 	{Name: "Mock Input Bool", Prefix: "MockInputBool"},
 	{Name: "Mock Input String", Prefix: "MockInputString"},
 	{Name: "Mock Input Float64", Prefix: "MockInputFloat64"},
