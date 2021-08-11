@@ -2,6 +2,7 @@ package testza
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path"
 
@@ -21,7 +22,7 @@ func SnapshotCreate(name string, snapshotObject interface{}) error {
 
 	originalSpewConfig := spew.Config.DisablePointerAddresses
 	spew.Config.DisablePointerAddresses = true
-	err = os.WriteFile(path.Clean(dir+name+".testza"), []byte(spew.Sdump(snapshotObject)), 0755)
+	err = ioutil.WriteFile(path.Clean(dir+name+".testza"), []byte(spew.Sdump(snapshotObject)), 0755)
 	if err != nil {
 		return fmt.Errorf("creating snapshot failed: %w", err)
 	}
@@ -34,7 +35,7 @@ func SnapshotCreate(name string, snapshotObject interface{}) error {
 func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
-	snapshot, err := os.ReadFile(snapshotPath)
+	snapshot, err := ioutil.ReadFile(snapshotPath)
 	if err != nil {
 		return fmt.Errorf("validating snapshot failed: %w", err)
 	}
