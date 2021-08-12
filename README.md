@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2506-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2504-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -771,6 +771,9 @@ future test runs. Using this function directly will override previous
 snapshots with the same name. You most likely want to use
 SnapshotCreateOrValidate.
 
+NOTICE: \r\n will be replaced with \n to make the files consistent between
+operating systems.
+
 #### SnapshotCreateOrValidate
 
 ```go
@@ -785,6 +788,9 @@ of Go. If a snapshot already exists, the function will not create a new one,
 but validate the exisiting one. To re-create a snapshot, you can delete the
 according file in /testdata/snapshots/.
 
+NOTICE: \r\n will be replaced with \n to make the files consistent between
+operating systems.
+
 #### SnapshotValidate
 
 ```go
@@ -793,6 +799,9 @@ func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...inte
 
 SnapshotValidate validates an already exisiting snapshot of an object. You
 most likely want to use SnapshotCreateOrValidate.
+
+NOTICE: \r\n will be replaced with \n to make the files consistent between
+operating systems.
 
 
 <!-- docs:end -->
