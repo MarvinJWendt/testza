@@ -9,6 +9,7 @@
 
 ### Code Refactoring
 - fix linting and make 1.15.X tests pass
+- **snapshot:** make linebreaks consistent
 
 
 <a name="v0.2.0"></a>
