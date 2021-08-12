@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/MarvinJWendt/testza/internal"
 	"github.com/davecgh/go-spew/spew"
@@ -24,7 +25,8 @@ func SnapshotCreate(name string, snapshotObject interface{}) error {
 
 	originalSpewConfig := spew.Config.DisablePointerAddresses
 	spew.Config.DisablePointerAddresses = true
-	err = ioutil.WriteFile(path.Clean(dir+name+".testza"), []byte(spew.Sdump(snapshotObject)), 0755)
+	dump := strings.ReplaceAll(spew.Sdump(snapshotObject), "\r\n", "\n")
+	err = ioutil.WriteFile(path.Clean(dir+name+".testza"), []byte(dump), 0755)
 	if err != nil {
 		return fmt.Errorf("creating snapshot failed: %w", err)
 	}
@@ -38,14 +40,15 @@ func SnapshotCreate(name string, snapshotObject interface{}) error {
 func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
-	snapshot, err := ioutil.ReadFile(snapshotPath)
+	snapshotContent, err := ioutil.ReadFile(snapshotPath)
+	snapshot := strings.ReplaceAll(string(snapshotContent), "\r\n", "\n")
 	if err != nil {
 		return fmt.Errorf("validating snapshot failed: %w", err)
 	}
 	originalSpewConfig := spew.Config.DisablePointerAddresses
 	spew.Config.DisablePointerAddresses = true
 
-	if spew.Sdump(actual) != string(snapshot) {
+	if spew.Sdump(actual) != snapshot {
 		internal.Fail(t,
 			generateMsg(msg,
 				fmt.Sprintf("Snapshot '%s' failed to validate", name)),
@@ -53,14 +56,14 @@ func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...inte
 				{
 					Name:      "Difference",
 					NameStyle: pterm.NewStyle(pterm.FgLightYellow),
-					Data:      internal.GetDifference(string(snapshot), spew.Sdump(actual), true),
+					Data:      internal.GetDifference(snapshot, spew.Sdump(actual), true),
 					DataStyle: pterm.NewStyle(pterm.FgGreen),
 					Raw:       true,
 				},
 				{
 					Name:      "Expected",
 					NameStyle: pterm.NewStyle(pterm.FgLightGreen),
-					Data:      string(snapshot),
+					Data:      snapshot,
 					DataStyle: pterm.NewStyle(pterm.FgGreen),
 					Raw:       true,
 				},
