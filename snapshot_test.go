@@ -64,6 +64,6 @@ func TestSnapshotCreateOrValidate_create_random(t *testing.T) {
 }
 
 func TestSnapshotCreateOrValidate_invalid_name(t *testing.T) {
-	err := testza.SnapshotCreateOrValidate(t, ">", snapshotObject)
+	err := testza.SnapshotCreateOrValidate(t, string(rune(0))+"><", snapshotObject)
 	testza.AssertNotNil(t, err)
 }
