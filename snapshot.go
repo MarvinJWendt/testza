@@ -12,6 +12,8 @@ import (
 )
 
 // SnapshotCreate creates a snapshot of an object, which can be validated in future test runs.
+// Using this function directly will override previous snapshots with the same name.
+// You most likely want to use SnapshotCreateOrValidate.
 func SnapshotCreate(name string, snapshotObject interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 
@@ -32,6 +34,7 @@ func SnapshotCreate(name string, snapshotObject interface{}) error {
 }
 
 // SnapshotValidate validates an already exisiting snapshot of an object.
+// You most likely want to use SnapshotCreateOrValidate.
 func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
@@ -50,7 +53,7 @@ func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...inte
 				{
 					Name:      "Difference",
 					NameStyle: pterm.NewStyle(pterm.FgLightYellow),
-					Data:      internal.GetDifference(spew.Sdump(actual), string(snapshot), true),
+					Data:      internal.GetDifference(string(snapshot), spew.Sdump(actual), true),
 					DataStyle: pterm.NewStyle(pterm.FgGreen),
 					Raw:       true,
 				},
@@ -76,7 +79,11 @@ func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...inte
 	return nil
 }
 
-// SnapshotCreateOrValidate creates a snapshot of an object which can be used in future test runs. If a snapshot already exists, the method will not create a new one, but validate the exisiting one.
+// SnapshotCreateOrValidate creates a snapshot of an object which can be used in future test runs.
+// It is good practice to name your snapshots the same as the test they are created in.
+// You can do that automatically by using t.Name() as the second parameter, if you are using the inbuilt test system of Go.
+// If a snapshot already exists, the function will not create a new one, but validate the exisiting one.
+// To re-create a snapshot, you can delete the according file in /testdata/snapshots/.
 func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
