@@ -2,6 +2,8 @@ package testza_test
 
 import (
 	"io/ioutil"
+	"math/rand"
+	"os"
 	"testing"
 	"time"
 
@@ -50,4 +52,18 @@ func TestSnapshotValidate_fails(t *testing.T) {
 func TestSnapshotCreateOrValidate(t *testing.T) {
 	err := testza.SnapshotCreateOrValidate(t, t.Name(), snapshotObject)
 	testza.AssertNoError(t, err)
+}
+
+func TestSnapshotCreateOrValidate_create_random(t *testing.T) {
+	name := t.Name() + testza.MockInputStringGenerateRandom(1, rand.Intn(10))[0]
+	err := testza.SnapshotCreateOrValidate(t, name, snapshotObject)
+	testza.AssertNoError(t, err)
+
+	err = os.Remove(internal.GetCurrentScriptDirectory() + "/testdata/snapshots/" + name + ".testza")
+	testza.AssertNoError(t, err)
+}
+
+func TestSnapshotCreateOrValidate_invalid_name(t *testing.T) {
+	err := testza.SnapshotCreateOrValidate(t, ">", snapshotObject)
+	testza.AssertNotNil(t, err)
 }
