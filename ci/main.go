@@ -22,13 +22,14 @@ var Categories = []Category{
 	{Name: "Mock Input String", Prefix: "MockInputString"},
 	{Name: "Mock Input Float64", Prefix: "MockInputFloat64"},
 	{Name: "Mock Input Int", Prefix: "MockInputInt"},
+	{Name: "Snapshot", Prefix: "Snapshot"},
 }
 
 func main() {
+	pterm.EnableDebugMessages()
+
 	goDoc = getGoDoc()
 	parseGoDoc()
-
-	pterm.EnableDebugMessages()
 
 	writeBetween("README.md", "docs", getMarkdown())
 }
@@ -71,6 +72,8 @@ func parseGoDoc() {
 		}
 	}
 
+	Functions = append(Functions, lastFunc)
+
 	for i, f := range Functions {
 		if strings.TrimSpace(f.Head) == "" {
 			continue
@@ -85,6 +88,11 @@ func parseGoDoc() {
 		}
 		Functions[i].Body = strings.TrimRight(newBody, "\n")
 	}
+
+	pterm.Debug.Printfln("Found %d functions:", len(Functions))
+	for _, f := range Functions {
+		pterm.Debug.Println(f.Name)
+	}
 }
 
 func pathToMarkdownLink(path string) string {
@@ -95,7 +103,6 @@ func pathToMarkdownLink(path string) string {
 }
 
 func getCategoryOfFunctionName(name string) (c Category) {
-
 	for _, category := range Categories {
 		if strings.HasPrefix(name, category.Prefix) {
 			c = category
@@ -119,7 +126,6 @@ func getMarkdown() (md string) {
 		path = pathToMarkdownLink(path)
 		md += "<tr>\n"
 		md += fmt.Sprintf(`<td><a href="https://github.com/MarvinJWendt/testza#%s">%s</a></td>`+"\n", path, category.Name)
-		// md += fmt.Sprintf("\n- [%s](https://github.com/MarvinJWendt/testza#%s)\n", category.Name, path)
 
 		md += "<td>\n\n<details>\n<summary>Click to expand</summary>\n\n"
 		for _, f := range Functions {

@@ -1,6 +1,19 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- **snapshot:** add snapshot functionality
+
+### Test
+- delete invalid named snapshot
+- **snapshot:** make tests pass on linux
+- **snapshot:** add more error tests to Snapshot
+- **snapshot:** add Snapshot tests
+
+### Code Refactoring
+- fix linting and make 1.15.X tests pass
+- **snapshot:** make linebreaks consistent
+
 
 <a name="v0.2.0"></a>
 ## [v0.2.0] - 2021-07-21

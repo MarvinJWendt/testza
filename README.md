@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2504-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2508-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -188,6 +188,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [MockInputStringModify](https://github.com/MarvinJWendt/testza#MockInputStringModify)
   - [MockInputStringNumeric](https://github.com/MarvinJWendt/testza#MockInputStringNumeric)
   - [MockInputStringRunTests](https://github.com/MarvinJWendt/testza#MockInputStringRunTests)
+  - [MockInputStringUsernames](https://github.com/MarvinJWendt/testza#MockInputStringUsernames)
 </td>
 
 </details>
@@ -224,6 +225,21 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [MockInputIntGenerateRandomRange](https://github.com/MarvinJWendt/testza#MockInputIntGenerateRandomRange)
   - [MockInputIntModify](https://github.com/MarvinJWendt/testza#MockInputIntModify)
   - [MockInputIntRunTests](https://github.com/MarvinJWendt/testza#MockInputIntRunTests)
+</td>
+
+</details>
+
+</tr>
+<tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Snapshot">Snapshot</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [SnapshotCreate](https://github.com/MarvinJWendt/testza#SnapshotCreate)
+  - [SnapshotCreateOrValidate](https://github.com/MarvinJWendt/testza#SnapshotCreateOrValidate)
+  - [SnapshotValidate](https://github.com/MarvinJWendt/testza#SnapshotValidate)
 </td>
 
 </details>
@@ -733,6 +749,59 @@ MockInputStringRunTests runs a test for every value in a testset. You can
 use the value as input parameter for your functions, to sanity test against
 many different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
+
+#### MockInputStringUsernames
+
+```go
+func MockInputStringUsernames() []string
+```
+
+MockInputStringUsernames returns a test set with usernames.
+
+### Snapshot
+
+#### SnapshotCreate
+
+```go
+func SnapshotCreate(name string, snapshotObject interface{}) error
+```
+
+SnapshotCreate creates a snapshot of an object, which can be validated in
+future test runs. Using this function directly will override previous
+snapshots with the same name. You most likely want to use
+SnapshotCreateOrValidate.
+
+NOTICE: \r\n will be replaced with \n to make the files consistent between
+operating systems.
+
+#### SnapshotCreateOrValidate
+
+```go
+func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg ...interface{}) error
+```
+
+SnapshotCreateOrValidate creates a snapshot of an object which can be used
+in future test runs. It is good practice to name your snapshots the same as
+the test they are created in. You can do that automatically by using
+t.Name() as the second parameter, if you are using the inbuilt test system
+of Go. If a snapshot already exists, the function will not create a new one,
+but validate the exisiting one. To re-create a snapshot, you can delete the
+according file in /testdata/snapshots/.
+
+NOTICE: \r\n will be replaced with \n to make the files consistent between
+operating systems.
+
+#### SnapshotValidate
+
+```go
+func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error
+```
+
+SnapshotValidate validates an already exisiting snapshot of an object. You
+most likely want to use SnapshotCreateOrValidate.
+
+NOTICE: \r\n will be replaced with \n to make the files consistent between
+operating systems.
 
 
 <!-- docs:end -->

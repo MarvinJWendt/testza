@@ -1,6 +1,8 @@
 package internal
 
 import (
+	"path/filepath"
+	"runtime"
 	"testing"
 )
 
@@ -19,4 +21,10 @@ func GetTest(t testingT) *testing.T {
 	}
 
 	return nil
+}
+
+// GetCurrentScriptDirectory returns the directory of the current Go file.
+func GetCurrentScriptDirectory() string {
+	_, scriptPath, _, _ := runtime.Caller(1)
+	return filepath.Join(scriptPath, "..")
 }
