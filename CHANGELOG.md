@@ -5,6 +5,7 @@
 - **snapshot:** add snapshot functionality
 
 ### Test
+- **snapshot:** add more error tests to Snapshot
 - **snapshot:** add Snapshot tests
 
 ### Code Refactoring
