@@ -64,7 +64,7 @@ Even developers who never used testza, will get into it quickly.
 
 ## Getting Started
 
-Testza is very IDE friendly and was made to integrate with your IDE to increase your productivity.  
+See the examples below for a quick introduction!
 
 ```go
 // --- Some Examples ---
