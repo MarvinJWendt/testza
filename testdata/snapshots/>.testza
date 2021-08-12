@@ -1,5 +1,0 @@
-(testza_test.snapshotObjectType) {
- Name: (string) (len=12) "Marvin Wendt",
- Username: (string) (len=12) "MarvinJWendt",
- Birthday: (time.Time) 2001-01-24 00:00:00 +0000 UTC
-}
