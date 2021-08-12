@@ -767,7 +767,9 @@ func SnapshotCreate(name string, snapshotObject interface{}) error
 ```
 
 SnapshotCreate creates a snapshot of an object, which can be validated in
-future test runs.
+future test runs. Using this function directly will override previous
+snapshots with the same name. You most likely want to use
+SnapshotCreateOrValidate.
 
 #### SnapshotCreateOrValidate
 
@@ -776,8 +778,12 @@ func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg
 ```
 
 SnapshotCreateOrValidate creates a snapshot of an object which can be used
-in future test runs. If a snapshot already exists, the method will not
-create a new one, but validate the exisiting one.
+in future test runs. It is good practice to name your snapshots the same as
+the test they are created in. You can do that automatically by using
+t.Name() as the second parameter, if you are using the inbuilt test system
+of Go. If a snapshot already exists, the function will not create a new one,
+but validate the exisiting one. To re-create a snapshot, you can delete the
+according file in /testdata/snapshots/.
 
 #### SnapshotValidate
 
@@ -785,7 +791,8 @@ create a new one, but validate the exisiting one.
 func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error
 ```
 
-SnapshotValidate validates an already exisiting snapshot of an object.
+SnapshotValidate validates an already exisiting snapshot of an object. You
+most likely want to use SnapshotCreateOrValidate.
 
 
 <!-- docs:end -->
