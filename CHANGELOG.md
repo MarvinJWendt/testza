@@ -4,6 +4,9 @@
 ### Features
 - **snapshot:** add snapshot functionality
 
+### Test
+- **snapshot:** add Snapshot tests
+
 ### Code Refactoring
 - fix linting and make 1.15.X tests pass
 
