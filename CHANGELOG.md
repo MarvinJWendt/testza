@@ -5,6 +5,8 @@
 - **snapshot:** add snapshot functionality
 
 ### Test
+- delete invalid named snapshot
+- **snapshot:** make tests pass on linux
 - **snapshot:** add more error tests to Snapshot
 - **snapshot:** add Snapshot tests
 
