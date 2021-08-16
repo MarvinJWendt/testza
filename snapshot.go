@@ -17,6 +17,9 @@ import (
 // You most likely want to use SnapshotCreateOrValidate.
 //
 // NOTICE: \r\n will be replaced with \n to make the files consistent between operating systems.
+//
+// Example:
+//  testza.SnapshotCreate(t.Name(), objectToBeSnapshotted)
 func SnapshotCreate(name string, snapshotObject interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 
@@ -41,6 +44,10 @@ func SnapshotCreate(name string, snapshotObject interface{}) error {
 // You most likely want to use SnapshotCreateOrValidate.
 //
 // NOTICE: \r\n will be replaced with \n to make the files consistent between operating systems.
+//
+// Example:
+//  testza.SnapshotValidate(t, t.Name(), objectToBeValidated)
+//  testza.SnapshotValidate(t, t.Name(), objectToBeValidated, "Optional message")
 func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
@@ -93,6 +100,10 @@ func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...inte
 // To re-create a snapshot, you can delete the according file in /testdata/snapshots/.
 //
 // NOTICE: \r\n will be replaced with \n to make the files consistent between operating systems.
+//
+// Example:
+//  testza.SnapshotCreateOrValidate(t, t.Name(), object)
+//  testza.SnapshotCreateOrValidate(t, t.Name(), object, "Optional Message")
 func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
