@@ -261,6 +261,12 @@ this function to test that functions do not take too long to complete.
 NOTE: Every system takes a different amount of time to complete a function.
 Do not set the duration too low, if you want consistent results.
 
+Example:
+
+    testza.AssertCompletesIn(t, 2 * time.Second, func() {
+    	// some code that should take less than 2 seconds...
+    }) // => PASS
+
 #### AssertContains
 
 ```go
@@ -270,6 +276,12 @@ func AssertContains(t testRunner, object, element interface{}, msg ...interface{
 AssertContains asserts that a string/list/array/slice/map contains the
 specified element.
 
+Example:
+
+    testza.AssertContains(t, []int{1,2,3}, 2)
+    testza.AssertContains(t, []string{"Hello", "World"}, "World")
+    testza.AssertContains(t, "Hello, World!", "World")
+
 #### AssertEqual
 
 ```go
@@ -278,13 +290,41 @@ func AssertEqual(t testRunner, expected interface{}, actual interface{}, msg ...
 
 AssertEqual asserts that two objects are equal.
 
+Example:
+
+    testza.AssertEqual(t, "Hello, World!", "Hello, World!")
+    testza.AssertEqual(t, true, true)
+
 #### AssertEqualValues
 
 ```go
 func AssertEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
 ```
 
-AssertEqualValues asserts that two objects have equal values.
+AssertEqualValues asserts that two objects have equal values. The order of
+the values is also validated.
+
+Example:
+
+    testza.AssertEqualValues(t, []string{"Hello", "World"}, []string{"Hello", "World"})
+    testza.AssertEqualValues(t, []int{1,2}, []int{1,2})
+    testza.AssertEqualValues(t, []int{1,2}, []int{2,1}) // FAILS (wrong order)
+
+Comparing struct values:
+
+    person1 := Person{
+      Name:   "Marvin Wendt",
+      Age:    20,
+      Gender: "male",
+    }
+
+    person2 := Person{
+      Name:   "Marvin Wendt",
+      Age:    20,
+      Gender: "male",
+    }
+
+    testza.AssertEqualValues(t, person1, person2)
 
 #### AssertFalse
 
@@ -294,6 +334,13 @@ func AssertFalse(t testRunner, value interface{}, msg ...interface{})
 
 AssertFalse asserts that an expression or object resolves to false.
 
+Example:
+
+    testza.AssertFalse(t, false)
+    testza.AssertFalse(t, 1 == 2)
+    testza.AssertFalse(t, 2 != 2)
+    testza.AssertFalse(t, 1 > 5 && 4 < 0)
+
 #### AssertGreater
 
 ```go
@@ -302,6 +349,11 @@ func AssertGreater(t testRunner, object1, object2 interface{}, msg ...interface{
 
 AssertGreater asserts that the first object is greater than the second.
 
+Example:
+
+    testza.AssertGreater(t, 5, 1)
+    testza.AssertGreater(t, 10, -10)
+
 #### AssertImplements
 
 ```go
@@ -309,6 +361,8 @@ func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...
 ```
 
 AssertImplements asserts that an objects implements an interface.
+
+Example:
 
     testza.AssertImplements(t, (*YourInterface)(nil), new(YourObject))
     testza.AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
@@ -329,6 +383,11 @@ func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{})
 
 AssertLess asserts that the first object is less than the second.
 
+Example:
+
+    testza.AssertLess(t, 1, 5)
+    testza.AssertLess(t, -10, 10)
+
 #### AssertNil
 
 ```go
@@ -337,6 +396,10 @@ func AssertNil(t testRunner, object interface{}, msg ...interface{})
 
 AssertNil asserts that an object is nil.
 
+Example:
+
+    testza.AssertNil(t, nil)
+
 #### AssertNoError
 
 ```go
@@ -344,6 +407,11 @@ func AssertNoError(t testRunner, err interface{}, msg ...interface{})
 ```
 
 AssertNoError asserts that an error is nil.
+
+Example:
+
+    err := nil
+    testza.AssertNoError(t, err)
 
 #### AssertNotCompletesIn
 
@@ -359,6 +427,13 @@ there might be something wrong.
 NOTE: Every system takes a different amount of time to complete a function.
 Do not set the duration too high, if you want consistent results.
 
+Example:
+
+    testza.AssertNotCompletesIn(t, 2 * time.Second, func() {
+    	// some code that should take more than 2 seconds...
+    	time.Sleep(3 * time.Second)
+    }) // => PASS
+
 #### AssertNotContains
 
 ```go
@@ -368,6 +443,11 @@ func AssertNotContains(t testRunner, object, element interface{}, msg ...interfa
 AssertNotContains asserts that a string/list/array/slice/map does not
 contain the specified element.
 
+Example:
+
+    testza.AssertNotContains(t, []string{"Hello", "World"}, "Spaceship")
+    testza.AssertNotContains(t, "Hello, World!", "Spaceship")
+
 #### AssertNotEqual
 
 ```go
@@ -375,6 +455,11 @@ func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg 
 ```
 
 AssertNotEqual asserts that two objects are not equal.
+
+Example:
+
+    testza.AssertNotEqual(t, true, false)
+    testza.AssertNotEqual(t, "Hello", "World")
 
 #### AssertNotEqualValues
 
@@ -384,6 +469,26 @@ func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}
 
 AssertNotEqualValues asserts that two objects do not have equal values.
 
+Example:
+
+    testza.AssertNotEqualValues(t, []int{1,2}, []int{3,4})
+
+Comparing struct values:
+
+    person1 := Person{
+      Name:   "Marvin Wendt",
+      Age:    20,
+      Gender: "male",
+    }
+
+    person2 := Person{
+      Name:   "Marvin Wendt",
+      Age:    20,
+      Gender: "female", // <-- CHANGED
+    }
+
+    testza.AssertNotEqualValues(t, person1, person2)
+
 #### AssertNotImplements
 
 ```go
@@ -391,6 +496,8 @@ func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg 
 ```
 
 AssertNotImplements asserts that an object does not implement an interface.
+
+Example:
 
     testza.AssertNotImplements(t, (*YourInterface)(nil), new(YourObject))
     testza.AssertNotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
@@ -411,6 +518,12 @@ func AssertNotNil(t testRunner, object interface{}, msg ...interface{})
 
 AssertNotNil asserts that an object is not nil.
 
+Example:
+
+    testza.AssertNotNil(t, true)
+    testza.AssertNotNil(t, "Hello, World!")
+    testza.AssertNotNil(t, 0)
+
 #### AssertNotNumeric
 
 ```go
@@ -421,6 +534,11 @@ AssertNotNumeric checks if the object is not a numeric type. Numeric types
 are: Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16,
 Uint32, Uint64, Complex64 and Complex128.
 
+Example:
+
+    testza.AssertNotNumeric(t, true)
+    testza.AssertNotNumeric(t, "123")
+
 #### AssertNotPanics
 
 ```go
@@ -429,6 +547,12 @@ func AssertNotPanics(t testRunner, f func(), msg ...interface{})
 
 AssertNotPanics asserts that a function does not panic.
 
+Example:
+
+    testza.AssertNotPanics(t, func() {
+    	// some code that does not call a panic...
+    }) // => PASS
+
 #### AssertNotZero
 
 ```go
@@ -436,6 +560,8 @@ func AssertNotZero(t testRunner, value interface{}, msg ...interface{})
 ```
 
 AssertNotZero asserts that the value is not the zero value for it's type.
+
+Example:
 
     testza.AssertNotZero(t, 1337)
     testza.AssertNotZero(t, true)
@@ -451,6 +577,12 @@ AssertNumeric asserts that the object is a numeric type. Numeric types are:
 Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16,
 Uint32, Uint64, Complex64 and Complex128.
 
+Example:
+
+    testza.AssertNumeric(t, 123)
+    testza.AssertNumeric(t, 1.23)
+    testza.AssertNumeric(t, uint(123))
+
 #### AssertPanics
 
 ```go
@@ -458,6 +590,13 @@ func AssertPanics(t testRunner, f func(), msg ...interface{})
 ```
 
 AssertPanics asserts that a function panics.
+
+Example:
+
+    testza.AssertPanics(t, func() {
+    	// ...
+    	panic("some panic")
+    }) // => PASS
 
 #### AssertTestFails
 
@@ -469,6 +608,17 @@ AssertTestFails asserts that a unit test fails. A unit test fails if one of
 the following methods is called in the test function: Error, Errorf, Fail,
 FailNow, Fatal, Fatalf
 
+Example:
+
+    testza.AssertTestFails(t, func(t testza.TestingPackageWithFailFunctions) {
+    	testza.AssertTrue(t, false)
+    }) // => Pass
+
+    testza.AssertTestFails(t, func(t testza.TestingPackageWithFailFunctions) {
+    	// ...
+    	t.Fail() // Or any other failing method.
+    }) // => Pass
+
 #### AssertTrue
 
 ```go
@@ -477,6 +627,13 @@ func AssertTrue(t testRunner, value interface{}, msg ...interface{})
 
 AssertTrue asserts that an expression or object resolves to true.
 
+Example:
+
+    testza.AssertTrue(t, true)
+    testza.AssertTrue(t, 1 == 1)
+    testza.AssertTrue(t, 2 != 3)
+    testza.AssertTrue(t, 1 > 0 && 4 < 5)
+
 #### AssertZero
 
 ```go
@@ -484,6 +641,8 @@ func AssertZero(t testRunner, value interface{}, msg ...interface{})
 ```
 
 AssertZero asserts that the value is the zero value for it's type.
+
+Example:
 
     testza.AssertZero(t, 0)
     testza.AssertZero(t, false)
@@ -774,6 +933,10 @@ SnapshotCreateOrValidate.
 NOTICE: \r\n will be replaced with \n to make the files consistent between
 operating systems.
 
+Example:
+
+    testza.SnapshotCreate(t.Name(), objectToBeSnapshotted)
+
 #### SnapshotCreateOrValidate
 
 ```go
@@ -791,6 +954,11 @@ according file in /testdata/snapshots/.
 NOTICE: \r\n will be replaced with \n to make the files consistent between
 operating systems.
 
+Example:
+
+    testza.SnapshotCreateOrValidate(t, t.Name(), object)
+    testza.SnapshotCreateOrValidate(t, t.Name(), object, "Optional Message")
+
 #### SnapshotValidate
 
 ```go
@@ -802,6 +970,11 @@ most likely want to use SnapshotCreateOrValidate.
 
 NOTICE: \r\n will be replaced with \n to make the files consistent between
 operating systems.
+
+Example:
+
+    testza.SnapshotValidate(t, t.Name(), objectToBeValidated)
+    testza.SnapshotValidate(t, t.Name(), objectToBeValidated, "Optional message")
 
 
 <!-- docs:end -->
