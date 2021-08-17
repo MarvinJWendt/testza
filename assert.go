@@ -28,7 +28,7 @@ func (m *testMock) Error(args ...interface{}) {
 
 // Errorf is a mock of testing.T.
 func (m *testMock) Errorf(format string, args ...interface{}) {
-	m.fail(args...)
+	m.fail(fmt.Sprintf(format, args...))
 }
 
 // Fail is a mock of testing.T.
@@ -48,7 +48,7 @@ func (m *testMock) Fatal(args ...interface{}) {
 
 // Fatalf is a mock of testing.T.
 func (m *testMock) Fatalf(format string, args ...interface{}) {
-	m.fail(args...)
+	m.fail(fmt.Sprintf(format, args...))
 }
 
 // ** Getter Methods **
