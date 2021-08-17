@@ -34,6 +34,6 @@ jobs:
         run: go test -coverprofile="coverage.txt" -covermode=atomic -race .
 
       - name: Upload coverage to Codecov
-        if: success() && matrix.go == 1.16 && matrix.os == 'ubuntu-latest'
+        if: success() && matrix.go == 1.17 && matrix.os == 'ubuntu-latest'
         # uses: codecov/codecov-action@v1
         run: bash <(curl -s https://codecov.io/bash)
