@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Bug Fixes
+- **assert:** get correctly formatted error messages on mocked test runner
+
 
 <a name="v0.2.2"></a>
 ## [v0.2.2] - 2021-08-16
