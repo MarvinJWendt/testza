@@ -16,6 +16,7 @@ var goDoc string
 var Functions []Function
 
 var Categories = []Category{
+	{Name: "Settings", Prefix: "Set"},
 	{Name: "Assert", Prefix: "Assert"},
 	{Name: "Capture", Prefix: "Capture"},
 	{Name: "Mock Input Bool", Prefix: "MockInputBool"},
