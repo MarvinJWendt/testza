@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2516-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2508-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -157,7 +157,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputBool">Mock Input Bool</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-Bool">Mock Input Bool</a></td>
 <td>
 
 <details>
@@ -172,7 +172,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputString">Mock Input String</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-String">Mock Input String</a></td>
 <td>
 
 <details>
@@ -195,7 +195,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputFloat64">Mock Input Float64</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-Float64">Mock Input Float64</a></td>
 <td>
 
 <details>
@@ -213,7 +213,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputInt">Mock Input Int</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-Int">Mock Input Int</a></td>
 <td>
 
 <details>
