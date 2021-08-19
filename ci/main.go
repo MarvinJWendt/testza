@@ -96,7 +96,7 @@ func parseGoDoc() {
 }
 
 func pathToMarkdownLink(path string) string {
-	path = strings.ReplaceAll(path, " ", "")
+	path = strings.ReplaceAll(path, " ", "-")
 	path = strings.ReplaceAll(path, ".", "")
 
 	return path
