@@ -105,6 +105,20 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
     <th>Module</th>
     <th>Methods</th>
   </tr><tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Settings">Settings</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [SetColorsEnabled](https://github.com/MarvinJWendt/testza#SetColorsEnabled)
+  - [SetLineNumbersEnabled](https://github.com/MarvinJWendt/testza#SetLineNumbersEnabled)
+</td>
+
+</details>
+
+</tr>
+<tr>
 <td><a href="https://github.com/MarvinJWendt/testza#Assert">Assert</a></td>
 <td>
 
@@ -916,6 +930,41 @@ func MockInputStringUsernames() []string
 ```
 
 MockInputStringUsernames returns a test set with usernames.
+
+### Settings
+
+#### SetColorsEnabled
+
+```go
+func SetColorsEnabled(enabled bool)
+```
+
+SetColorsEnabled controls if testza should print colored output. You should
+use this in the init() method of the package, which contains your tests.
+
+Example:
+
+    init() {
+      testza.SetColorsEnabled(false) // Disable colored output
+      testza.SetColorsEnabled(true)  // Enable colored output
+    }
+
+#### SetLineNumbersEnabled
+
+```go
+func SetLineNumbersEnabled(enabled bool)
+```
+
+SetLineNumbersEnabled controls if line numbers should be printed in failing
+tests. You should use this in the init() method of the package, which
+contains your tests.
+
+Example:
+
+    init() {
+      testza.SetLineNumbersEnabled(false) // Disable line numbers
+      testza.SetLineNumbersEnabled(true)  // Enable line numbers
+    }
 
 ### Snapshot
 
