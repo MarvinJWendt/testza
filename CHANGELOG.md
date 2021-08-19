@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v0.2.3"></a>
+## [v0.2.3] - 2021-08-17
 ### Bug Fixes
 - **assert:** get correctly formatted error messages on mocked test runner
 
@@ -134,7 +137,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.3...HEAD
+[v0.2.3]: https://github.com/MarvinJWendt/testza/compare/v0.2.2...v0.2.3
 [v0.2.2]: https://github.com/MarvinJWendt/testza/compare/v0.2.1...v0.2.2
 [v0.2.1]: https://github.com/MarvinJWendt/testza/compare/v0.2.0...v0.2.1
 [v0.2.0]: https://github.com/MarvinJWendt/testza/compare/v0.1.0...v0.2.0
