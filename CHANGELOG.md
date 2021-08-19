@@ -4,6 +4,9 @@
 ### Features
 - add configuratable options
 
+### Test
+- **configuration:** add tests to configuration values
+
 
 <a name="v0.2.3"></a>
 ## [v0.2.3] - 2021-08-17
