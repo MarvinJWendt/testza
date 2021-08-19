@@ -157,7 +157,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputBool">Mock Input Bool</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-Bool">Mock Input Bool</a></td>
 <td>
 
 <details>
@@ -172,7 +172,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputString">Mock Input String</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-String">Mock Input String</a></td>
 <td>
 
 <details>
@@ -195,7 +195,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputFloat64">Mock Input Float64</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-Float64">Mock Input Float64</a></td>
 <td>
 
 <details>
@@ -213,7 +213,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#MockInputInt">Mock Input Int</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-Int">Mock Input Int</a></td>
 <td>
 
 <details>
