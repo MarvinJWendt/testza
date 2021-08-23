@@ -555,6 +555,22 @@ func TestAssertNil(t *testing.T) {
 	AssertNil(t, nil)
 }
 
+func TestAssertNil_pointer(t *testing.T) {
+	var a *int = nil
+	AssertNil(t, a)
+}
+
+func TestAssertNil_interface(t *testing.T) {
+	var i *int = nil
+	var a interface{} = i
+	AssertNil(t, a)
+}
+
+func TestAssertNil_pointer_struct(t *testing.T) {
+	var a *assertionTestStruct
+	AssertNil(t, a)
+}
+
 func TestAssertNil_fails(t *testing.T) {
 	objectsNotNil := []interface{}{"asd", 0, false, true, 'c', "", []int{1, 2, 3}}
 
