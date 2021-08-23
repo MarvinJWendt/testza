@@ -57,6 +57,19 @@ func isKind(expectedKind reflect.Kind, value interface{}) bool {
 	return reflect.TypeOf(value).Kind() == expectedKind
 }
 
+func isNil(object interface{}) bool {
+	if object == nil {
+		return true
+	}
+
+	switch reflect.ValueOf(object).Kind() {
+	case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice:
+		return reflect.ValueOf(object).IsNil()
+	}
+
+	return false
+}
+
 func isNumber(value interface{}) bool {
 	numberKinds := []reflect.Kind{
 		reflect.Int,
@@ -502,7 +515,7 @@ func AssertNil(t testRunner, object interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if object != nil {
+	if !isNil(object) {
 		internal.Fail(t, "An object that !!should be nil!! is not nil.", internal.NewObjectsExpectedActual(nil, object))
 	}
 }
@@ -518,7 +531,7 @@ func AssertNotNil(t testRunner, object interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if object == nil {
+	if isNil(object) {
 		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleNamed("object", object))
 	}
 }

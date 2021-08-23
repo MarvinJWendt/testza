@@ -1,6 +1,15 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Bug Fixes
+- **assert:** fix `AssertNil` and `AssertNotNil` on non basic types
+
+### Test
+- **assert:** add tests for `AssertNil` with non basic types
+
+
+<a name="v0.2.4"></a>
+## [v0.2.4] - 2021-08-19
 ### Features
 - add configuratable options
 
@@ -143,7 +152,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.3...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.4...HEAD
+[v0.2.4]: https://github.com/MarvinJWendt/testza/compare/v0.2.3...v0.2.4
 [v0.2.3]: https://github.com/MarvinJWendt/testza/compare/v0.2.2...v0.2.3
 [v0.2.2]: https://github.com/MarvinJWendt/testza/compare/v0.2.1...v0.2.2
 [v0.2.1]: https://github.com/MarvinJWendt/testza/compare/v0.2.0...v0.2.1
