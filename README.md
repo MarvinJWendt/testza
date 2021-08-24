@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2521-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2524-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -165,6 +165,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
   - [CaptureStderr](https://github.com/MarvinJWendt/testza#CaptureStderr)
   - [CaptureStdout](https://github.com/MarvinJWendt/testza#CaptureStdout)
+  - [CaptureStdoutAndStderr](https://github.com/MarvinJWendt/testza#CaptureStdoutAndStderr)
 </td>
 
 </details>
@@ -683,6 +684,16 @@ func CaptureStdout(capture func(w io.Writer) error) (string, error)
 CaptureStdout captures everything written to stdout from a specific
 function. You can use this method in tests, to validate that your functions
 writes a string to the terminal.
+
+#### CaptureStdoutAndStderr
+
+```go
+func CaptureStdoutAndStderr(capture func(stdoutWriter, stderrWriter io.Writer) error) (stdout, stderr string, err error)
+```
+
+CaptureStdoutAndStderr captures everything written to stdout and stderr from
+a specific function. You can use this method in tests, to validate that your
+functions writes a string to the terminal.
 
 ### Mock Input Bool
 

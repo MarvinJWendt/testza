@@ -57,3 +57,15 @@ func TestCaptureStderr(t *testing.T) {
 		})
 	}
 }
+
+func TestCaptureStdoutAndStderr(t *testing.T) {
+	stdout, stderr, err := CaptureStdoutAndStderr(func(stdoutWriter, stderrWriter io.Writer) error {
+		fmt.Fprint(os.Stdout, "Hello")
+		fmt.Fprint(os.Stderr, "World")
+		return nil
+	})
+
+	AssertEqual(t, stdout, "Hello")
+	AssertEqual(t, stderr, "World")
+	AssertNoError(t, err)
+}
