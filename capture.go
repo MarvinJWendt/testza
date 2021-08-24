@@ -9,6 +9,15 @@ import (
 
 // CaptureStdout captures everything written to stdout from a specific function.
 // You can use this method in tests, to validate that your functions writes a string to the terminal.
+//
+// Example:
+//  stdout, err := testza.CaptureStdout(func(w io.Writer) error {
+//  	fmt.Println("Hello, World!")
+//  	return nil
+//  })
+//
+//  testza.AssertNoError(t, err)
+//  testza.AssertEqual(t, "Hello, World!", stdout)
 func CaptureStdout(capture func(w io.Writer) error) (string, error) {
 	originalStdout := os.Stdout
 	r, w, err := os.Pipe()
@@ -41,6 +50,16 @@ func CaptureStdout(capture func(w io.Writer) error) (string, error) {
 
 // CaptureStderr captures everything written to stderr from a specific function.
 // You can use this method in tests, to validate that your functions writes a string to the terminal.
+//
+// Example:
+//  stderr, err := testza.CaptureStderr(func(w io.Writer) error {
+//  	_, err := fmt.Fprint(os.Stderr, "Hello, World!")
+//  	testza.AssertNoError(t, err)
+//  	return nil
+//  })
+//
+//  testza.AssertNoError(t, err)
+//  testza.AssertEqual(t, "Hello, World!", stderr)
 func CaptureStderr(capture func(w io.Writer) error) (string, error) {
 	originalStderr := os.Stderr
 	r, w, err := os.Pipe()
@@ -73,6 +92,17 @@ func CaptureStderr(capture func(w io.Writer) error) (string, error) {
 
 // CaptureStdoutAndStderr captures everything written to stdout and stderr from a specific function.
 // You can use this method in tests, to validate that your functions writes a string to the terminal.
+//
+// Example:
+//  stdout, stderr, err := testza.CaptureStdoutAndStderr(func(stdoutWriter, stderrWriter io.Writer) error {
+//  	fmt.Fprint(os.Stdout, "Hello")
+//  	fmt.Fprint(os.Stderr, "World")
+//  	return nil
+//  })
+//
+//  testza.AssertNoError(t, err)
+//  testza.AssertEqual(t, "Hello", stdout)
+//  testza.AssertEqual(t, "World", stderr)
 func CaptureStdoutAndStderr(capture func(stdoutWriter, stderrWriter io.Writer) error) (stdout, stderr string, err error) {
 	originalStdout := os.Stdout
 	originalStderr := os.Stderr
