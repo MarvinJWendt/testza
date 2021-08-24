@@ -960,7 +960,7 @@ MockInputStringUsernames returns a test set with usernames.
 #### MockStdinString
 
 ```go
-func MockStdinString(t testRunner, f func() error) (output string, err error)
+func MockStdinString(f func() error) (output string, err error)
 ```
 
 
