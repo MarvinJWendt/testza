@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2520-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2534-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -675,6 +675,17 @@ CaptureStderr captures everything written to stderr from a specific
 function. You can use this method in tests, to validate that your functions
 writes a string to the terminal.
 
+Example:
+
+    stderr, err := testza.CaptureStderr(func(w io.Writer) error {
+    	_, err := fmt.Fprint(os.Stderr, "Hello, World!")
+    	testza.AssertNoError(t, err)
+    	return nil
+    })
+
+    testza.AssertNoError(t, err)
+    testza.AssertEqual(t, "Hello, World!", stderr)
+
 #### CaptureStdout
 
 ```go
@@ -685,6 +696,16 @@ CaptureStdout captures everything written to stdout from a specific
 function. You can use this method in tests, to validate that your functions
 writes a string to the terminal.
 
+Example:
+
+    stdout, err := testza.CaptureStdout(func(w io.Writer) error {
+    	fmt.Println("Hello, World!")
+    	return nil
+    })
+
+    testza.AssertNoError(t, err)
+    testza.AssertEqual(t, "Hello, World!", stdout)
+
 #### CaptureStdoutAndStderr
 
 ```go
@@ -694,6 +715,18 @@ func CaptureStdoutAndStderr(capture func(stdoutWriter, stderrWriter io.Writer) e
 CaptureStdoutAndStderr captures everything written to stdout and stderr from
 a specific function. You can use this method in tests, to validate that your
 functions writes a string to the terminal.
+
+Example:
+
+    stdout, stderr, err := testza.CaptureStdoutAndStderr(func(stdoutWriter, stderrWriter io.Writer) error {
+    	fmt.Fprint(os.Stdout, "Hello")
+    	fmt.Fprint(os.Stderr, "World")
+    	return nil
+    })
+
+    testza.AssertNoError(t, err)
+    testza.AssertEqual(t, "Hello", stdout)
+    testza.AssertEqual(t, "World", stderr)
 
 ### Mock Input Bool
 
@@ -708,10 +741,16 @@ MockInputBoolFull returns true and false in a boolean slice.
 #### MockInputBoolModify
 
 ```go
-func MockInputBoolModify(inputSlice []bool, f func(index int, value bool) bool) (floats []bool)
+func MockInputBoolModify(inputSlice []bool, modifier func(index int, value bool) bool) (floats []bool)
 ```
 
 MockInputBoolModify returns a modified version of a test set.
+
+Example:
+
+    testset := testza.MockInputBoolModify(testza.MockInputBoolFull(), func(index int, value bool) bool {
+    	return !value
+    })
 
 #### MockInputBoolRunTests
 
@@ -723,6 +762,15 @@ MockInputBoolRunTests runs a test for every value in a testset. You can use
 the value as input parameter for your functions, to sanity test against many
 different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
+
+Example:
+
+    testza.MockInputBoolRunTests(t, testza.MockInputBoolFull(), func(t *testing.T, index int, b bool) {
+    	// Test logic
+    	// err := YourFunction(b)
+    	// testza.AssertNoError(t, err)
+    	// ...
+    })
 
 ### Mock Input Float64
 
@@ -768,10 +816,16 @@ math.MaxInt64.
 #### MockInputFloat64Modify
 
 ```go
-func MockInputFloat64Modify(inputSlice []float64, f func(index int, value float64) float64) (floats []float64)
+func MockInputFloat64Modify(inputSlice []float64, modifier func(index int, value float64) float64) (floats []float64)
 ```
 
 MockInputFloat64Modify returns a modified version of a test set.
+
+Example:
+
+    testset := testza.MockInputFloat64Modify(testza.MockInputFloat64Full(), func(index int, value float64) float64 {
+    	return value * 2
+    })
 
 #### MockInputFloat64RunTests
 
@@ -783,6 +837,15 @@ MockInputFloat64RunTests runs a test for every value in a testset. You can
 use the value as input parameter for your functions, to sanity test against
 many different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
+
+Example:
+
+    testza.MockInputFloat64RunTests(t, testza.MockInputFloat64Full(), func(t *testing.T, index int, f float64) {
+    	// Test logic
+    	// err := YourFunction(f)
+    	// testza.AssertNoError(t, err)
+    	// ...
+    })
 
 ### Mock Input Int
 
@@ -827,10 +890,16 @@ min to max.
 #### MockInputIntModify
 
 ```go
-func MockInputIntModify(inputSlice []int, f func(index int, value int) int) (ints []int)
+func MockInputIntModify(inputSlice []int, modifier func(index int, value int) int) (ints []int)
 ```
 
 MockInputIntModify returns a modified version of a test set.
+
+Example:
+
+    testset := testza.MockInputIntModify(testza.MockInputIntFull(), func(index int, value int) int {
+    	return value * 2
+    })
 
 #### MockInputIntRunTests
 
@@ -842,6 +911,15 @@ MockInputIntRunTests runs a test for every value in a testset. You can use
 the value as input parameter for your functions, to sanity test against many
 different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
+
+Example:
+
+    testza.MockInputIntRunTests(t, testza.MockInputIntFull(), func(t *testing.T, index int, i int) {
+    	// Test logic
+    	// err := YourFunction(i)
+    	// testza.AssertNoError(t, err)
+    	// ...
+    })
 
 ### Mock Input String
 
@@ -908,10 +986,16 @@ Random string (length: 25) - Random string (length: 50) - Random string
 #### MockInputStringModify
 
 ```go
-func MockInputStringModify(inputSlice []string, f func(index int, value string) string) (ret []string)
+func MockInputStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string)
 ```
 
 MockInputStringModify returns a modified version of a test set.
+
+Example:
+
+    testset := testza.MockInputStringModify(testza.MockInputStringFull(), func(index int, value string) string {
+    	return value + " some suffix"
+    })
 
 #### MockInputStringNumeric
 
@@ -933,6 +1017,15 @@ MockInputStringRunTests runs a test for every value in a testset. You can
 use the value as input parameter for your functions, to sanity test against
 many different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
+
+Example:
+
+    testza.MockInputStringRunTests(t, testza.MockInputStringFull(), func(t *testing.T, index int, str string) {
+    	// Test logic
+    	// err := YourFunction(str)
+    	// testza.AssertNoError(t, err)
+    	// ...
+    })
 
 #### MockInputStringUsernames
 

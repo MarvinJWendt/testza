@@ -4,6 +4,9 @@
 ### Features
 - **capture:** add `CaptureStdoutAndStderr`
 
+### Code Refactoring
+- rename variable in `MockInputXXXModify` functions
+
 
 <a name="v0.2.5"></a>
 ## [v0.2.5] - 2021-08-23
