@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2520-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2516-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -240,6 +240,19 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [MockInputIntGenerateRandomRange](https://github.com/MarvinJWendt/testza#MockInputIntGenerateRandomRange)
   - [MockInputIntModify](https://github.com/MarvinJWendt/testza#MockInputIntModify)
   - [MockInputIntRunTests](https://github.com/MarvinJWendt/testza#MockInputIntRunTests)
+</td>
+
+</details>
+
+</tr>
+<tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Stdin">Mock Stdin</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [MockStdinString](https://github.com/MarvinJWendt/testza#MockStdinString)
 </td>
 
 </details>
@@ -941,6 +954,16 @@ func MockInputStringUsernames() []string
 ```
 
 MockInputStringUsernames returns a test set with usernames.
+
+### Mock Stdin
+
+#### MockStdinString
+
+```go
+func MockStdinString(t testRunner, f func() error) (output string, err error)
+```
+
+
 
 ### Settings
 
