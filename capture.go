@@ -86,7 +86,7 @@ func CaptureStdoutAndStderr(capture func(stdoutWriter, stderrWriter io.Writer) e
 	if err != nil {
 		return "", "", fmt.Errorf("could not capture stdout or stderr: %w", err)
 	}
-	
+
 	os.Stdout = stdoutW
 	os.Stderr = stderrW
 
