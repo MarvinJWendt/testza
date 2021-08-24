@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func MockStdinString(t testRunner, f func() error) (output string, err error) {
+func MockStdinString(f func() error) (output string, err error) {
 	r, w, err := os.Pipe()
 	if err != nil {
 		return "", fmt.Errorf("could not mock stdin: %w", err)
