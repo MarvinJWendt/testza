@@ -173,6 +173,11 @@ func MockInputStringRunTests(t testRunner, testSet []string, testFunc func(t *te
 }
 
 // MockInputStringModify returns a modified version of a test set.
+//
+// Example:
+//  testset := testza.MockInputStringModify(testza.MockInputStringFull(), func(index int, value string) string {
+//  	return value + " some suffix"
+//  })
 func MockInputStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string) {
 	for i, str := range inputSlice {
 		ret = append(ret, modifier(i, str))
