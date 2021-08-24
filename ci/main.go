@@ -23,6 +23,7 @@ var Categories = []Category{
 	{Name: "Mock Input String", Prefix: "MockInputString"},
 	{Name: "Mock Input Float64", Prefix: "MockInputFloat64"},
 	{Name: "Mock Input Int", Prefix: "MockInputInt"},
+	{Name: "Mock Stdin", Prefix: "MockStdin"},
 	{Name: "Snapshot", Prefix: "Snapshot"},
 }
 
