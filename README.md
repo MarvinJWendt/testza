@@ -246,6 +246,19 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Mock-Stdin">Mock Stdin</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [MockStdinString](https://github.com/MarvinJWendt/testza#MockStdinString)
+</td>
+
+</details>
+
+</tr>
+<tr>
 <td><a href="https://github.com/MarvinJWendt/testza#Snapshot">Snapshot</a></td>
 <td>
 
@@ -941,6 +954,16 @@ func MockInputStringUsernames() []string
 ```
 
 MockInputStringUsernames returns a test set with usernames.
+
+### Mock Stdin
+
+#### MockStdinString
+
+```go
+func MockStdinString(t testRunner, f func() error) (output string, err error)
+```
+
+
 
 ### Settings
 
