@@ -5,6 +5,10 @@
 - **capture:** add `CaptureStdoutAndStderr`
 - **mock:** add `Stdin` mocking
 
+### Code Refactoring
+- **mock-stdin:** remove unused test runner from `MockStdinString` function
+- **mock-stdin:** wrap errors
+
 
 <a name="v0.2.5"></a>
 ## [v0.2.5] - 2021-08-23
