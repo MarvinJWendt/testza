@@ -1,6 +1,7 @@
 package testza
 
 import (
+	"fmt"
 	"io"
 	"os"
 )
@@ -8,16 +9,16 @@ import (
 func MockStdinString(t testRunner, f func() error) (output string, err error) {
 	r, w, err := os.Pipe()
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("could not mock stdin: %w", err)
 	}
 
 	_, err = w.Write([]byte("Hello World\n"))
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("could not mock stdin: %w", err)
 	}
 	err = w.Close()
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("could not mock stdin: %w", err)
 	}
 
 	stdin := os.Stdin
@@ -27,7 +28,7 @@ func MockStdinString(t testRunner, f func() error) (output string, err error) {
 		return f()
 	})
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("could not mock stdin: %w", err)
 	}
 
 	os.Stdin = stdin
