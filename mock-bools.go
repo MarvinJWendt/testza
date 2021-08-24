@@ -44,9 +44,9 @@ func MockInputBoolRunTests(t testRunner, testSet []bool, testFunc func(t *testin
 }
 
 // MockInputBoolModify returns a modified version of a test set.
-func MockInputBoolModify(inputSlice []bool, f func(index int, value bool) bool) (floats []bool) {
+func MockInputBoolModify(inputSlice []bool, modifier func(index int, value bool) bool) (floats []bool) {
 	for i, input := range inputSlice {
-		floats = append(floats, f(i, input))
+		floats = append(floats, modifier(i, input))
 	}
 
 	return

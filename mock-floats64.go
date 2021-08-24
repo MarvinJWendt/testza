@@ -89,9 +89,9 @@ func MockInputFloat64RunTests(t testRunner, testSet []float64, testFunc func(t *
 }
 
 // MockInputFloat64Modify returns a modified version of a test set.
-func MockInputFloat64Modify(inputSlice []float64, f func(index int, value float64) float64) (floats []float64) {
+func MockInputFloat64Modify(inputSlice []float64, modifier func(index int, value float64) float64) (floats []float64) {
 	for i, input := range inputSlice {
-		floats = append(floats, f(i, input))
+		floats = append(floats, modifier(i, input))
 	}
 
 	return

@@ -91,9 +91,9 @@ func MockInputIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.
 }
 
 // MockInputIntModify returns a modified version of a test set.
-func MockInputIntModify(inputSlice []int, f func(index int, value int) int) (ints []int) {
+func MockInputIntModify(inputSlice []int, modifier func(index int, value int) int) (ints []int) {
 	for i, input := range inputSlice {
-		ints = append(ints, f(i, input))
+		ints = append(ints, modifier(i, input))
 	}
 
 	return
