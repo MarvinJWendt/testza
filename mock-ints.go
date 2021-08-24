@@ -62,6 +62,14 @@ func MockInputIntGenerateRandomNegative(count, min int) (ints []int) {
 // MockInputIntRunTests runs a test for every value in a testset.
 // You can use the value as input parameter for your functions, to sanity test against many different cases.
 // This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
+//
+// Example:
+//  testza.MockInputIntRunTests(t, testza.MockInputIntFull(), func(t *testing.T, index int, i int) {
+//  	// Test logic
+//  	// err := YourFunction(i)
+//  	// testza.AssertNoError(t, err)
+//  	// ...
+//  })
 func MockInputIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()

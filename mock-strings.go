@@ -144,6 +144,14 @@ func MockInputStringGenerateRandom(count, length int) (result []string) {
 // MockInputStringRunTests runs a test for every value in a testset.
 // You can use the value as input parameter for your functions, to sanity test against many different cases.
 // This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
+//
+// Example:
+//  testza.MockInputStringRunTests(t, testza.MockInputStringFull(), func(t *testing.T, index int, str string) {
+//  	// Test logic
+//  	// err := YourFunction(str)
+//  	// testza.AssertNoError(t, err)
+//  	// ...
+//  })
 func MockInputStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()

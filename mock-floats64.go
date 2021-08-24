@@ -60,6 +60,14 @@ func MockInputFloat64GenerateRandomNegative(count int, min float64) (floats []fl
 // MockInputFloat64RunTests runs a test for every value in a testset.
 // You can use the value as input parameter for your functions, to sanity test against many different cases.
 // This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
+//
+// Example:
+//  testza.MockInputFloat64RunTests(t, testza.MockInputFloat64Full(), func(t *testing.T, index int, f float64) {
+//  	// Test logic
+//  	// err := YourFunction(f)
+//  	// testza.AssertNoError(t, err)
+//  	// ...
+//  })
 func MockInputFloat64RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
