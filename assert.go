@@ -191,6 +191,13 @@ func doesContain(object, element interface{}) bool {
 // ** Helper Methods **
 
 // AssertKindOf asserts that the object is a type of kind exptectedKind.
+//
+// Example:
+//  testza.AssertKindOf(t, reflect.Slice, []int{1,2,3})
+//  testza.AssertKindOf(t, reflect.Slice, []string{"Hello", "World"})
+//  testza.AssertKindOf(t, reflect.Int, 1337)
+//  testza.AssertKindOf(t, reflect.Bool, true)
+//  testza.AssertKindOf(t, reflect.Map, map[string]bool{})
 func AssertKindOf(t testRunner, expectedKind reflect.Kind, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -206,6 +213,13 @@ func AssertKindOf(t testRunner, expectedKind reflect.Kind, object interface{}, m
 }
 
 // AssertNotKindOf asserts that the object is not a type of kind `kind`.
+//
+// Example:
+//  testza.AssertNotKindOf(t, reflect.Slice, "Hello, World")
+//  testza.AssertNotKindOf(t, reflect.Slice, true)
+//  testza.AssertNotKindOf(t, reflect.Int, 13.37)
+//  testza.AssertNotKindOf(t, reflect.Bool, map[string]bool{})
+//  testza.AssertNotKindOf(t, reflect.Map, false)
 func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
