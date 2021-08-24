@@ -2,7 +2,7 @@
 ## [Unreleased]
 
 ### Features
-- **mock:** add `Stdin` mocking
+- **capture:** add `CaptureStdoutAndStderr`
 
 
 <a name="v0.2.5"></a>
