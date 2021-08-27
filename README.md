@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2522-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2520-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -129,6 +129,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertContains](https://github.com/MarvinJWendt/testza#AssertContains)
   - [AssertEqual](https://github.com/MarvinJWendt/testza#AssertEqual)
   - [AssertEqualValues](https://github.com/MarvinJWendt/testza#AssertEqualValues)
+  - [AssertErrorIs](https://github.com/MarvinJWendt/testza#AssertErrorIs)
   - [AssertFalse](https://github.com/MarvinJWendt/testza#AssertFalse)
   - [AssertGreater](https://github.com/MarvinJWendt/testza#AssertGreater)
   - [AssertImplements](https://github.com/MarvinJWendt/testza#AssertImplements)
@@ -140,6 +141,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertNotContains](https://github.com/MarvinJWendt/testza#AssertNotContains)
   - [AssertNotEqual](https://github.com/MarvinJWendt/testza#AssertNotEqual)
   - [AssertNotEqualValues](https://github.com/MarvinJWendt/testza#AssertNotEqualValues)
+  - [AssertNotErrorIs](https://github.com/MarvinJWendt/testza#AssertNotErrorIs)
   - [AssertNotImplements](https://github.com/MarvinJWendt/testza#AssertNotImplements)
   - [AssertNotKindOf](https://github.com/MarvinJWendt/testza#AssertNotKindOf)
   - [AssertNotNil](https://github.com/MarvinJWendt/testza#AssertNotNil)
@@ -341,6 +343,20 @@ Comparing struct values:
 
     testza.AssertEqualValues(t, person1, person2)
 
+#### AssertErrorIs
+
+```go
+func AssertErrorIs(t testRunner, err, target error, msg ...interface{})
+```
+
+AssertErrorIs asserts that target is inside the error chain of err.
+
+Example:
+
+    var testErr = errors.New("hello world")
+    var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+    testza.AssertErrorIs(t, testErrWrapped ,testErr)
+
 #### AssertFalse
 
 ```go
@@ -511,6 +527,21 @@ Comparing struct values:
     }
 
     testza.AssertNotEqualValues(t, person1, person2)
+
+#### AssertNotErrorIs
+
+```go
+func AssertNotErrorIs(t testRunner, err, target error, msg ...interface{})
+```
+
+AssertNotErrorIs
+
+Example:
+
+    var testErr = errors.New("hello world")
+    var test2Err = errors.New("hello world 2")
+    var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+    testza.AssertNotErrorIs(t, testErrWrapped, test2Err)
 
 #### AssertNotImplements
 

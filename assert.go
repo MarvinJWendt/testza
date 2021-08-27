@@ -2,6 +2,7 @@ package testza
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -678,5 +679,38 @@ func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions),
 
 	if !mock.ErrorCalled {
 		internal.Fail(t, "A test that !!should fail!! did not fail.", []internal.Object{}, msg...)
+	}
+}
+
+// AssertErrorIs asserts that target is inside the error chain of err.
+//
+// Example:
+//  var testErr = errors.New("hello world")
+//  var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+//  testza.AssertErrorIs(t, testErrWrapped ,testErr)
+func AssertErrorIs(t testRunner, err, target error, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !errors.Is(err, target) {
+		internal.Fail(t, "Target error !!should be in the error chain!! of err.", internal.NewObjectsExpectedActual(target.Error(), err.Error()), msg...)
+	}
+}
+
+// AssertNotErrorIs
+//
+// Example:
+//  var testErr = errors.New("hello world")
+//  var test2Err = errors.New("hello world 2")
+//  var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+//  testza.AssertNotErrorIs(t, testErrWrapped, test2Err)
+func AssertNotErrorIs(t testRunner, err, target error, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if errors.Is(err, target) {
+		internal.Fail(t, "Target error !!should not be in the error chain!! of err.", internal.NewObjectsExpectedActual(target.Error(), err.Error()), msg...)
 	}
 }
