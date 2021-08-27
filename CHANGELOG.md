@@ -4,6 +4,9 @@
 ### Features
 - **assert:** added `AssertErrorIs` and `AssertNotErrorIs`
 
+### Test
+- **assert:** added tests for `AssertErrorIs` and `AssertNotErrorIs`
+
 
 <a name="v0.2.6"></a>
 ## [v0.2.6] - 2021-08-24
