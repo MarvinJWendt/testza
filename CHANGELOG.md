@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 ### Features
+- **assert:** added `AssertErrorIs` and `AssertNotErrorIs`
+
+
+<a name="v0.2.6"></a>
+## [v0.2.6] - 2021-08-24
+### Features
 - **capture:** add `CaptureStdoutAndStderr`
 
 ### Code Refactoring
@@ -161,7 +167,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.5...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.6...HEAD
+[v0.2.6]: https://github.com/MarvinJWendt/testza/compare/v0.2.5...v0.2.6
 [v0.2.5]: https://github.com/MarvinJWendt/testza/compare/v0.2.4...v0.2.5
 [v0.2.4]: https://github.com/MarvinJWendt/testza/compare/v0.2.3...v0.2.4
 [v0.2.3]: https://github.com/MarvinJWendt/testza/compare/v0.2.2...v0.2.3
