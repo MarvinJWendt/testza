@@ -718,3 +718,33 @@ func TestAssertTestFails_fails(t *testing.T) {
 		})
 	})
 }
+
+func TestAssertErrorIs(t *testing.T) {
+	var testErr = errors.New("hello world")
+	var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+	AssertErrorIs(t, testErrWrapped, testErr)
+}
+
+func TestAssertErrorIs_fails(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		var testErr = errors.New("hello world")
+		var test2Err = errors.New("hello world 2")
+		var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+		AssertErrorIs(t, testErrWrapped, test2Err)
+	})
+}
+
+func TestAssertNotErrorIs(t *testing.T) {
+	var testErr = errors.New("hello world")
+	var test2Err = errors.New("hello world 2")
+	var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+	AssertNotErrorIs(t, testErrWrapped, test2Err)
+}
+
+func TestAssertNotErrorIs_fails(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		var testErr = errors.New("hello world")
+		var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+		AssertNotErrorIs(t, testErrWrapped, testErr)
+	})
+}
