@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 ### Features
+- **assert:** added error message to `AssertNoError`
+
+
+<a name="v0.2.7"></a>
+## [v0.2.7] - 2021-08-27
+### Features
 - **assert:** added `AssertErrorIs` and `AssertNotErrorIs`
 
 ### Test
@@ -170,7 +176,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.6...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.7...HEAD
+[v0.2.7]: https://github.com/MarvinJWendt/testza/compare/v0.2.6...v0.2.7
 [v0.2.6]: https://github.com/MarvinJWendt/testza/compare/v0.2.5...v0.2.6
 [v0.2.5]: https://github.com/MarvinJWendt/testza/compare/v0.2.4...v0.2.5
 [v0.2.4]: https://github.com/MarvinJWendt/testza/compare/v0.2.3...v0.2.4
