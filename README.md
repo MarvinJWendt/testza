@@ -442,7 +442,7 @@ Example:
 #### AssertNoError
 
 ```go
-func AssertNoError(t testRunner, err interface{}, msg ...interface{})
+func AssertNoError(t testRunner, err error, msg ...interface{})
 ```
 
 AssertNoError asserts that an error is nil.
