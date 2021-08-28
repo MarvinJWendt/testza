@@ -722,3 +722,43 @@ func AssertNotErrorIs(t testRunner, err, target error, msg ...interface{}) {
 		internal.Fail(t, "Target error !!should not be in the error chain!! of err.", internal.NewObjectsExpectedActual(target.Error(), err.Error()), msg...)
 	}
 }
+
+// AssertLen asserts that the length of an object is equal to the given length.
+//
+// Example:
+//  testza.AssertLen(t, "abc", 3)
+//  testza.AssertLen(t, "Assert", 6)
+//  testza.AssertLen(t, []int{1, 2, 1337, 25}, 4)
+//  testza.AssertLen(t, map[string]int{"asd": 1, "test": 1337}, 2)
+func AssertLen(t testRunner, object interface{}, length int, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	v := reflect.ValueOf(object)
+	defer func() {
+		if e := recover(); e != nil {
+			internal.Fail(t, "The 'object' !!does not!! have a length.", internal.NewObjectsSingleUnknown(object), msg...)
+		}
+	}()
+
+	if v.Len() != length {
+		internal.Fail(t, "The length of 'object' !!is not!! the expected length.", internal.Objects{
+			{
+				Name:      "Expected length",
+				NameStyle: pterm.NewStyle(pterm.FgRed),
+				Data:      fmt.Sprint(length) + "\n",
+				DataStyle: pterm.NewStyle(pterm.FgRed),
+				Raw:       true,
+			},
+			{
+				Name:      "Actual length",
+				NameStyle: pterm.NewStyle(pterm.FgRed),
+				Data:      fmt.Sprint(v.Len()) + "\n",
+				DataStyle: pterm.NewStyle(pterm.FgRed),
+				Raw:       true,
+			},
+			internal.NewObjectsSingleUnknown(object)[0],
+		}, msg...)
+	}
+}

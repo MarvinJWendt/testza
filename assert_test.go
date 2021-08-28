@@ -748,3 +748,55 @@ func TestAssertNotErrorIs_fails(t *testing.T) {
 		AssertNotErrorIs(t, testErrWrapped, testErr)
 	})
 }
+
+func TestAssertLen(t *testing.T) {
+	tests := []struct {
+		object interface{}
+		expLen int
+	}{
+		{object: "", expLen: 0},
+		{object: "a", expLen: 1},
+		{object: "123", expLen: 3},
+		{object: []string{"", "", "", ""}, expLen: 4},
+		{object: []string{}, expLen: 0},
+		{object: []int{1, 2, 3, 4, 5}, expLen: 5},
+	}
+	for _, test := range tests {
+		t.Run(fmt.Sprint(test.object), func(t *testing.T) {
+			AssertLen(t, test.object, test.expLen)
+		})
+	}
+}
+
+func TestAssertLen_fails(t *testing.T) {
+	tests := []struct {
+		object interface{}
+		expLen int
+	}{
+		{object: "", expLen: 1},
+		{object: "a", expLen: 2},
+		{object: "123", expLen: 4},
+		{object: []string{"", "", "", ""}, expLen: 5},
+		{object: []string{}, expLen: 1},
+		{object: []int{1, 2, 3, 4, 5}, expLen: 4},
+		{object: 1, expLen: 4},
+		{object: 0.1, expLen: 4},
+		{object: generateStruct(), expLen: 1},
+		{object: interface{}(nil), expLen: 1},
+		{object: true, expLen: 0},
+		{object: uint(137), expLen: 0},
+	}
+	for _, test := range tests {
+		t.Run(fmt.Sprint(test.object), func(t *testing.T) {
+			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+				AssertLen(t, test.object, test.expLen)
+			})
+		})
+	}
+}
+
+func TestAssertLen_full(t *testing.T) {
+	MockInputStringRunTests(t, MockInputStringFull(), func(t *testing.T, index int, str string) {
+		AssertLen(t, str, len(str))
+	})
+}
