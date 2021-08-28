@@ -730,7 +730,7 @@ func AssertNotErrorIs(t testRunner, err, target error, msg ...interface{}) {
 //  testza.AssertLen(t, "Assert", 6)
 //  testza.AssertLen(t, []int{1, 2, 1337, 25}, 4)
 //  testza.AssertLen(t, map[string]int{"asd": 1, "test": 1337}, 2)
-func AssertLen(t testRunner, object interface{}, len int, msg ...interface{}) {
+func AssertLen(t testRunner, object interface{}, length int, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -742,12 +742,12 @@ func AssertLen(t testRunner, object interface{}, len int, msg ...interface{}) {
 		}
 	}()
 
-	if v.Len() != len {
+	if v.Len() != length {
 		internal.Fail(t, "The length of 'object' !!is not!! the expected length.", internal.Objects{
 			{
 				Name:      "Expected length",
 				NameStyle: pterm.NewStyle(pterm.FgRed),
-				Data:      fmt.Sprint(len) + "\n",
+				Data:      fmt.Sprint(length) + "\n",
 				DataStyle: pterm.NewStyle(pterm.FgRed),
 				Raw:       true,
 			},
