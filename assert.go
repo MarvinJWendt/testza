@@ -598,18 +598,26 @@ func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ..
 // Example:
 //  err := nil
 //  testza.AssertNoError(t, err)
-func AssertNoError(t testRunner, err interface{}, msg ...interface{}) {
+func AssertNoError(t testRunner, err error, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
 
 	if err != nil {
-		internal.Fail(t, "An error that !!should be nil!! is not nil.", internal.Objects{{
-			Name:      "Error",
-			NameStyle: pterm.NewStyle(pterm.FgRed),
-			Data:      err,
-			DataStyle: pterm.NewStyle(pterm.FgRed),
-		}}, msg...)
+		internal.Fail(t, "An error that !!should be nil!! is not nil.", internal.Objects{
+			{
+				Name:      "Error message",
+				NameStyle: pterm.NewStyle(pterm.FgRed),
+				Data:      fmt.Sprintf("%q\n", err.Error()),
+				DataStyle: pterm.NewStyle(pterm.FgRed),
+				Raw:       true,
+			},
+			{
+				Name:      "Error object",
+				NameStyle: pterm.NewStyle(pterm.FgRed),
+				Data:      err,
+				DataStyle: pterm.NewStyle(pterm.FgRed),
+			}}, msg...)
 	}
 }
 
