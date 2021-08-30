@@ -1,12 +1,13 @@
 package internal
 
 import (
-	"github.com/pterm/pterm"
 	"path/filepath"
 	"reflect"
 	"regexp"
 	"runtime"
 	"testing"
+
+	"github.com/pterm/pterm"
 )
 
 type testRunner interface {
