@@ -800,3 +800,125 @@ func TestAssertLen_full(t *testing.T) {
 		AssertLen(t, str, len(str))
 	})
 }
+
+func TestAssertIsIncreasing(t *testing.T) {
+	tests := []struct {
+		name   string
+		object interface{}
+	}{
+		{name: "int", object: []int{1, 2, 3, 4, 5, 6}},
+		{name: "int2", object: []int{1, 7, 10, 11, 134, 700432}},
+		{name: "int_negative", object: []int{-2, -1, 0, 1, 2, 3, 4, 5, 6}},
+		{name: "int8", object: []int8{1, 2, 3, 4, 5, 6}},
+		{name: "int16", object: []int16{1, 2, 3, 4, 5, 6}},
+		{name: "int32", object: []int32{1, 2, 3, 4, 5, 6}},
+		{name: "int64", object: []int64{1, 2, 3, 4, 5, 6}},
+		{name: "uint", object: []uint{1, 2, 3, 4, 5, 6}},
+		{name: "uint8", object: []uint8{1, 2, 3, 4, 5, 6}},
+		{name: "uint16", object: []uint16{1, 2, 3, 4, 5, 6}},
+		{name: "uint32", object: []uint32{1, 2, 3, 4, 5, 6}},
+		{name: "uint64", object: []uint64{1, 2, 3, 4, 5, 6}},
+		{name: "float32", object: []float32{1.0, 2.1, 3.0, 4.12345, 5.45623, 6.1}},
+		{name: "float64", object: []float64{1.0, 2.1, 3.0, 4.12345, 5.45623, 6.1}},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			AssertIncreasing(t, test.object)
+		})
+	}
+}
+
+func TestAssertIsIncreasing_fail(t *testing.T) {
+	tests := []struct {
+		name   string
+		object interface{}
+	}{
+		{name: "int_empty", object: []int{}},
+		{name: "int_one", object: []int{4}},
+		{name: "int", object: []int{4, 2, 3, 4, 5, 6}},
+		{name: "int8", object: []int8{4, 2, 3, 4, 5, 6}},
+		{name: "int16", object: []int16{4, 2, 3, 4, 5, 6}},
+		{name: "int32", object: []int32{4, 2, 3, 4, 5, 6}},
+		{name: "int64", object: []int64{4, 2, 3, 4, 5, 6}},
+		{name: "uint", object: []uint{4, 2, 3, 4, 5, 6}},
+		{name: "uint8", object: []uint8{4, 2, 3, 4, 5, 6}},
+		{name: "uint16", object: []uint16{4, 2, 3, 4, 5, 6}},
+		{name: "uint32", object: []uint32{4, 2, 3, 4, 5, 6}},
+		{name: "uint64", object: []uint64{4, 2, 3, 4, 5, 6}},
+		{name: "float32", object: []float32{4.0, 2.1, 3.0, 4.12345, 5.45623, 6.1}},
+		{name: "float64", object: []float64{4.0, 2.1, 3.0, 4.12345, 5.45623, 6.1}},
+		{name: "complex64", object: []complex64{complex64(complex(float64(4), 2)), complex64(complex(float64(2), 2)), complex64(complex(float64(4), 2))}},
+		{name: "complex128", object: []complex128{complex(400.0, 2), complex(133.4, 2), complex(144.4, 2)}},
+		{name: "stringSlice", object: []string{"a"}},
+		{name: "string", object: "a"},
+		{name: "bool", object: true},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+				AssertIncreasing(t, test.object)
+			})
+		})
+	}
+}
+
+func TestAssertIsDecreasing(t *testing.T) {
+	tests := []struct {
+		name   string
+		object interface{}
+	}{
+		{name: "int", object: []int{6, 5, 4, 3, 2, 1}},
+		{name: "int2", object: []int{700432, 134, 11, 10, 7, 1}},
+		{name: "int_negative", object: []int{6, 5, 4, 3, 2, 1, 0, -1, -2}},
+		{name: "int8", object: []int8{6, 5, 4, 3, 2, 1}},
+		{name: "int16", object: []int16{6, 5, 4, 3, 2, 1}},
+		{name: "int32", object: []int32{6, 5, 4, 3, 2, 1}},
+		{name: "int64", object: []int64{6, 5, 4, 3, 2, 1}},
+		{name: "uint", object: []uint{6, 5, 4, 3, 2, 1}},
+		{name: "uint8", object: []uint8{6, 5, 4, 3, 2, 1}},
+		{name: "uint16", object: []uint16{6, 5, 4, 3, 2, 1}},
+		{name: "uint32", object: []uint32{6, 5, 4, 3, 2, 1}},
+		{name: "uint64", object: []uint64{6, 5, 4, 3, 2, 1}},
+		{name: "float32", object: []float32{5.45623, 4.12345, 3.0, 2.1, 1.0}},
+		{name: "float64", object: []float64{5.45623, 4.12345, 3.0, 2.1, 1.0}},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			AssertDecreasing(t, test.object)
+		})
+	}
+}
+
+func TestAssertIsDecreasing_fail(t *testing.T) {
+	tests := []struct {
+		name   string
+		object interface{}
+	}{
+		{name: "int_empty", object: []int{}},
+		{name: "int_one", object: []int{4}},
+		{name: "int", object: []int{4, 2, 3, 4, 5, 6}},
+		{name: "int8", object: []int8{4, 2, 3, 4, 5, 6}},
+		{name: "int16", object: []int16{4, 2, 3, 4, 5, 6}},
+		{name: "int32", object: []int32{4, 2, 3, 4, 5, 6}},
+		{name: "int64", object: []int64{4, 2, 3, 4, 5, 6}},
+		{name: "uint", object: []uint{4, 2, 3, 4, 5, 6}},
+		{name: "uint8", object: []uint8{4, 2, 3, 4, 5, 6}},
+		{name: "uint16", object: []uint16{4, 2, 3, 4, 5, 6}},
+		{name: "uint32", object: []uint32{4, 2, 3, 4, 5, 6}},
+		{name: "uint64", object: []uint64{4, 2, 3, 4, 5, 6}},
+		{name: "float32", object: []float32{4.0, 2.1, 3.0, 4.12345, 5.45623, 6.1}},
+		{name: "float64", object: []float64{4.0, 2.1, 3.0, 4.12345, 5.45623, 6.1}},
+		{name: "complex64", object: []complex64{complex64(complex(float64(4), 2)), complex64(complex(float64(2), 2)), complex64(complex(float64(4), 2))}},
+		{name: "complex128", object: []complex128{complex(400.0, 2), complex(133.4, 2), complex(144.4, 2)}},
+		{name: "stringSlice", object: []string{"a"}},
+		{name: "string", object: "a"},
+		{name: "bool", object: true},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+				AssertDecreasing(t, test.object)
+			})
+		})
+	}
+}
