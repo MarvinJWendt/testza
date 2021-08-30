@@ -46,7 +46,6 @@ func AssertCompareHelper(t testRunner, object interface{}, option int, msg ...in
 			}
 			return false
 		})
-		break
 	case uint, uint8, uint16, uint32, uint64:
 		ok = CompareTwoValuesInASlice(v, func(a, b reflect.Value) bool {
 			if option == 1 {
@@ -58,7 +57,6 @@ func AssertCompareHelper(t testRunner, object interface{}, option int, msg ...in
 			}
 			return false
 		})
-		break
 	case float32, float64:
 		ok = CompareTwoValuesInASlice(v, func(a, b reflect.Value) bool {
 			if option == 1 {
@@ -70,7 +68,6 @@ func AssertCompareHelper(t testRunner, object interface{}, option int, msg ...in
 			}
 			return false
 		})
-		break
 	default:
 		Fail(t, "The 'object' !!must be a numeric slice!!.", NewObjectsSingleUnknown(object), msg...)
 	}
@@ -80,13 +77,10 @@ func AssertCompareHelper(t testRunner, object interface{}, option int, msg ...in
 		switch option {
 		case 1:
 			txt = "increasing"
-			break
 		case 0:
 			txt = "equal"
-			break
 		case -1:
 			txt = "decreasing"
-			break
 		}
 		Fail(t, fmt.Sprintf("The 'object' !!is not %s!!.", txt), NewObjectsSingleUnknown(object), msg...)
 	}
