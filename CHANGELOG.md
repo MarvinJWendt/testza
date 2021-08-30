@@ -2,10 +2,12 @@
 ## [Unreleased]
 
 ### Features
+- **assert:** added `AssertIncreasing` and `AssertDecreasing`
 - **assert:** added `AssertLen`
 - **assert:** added error message to `AssertNoError`
 
 ### Code Refactoring
+- **assert:** removed unused break statements
 - **assert:** renamed variable in `AssertLen`
 
 
