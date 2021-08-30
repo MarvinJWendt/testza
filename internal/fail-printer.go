@@ -139,7 +139,7 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 	return message
 }
 
-func Fail(t testingT, message string, objects Objects, args ...interface{}) {
+func Fail(t testRunner, message string, objects Objects, args ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}

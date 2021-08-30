@@ -762,3 +762,35 @@ func AssertLen(t testRunner, object interface{}, length int, msg ...interface{})
 		}, msg...)
 	}
 }
+
+// AssertIncreasing asserts that the values in a slice are increasing.
+// the test fails if the values are not in a slice or if the values are not comparable.
+//
+// Valid input kinds are: []int, []int8, []int16, []int32, []int64, []uint, []uint8, []uint16, []uint32, []uint64, []float32, []float64.
+//
+// Example:
+//  testza.AssertIncreasing(t, []int{1, 2, 137, 1000})
+//  testza.AssertIncreasing(t, []float32{-10.3, 0.1, 7, 13.5})
+func AssertIncreasing(t testRunner, object interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	internal.AssertCompareHelper(t, object, 1, msg...)
+}
+
+// AssertDecreasing asserts that the values in a slice are decreasing.
+// the test fails if the values are not in a slice or if the values are not comparable.
+//
+// Valid input kinds are: []int, []int8, []int16, []int32, []int64, []uint, []uint8, []uint16, []uint32, []uint64, []float32, []float64.
+//
+// Example:
+//  testza.AssertDecreasing(t, []int{1000, 137, 2, 1})
+//  testza.AssertDecreasing(t, []float32{13.5, 7, 0.1, -10.3})
+func AssertDecreasing(t testRunner, object interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	internal.AssertCompareHelper(t, object, -1, msg...)
+}
