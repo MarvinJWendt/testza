@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2526-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2642-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -134,6 +134,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertGreater](https://github.com/MarvinJWendt/testza#AssertGreater)
   - [AssertImplements](https://github.com/MarvinJWendt/testza#AssertImplements)
   - [AssertKindOf](https://github.com/MarvinJWendt/testza#AssertKindOf)
+  - [AssertLen](https://github.com/MarvinJWendt/testza#AssertLen)
   - [AssertLess](https://github.com/MarvinJWendt/testza#AssertLess)
   - [AssertNil](https://github.com/MarvinJWendt/testza#AssertNil)
   - [AssertNoError](https://github.com/MarvinJWendt/testza#AssertNoError)
@@ -413,6 +414,21 @@ Example:
     testza.AssertKindOf(t, reflect.Int, 1337)
     testza.AssertKindOf(t, reflect.Bool, true)
     testza.AssertKindOf(t, reflect.Map, map[string]bool{})
+
+#### AssertLen
+
+```go
+func AssertLen(t testRunner, object interface{}, length int, msg ...interface{})
+```
+
+AssertLen asserts that the length of an object is equal to the given length.
+
+Example:
+
+    testza.AssertLen(t, "abc", 3)
+    testza.AssertLen(t, "Assert", 6)
+    testza.AssertLen(t, []int{1, 2, 1337, 25}, 4)
+    testza.AssertLen(t, map[string]int{"asd": 1, "test": 1337}, 2)
 
 #### AssertLess
 

@@ -2,7 +2,11 @@
 ## [Unreleased]
 
 ### Features
+- **assert:** added `AssertLen`
 - **assert:** added error message to `AssertNoError`
+
+### Code Refactoring
+- **assert:** renamed variable in `AssertLen`
 
 
 <a name="v0.2.7"></a>
