@@ -922,3 +922,23 @@ func TestAssertIsDecreasing_fail(t *testing.T) {
 		})
 	}
 }
+
+func TestAssertRegexp(t *testing.T) {
+	AssertRegexp(t, "peache", "p([a-z]+)ch")
+}
+
+func TestAssertRegexp_fail(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertRegexp(t, "peahe", "p([a-z]+)ch")
+	})
+}
+
+func TestAssertNotRegexp(t *testing.T) {
+	AssertNotRegexp(t, "peahe", "p([a-z]+)ch")
+}
+
+func TestAssertNotRegexp_fail(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertNotRegexp(t, "peache", "p([a-z]+)ch")
+	})
+}
