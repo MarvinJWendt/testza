@@ -127,12 +127,14 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
   - [AssertCompletesIn](https://github.com/MarvinJWendt/testza#AssertCompletesIn)
   - [AssertContains](https://github.com/MarvinJWendt/testza#AssertContains)
+  - [AssertDecreasing](https://github.com/MarvinJWendt/testza#AssertDecreasing)
   - [AssertEqual](https://github.com/MarvinJWendt/testza#AssertEqual)
   - [AssertEqualValues](https://github.com/MarvinJWendt/testza#AssertEqualValues)
   - [AssertErrorIs](https://github.com/MarvinJWendt/testza#AssertErrorIs)
   - [AssertFalse](https://github.com/MarvinJWendt/testza#AssertFalse)
   - [AssertGreater](https://github.com/MarvinJWendt/testza#AssertGreater)
   - [AssertImplements](https://github.com/MarvinJWendt/testza#AssertImplements)
+  - [AssertIncreasing](https://github.com/MarvinJWendt/testza#AssertIncreasing)
   - [AssertKindOf](https://github.com/MarvinJWendt/testza#AssertKindOf)
   - [AssertLen](https://github.com/MarvinJWendt/testza#AssertLen)
   - [AssertLess](https://github.com/MarvinJWendt/testza#AssertLess)
@@ -300,6 +302,23 @@ Example:
     testza.AssertContains(t, []string{"Hello", "World"}, "World")
     testza.AssertContains(t, "Hello, World!", "World")
 
+#### AssertDecreasing
+
+```go
+func AssertDecreasing(t testRunner, object interface{}, msg ...interface{})
+```
+
+AssertDecreasing asserts that the values in a slice are decreasing. the test
+fails if the values are not in a slice or if the values are not comparable.
+
+Valid input kinds are: []int, []int8, []int16, []int32, []int64, []uint,
+[]uint8, []uint16, []uint32, []uint64, []float32, []float64.
+
+Example:
+
+    testza.AssertDecreasing(t, []int{1000, 137, 2, 1})
+    testza.AssertDecreasing(t, []float32{13.5, 7, 0.1, -10.3})
+
 #### AssertEqual
 
 ```go
@@ -398,6 +417,23 @@ Example:
 
     testza.AssertImplements(t, (*YourInterface)(nil), new(YourObject))
     testza.AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
+
+#### AssertIncreasing
+
+```go
+func AssertIncreasing(t testRunner, object interface{}, msg ...interface{})
+```
+
+AssertIncreasing asserts that the values in a slice are increasing. the test
+fails if the values are not in a slice or if the values are not comparable.
+
+Valid input kinds are: []int, []int8, []int16, []int32, []int64, []uint,
+[]uint8, []uint16, []uint32, []uint64, []float32, []float64.
+
+Example:
+
+    testza.AssertIncreasing(t, []int{1, 2, 137, 1000})
+    testza.AssertIncreasing(t, []float32{-10.3, 0.1, 7, 13.5})
 
 #### AssertKindOf
 
