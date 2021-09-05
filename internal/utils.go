@@ -50,7 +50,7 @@ func AssertRegexpHelper(t testRunner, txt string, regex string, shouldMatch bool
 	if shouldMatch != match {
 		failText := "!!does not match!! the string."
 		if !shouldMatch {
-			failText = "!!does match!! the string !!but shouldn't!!."
+			failText = "!!does match!! the string !!but should not!!."
 		}
 		Fail(t, "The regex pattern "+failText, Objects{
 			{
