@@ -9,8 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/MarvinJWendt/testza/internal"
 	"github.com/pterm/pterm"
+
+	"github.com/MarvinJWendt/testza/internal"
 )
 
 type testMock struct {
@@ -795,18 +796,18 @@ func AssertDecreasing(t testRunner, object interface{}, msg ...interface{}) {
 	internal.AssertCompareHelper(t, object, -1, msg...)
 }
 
-func AssertRegexp(t testRunner, txt string, regex string, msg ...interface{}) {
+func AssertRegexp(t testRunner, regex string, txt string, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
 
-	internal.AssertRegexpHelper(t, txt, regex, true, msg...)
+	internal.AssertRegexpHelper(t, regex, txt, true, msg...)
 }
 
-func AssertNotRegexp(t testRunner, txt string, regex string, msg ...interface{}) {
+func AssertNotRegexp(t testRunner, regex string, txt string, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
 
-	internal.AssertRegexpHelper(t, txt, regex, false, msg...)
+	internal.AssertRegexpHelper(t, regex, txt, false, msg...)
 }

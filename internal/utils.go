@@ -45,7 +45,7 @@ func CompareTwoValuesInASlice(a reflect.Value, compareFunc func(a, b reflect.Val
 	return
 }
 
-func AssertRegexpHelper(t testRunner, txt string, regex string, shouldMatch bool, msg ...interface{}) {
+func AssertRegexpHelper(t testRunner, regex string, txt string, shouldMatch bool, msg ...interface{}) {
 	match, _ := regexp.MatchString(regex, txt)
 	if shouldMatch != match {
 		failText := "!!does not match!! the string."
