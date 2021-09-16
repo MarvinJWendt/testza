@@ -1,12 +1,10 @@
 package testza
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
 	"reflect"
 	"strconv"
-	"strings"
 	"time"
 
 	"github.com/MarvinJWendt/testza/internal"
@@ -52,143 +50,6 @@ func (m *testMock) Fatalf(format string, args ...interface{}) {
 	m.fail(fmt.Sprintf(format, args...))
 }
 
-// ** Getter Methods **
-
-func isKind(expectedKind reflect.Kind, value interface{}) bool {
-	return reflect.TypeOf(value).Kind() == expectedKind
-}
-
-func isNil(object interface{}) bool {
-	if object == nil {
-		return true
-	}
-
-	switch reflect.ValueOf(object).Kind() {
-	case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice:
-		return reflect.ValueOf(object).IsNil()
-	}
-
-	return false
-}
-
-func isNumber(value interface{}) bool {
-	numberKinds := []reflect.Kind{
-		reflect.Int,
-		reflect.Int8,
-		reflect.Int16,
-		reflect.Int32,
-		reflect.Int64,
-		reflect.Float32,
-		reflect.Float64,
-		reflect.Uint,
-		reflect.Uint8,
-		reflect.Uint16,
-		reflect.Uint32,
-		reflect.Uint64,
-		reflect.Complex64,
-		reflect.Complex128,
-	}
-
-	for _, k := range numberKinds {
-		if isKind(k, value) {
-			return true
-		}
-	}
-
-	return false
-}
-
-// completesIn returns if a function completes in a specific time.
-func completesIn(duration time.Duration, f func()) bool {
-	done := make(chan bool)
-	go func() {
-		f()
-		done <- true
-	}()
-
-	select {
-	case <-time.After(duration):
-		return false
-	case <-done:
-		return true
-	}
-}
-
-func isZero(value interface{}) bool {
-	return value == nil || reflect.DeepEqual(value, reflect.Zero(reflect.TypeOf(value)).Interface())
-}
-
-func isEqual(expected interface{}, actual interface{}) bool {
-	if expected == nil || actual == nil {
-		return expected == actual
-	}
-
-	expectedB, ok := expected.([]byte)
-	if !ok {
-		return reflect.DeepEqual(expected, actual)
-	}
-
-	actualB, ok := actual.([]byte)
-	if !ok {
-		return false
-	}
-	if expectedB == nil || actualB == nil {
-		return expectedB == nil && actualB == nil
-	}
-
-	return bytes.Equal(expectedB, actualB)
-}
-
-func hasEqualValues(expected interface{}, actual interface{}) bool {
-	if isEqual(expected, actual) {
-		return true
-	}
-
-	actualType := reflect.TypeOf(actual)
-	if actualType == nil {
-		return false
-	}
-
-	expectedValue := reflect.ValueOf(expected)
-	if expectedValue.IsValid() && expectedValue.Type().ConvertibleTo(actualType) {
-		return reflect.DeepEqual(expectedValue.Convert(actualType).Interface(), actual)
-	}
-
-	return false
-}
-
-func doesImplement(interfaceObject, object interface{}) bool {
-	interfaceType := reflect.TypeOf(interfaceObject).Elem()
-
-	if object == nil {
-		return false
-	}
-	if !reflect.TypeOf(object).Implements(interfaceType) {
-		return false
-	}
-
-	return true
-}
-
-func doesContain(object, element interface{}) bool {
-	objectValue := reflect.ValueOf(object)
-	objectKind := reflect.TypeOf(object).Kind()
-
-	switch objectKind {
-	case reflect.String:
-		return strings.Contains(objectValue.String(), reflect.ValueOf(element).String())
-	case reflect.Map:
-	default:
-		for i := 0; i < objectValue.Len(); i++ {
-			if isEqual(objectValue.Index(i).Interface(), element) {
-				return true
-			}
-		}
-	}
-
-	return false
-}
-
 // ** Helper Methods **
 
 // AssertKindOf asserts that the object is a type of kind exptectedKind.
@@ -204,7 +65,7 @@ func AssertKindOf(t testRunner, expectedKind reflect.Kind, object interface{}, m
 		test.Helper()
 	}
 
-	if !isKind(expectedKind, object) {
+	if !internal.IsKind(expectedKind, object) {
 		internal.Fail(t,
 			fmt.Sprintf("A value that !!should be a type of kind %s!! is a type of kind %s.", expectedKind.String(), reflect.TypeOf(object).Kind().String()),
 			internal.NewObjectsExpectedActual(expectedKind, object),
@@ -226,7 +87,7 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 		test.Helper()
 	}
 
-	if isKind(kind, object) {
+	if internal.IsKind(kind, object) {
 		internal.Fail(t,
 			fmt.Sprintf("A value that !!should not be a type of kind %s!! is a type of kind %s.", kind.String(), reflect.TypeOf(object).Kind().String()),
 			internal.NewObjectsExpectedActual(kind, object),
@@ -244,7 +105,7 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 //  testza.AssertNumeric(t, 1.23)
 //  testza.AssertNumeric(t, uint(123))
 func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
-	if !isNumber(object) {
+	if !internal.IsNumber(object) {
 		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object))
 	}
 }
@@ -257,7 +118,7 @@ func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
 //  testza.AssertNotNumeric(t, true)
 //  testza.AssertNotNumeric(t, "123")
 func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{}) {
-	if isNumber(object) {
+	if internal.IsNumber(object) {
 		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object))
 	}
 }
@@ -273,7 +134,7 @@ func AssertZero(t testRunner, value interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if !isZero(value) {
+	if !internal.IsZero(value) {
 		internal.Fail(t, "An object that !!should have it's zero value!!, does not have it's zero value.", internal.NewObjectsSingleNamed("object", value))
 	}
 }
@@ -289,7 +150,7 @@ func AssertNotZero(t testRunner, value interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if isZero(value) {
+	if internal.IsZero(value) {
 		internal.Fail(t, "An object that !!should not have it's zero value!!, does have it's zero value.", internal.NewObjectsSingleNamed("object", value))
 	}
 }
@@ -304,7 +165,7 @@ func AssertEqual(t testRunner, expected interface{}, actual interface{}, msg ...
 		test.Helper()
 	}
 
-	if !isEqual(expected, actual) {
+	if !internal.IsEqual(expected, actual) {
 		internal.Fail(t, "Two objects that !!should be equal!!, are not equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
@@ -319,7 +180,7 @@ func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg 
 		test.Helper()
 	}
 
-	if isEqual(expected, actual) {
+	if internal.IsEqual(expected, actual) {
 		internal.Fail(t, "Two objects that !!should not be equal!!, are equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
@@ -351,7 +212,7 @@ func AssertEqualValues(t testRunner, expected interface{}, actual interface{}, m
 		test.Helper()
 	}
 
-	if !hasEqualValues(expected, actual) {
+	if !internal.HasEqualValues(expected, actual) {
 		internal.Fail(t, "Two objects that !!should have equal values!!, do not have equal values.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
@@ -380,7 +241,7 @@ func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}
 		test.Helper()
 	}
 
-	if hasEqualValues(expected, actual) {
+	if internal.HasEqualValues(expected, actual) {
 		internal.Fail(t, "Two objects that !!should not have equal values!!, do have equal values.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
@@ -429,7 +290,7 @@ func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...
 		test.Helper()
 	}
 
-	if !doesImplement(interfaceObject, object) {
+	if !internal.DoesImplement(interfaceObject, object) {
 		internal.Fail(t, fmt.Sprintf("An object that !!should implement %s!! does not implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
@@ -444,7 +305,7 @@ func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg 
 		test.Helper()
 	}
 
-	if doesImplement(interfaceObject, object) {
+	if internal.DoesImplement(interfaceObject, object) {
 		internal.Fail(t, fmt.Sprintf("An object that !!should not implement %s!! does implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
@@ -460,7 +321,7 @@ func AssertContains(t testRunner, object, element interface{}, msg ...interface{
 		test.Helper()
 	}
 
-	if !doesContain(object, element) {
+	if !internal.DoesContain(object, element) {
 		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that is missing in object", Data: element}})
 	}
 }
@@ -475,7 +336,7 @@ func AssertNotContains(t testRunner, object, element interface{}, msg ...interfa
 		test.Helper()
 	}
 
-	if doesContain(object, element) {
+	if internal.DoesContain(object, element) {
 		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that should not be in object", Data: element}})
 	}
 }
@@ -530,7 +391,7 @@ func AssertNil(t testRunner, object interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if !isNil(object) {
+	if !internal.IsNil(object) {
 		internal.Fail(t, "An object that !!should be nil!! is not nil.", internal.NewObjectsExpectedActual(nil, object))
 	}
 }
@@ -546,7 +407,7 @@ func AssertNotNil(t testRunner, object interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if isNil(object) {
+	if internal.IsNil(object) {
 		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleNamed("object", object))
 	}
 }
@@ -566,7 +427,7 @@ func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...in
 		test.Helper()
 	}
 
-	if !completesIn(duration, f) {
+	if !internal.CompletesIn(duration, f) {
 		internal.Fail(t, fmt.Sprintf("The function !!should complete in %s!!, but it did not.", duration), internal.Objects{}, msg...)
 	}
 }
@@ -588,7 +449,7 @@ func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ..
 		test.Helper()
 	}
 
-	if completesIn(duration, f) {
+	if internal.CompletesIn(duration, f) {
 		internal.Fail(t, fmt.Sprintf("The function !!should not complete in %s!!, but it did.", duration), internal.Objects{}, msg...)
 	}
 }
