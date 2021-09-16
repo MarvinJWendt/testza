@@ -7,6 +7,7 @@
 - **assert:** added error message to `AssertNoError`
 
 ### Code Refactoring
+- **assert:** moved getter functions to internal package
 - **assert:** removed unused break statements
 - **assert:** renamed variable in `AssertLen`
 
