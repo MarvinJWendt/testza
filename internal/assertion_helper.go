@@ -8,10 +8,12 @@ import (
 	"time"
 )
 
+// IsKind returns if an object is kind of a specific kind.
 func IsKind(expectedKind reflect.Kind, value interface{}) bool {
 	return reflect.TypeOf(value).Kind() == expectedKind
 }
 
+// IsNil checks if an object is nil.
 func IsNil(object interface{}) bool {
 	if object == nil {
 		return true
@@ -25,6 +27,7 @@ func IsNil(object interface{}) bool {
 	return false
 }
 
+// IsNumber checks if the value is of a numeric kind.
 func IsNumber(value interface{}) bool {
 	numberKinds := []reflect.Kind{
 		reflect.Int,
@@ -68,10 +71,12 @@ func CompletesIn(duration time.Duration, f func()) bool {
 	}
 }
 
+// IsZero checks if a value is the zero value of its type.
 func IsZero(value interface{}) bool {
 	return value == nil || reflect.DeepEqual(value, reflect.Zero(reflect.TypeOf(value)).Interface())
 }
 
+// IsEqual checks if two objects are equal.
 func IsEqual(expected interface{}, actual interface{}) bool {
 	if expected == nil || actual == nil {
 		return expected == actual
@@ -93,6 +98,7 @@ func IsEqual(expected interface{}, actual interface{}) bool {
 	return bytes.Equal(expectedB, actualB)
 }
 
+// HasEqualValues checks if two objects have equal values.
 func HasEqualValues(expected interface{}, actual interface{}) bool {
 	if IsEqual(expected, actual) {
 		return true
@@ -111,6 +117,7 @@ func HasEqualValues(expected interface{}, actual interface{}) bool {
 	return false
 }
 
+// DoesImplement checks if an objects implements an interface.
 func DoesImplement(interfaceObject, object interface{}) bool {
 	interfaceType := reflect.TypeOf(interfaceObject).Elem()
 
@@ -124,6 +131,7 @@ func DoesImplement(interfaceObject, object interface{}) bool {
 	return true
 }
 
+// DoesContain checks that ab objects contains an element.
 func DoesContain(object, element interface{}) bool {
 	objectValue := reflect.ValueOf(object)
 	objectKind := reflect.TypeOf(object).Kind()
