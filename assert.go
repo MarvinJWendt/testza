@@ -796,7 +796,7 @@ func AssertDecreasing(t testRunner, object interface{}, msg ...interface{}) {
 	internal.AssertCompareHelper(t, object, -1, msg...)
 }
 
-func AssertRegexp(t testRunner, regex string, txt string, msg ...interface{}) {
+func AssertRegexp(t testRunner, regex interface{}, txt string, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -804,7 +804,7 @@ func AssertRegexp(t testRunner, regex string, txt string, msg ...interface{}) {
 	internal.AssertRegexpHelper(t, regex, txt, true, msg...)
 }
 
-func AssertNotRegexp(t testRunner, regex string, txt string, msg ...interface{}) {
+func AssertNotRegexp(t testRunner, regex interface{}, txt string, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
