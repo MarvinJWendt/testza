@@ -211,15 +211,15 @@ func AssertCompareHelper(t testRunner, object interface{}, option int, msg ...in
 	}
 
 	if !ok {
-		var txt string
+		var order string
 		switch option {
 		case 1:
-			txt = "increasing"
+			order = "increasing"
 		case 0:
-			txt = "equal"
+			order = "equal"
 		case -1:
-			txt = "decreasing"
+			order = "decreasing"
 		}
-		Fail(t, fmt.Sprintf("The 'object' !!is not %s!!.", txt), NewObjectsSingleUnknown(object), msg...)
+		Fail(t, fmt.Sprintf("The 'object' !!is not %s!!.", order), NewObjectsSingleUnknown(object), msg...)
 	}
 }
