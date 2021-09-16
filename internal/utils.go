@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"fmt"
 	"path/filepath"
 	"reflect"
 	"regexp"
@@ -46,9 +45,10 @@ func CompareTwoValuesInASlice(a reflect.Value, compareFunc func(a, b reflect.Val
 	return
 }
 
-func AssertRegexpHelper(t testRunner, regex interface{}, txt string, shouldMatch bool, msg ...interface{}) {
+func AssertRegexpHelper(t testRunner, regex interface{}, txt interface{}, shouldMatch bool, msg ...interface{}) {
 	regexString := fmt.Sprint(regex)
-	match, _ := regexp.MatchString(regexString, txt)
+	txtString := fmt.Sprint(txt)
+	match, _ := regexp.MatchString(regexString, txtString)
 	if shouldMatch != match {
 		failText := "!!does not match!! the string."
 		if !shouldMatch {
@@ -65,7 +65,7 @@ func AssertRegexpHelper(t testRunner, regex interface{}, txt string, shouldMatch
 			{
 				Name:      "String",
 				NameStyle: pterm.NewStyle(pterm.FgRed),
-				Data:      txt + "\n",
+				Data:      txtString + "\n",
 				DataStyle: pterm.NewStyle(pterm.FgRed),
 				Raw:       true,
 			},
