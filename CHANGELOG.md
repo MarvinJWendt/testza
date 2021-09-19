@@ -2,11 +2,19 @@
 ## [Unreleased]
 
 ### Features
+- **assert:** added `AssertRegexp` and `AssertNotRegexp`
 - **assert:** added `AssertIncreasing` and `AssertDecreasing`
 - **assert:** added `AssertLen`
 - **assert:** added error message to `AssertNoError`
 
 ### Code Refactoring
+- **assert:** added regexp tests for `AssertRegexp` & `AssertNotRegexp`
+- **assert:** changed parameter for `Assert(Not)Regexp` to interface
+- **assert:** changed parameter for `Assert(Not)Regexp` to interface
+- **assert:** changed parameter for `Assert(Not)Regexp` to interface
+- **assert:** rearranged parameters
+- **assert:** change fail message
+- **assert:** rearranged imports
 - **assert:** removed unused break statements
 - **assert:** renamed variable in `AssertLen`
 
