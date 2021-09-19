@@ -6,11 +6,13 @@ import (
 	"go/types"
 	"math/rand"
 	"reflect"
+	"regexp"
 	"testing"
 	"time"
 
-	. "github.com/MarvinJWendt/testza"
 	"github.com/pterm/pterm"
+
+	. "github.com/MarvinJWendt/testza"
 )
 
 type assertionTestStruct struct {
@@ -921,4 +923,36 @@ func TestAssertIsDecreasing_fail(t *testing.T) {
 			})
 		})
 	}
+}
+
+func TestAssertRegexp(t *testing.T) {
+	AssertRegexp(t, "p([a-z]+)ch", "peache")
+	rxp, err := regexp.Compile("Hello, .*")
+	AssertNoError(t, err)
+	AssertRegexp(t, rxp, "Hello, World!")
+}
+
+func TestAssertRegexp_fail(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertRegexp(t, "p([a-z]+)ch", "peahe")
+		rxp, err := regexp.Compile("Hello, .*")
+		AssertNoError(t, err)
+		AssertRegexp(t, rxp, "Hello World!")
+	})
+}
+
+func TestAssertNotRegexp(t *testing.T) {
+	AssertNotRegexp(t, "p([a-z]+)ch", "peahe")
+	rxp, err := regexp.Compile("Hello, .*")
+	AssertNoError(t, err)
+	AssertNotRegexp(t, rxp, "Hello World!")
+}
+
+func TestAssertNotRegexp_fail(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertNotRegexp(t, "p([a-z]+)ch", "peache")
+		rxp, err := regexp.Compile("Hello, .*")
+		AssertNoError(t, err)
+		AssertNotRegexp(t, rxp, "Hello, World!")
+	})
 }
