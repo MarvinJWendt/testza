@@ -150,9 +150,11 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertNotNil](https://github.com/MarvinJWendt/testza#AssertNotNil)
   - [AssertNotNumeric](https://github.com/MarvinJWendt/testza#AssertNotNumeric)
   - [AssertNotPanics](https://github.com/MarvinJWendt/testza#AssertNotPanics)
+  - [AssertNotRegexp](https://github.com/MarvinJWendt/testza#AssertNotRegexp)
   - [AssertNotZero](https://github.com/MarvinJWendt/testza#AssertNotZero)
   - [AssertNumeric](https://github.com/MarvinJWendt/testza#AssertNumeric)
   - [AssertPanics](https://github.com/MarvinJWendt/testza#AssertPanics)
+  - [AssertRegexp](https://github.com/MarvinJWendt/testza#AssertRegexp)
   - [AssertTestFails](https://github.com/MarvinJWendt/testza#AssertTestFails)
   - [AssertTrue](https://github.com/MarvinJWendt/testza#AssertTrue)
   - [AssertZero](https://github.com/MarvinJWendt/testza#AssertZero)
@@ -667,6 +669,14 @@ Example:
     	// some code that does not call a panic...
     }) // => PASS
 
+#### AssertNotRegexp
+
+```go
+func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
+```
+
+
+
 #### AssertNotZero
 
 ```go
@@ -711,6 +721,14 @@ Example:
     	// ...
     	panic("some panic")
     }) // => PASS
+
+#### AssertRegexp
+
+```go
+func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
+```
+
+
 
 #### AssertTestFails
 
