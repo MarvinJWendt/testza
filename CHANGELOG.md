@@ -1,6 +1,15 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Code Refactoring
+- **assert:** renamed internal variable
+- **assert:** moved `AssertCompareHelper` to assertion_helper.go
+- **assert:** moved getter functions to internal package
+- **internal:** moved `AssertRegexpHelper` to right file
+
+
+<a name="v0.2.8"></a>
+## [v0.2.8] - 2021-09-19
 ### Features
 - **assert:** added `AssertRegexp` and `AssertNotRegexp`
 - **assert:** added `AssertIncreasing` and `AssertDecreasing`
@@ -190,7 +199,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.7...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.8...HEAD
+[v0.2.8]: https://github.com/MarvinJWendt/testza/compare/v0.2.7...v0.2.8
 [v0.2.7]: https://github.com/MarvinJWendt/testza/compare/v0.2.6...v0.2.7
 [v0.2.6]: https://github.com/MarvinJWendt/testza/compare/v0.2.5...v0.2.6
 [v0.2.5]: https://github.com/MarvinJWendt/testza/compare/v0.2.4...v0.2.5
