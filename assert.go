@@ -7,8 +7,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/MarvinJWendt/testza/internal"
 	"github.com/pterm/pterm"
+
+	"github.com/MarvinJWendt/testza/internal"
 )
 
 type testMock struct {
@@ -654,4 +655,20 @@ func AssertDecreasing(t testRunner, object interface{}, msg ...interface{}) {
 	}
 
 	internal.AssertCompareHelper(t, object, -1, msg...)
+}
+
+func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	internal.AssertRegexpHelper(t, regex, txt, true, msg...)
+}
+
+func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	internal.AssertRegexpHelper(t, regex, txt, false, msg...)
 }

@@ -1,10 +1,14 @@
 package internal
 
 import (
+	"fmt"
 	"path/filepath"
 	"reflect"
+	"regexp"
 	"runtime"
 	"testing"
+
+	"github.com/pterm/pterm"
 )
 
 type testRunner interface {
@@ -40,4 +44,32 @@ func CompareTwoValuesInASlice(a reflect.Value, compareFunc func(a, b reflect.Val
 	}
 
 	return
+}
+
+func AssertRegexpHelper(t testRunner, regex interface{}, txt interface{}, shouldMatch bool, msg ...interface{}) {
+	regexString := fmt.Sprint(regex)
+	txtString := fmt.Sprint(txt)
+	match, _ := regexp.MatchString(regexString, txtString)
+	if shouldMatch != match {
+		failText := "!!does not match!! the string."
+		if !shouldMatch {
+			failText = "!!does match!! the string !!but should not!!."
+		}
+		Fail(t, "The regex pattern "+failText, Objects{
+			{
+				Name:      "Regex Pattern",
+				NameStyle: pterm.NewStyle(pterm.FgRed),
+				Data:      regexString + "\n",
+				DataStyle: pterm.NewStyle(pterm.FgRed),
+				Raw:       true,
+			},
+			{
+				Name:      "String",
+				NameStyle: pterm.NewStyle(pterm.FgRed),
+				Data:      txtString + "\n",
+				DataStyle: pterm.NewStyle(pterm.FgRed),
+				Raw:       true,
+			},
+		}, msg...)
+	}
 }
