@@ -4,8 +4,11 @@ import (
 	"bytes"
 	"fmt"
 	"reflect"
+	"regexp"
 	"strings"
 	"time"
+
+	"github.com/pterm/pterm"
 )
 
 // IsKind returns if an object is kind of a specific kind.
@@ -229,5 +232,33 @@ func AssertCompareHelper(t testRunner, object interface{}, option int, msg ...in
 			order = "decreasing"
 		}
 		Fail(t, fmt.Sprintf("The 'object' !!is not %s!!.", order), NewObjectsSingleUnknown(object), msg...)
+	}
+}
+
+func AssertRegexpHelper(t testRunner, regex interface{}, txt interface{}, shouldMatch bool, msg ...interface{}) {
+	regexString := fmt.Sprint(regex)
+	txtString := fmt.Sprint(txt)
+	match, _ := regexp.MatchString(regexString, txtString)
+	if shouldMatch != match {
+		failText := "!!does not match!! the string."
+		if !shouldMatch {
+			failText = "!!does match!! the string, but !!should not!!."
+		}
+		Fail(t, "The regex pattern "+failText, Objects{
+			{
+				Name:      "Regex Pattern",
+				NameStyle: pterm.NewStyle(pterm.FgRed),
+				Data:      regexString + "\n",
+				DataStyle: pterm.NewStyle(pterm.FgRed),
+				Raw:       true,
+			},
+			{
+				Name:      "String",
+				NameStyle: pterm.NewStyle(pterm.FgRed),
+				Data:      txtString + "\n",
+				DataStyle: pterm.NewStyle(pterm.FgRed),
+				Raw:       true,
+			},
+		}, msg...)
 	}
 }
