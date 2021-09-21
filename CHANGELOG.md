@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v0.2.9"></a>
+## [v0.2.9] - 2021-09-21
 ### Code Refactoring
 - **assert:** renamed internal variable
 - **assert:** moved `AssertCompareHelper` to assertion_helper.go
@@ -199,7 +202,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.8...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.9...HEAD
+[v0.2.9]: https://github.com/MarvinJWendt/testza/compare/v0.2.8...v0.2.9
 [v0.2.8]: https://github.com/MarvinJWendt/testza/compare/v0.2.7...v0.2.8
 [v0.2.7]: https://github.com/MarvinJWendt/testza/compare/v0.2.6...v0.2.7
 [v0.2.6]: https://github.com/MarvinJWendt/testza/compare/v0.2.5...v0.2.6
