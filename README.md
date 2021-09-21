@@ -675,7 +675,11 @@ Example:
 func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
 ```
 
+AssertNotRegexp asserts that a string does not match a given regexp.
 
+Example:
+
+    testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
 
 #### AssertNotZero
 
@@ -728,7 +732,11 @@ Example:
 func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
 ```
 
+AssertRegexp asserts that a string matches a given regexp.
 
+Example:
+
+    testza.AssertRegexp(t, "^a.*c$", "abc")
 
 #### AssertTestFails
 
