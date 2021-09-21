@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2718-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2710-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -675,7 +675,11 @@ Example:
 func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
 ```
 
+AssertNotRegexp asserts that a string does not match a given regexp.
 
+Example:
+
+    testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
 
 #### AssertNotZero
 
@@ -728,7 +732,11 @@ Example:
 func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
 ```
 
+AssertRegexp asserts that a string matches a given regexp.
 
+Example:
+
+    testza.AssertRegexp(t, "^a.*c$", "abc")
 
 #### AssertTestFails
 

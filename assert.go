@@ -657,6 +657,10 @@ func AssertDecreasing(t testRunner, object interface{}, msg ...interface{}) {
 	internal.AssertCompareHelper(t, object, -1, msg...)
 }
 
+// AssertRegexp asserts that a string matches a given regexp.
+//
+// Example:
+//  testza.AssertRegexp(t, "^a.*c$", "abc")
 func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -665,6 +669,10 @@ func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...inter
 	internal.AssertRegexpHelper(t, regex, txt, true, msg...)
 }
 
+// AssertNotRegexp asserts that a string does not match a given regexp.
+//
+// Example:
+//  testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
 func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
