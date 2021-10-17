@@ -680,3 +680,31 @@ func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...in
 
 	internal.AssertRegexpHelper(t, regex, txt, false, msg...)
 }
+
+// AssertDirEmpty asserts that a directory is empty
+//
+// Example:
+//  testza.AssertDirEmpty(t, "FolderName")
+func AssertDirEmpty(t testRunner, dir string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !internal.AssertDirEmptyHelper(t, dir) {
+		internal.Fail(t, "The 'dir' !!is not!! empty.", internal.NewObjectsSingleNamed("dir", dir))
+	}
+}
+
+// AssertDirNotEmpty asserts that a directory is not empty
+//
+// Example:
+//  testza.AssertDirNotEmpty(t, "FolderName")
+func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if internal.AssertDirEmptyHelper(t, dir) {
+		internal.Fail(t, "The 'dir' !!is!! empty.", internal.NewObjectsSingleNamed("dir", dir))
+	}
+}
