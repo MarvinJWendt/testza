@@ -956,3 +956,71 @@ func TestAssertNotRegexp_fail(t *testing.T) {
 		AssertNotRegexp(t, rxp, "Hello, World!")
 	})
 }
+
+func TestAssertFileExists(t *testing.T) {
+	t.Run("LICENSE", func(t *testing.T) {
+		AssertFileExists(t, "LICENSE")
+	})
+
+	t.Run("README.md", func(t *testing.T) {
+		AssertFileExists(t, "README.md")
+	})
+
+	t.Run("CODE_OF_CONDUCT.md", func(t *testing.T) {
+		AssertFileExists(t, "CODE_OF_CONDUCT.md")
+	})
+
+	t.Run("CONTRIBUTING.md", func(t *testing.T) {
+		AssertFileExists(t, "CONTRIBUTING.md")
+	})
+
+	t.Run("CHANGELOG.md", func(t *testing.T) {
+		AssertFileExists(t, "CHANGELOG.md")
+	})
+}
+
+func TestAssertFileExists_fail(t *testing.T) {
+	t.Run("asdasdasdasd.md", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertFileExists(t, "asdasdasdasd.md")
+		})
+	})
+}
+
+func TestAssertNoFileExists(t *testing.T) {
+	t.Run("asdasdasdasd.md", func(t *testing.T) {
+		AssertNoFileExists(t, "asdasdasdasd.md")
+	})
+}
+
+func TestAssertNoFileExists_fail(t *testing.T) {
+	t.Run("LICENSE", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertNoFileExists(t, "LICENSE")
+		})
+	})
+
+	t.Run("README.md", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertNoFileExists(t, "README.md")
+		})
+	})
+
+	t.Run("CODE_OF_CONDUCT.md", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertNoFileExists(t, "CODE_OF_CONDUCT.md")
+		})
+	})
+
+	t.Run("CONTRIBUTING.md", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertNoFileExists(t, "CONTRIBUTING.md")
+		})
+	})
+
+	t.Run("CHANGELOG.md", func(t *testing.T) {
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertNoFileExists(t, "CHANGELOG.md")
+		})
+	})
+}

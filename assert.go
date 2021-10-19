@@ -3,6 +3,7 @@ package testza
 import (
 	"errors"
 	"fmt"
+	"os"
 	"reflect"
 	"strconv"
 	"time"
@@ -679,4 +680,31 @@ func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...in
 	}
 
 	internal.AssertRegexpHelper(t, regex, txt, false, msg...)
+}
+
+// AssertFileExists asserts that a file exists.
+//
+// Example:
+//  testza.AssertFileExists(t, "./test.txt")
+//  testza.AssertFileExists(t, "./config.yaml", "the config file is missing")
+func AssertFileExists(t testRunner, file string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	// check if a file does not exists
+	if _, err := os.Stat(file); os.IsNotExist(err) {
+		internal.Fail(t, "A file !!does not exist!!.", internal.NewObjectsSingleNamed("File", file), msg...)
+	}
+}
+
+func AssertNoFileExists(t testRunner, file string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	// check if a file exists
+	if _, err := os.Stat(file); !os.IsNotExist(err) {
+		internal.Fail(t, "A file that !!should not exist!!, does exist.", internal.NewObjectsSingleUnknown(file), msg...)
+	}
 }
