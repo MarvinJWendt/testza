@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2708-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2724-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -132,6 +132,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertEqualValues](https://github.com/MarvinJWendt/testza#AssertEqualValues)
   - [AssertErrorIs](https://github.com/MarvinJWendt/testza#AssertErrorIs)
   - [AssertFalse](https://github.com/MarvinJWendt/testza#AssertFalse)
+  - [AssertFileExists](https://github.com/MarvinJWendt/testza#AssertFileExists)
   - [AssertGreater](https://github.com/MarvinJWendt/testza#AssertGreater)
   - [AssertImplements](https://github.com/MarvinJWendt/testza#AssertImplements)
   - [AssertIncreasing](https://github.com/MarvinJWendt/testza#AssertIncreasing)
@@ -140,6 +141,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertLess](https://github.com/MarvinJWendt/testza#AssertLess)
   - [AssertNil](https://github.com/MarvinJWendt/testza#AssertNil)
   - [AssertNoError](https://github.com/MarvinJWendt/testza#AssertNoError)
+  - [AssertNoFileExists](https://github.com/MarvinJWendt/testza#AssertNoFileExists)
   - [AssertNotCompletesIn](https://github.com/MarvinJWendt/testza#AssertNotCompletesIn)
   - [AssertNotContains](https://github.com/MarvinJWendt/testza#AssertNotContains)
   - [AssertNotEqual](https://github.com/MarvinJWendt/testza#AssertNotEqual)
@@ -394,6 +396,19 @@ Example:
     testza.AssertFalse(t, 2 != 2)
     testza.AssertFalse(t, 1 > 5 && 4 < 0)
 
+#### AssertFileExists
+
+```go
+func AssertFileExists(t testRunner, file string, msg ...interface{})
+```
+
+AssertFileExists asserts that a file exists.
+
+Example:
+
+    testza.AssertFileExists(t, "./test.txt")
+    testza.AssertFileExists(t, "./config.yaml", "the config file is missing")
+
 #### AssertGreater
 
 ```go
@@ -505,6 +520,14 @@ Example:
 
     err := nil
     testza.AssertNoError(t, err)
+
+#### AssertNoFileExists
+
+```go
+func AssertNoFileExists(t testRunner, file string, msg ...interface{})
+```
+
+
 
 #### AssertNotCompletesIn
 
