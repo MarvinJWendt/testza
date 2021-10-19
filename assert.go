@@ -705,6 +705,6 @@ func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{}) {
 	}
 
 	if internal.AssertDirEmptyHelper(t, dir) {
-		internal.Fail(t, "The 'dir' !!is!! empty.", internal.NewObjectsSingleNamed("dir", dir))
+		internal.Fail(t, "The directory !!is!! empty.", internal.NewObjectsSingleNamed("Directory", dir))
 	}
 }
