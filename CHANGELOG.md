@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- **assert:** added `AssertFileExists` and `AssertNoFileExists`
+
 
 <a name="v0.2.9"></a>
 ## [v0.2.9] - 2021-09-21
