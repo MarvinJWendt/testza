@@ -3,6 +3,7 @@ package testza
 import (
 	"errors"
 	"fmt"
+	"os"
 	"reflect"
 	"strconv"
 	"time"
@@ -681,6 +682,34 @@ func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...in
 	internal.AssertRegexpHelper(t, regex, txt, false, msg...)
 }
 
+
+// AssertFileExists asserts that a file exists.
+//
+// Example:
+//  testza.AssertFileExists(t, "./test.txt")
+//  testza.AssertFileExists(t, "./config.yaml", "the config file is missing")
+func AssertFileExists(t testRunner, file string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	// check if a file does not exists
+	if _, err := os.Stat(file); os.IsNotExist(err) {
+		internal.Fail(t, "A file !!does not exist!!.", internal.NewObjectsSingleNamed("File", file), msg...)
+	}
+}
+
+func AssertNoFileExists(t testRunner, file string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	// check if a file exists
+	if _, err := os.Stat(file); !os.IsNotExist(err) {
+		internal.Fail(t, "A file that !!should not exist!!, does exist.", internal.NewObjectsSingleUnknown(file), msg...)
+	}
+}
+
 // AssertDirEmpty asserts that a directory is empty.
 // The test will pass when the directory is empty or does not exist.
 //
@@ -690,8 +719,8 @@ func AssertDirEmpty(t testRunner, dir string, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
-
-	if !internal.AssertDirEmptyHelper(t, dir) {
+  
+  if !internal.AssertDirEmptyHelper(t, dir) {
 		internal.Fail(t, "The directory !!is not!! empty.", internal.NewObjectsSingleNamed("Directory", dir))
 	}
 }
