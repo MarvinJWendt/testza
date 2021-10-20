@@ -2,6 +2,7 @@
 ## [Unreleased]
 
 ### Features
+- **assert:** added AssertDirEmpty and AssertDirNotEmpty. fixes [#37](https://github.com/MarvinJWendt/testza/issues/37) ([#52](https://github.com/MarvinJWendt/testza/issues/52))
 - **assert:** added `AssertFileExists` and `AssertNoFileExists`
 
 
