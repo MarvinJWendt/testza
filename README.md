@@ -128,6 +128,8 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertCompletesIn](https://github.com/MarvinJWendt/testza#AssertCompletesIn)
   - [AssertContains](https://github.com/MarvinJWendt/testza#AssertContains)
   - [AssertDecreasing](https://github.com/MarvinJWendt/testza#AssertDecreasing)
+  - [AssertDirEmpty](https://github.com/MarvinJWendt/testza#AssertDirEmpty)
+  - [AssertDirNotEmpty](https://github.com/MarvinJWendt/testza#AssertDirNotEmpty)
   - [AssertEqual](https://github.com/MarvinJWendt/testza#AssertEqual)
   - [AssertEqualValues](https://github.com/MarvinJWendt/testza#AssertEqualValues)
   - [AssertErrorIs](https://github.com/MarvinJWendt/testza#AssertErrorIs)
@@ -322,6 +324,31 @@ Example:
 
     testza.AssertDecreasing(t, []int{1000, 137, 2, 1})
     testza.AssertDecreasing(t, []float32{13.5, 7, 0.1, -10.3})
+
+#### AssertDirEmpty
+
+```go
+func AssertDirEmpty(t testRunner, dir string, msg ...interface{})
+```
+
+AssertDirEmpty asserts that a directory is empty. The test will pass when
+the directory is empty or does not exist.
+
+Example:
+
+    testza.AssertDirEmpty(t, "FolderName")
+
+#### AssertDirNotEmpty
+
+```go
+func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{})
+```
+
+AssertDirNotEmpty asserts that a directory is not empty
+
+Example:
+
+    testza.AssertDirNotEmpty(t, "FolderName")
 
 #### AssertEqual
 
