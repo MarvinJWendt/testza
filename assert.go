@@ -682,7 +682,6 @@ func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...in
 	internal.AssertRegexpHelper(t, regex, txt, false, msg...)
 }
 
-
 // AssertFileExists asserts that a file exists.
 //
 // Example:
@@ -719,8 +718,8 @@ func AssertDirEmpty(t testRunner, dir string, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
-  
-  if !internal.AssertDirEmptyHelper(t, dir) {
+
+	if !internal.AssertDirEmptyHelper(t, dir) {
 		internal.Fail(t, "The directory !!is not!! empty.", internal.NewObjectsSingleNamed("Directory", dir))
 	}
 }
