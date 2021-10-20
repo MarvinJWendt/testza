@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v0.2.10"></a>
+## [v0.2.10] - 2021-10-20
 ### Features
 - **assert:** added AssertDirEmpty and AssertDirNotEmpty. fixes [#37](https://github.com/MarvinJWendt/testza/issues/37) ([#52](https://github.com/MarvinJWendt/testza/issues/52))
 - **assert:** added `AssertFileExists` and `AssertNoFileExists`
@@ -206,7 +209,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.9...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.10...HEAD
+[v0.2.10]: https://github.com/MarvinJWendt/testza/compare/v0.2.9...v0.2.10
 [v0.2.9]: https://github.com/MarvinJWendt/testza/compare/v0.2.8...v0.2.9
 [v0.2.8]: https://github.com/MarvinJWendt/testza/compare/v0.2.7...v0.2.8
 [v0.2.7]: https://github.com/MarvinJWendt/testza/compare/v0.2.6...v0.2.7
