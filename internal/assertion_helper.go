@@ -2,7 +2,10 @@ package internal
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
+	"io"
+	"os"
 	"reflect"
 	"regexp"
 	"strings"
@@ -261,4 +264,16 @@ func AssertRegexpHelper(t testRunner, regex interface{}, txt interface{}, should
 			},
 		}, msg...)
 	}
+}
+
+// AssertDirEmptyHelper checks for io.EOF to determine if directory empty or not
+func AssertDirEmptyHelper(t testRunner, dir string) bool {
+	f, err := os.Open(dir)
+	if err != nil {
+		Fail(t, "Error opening directory specified", NewObjectsSingleNamed("dir", dir))
+	}
+	defer f.Close()
+
+	_, err = f.Readdirnames(1)
+	return errors.Is(err, io.EOF)
 }

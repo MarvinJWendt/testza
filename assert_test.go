@@ -4,7 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"go/types"
+	"io/ioutil"
 	"math/rand"
+	"os"
 	"reflect"
 	"regexp"
 	"testing"
@@ -1023,4 +1025,29 @@ func TestAssertNoFileExists_fail(t *testing.T) {
 			AssertNoFileExists(t, "CHANGELOG.md")
 		})
 	})
+}
+
+func TestAssertDirEmpty(t *testing.T) {
+	tempdir, _ := ioutil.TempDir("testdata", "temp")
+	AssertDirEmpty(t, tempdir)
+	defer os.RemoveAll(tempdir)
+}
+
+func TestAssertDirEmpty_fail(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertDirEmpty(t, "non-existent")
+		AssertDirEmpty(t, "internal")
+	})
+}
+
+func TestAssertDirNotEmpty(t *testing.T) {
+	AssertDirNotEmpty(t, "testdata")
+}
+
+func TestAssertDirNotEmpty_fail(t *testing.T) {
+	tempdir, _ := ioutil.TempDir("testdata", "temp")
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertDirNotEmpty(t, tempdir)
+	})
+	defer os.RemoveAll(tempdir)
 }

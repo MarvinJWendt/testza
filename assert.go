@@ -708,3 +708,32 @@ func AssertNoFileExists(t testRunner, file string, msg ...interface{}) {
 		internal.Fail(t, "A file that !!should not exist!!, does exist.", internal.NewObjectsSingleUnknown(file), msg...)
 	}
 }
+
+// AssertDirEmpty asserts that a directory is empty.
+// The test will pass when the directory is empty or does not exist.
+//
+// Example:
+//  testza.AssertDirEmpty(t, "FolderName")
+func AssertDirEmpty(t testRunner, dir string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !internal.AssertDirEmptyHelper(t, dir) {
+		internal.Fail(t, "The directory !!is not!! empty.", internal.NewObjectsSingleNamed("Directory", dir))
+	}
+}
+
+// AssertDirNotEmpty asserts that a directory is not empty
+//
+// Example:
+//  testza.AssertDirNotEmpty(t, "FolderName")
+func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if internal.AssertDirEmptyHelper(t, dir) {
+		internal.Fail(t, "The directory !!is!! empty.", internal.NewObjectsSingleNamed("Directory", dir))
+	}
+}
