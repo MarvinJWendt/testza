@@ -1,0 +1,31 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - octocat
+  categories:
+    - title: Breaking Changes 🛠
+      labels:
+        - breaking
+    - title: Exciting New Features 🎉
+      labels:
+        - feature
+    - title: Fixes 🔧
+      labels:
+        - fix
+    - title: Refactors 🧹
+      labels:
+        - refactor
+    - title: CI-System 🤖
+      labels:
+        - ci
+    - title: Tests 🧪
+      labels:
+        - test
+    - title: Documentation 📚
+      labels:
+        - docs
+    - title: Other Changes
+      labels:
+        - "*"
