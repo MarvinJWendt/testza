@@ -1027,6 +1027,42 @@ func TestAssertNoFileExists_fail(t *testing.T) {
 	})
 }
 
+func TestAssertDirExists(t *testing.T) {
+	for _, dir := range []string{"ci", "internal", "testdata", os.TempDir()} {
+		t.Run(dir, func(t *testing.T) {
+			AssertDirExist(t, dir)
+		})
+	}
+}
+
+func TestAssertDirExists_fail(t *testing.T) {
+	for _, dir := range []string{"asdasdasdasd", "LICENSE", "CHANGELOG.md"} {
+		t.Run(dir, func(t *testing.T) {
+			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+				AssertDirExist(t, dir)
+			})
+		})
+	}
+}
+
+func TestAssertNoDirExists(t *testing.T) {
+	for _, dir := range []string{"asdasdasdasd", "LICENSE", "CHANGELOG.md"} {
+		t.Run(dir, func(t *testing.T) {
+			AssertNoDirExists(t, dir)
+		})
+	}
+}
+
+func TestAssertNoDirExists_fail(t *testing.T) {
+	for _, dir := range []string{"ci", "internal", "testdata", os.TempDir()} {
+		t.Run(dir, func(t *testing.T) {
+			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+				AssertNoDirExists(t, dir)
+			})
+		})
+	}
+}
+
 func TestAssertDirEmpty(t *testing.T) {
 	tempdir, _ := ioutil.TempDir("testdata", "temp")
 	AssertDirEmpty(t, tempdir)
