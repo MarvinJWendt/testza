@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- **assert:** added AssertNoDirExists and AssertDirExists. fixes [#36](https://github.com/MarvinJWendt/testza/issues/36)
+
 
 <a name="v0.2.10"></a>
 ## [v0.2.10] - 2021-10-20
