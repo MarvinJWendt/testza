@@ -14,11 +14,11 @@ func MockInputStringEmpty() []string {
 
 // MockInputStringLong returns a test set with long random strings.
 // Returns:
-// - Random string (length: 25)
-// - Random string (length: 50)
-// - Random string (length: 100)
-// - Random string (length: 1,000)
-// - Random string (length: 100,000)
+// [0]: Random string (length: 25)
+// [1]: Random string (length: 50)
+// [2]: Random string (length: 100)
+// [3]: Random string (length: 1,000)
+// [4]: Random string (length: 100,000)
 func MockInputStringLong() (testSet []string) {
 	testSet = append(testSet, MockInputStringGenerateRandom(1, 25)...)
 	testSet = append(testSet, MockInputStringGenerateRandom(1, 50)...)
