@@ -14,18 +14,6 @@ changelog:
     - title: Fixes 🔧
       labels:
         - fix
-    - title: Refactors 🧹
-      labels:
-        - refactor
-    - title: CI-System 🤖
-      labels:
-        - ci
-    - title: Tests 🧪
-      labels:
-        - test
-    - title: Documentation 📚
-      labels:
-        - docs
     - title: Other Changes
       labels:
         - "*"

@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2740-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2752-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -1135,6 +1135,9 @@ func MockInputStringEmailAddresses() []string
 ```
 
 MockInputStringEmailAddresses returns a test set with valid email addresses.
+The addresses may look like they are invalid, but they are all conform to
+RFC 2822 and could be used. You can use this test set to test your email
+validation process.
 
 #### MockInputStringEmpty
 
@@ -1151,7 +1154,8 @@ func MockInputStringFull() (ret []string)
 ```
 
 MockInputStringFull contains all string test sets plus ten generated random
-strings.
+strings. This test set is huge and should only be used if you want to make
+sure that no string, at all, can crash a process.
 
 #### MockInputStringGenerateRandom
 
@@ -1159,7 +1163,7 @@ strings.
 func MockInputStringGenerateRandom(count, length int) (result []string)
 ```
 
-MockInputStringGenerateRandom returns random StringsHelper in a test set.
+MockInputStringGenerateRandom returns random strings in a test set.
 
 #### MockInputStringHtmlTags
 
@@ -1167,7 +1171,13 @@ MockInputStringGenerateRandom returns random StringsHelper in a test set.
 func MockInputStringHtmlTags() []string
 ```
 
-MockInputStringHtmlTags returns a test set with html tags.
+MockInputStringHtmlTags returns a test set with different html tags.
+
+Example:
+
+    - <script>
+    - <script>alert('XSS')</script>
+    - <a href="https://github.com/MarvinJWendt/testza">link</a>
 
 #### MockInputStringLimit
 
@@ -1183,10 +1193,10 @@ MockInputStringLimit limits a test set in size.
 func MockInputStringLong() (testSet []string)
 ```
 
-MockInputStringLong returns a test set with long random strings. Returns: -
-Random string (length: 25) - Random string (length: 50) - Random string
-(length: 100) - Random string (length: 1,000) - Random string (length:
-100,000)
+MockInputStringLong returns a test set with long random strings. Returns:
+[0]: Random string (length: 25) [1]: Random string (length: 50) [2]: Random
+string (length: 100) [3]: Random string (length: 1,000) [4]: Random string
+(length: 100,000)
 
 #### MockInputStringModify
 
