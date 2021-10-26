@@ -88,7 +88,12 @@ func MockInputStringEmailAddresses() []string {
 	}
 }
 
-// MockInputStringHtmlTags returns a test set with html tags.
+// MockInputStringHtmlTags returns a test set with different html tags.
+//
+// Example:
+//  - <script>
+//  - <script>alert('XSS')</script>
+//  - <a href="https://github.com/MarvinJWendt/testza">link</a>
 func MockInputStringHtmlTags() []string {
 	return []string{
 		"<script>alert('XSS')</script>",
