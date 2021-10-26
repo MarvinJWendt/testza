@@ -43,6 +43,8 @@ func MockInputStringUsernames() []string {
 }
 
 // MockInputStringEmailAddresses returns a test set with valid email addresses.
+// The addresses may look like they are invalid, but they are all conform to RFC 2822 and could be used.
+// You can use this test set to test your email validation process.
 func MockInputStringEmailAddresses() []string {
 	return []string{
 		"hello@world.com",
