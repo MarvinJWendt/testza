@@ -105,6 +105,7 @@ func MockInputStringHtmlTags() []string {
 }
 
 // MockInputStringFull contains all string test sets plus ten generated random strings.
+// This test set is huge and should only be used if you want to make sure that no string, at all, can crash a process.
 func MockInputStringFull() (ret []string) {
 	ret = append(ret, MockInputStringUsernames()...)
 	ret = append(ret, MockInputStringHtmlTags()...)
