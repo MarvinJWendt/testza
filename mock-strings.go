@@ -134,7 +134,7 @@ func MockInputStringLimit(testSet []string, max int) []string {
 	return testSet[:max]
 }
 
-// MockInputStringGenerateRandom returns random StringsHelper in a test set.
+// MockInputStringGenerateRandom returns random strings in a test set.
 func MockInputStringGenerateRandom(count, length int) (result []string) {
 	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
