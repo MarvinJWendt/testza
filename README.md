@@ -113,6 +113,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
   - [SetColorsEnabled](https://github.com/MarvinJWendt/testza#SetColorsEnabled)
   - [SetLineNumbersEnabled](https://github.com/MarvinJWendt/testza#SetLineNumbersEnabled)
+  - [SetRandomSeed](https://github.com/MarvinJWendt/testza#SetRandomSeed)
 </td>
 
 </details>
@@ -1283,6 +1284,24 @@ Example:
     init() {
       testza.SetLineNumbersEnabled(false) // Disable line numbers
       testza.SetLineNumbersEnabled(true)  // Enable line numbers
+    }
+
+#### SetRandomSeed
+
+```go
+func SetRandomSeed(seed int64)
+```
+
+SetRandomSeed sets the seed for the random generator used in testza. Using
+the same seed will result in the same random sequences each time and
+guarantee a reproducible test run. Use this setting, if you want a 100%
+deterministic test. You should use this in the init() method of the package,
+which contains your tests.
+
+Example:
+
+    init() {
+      testza.SetRandomSeed(1337) // Set the seed to 1337
     }
 
 ### Snapshot
