@@ -2,6 +2,7 @@
 ## [Unreleased]
 
 ### Features
+- added startup information output
 - **assert:** added AssertNoDirExists and AssertDirExists. fixes [#36](https://github.com/MarvinJWendt/testza/issues/36)
 - **configuration:** added `SetRandomSeed`
 
