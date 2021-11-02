@@ -1,6 +1,8 @@
 package testza
 
 import (
+	"math/rand"
+
 	"github.com/MarvinJWendt/testza/internal"
 	"github.com/pterm/pterm"
 )
@@ -31,4 +33,18 @@ func SetColorsEnabled(enabled bool) {
 //  }
 func SetLineNumbersEnabled(enabled bool) {
 	internal.LineNumbersEnabled = enabled
+}
+
+// SetRandomSeed sets the seed for the random generator used in testza.
+// Using the same seed will result in the same random sequences each time and guarantee a reproducible test run.
+// Use this setting, if you want a 100% deterministic test.
+// You should use this in the init() method of the package, which contains your tests.
+//
+// Example:
+//  init() {
+//    testza.SetRandomSeed(1337) // Set the seed to 1337
+//  }
+func SetRandomSeed(seed int64) {
+	randomSeed = seed
+	rand.Seed(seed)
 }
