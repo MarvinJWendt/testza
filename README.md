@@ -1302,6 +1302,7 @@ Example:
 
     init() {
       testza.SetRandomSeed(1337) // Set the seed to 1337
+      testza.SetRandomSeed(time.Now().UnixNano()) // Set the seed back to the current time (default | non-deterministic)
     }
 
 ### Snapshot
