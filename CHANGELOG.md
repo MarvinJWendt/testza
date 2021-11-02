@@ -3,6 +3,7 @@
 
 ### Features
 - **assert:** added AssertNoDirExists and AssertDirExists. fixes [#36](https://github.com/MarvinJWendt/testza/issues/36)
+- **configuration:** added `SetRandomSeed`
 
 
 <a name="v0.2.10"></a>
