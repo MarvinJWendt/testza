@@ -2,6 +2,7 @@ package testza
 
 import (
 	"testing"
+	"time"
 
 	"github.com/MarvinJWendt/testza/internal"
 	"github.com/pterm/pterm"
@@ -29,4 +30,13 @@ func TestSetLineNumbersEnabled(t *testing.T) {
 		SetLineNumbersEnabled(true)
 		AssertTrue(t, internal.LineNumbersEnabled)
 	})
+}
+
+func TestSetRandomSeed(t *testing.T) {
+	SetRandomSeed(1337)
+	AssertEqual(t, int64(1337), randomSeed)
+	AssertEqual(t, "4U390O49B9", MockInputStringGenerateRandom(1, 10)[0])
+	un := time.Now().UnixNano()
+	SetRandomSeed(un)
+	AssertEqual(t, un, randomSeed)
 }

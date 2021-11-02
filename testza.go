@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+var randomSeed int64
+
 func init() {
-	rand.Seed(time.Now().UnixNano())
+	randomSeed = time.Now().UnixNano()
+	rand.Seed(randomSeed)
 }
