@@ -22,7 +22,10 @@ import (
 //  testza.SnapshotCreate(t.Name(), objectToBeSnapshotted)
 func SnapshotCreate(name string, snapshotObject interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
+	return snapshotCreateForDir(dir, name, snapshotObject)
+}
 
+func snapshotCreateForDir(dir string, name string, snapshotObject interface{}) error {
 	err := os.MkdirAll(dir, 0755)
 	if err != nil {
 		return fmt.Errorf("creating snapshot failed: %w", err)
@@ -114,7 +117,7 @@ func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg
 			return err
 		}
 	} else if os.IsNotExist(err) {
-		err = SnapshotCreate(name, object)
+		err = snapshotCreateForDir(dir, name, object)
 		if err != nil {
 			return err
 		}
