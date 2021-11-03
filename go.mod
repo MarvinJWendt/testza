@@ -1,4 +1,4 @@
-module github.com/TobiaszCudnik/testza
+module github.com/MarvinJWendt/testza
 
 go 1.15
 
