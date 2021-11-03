@@ -53,6 +53,12 @@ func snapshotCreateForDir(dir string, name string, snapshotObject interface{}) e
 //  testza.SnapshotValidate(t, t.Name(), objectToBeValidated, "Optional message")
 func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
+	return snapshotValidateFromDir(dir, name, actual, msg...)
+}
+
+
+func snapshotValidateFromDir(dir string, t testRunner, name string, actual interface{}, msg ...interface{}) error {
+	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
 	snapshotContent, err := ioutil.ReadFile(snapshotPath)
 	snapshot := strings.ReplaceAll(string(snapshotContent), "\r\n", "\n")
@@ -112,7 +118,7 @@ func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg
 	snapshotPath := path.Clean(dir + name + ".testza")
 
 	if _, err := os.Stat(snapshotPath); err == nil {
-		err = SnapshotValidate(t, name, object, msg...)
+		err = SnapshotValidateFromDir(dir, t, name, object, msg...)
 		if err != nil {
 			return err
 		}
