@@ -42,6 +42,6 @@ func generateMsg(msg []interface{}, addon ...interface{}) (out string) {
 }
 
 func getCurrentScriptDirectory() string {
-	_, scriptPath, _, _ := runtime.Caller(1)
+	_, scriptPath, _, _ := runtime.Caller(2)
 	return filepath.Join(scriptPath, "..")
 }
