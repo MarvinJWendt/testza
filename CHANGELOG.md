@@ -1,6 +1,12 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Bug Fixes
+- **snapshot:** fixed snapshots always created in testza directory ([#65](https://github.com/MarvinJWendt/testza/issues/65))
+
+
+<a name="v0.2.11"></a>
+## [v0.2.11] - 2021-11-02
 ### Features
 - added startup information output
 - **assert:** added AssertNoDirExists and AssertDirExists. fixes [#36](https://github.com/MarvinJWendt/testza/issues/36)
@@ -214,7 +220,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.10...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.11...HEAD
+[v0.2.11]: https://github.com/MarvinJWendt/testza/compare/v0.2.10...v0.2.11
 [v0.2.10]: https://github.com/MarvinJWendt/testza/compare/v0.2.9...v0.2.10
 [v0.2.9]: https://github.com/MarvinJWendt/testza/compare/v0.2.8...v0.2.9
 [v0.2.8]: https://github.com/MarvinJWendt/testza/compare/v0.2.7...v0.2.8
