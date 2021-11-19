@@ -108,7 +108,7 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 //  testza.AssertNumeric(t, uint(123))
 func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
 	if !internal.IsNumber(object) {
-		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object))
+		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object), msg...)
 	}
 }
 
@@ -121,7 +121,7 @@ func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
 //  testza.AssertNotNumeric(t, "123")
 func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{}) {
 	if internal.IsNumber(object) {
-		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object))
+		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object), msg...)
 	}
 }
 
@@ -137,7 +137,7 @@ func AssertZero(t testRunner, value interface{}, msg ...interface{}) {
 	}
 
 	if !internal.IsZero(value) {
-		internal.Fail(t, "An object that !!should have it's zero value!!, does not have it's zero value.", internal.NewObjectsSingleNamed("object", value))
+		internal.Fail(t, "An object that !!should have it's zero value!!, does not have it's zero value.", internal.NewObjectsSingleNamed("object", value), msg...)
 	}
 }
 
@@ -153,7 +153,7 @@ func AssertNotZero(t testRunner, value interface{}, msg ...interface{}) {
 	}
 
 	if internal.IsZero(value) {
-		internal.Fail(t, "An object that !!should not have it's zero value!!, does have it's zero value.", internal.NewObjectsSingleNamed("object", value))
+		internal.Fail(t, "An object that !!should not have it's zero value!!, does have it's zero value.", internal.NewObjectsSingleNamed("object", value), msg...)
 	}
 }
 
@@ -261,7 +261,7 @@ func AssertTrue(t testRunner, value interface{}, msg ...interface{}) {
 	}
 
 	if value != true {
-		internal.Fail(t, "Value !!should be true!! but is not.", internal.NewObjectsExpectedActual(true, value))
+		internal.Fail(t, "Value !!should be true!! but is not.", internal.NewObjectsExpectedActual(true, value), msg...)
 	}
 }
 
@@ -278,7 +278,7 @@ func AssertFalse(t testRunner, value interface{}, msg ...interface{}) {
 	}
 
 	if value == true {
-		internal.Fail(t, "Value !!should be false!! but is not.", internal.NewObjectsExpectedActual(false, value))
+		internal.Fail(t, "Value !!should be false!! but is not.", internal.NewObjectsExpectedActual(false, value), msg...)
 	}
 }
 
@@ -324,7 +324,7 @@ func AssertContains(t testRunner, object, element interface{}, msg ...interface{
 	}
 
 	if !internal.DoesContain(object, element) {
-		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that is missing in object", Data: element}})
+		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that is missing in object", Data: element}}, msg...)
 	}
 }
 
@@ -339,7 +339,7 @@ func AssertNotContains(t testRunner, object, element interface{}, msg ...interfa
 	}
 
 	if internal.DoesContain(object, element) {
-		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that should not be in object", Data: element}})
+		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that should not be in object", Data: element}}, msg...)
 	}
 }
 
@@ -394,7 +394,7 @@ func AssertNil(t testRunner, object interface{}, msg ...interface{}) {
 	}
 
 	if !internal.IsNil(object) {
-		internal.Fail(t, "An object that !!should be nil!! is not nil.", internal.NewObjectsExpectedActual(nil, object))
+		internal.Fail(t, "An object that !!should be nil!! is not nil.", internal.NewObjectsExpectedActual(nil, object), msg...)
 	}
 }
 
@@ -410,7 +410,7 @@ func AssertNotNil(t testRunner, object interface{}, msg ...interface{}) {
 	}
 
 	if internal.IsNil(object) {
-		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleNamed("object", object))
+		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleNamed("object", object), msg...)
 	}
 }
 
@@ -498,7 +498,7 @@ func AssertGreater(t testRunner, object1, object2 interface{}, msg ...interface{
 	v2, err2 := strconv.ParseFloat(fmt.Sprint(object2), 64)
 
 	if err != nil || err2 != nil {
-		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2))
+		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2), msg...)
 	}
 
 	if !(v1 > v2) {
@@ -520,7 +520,7 @@ func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{}) 
 	v2, err2 := strconv.ParseFloat(fmt.Sprint(object2), 64)
 
 	if err != nil || err2 != nil {
-		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2))
+		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2), msg...)
 	}
 
 	if !(v1 < v2) {
@@ -758,7 +758,7 @@ func AssertDirEmpty(t testRunner, dir string, msg ...interface{}) {
 	}
 
 	if !internal.AssertDirEmptyHelper(t, dir) {
-		internal.Fail(t, "The directory !!is not!! empty.", internal.NewObjectsSingleNamed("Directory", dir))
+		internal.Fail(t, "The directory !!is not!! empty.", internal.NewObjectsSingleNamed("Directory", dir), msg...)
 	}
 }
 
@@ -772,6 +772,6 @@ func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{}) {
 	}
 
 	if internal.AssertDirEmptyHelper(t, dir) {
-		internal.Fail(t, "The directory !!is!! empty.", internal.NewObjectsSingleNamed("Directory", dir))
+		internal.Fail(t, "The directory !!is!! empty.", internal.NewObjectsSingleNamed("Directory", dir), msg...)
 	}
 }
