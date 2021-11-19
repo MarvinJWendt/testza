@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 ### Bug Fixes
+- **assert:** fixed missing custom messages in some functions
+
+
+<a name="v0.2.12"></a>
+## [v0.2.12] - 2021-11-09
+### Bug Fixes
 - **snapshot:** fixed snapshots always created in testza directory ([#65](https://github.com/MarvinJWendt/testza/issues/65))
 
 
@@ -220,7 +226,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.11...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.12...HEAD
+[v0.2.12]: https://github.com/MarvinJWendt/testza/compare/v0.2.11...v0.2.12
 [v0.2.11]: https://github.com/MarvinJWendt/testza/compare/v0.2.10...v0.2.11
 [v0.2.10]: https://github.com/MarvinJWendt/testza/compare/v0.2.9...v0.2.10
 [v0.2.9]: https://github.com/MarvinJWendt/testza/compare/v0.2.8...v0.2.9
