@@ -9,8 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/MarvinJWendt/testza/internal"
 	"github.com/pterm/pterm"
+
+	"github.com/MarvinJWendt/testza/internal"
 )
 
 type testMock struct {
@@ -184,6 +185,65 @@ func doesContain(object, element interface{}) bool {
 				return true
 			}
 		}
+	}
+
+	return false
+}
+
+func isList(list interface{}) bool {
+	kind := reflect.TypeOf(list).Kind()
+	if kind != reflect.Array && kind != reflect.Slice {
+		return false
+	}
+
+	return true
+}
+
+func hasSameElements(expected interface{}, actual interface{}) bool {
+	if isNil(expected) || isNil(actual) {
+		return expected == actual
+	}
+
+	if !isList(expected) || !isList(actual) {
+		return false
+	}
+
+	expectedValue := reflect.ValueOf(expected)
+	actualValue := reflect.ValueOf(actual)
+
+	expectedLen := expectedValue.Len()
+	actualLen := actualValue.Len()
+
+	visited := make([]bool, actualLen)
+
+	var extraA, extraB []interface{}
+	for i := 0; i < expectedLen; i++ {
+		element := expectedValue.Index(i).Interface()
+		found := false
+		for j := 0; j < actualLen; j++ {
+			if visited[j] {
+				continue
+			}
+			if isEqual(actualValue.Index(j).Interface(), element) {
+				visited[j] = true
+				found = true
+				break
+			}
+		}
+		if !found {
+			extraA = append(extraA, element)
+		}
+	}
+
+	for j := 0; j < actualLen; j++ {
+		if visited[j] {
+			continue
+		}
+		extraB = append(extraB, actualValue.Index(j).Interface())
+	}
+
+	if len(extraA) == 0 && len(extraB) == 0 {
+		return true
 	}
 
 	return false
@@ -793,4 +853,47 @@ func AssertDecreasing(t testRunner, object interface{}, msg ...interface{}) {
 	}
 
 	internal.AssertCompareHelper(t, object, -1, msg...)
+}
+
+// AssertSameElements asserts that two slices contains same elements (including pointers).
+// The order is irrelevant.
+//
+// Example:
+//  testza.AssertSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World"})
+//  testza.AssertSameElements(t, []int{1,2,3}, []int{1,2,3})
+//  testza.AssertSameElements(t, []int{1,2}, []int{2,1})
+//
+//  type A struct {
+//	  a string
+//  }
+//  testza.AssertSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}})
+func AssertSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !hasSameElements(expected, actual) {
+		internal.Fail(t, "Two objects that !!should have same elements!!, do not have same elements.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+	}
+}
+
+// AssertNotSameElements asserts that two slices contains same elements (including pointers).
+// The order is irrelevant.
+//
+// Example:
+//  testza.AssertNotSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World", "World"})
+//  testza.AssertNotSameElements(t, []int{1,2}, []int{1,2,3})
+//
+//  type A struct {
+//	  a string
+//  }
+//  testza.AssertNotSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}, {a: "D"}})
+func AssertNotSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if hasSameElements(expected, actual) {
+		internal.Fail(t, "Two objects that !!should have same elements!!, do not have same elements.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+	}
 }
