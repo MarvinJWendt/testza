@@ -1,8 +1,15 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- proposal AssertSameElements
+
 ### Bug Fixes
 - **assert:** fixed missing custom messages in some functions
+
+### Code Refactoring
+- **assert:** clean code
+- **assert:** made output message for `AssertSameElements` more fluent
 
 
 <a name="v0.2.12"></a>
