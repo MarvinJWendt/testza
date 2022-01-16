@@ -927,6 +927,156 @@ func TestAssertIsDecreasing_fail(t *testing.T) {
 	}
 }
 
+func TestAssertSameElements(t *testing.T) {
+	t.Run("String", func(t *testing.T) {
+		MockInputStringRunTests(t, MockInputStringFull(), func(t *testing.T, index int, str string) {
+			t.Helper()
+
+			testEqual(t, str, str)
+		})
+	})
+
+	t.Run("Nil and Nil are equal", func(t *testing.T) {
+		AssertSameElements(t, nil, nil)
+	})
+
+	t.Run("Same arrays to same struct are equal", func(t *testing.T) {
+		s := generateStruct()
+		ss := []assertionTestStruct{s}
+		AssertSameElements(t, ss, ss)
+	})
+
+	t.Run("Same arrays to same pointer struct are equal", func(t *testing.T) {
+		s := generateStruct()
+		ss := []*assertionTestStruct{&s}
+		AssertSameElements(t, ss, ss)
+	})
+
+	t.Run("Structs", func(t *testing.T) {
+		// Test ten random structs for equality.
+		ss := make([]assertionTestStruct, 0)
+		for i := 0; i < 10; i++ {
+			s := generateStruct()
+			ss = append(ss, s)
+		}
+
+		ss2 := ss
+		AssertSameElements(t, ss, ss2)
+	})
+
+	t.Run("Strings", func(t *testing.T) {
+		s := []string{"Hello", "World"}
+		ss := []string{"World", "Hello"}
+		AssertSameElements(t, s, ss)
+	})
+
+	t.Run("Integers", func(t *testing.T) {
+		s := []int{1, 2, 3, 4, 5, 6, 7, 8}
+		ss := []int{8, 7, 6, 5, 4, 3, 2, 1}
+		AssertSameElements(t, s, ss)
+	})
+}
+
+func TestAssertSameElementsFails(t *testing.T) {
+	t.Run("Not an array", func(t *testing.T) {
+		MockInputStringRunTests(t, MockInputStringFull(), func(t *testing.T, index int, str string) {
+			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+				AssertSameElements(t, str, str)
+			})
+		})
+	})
+
+	t.Run("Structs", func(t *testing.T) {
+		// Test ten random structs for equality.
+		ss := make([]assertionTestStruct, 0)
+		for i := 0; i < 10; i++ {
+			s := generateStruct()
+			ss = append(ss, s)
+		}
+
+		ss2 := ss
+		ss2 = append(ss2, generateStruct())
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertSameElements(t, ss, ss2)
+		})
+	})
+
+	t.Run("Strings", func(t *testing.T) {
+		s := []string{"Hello", "World"}
+		ss := []string{"World", "Hello", "Again"}
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertSameElements(t, s, ss)
+		})
+	})
+
+	t.Run("Integers", func(t *testing.T) {
+		s := []int{1, 2, 3, 4, 5}
+		ss := []int{9, 8, 7, 6}
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertSameElements(t, s, ss)
+		})
+	})
+}
+
+func TestAssertNotSameElements(t *testing.T) {
+	t.Run("Structs", func(t *testing.T) {
+		// Test ten random structs for equality.
+		ss := make([]assertionTestStruct, 0)
+		for i := 0; i < 10; i++ {
+			s := generateStruct()
+			ss = append(ss, s)
+		}
+
+		ss2 := ss
+		ss2 = append(ss2, generateStruct())
+		AssertNotSameElements(t, ss, ss2)
+	})
+
+	t.Run("Strings", func(t *testing.T) {
+		s := []string{"Hello", "World"}
+		ss := []string{"World", "Hello", "Again"}
+		AssertNotSameElements(t, s, ss)
+	})
+
+	t.Run("Integers", func(t *testing.T) {
+		s := []int{1, 2, 3, 4, 5, 6, 7, 8}
+		ss := []int{9, 8, 7, 6, 5, 4, 3, 2, 1}
+		AssertNotSameElements(t, s, ss)
+	})
+}
+
+func TestAssertNotSameElementsFails(t *testing.T) {
+	t.Run("Structs", func(t *testing.T) {
+		// Test ten random structs for equality.
+		ss := make([]assertionTestStruct, 0)
+		for i := 0; i < 10; i++ {
+			s := generateStruct()
+			ss = append(ss, s)
+		}
+
+		ss2 := ss
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertNotSameElements(t, ss, ss2)
+		})
+	})
+
+	t.Run("Strings", func(t *testing.T) {
+		s := []string{"Hello", "World"}
+		ss := []string{"World", "Hello"}
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertNotSameElements(t, s, ss)
+		})
+	})
+
+	t.Run("Integers", func(t *testing.T) {
+		s := []int{1, 2, 3, 4, 5, 6, 7, 8}
+		ss := []int{8, 7, 6, 5, 4, 3, 2, 1}
+		AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+			AssertNotSameElements(t, s, ss)
+		})
+	})
+}
+
 func TestAssertRegexp(t *testing.T) {
 	AssertRegexp(t, "p([a-z]+)ch", "peache")
 	rxp, err := regexp.Compile("Hello, .*")

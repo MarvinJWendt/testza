@@ -52,8 +52,6 @@ func (m *testMock) Fatalf(format string, args ...interface{}) {
 	m.fail(fmt.Sprintf(format, args...))
 }
 
-// ** Helper Methods **
-
 // AssertKindOf asserts that the object is a type of kind exptectedKind.
 //
 // Example:
@@ -773,5 +771,48 @@ func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{}) {
 
 	if internal.AssertDirEmptyHelper(t, dir) {
 		internal.Fail(t, "The directory !!is!! empty.", internal.NewObjectsSingleNamed("Directory", dir), msg...)
+	}
+}
+
+// AssertSameElements asserts that two slices contains same elements (including pointers).
+// The order is irrelevant.
+//
+// Example:
+//  testza.AssertSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World"})
+//  testza.AssertSameElements(t, []int{1,2,3}, []int{1,2,3})
+//  testza.AssertSameElements(t, []int{1,2}, []int{2,1})
+//
+//  type A struct {
+//	  a string
+//  }
+//  testza.AssertSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}})
+func AssertSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !internal.HasSameElements(expected, actual) {
+		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+	}
+}
+
+// AssertNotSameElements asserts that two slices contains same elements (including pointers).
+// The order is irrelevant.
+//
+// Example:
+//  testza.AssertNotSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World", "World"})
+//  testza.AssertNotSameElements(t, []int{1,2}, []int{1,2,3})
+//
+//  type A struct {
+//	  a string
+//  }
+//  testza.AssertNotSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}, {a: "D"}})
+func AssertNotSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if internal.HasSameElements(expected, actual) {
+		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
