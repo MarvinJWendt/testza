@@ -52,204 +52,6 @@ func (m *testMock) Fatalf(format string, args ...interface{}) {
 	m.fail(fmt.Sprintf(format, args...))
 }
 
-// ** Getter Methods **
-
-func isKind(expectedKind reflect.Kind, value interface{}) bool {
-	return reflect.TypeOf(value).Kind() == expectedKind
-}
-
-func isNil(object interface{}) bool {
-	if object == nil {
-		return true
-	}
-
-	switch reflect.ValueOf(object).Kind() {
-	case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice:
-		return reflect.ValueOf(object).IsNil()
-	}
-
-	return false
-}
-
-func isNumber(value interface{}) bool {
-	numberKinds := []reflect.Kind{
-		reflect.Int,
-		reflect.Int8,
-		reflect.Int16,
-		reflect.Int32,
-		reflect.Int64,
-		reflect.Float32,
-		reflect.Float64,
-		reflect.Uint,
-		reflect.Uint8,
-		reflect.Uint16,
-		reflect.Uint32,
-		reflect.Uint64,
-		reflect.Complex64,
-		reflect.Complex128,
-	}
-
-	for _, k := range numberKinds {
-		if isKind(k, value) {
-			return true
-		}
-	}
-
-	return false
-}
-
-// completesIn returns if a function completes in a specific time.
-func completesIn(duration time.Duration, f func()) bool {
-	done := make(chan bool)
-	go func() {
-		f()
-		done <- true
-	}()
-
-	select {
-	case <-time.After(duration):
-		return false
-	case <-done:
-		return true
-	}
-}
-
-func isZero(value interface{}) bool {
-	return value == nil || reflect.DeepEqual(value, reflect.Zero(reflect.TypeOf(value)).Interface())
-}
-
-func isEqual(expected interface{}, actual interface{}) bool {
-	if expected == nil || actual == nil {
-		return expected == actual
-	}
-
-	expectedB, ok := expected.([]byte)
-	if !ok {
-		return reflect.DeepEqual(expected, actual)
-	}
-
-	actualB, ok := actual.([]byte)
-	if !ok {
-		return false
-	}
-	if expectedB == nil || actualB == nil {
-		return expectedB == nil && actualB == nil
-	}
-
-	return bytes.Equal(expectedB, actualB)
-}
-
-func hasEqualValues(expected interface{}, actual interface{}) bool {
-	if isEqual(expected, actual) {
-		return true
-	}
-
-	actualType := reflect.TypeOf(actual)
-	if actualType == nil {
-		return false
-	}
-
-	expectedValue := reflect.ValueOf(expected)
-	if expectedValue.IsValid() && expectedValue.Type().ConvertibleTo(actualType) {
-		return reflect.DeepEqual(expectedValue.Convert(actualType).Interface(), actual)
-	}
-
-	return false
-}
-
-func doesImplement(interfaceObject, object interface{}) bool {
-	interfaceType := reflect.TypeOf(interfaceObject).Elem()
-
-	if object == nil {
-		return false
-	}
-	if !reflect.TypeOf(object).Implements(interfaceType) {
-		return false
-	}
-
-	return true
-}
-
-func doesContain(object, element interface{}) bool {
-	objectValue := reflect.ValueOf(object)
-	objectKind := reflect.TypeOf(object).Kind()
-
-	switch objectKind {
-	case reflect.String:
-		return strings.Contains(objectValue.String(), reflect.ValueOf(element).String())
-	case reflect.Map:
-	default:
-		for i := 0; i < objectValue.Len(); i++ {
-			if isEqual(objectValue.Index(i).Interface(), element) {
-				return true
-			}
-		}
-	}
-
-	return false
-}
-
-func isList(list interface{}) bool {
-	kind := reflect.TypeOf(list).Kind()
-	if kind != reflect.Array && kind != reflect.Slice {
-		return false
-	}
-
-	return true
-}
-
-func hasSameElements(expected interface{}, actual interface{}) bool {
-	if isNil(expected) || isNil(actual) {
-		return expected == actual
-	}
-
-	if !isList(expected) || !isList(actual) {
-		return false
-	}
-
-	expectedValue := reflect.ValueOf(expected)
-	actualValue := reflect.ValueOf(actual)
-
-	expectedLen := expectedValue.Len()
-	actualLen := actualValue.Len()
-
-	visited := make([]bool, actualLen)
-
-	var extraA, extraB []interface{}
-	for i := 0; i < expectedLen; i++ {
-		element := expectedValue.Index(i).Interface()
-		found := false
-		for j := 0; j < actualLen; j++ {
-			if visited[j] {
-				continue
-			}
-			if isEqual(actualValue.Index(j).Interface(), element) {
-				visited[j] = true
-				found = true
-				break
-			}
-		}
-		if !found {
-			extraA = append(extraA, element)
-		}
-	}
-
-	for j := 0; j < actualLen; j++ {
-		if visited[j] {
-			continue
-		}
-		extraB = append(extraB, actualValue.Index(j).Interface())
-	}
-
-	if len(extraA) == 0 && len(extraB) == 0 {
-		return true
-	}
-
-	return false
-}
-
-// ** Helper Methods **
-
 // AssertKindOf asserts that the object is a type of kind exptectedKind.
 //
 // Example:
@@ -989,7 +791,7 @@ func AssertSameElements(t testRunner, expected interface{}, actual interface{}, 
 		test.Helper()
 	}
 
-	if !hasSameElements(expected, actual) {
+	if !internal.HasSameElements(expected, actual) {
 		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
@@ -1010,7 +812,7 @@ func AssertNotSameElements(t testRunner, expected interface{}, actual interface{
 		test.Helper()
 	}
 
-	if hasSameElements(expected, actual) {
+	if internal.HasSameElements(expected, actual) {
 		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }

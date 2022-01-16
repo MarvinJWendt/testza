@@ -277,3 +277,62 @@ func AssertDirEmptyHelper(t testRunner, dir string) bool {
 	_, err = f.Readdirnames(1)
 	return errors.Is(err, io.EOF)
 }
+
+func IsList(list interface{}) bool {
+	kind := reflect.TypeOf(list).Kind()
+	if kind != reflect.Array && kind != reflect.Slice {
+		return false
+	}
+
+	return true
+}
+
+func HasSameElements(expected interface{}, actual interface{}) bool {
+	if IsNil(expected) || IsNil(actual) {
+		return expected == actual
+	}
+
+	if !IsList(expected) || !IsList(actual) {
+		return false
+	}
+
+	expectedValue := reflect.ValueOf(expected)
+	actualValue := reflect.ValueOf(actual)
+
+	expectedLen := expectedValue.Len()
+	actualLen := actualValue.Len()
+
+	visited := make([]bool, actualLen)
+
+	var extraA, extraB []interface{}
+	for i := 0; i < expectedLen; i++ {
+		element := expectedValue.Index(i).Interface()
+		found := false
+		for j := 0; j < actualLen; j++ {
+			if visited[j] {
+				continue
+			}
+			if IsEqual(actualValue.Index(j).Interface(), element) {
+				visited[j] = true
+				found = true
+				break
+			}
+		}
+		if !found {
+			extraA = append(extraA, element)
+		}
+	}
+
+	for j := 0; j < actualLen; j++ {
+		if visited[j] {
+			continue
+		}
+		extraB = append(extraB, actualValue.Index(j).Interface())
+	}
+
+	if len(extraA) == 0 && len(extraB) == 0 {
+		return true
+	}
+
+	return false
+}
