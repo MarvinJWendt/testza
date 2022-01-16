@@ -1237,3 +1237,38 @@ func TestAssertDirNotEmpty_fail(t *testing.T) {
 	})
 	defer os.RemoveAll(tempdir)
 }
+
+func TestAssertSubset(t *testing.T) {
+	t.Run("Simple integer subset", func(t *testing.T) {
+		AssertSubset(t, []int{1, 2, 3}, []int{1, 2})
+	})
+
+	t.Run("Simple string subset", func(t *testing.T) {
+		AssertSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "World"})
+	})
+
+	t.Run("Complex struct subset", func(t *testing.T) {
+		s1 := generateStruct()
+		s2 := generateStruct()
+		s3 := generateStruct()
+		AssertSubset(t, []assertionTestStruct{s1, s2, s3}, []assertionTestStruct{s2, s3})
+	})
+}
+
+func TestAssertSubset_fail(t *testing.T) {
+	t.Run("Simple integer subset", func(t *testing.T) {
+		AssertNoSubset(t, []int{1, 2, 3}, []int{1, 7})
+	})
+
+	t.Run("Simple string subset", func(t *testing.T) {
+		AssertNoSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "John"})
+	})
+
+	t.Run("Complex struct subset", func(t *testing.T) {
+		s1 := generateStruct()
+		s2 := generateStruct()
+		s3 := generateStruct()
+		s4 := generateStruct()
+		AssertNoSubset(t, []assertionTestStruct{s1, s2, s3}, []assertionTestStruct{s3, s4})
+	})
+}
