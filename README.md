@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3087-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2757-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -113,6 +113,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
   - [SetColorsEnabled](https://github.com/MarvinJWendt/testza#SetColorsEnabled)
   - [SetLineNumbersEnabled](https://github.com/MarvinJWendt/testza#SetLineNumbersEnabled)
+  - [SetRandomSeed](https://github.com/MarvinJWendt/testza#SetRandomSeed)
 </td>
 
 </details>
@@ -128,10 +129,14 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertCompletesIn](https://github.com/MarvinJWendt/testza#AssertCompletesIn)
   - [AssertContains](https://github.com/MarvinJWendt/testza#AssertContains)
   - [AssertDecreasing](https://github.com/MarvinJWendt/testza#AssertDecreasing)
+  - [AssertDirEmpty](https://github.com/MarvinJWendt/testza#AssertDirEmpty)
+  - [AssertDirExist](https://github.com/MarvinJWendt/testza#AssertDirExist)
+  - [AssertDirNotEmpty](https://github.com/MarvinJWendt/testza#AssertDirNotEmpty)
   - [AssertEqual](https://github.com/MarvinJWendt/testza#AssertEqual)
   - [AssertEqualValues](https://github.com/MarvinJWendt/testza#AssertEqualValues)
   - [AssertErrorIs](https://github.com/MarvinJWendt/testza#AssertErrorIs)
   - [AssertFalse](https://github.com/MarvinJWendt/testza#AssertFalse)
+  - [AssertFileExists](https://github.com/MarvinJWendt/testza#AssertFileExists)
   - [AssertGreater](https://github.com/MarvinJWendt/testza#AssertGreater)
   - [AssertImplements](https://github.com/MarvinJWendt/testza#AssertImplements)
   - [AssertIncreasing](https://github.com/MarvinJWendt/testza#AssertIncreasing)
@@ -139,7 +144,9 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertLen](https://github.com/MarvinJWendt/testza#AssertLen)
   - [AssertLess](https://github.com/MarvinJWendt/testza#AssertLess)
   - [AssertNil](https://github.com/MarvinJWendt/testza#AssertNil)
+  - [AssertNoDirExists](https://github.com/MarvinJWendt/testza#AssertNoDirExists)
   - [AssertNoError](https://github.com/MarvinJWendt/testza#AssertNoError)
+  - [AssertNoFileExists](https://github.com/MarvinJWendt/testza#AssertNoFileExists)
   - [AssertNotCompletesIn](https://github.com/MarvinJWendt/testza#AssertNotCompletesIn)
   - [AssertNotContains](https://github.com/MarvinJWendt/testza#AssertNotContains)
   - [AssertNotEqual](https://github.com/MarvinJWendt/testza#AssertNotEqual)
@@ -150,11 +157,11 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertNotNil](https://github.com/MarvinJWendt/testza#AssertNotNil)
   - [AssertNotNumeric](https://github.com/MarvinJWendt/testza#AssertNotNumeric)
   - [AssertNotPanics](https://github.com/MarvinJWendt/testza#AssertNotPanics)
-  - [AssertNotSameElements](https://github.com/MarvinJWendt/testza#AssertNotSameElements)
+  - [AssertNotRegexp](https://github.com/MarvinJWendt/testza#AssertNotRegexp)
   - [AssertNotZero](https://github.com/MarvinJWendt/testza#AssertNotZero)
   - [AssertNumeric](https://github.com/MarvinJWendt/testza#AssertNumeric)
   - [AssertPanics](https://github.com/MarvinJWendt/testza#AssertPanics)
-  - [AssertSameElements](https://github.com/MarvinJWendt/testza#AssertSameElements)
+  - [AssertRegexp](https://github.com/MarvinJWendt/testza#AssertRegexp)
   - [AssertTestFails](https://github.com/MarvinJWendt/testza#AssertTestFails)
   - [AssertTrue](https://github.com/MarvinJWendt/testza#AssertTrue)
   - [AssertZero](https://github.com/MarvinJWendt/testza#AssertZero)
@@ -321,6 +328,45 @@ Example:
     testza.AssertDecreasing(t, []int{1000, 137, 2, 1})
     testza.AssertDecreasing(t, []float32{13.5, 7, 0.1, -10.3})
 
+#### AssertDirEmpty
+
+```go
+func AssertDirEmpty(t testRunner, dir string, msg ...interface{})
+```
+
+AssertDirEmpty asserts that a directory is empty. The test will pass when
+the directory is empty or does not exist.
+
+Example:
+
+    testza.AssertDirEmpty(t, "FolderName")
+
+#### AssertDirExist
+
+```go
+func AssertDirExist(t testRunner, dir string, msg ...interface{})
+```
+
+AssertDirExist asserts that a directory exists. The test will pass when the
+directory exists, and it's visible to the current user. The test will fail,
+if the path points to a file.
+
+Example:
+
+    testza.AssertDirExist(t, "FolderName")
+
+#### AssertDirNotEmpty
+
+```go
+func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{})
+```
+
+AssertDirNotEmpty asserts that a directory is not empty
+
+Example:
+
+    testza.AssertDirNotEmpty(t, "FolderName")
+
 #### AssertEqual
 
 ```go
@@ -393,6 +439,19 @@ Example:
     testza.AssertFalse(t, 1 == 2)
     testza.AssertFalse(t, 2 != 2)
     testza.AssertFalse(t, 1 > 5 && 4 < 0)
+
+#### AssertFileExists
+
+```go
+func AssertFileExists(t testRunner, file string, msg ...interface{})
+```
+
+AssertFileExists asserts that a file exists.
+
+Example:
+
+    testza.AssertFileExists(t, "./test.txt")
+    testza.AssertFileExists(t, "./config.yaml", "the config file is missing")
 
 #### AssertGreater
 
@@ -493,6 +552,20 @@ Example:
 
     testza.AssertNil(t, nil)
 
+#### AssertNoDirExists
+
+```go
+func AssertNoDirExists(t testRunner, dir string, msg ...interface{})
+```
+
+AssertNoDirExists asserts that a directory does not exists. The test will
+pass, if the path points to a file, as a directory with the same name,
+cannot exist.
+
+Example:
+
+    testza.AssertNoDirExists(t, "FolderName")
+
 #### AssertNoError
 
 ```go
@@ -505,6 +578,14 @@ Example:
 
     err := nil
     testza.AssertNoError(t, err)
+
+#### AssertNoFileExists
+
+```go
+func AssertNoFileExists(t testRunner, file string, msg ...interface{})
+```
+
+
 
 #### AssertNotCompletesIn
 
@@ -669,24 +750,17 @@ Example:
     	// some code that does not call a panic...
     }) // => PASS
 
-#### AssertNotSameElements
+#### AssertNotRegexp
 
 ```go
-func AssertNotSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
 ```
 
-AssertNotSameElements asserts that two slices contains same elements
-(including pointers). The order is irrelevant.
+AssertNotRegexp asserts that a string does not match a given regexp.
 
 Example:
 
-     testza.AssertNotSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World", "World"})
-     testza.AssertNotSameElements(t, []int{1,2}, []int{1,2,3})
-
-     type A struct {
-    	  a string
-     }
-     testza.AssertNotSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}, {a: "D"}})
+    testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
 
 #### AssertNotZero
 
@@ -733,25 +807,17 @@ Example:
     	panic("some panic")
     }) // => PASS
 
-#### AssertSameElements
+#### AssertRegexp
 
 ```go
-func AssertSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
 ```
 
-AssertSameElements asserts that two slices contains same elements (including
-pointers). The order is irrelevant.
+AssertRegexp asserts that a string matches a given regexp.
 
 Example:
 
-     testza.AssertSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World"})
-     testza.AssertSameElements(t, []int{1,2,3}, []int{1,2,3})
-     testza.AssertSameElements(t, []int{1,2}, []int{2,1})
-
-     type A struct {
-    	  a string
-     }
-     testza.AssertSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}})
+    testza.AssertRegexp(t, "^a.*c$", "abc")
 
 #### AssertTestFails
 
@@ -1070,6 +1136,9 @@ func MockInputStringEmailAddresses() []string
 ```
 
 MockInputStringEmailAddresses returns a test set with valid email addresses.
+The addresses may look like they are invalid, but they are all conform to
+RFC 2822 and could be used. You can use this test set to test your email
+validation process.
 
 #### MockInputStringEmpty
 
@@ -1086,7 +1155,8 @@ func MockInputStringFull() (ret []string)
 ```
 
 MockInputStringFull contains all string test sets plus ten generated random
-strings.
+strings. This test set is huge and should only be used if you want to make
+sure that no string, at all, can crash a process.
 
 #### MockInputStringGenerateRandom
 
@@ -1094,7 +1164,7 @@ strings.
 func MockInputStringGenerateRandom(count, length int) (result []string)
 ```
 
-MockInputStringGenerateRandom returns random StringsHelper in a test set.
+MockInputStringGenerateRandom returns random strings in a test set.
 
 #### MockInputStringHtmlTags
 
@@ -1102,7 +1172,13 @@ MockInputStringGenerateRandom returns random StringsHelper in a test set.
 func MockInputStringHtmlTags() []string
 ```
 
-MockInputStringHtmlTags returns a test set with html tags.
+MockInputStringHtmlTags returns a test set with different html tags.
+
+Example:
+
+    - <script>
+    - <script>alert('XSS')</script>
+    - <a href="https://github.com/MarvinJWendt/testza">link</a>
 
 #### MockInputStringLimit
 
@@ -1118,10 +1194,10 @@ MockInputStringLimit limits a test set in size.
 func MockInputStringLong() (testSet []string)
 ```
 
-MockInputStringLong returns a test set with long random strings. Returns: -
-Random string (length: 25) - Random string (length: 50) - Random string
-(length: 100) - Random string (length: 1,000) - Random string (length:
-100,000)
+MockInputStringLong returns a test set with long random strings. Returns:
+[0]: Random string (length: 25) [1]: Random string (length: 50) [2]: Random
+string (length: 100) [3]: Random string (length: 1,000) [4]: Random string
+(length: 100,000)
 
 #### MockInputStringModify
 
@@ -1208,6 +1284,25 @@ Example:
     init() {
       testza.SetLineNumbersEnabled(false) // Disable line numbers
       testza.SetLineNumbersEnabled(true)  // Enable line numbers
+    }
+
+#### SetRandomSeed
+
+```go
+func SetRandomSeed(seed int64)
+```
+
+SetRandomSeed sets the seed for the random generator used in testza. Using
+the same seed will result in the same random sequences each time and
+guarantee a reproducible test run. Use this setting, if you want a 100%
+deterministic test. You should use this in the init() method of the package,
+which contains your tests.
+
+Example:
+
+    init() {
+      testza.SetRandomSeed(1337) // Set the seed to 1337
+      testza.SetRandomSeed(time.Now().UnixNano()) // Set the seed back to the current time (default | non-deterministic)
     }
 
 ### Snapshot

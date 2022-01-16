@@ -1,12 +1,11 @@
 package testza
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
+	"os"
 	"reflect"
 	"strconv"
-	"strings"
 	"time"
 
 	"github.com/pterm/pterm"
@@ -264,7 +263,7 @@ func AssertKindOf(t testRunner, expectedKind reflect.Kind, object interface{}, m
 		test.Helper()
 	}
 
-	if !isKind(expectedKind, object) {
+	if !internal.IsKind(expectedKind, object) {
 		internal.Fail(t,
 			fmt.Sprintf("A value that !!should be a type of kind %s!! is a type of kind %s.", expectedKind.String(), reflect.TypeOf(object).Kind().String()),
 			internal.NewObjectsExpectedActual(expectedKind, object),
@@ -286,7 +285,7 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 		test.Helper()
 	}
 
-	if isKind(kind, object) {
+	if internal.IsKind(kind, object) {
 		internal.Fail(t,
 			fmt.Sprintf("A value that !!should not be a type of kind %s!! is a type of kind %s.", kind.String(), reflect.TypeOf(object).Kind().String()),
 			internal.NewObjectsExpectedActual(kind, object),
@@ -304,8 +303,8 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 //  testza.AssertNumeric(t, 1.23)
 //  testza.AssertNumeric(t, uint(123))
 func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
-	if !isNumber(object) {
-		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object))
+	if !internal.IsNumber(object) {
+		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object), msg...)
 	}
 }
 
@@ -317,8 +316,8 @@ func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
 //  testza.AssertNotNumeric(t, true)
 //  testza.AssertNotNumeric(t, "123")
 func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{}) {
-	if isNumber(object) {
-		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object))
+	if internal.IsNumber(object) {
+		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object), msg...)
 	}
 }
 
@@ -333,8 +332,8 @@ func AssertZero(t testRunner, value interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if !isZero(value) {
-		internal.Fail(t, "An object that !!should have it's zero value!!, does not have it's zero value.", internal.NewObjectsSingleNamed("object", value))
+	if !internal.IsZero(value) {
+		internal.Fail(t, "An object that !!should have it's zero value!!, does not have it's zero value.", internal.NewObjectsSingleNamed("object", value), msg...)
 	}
 }
 
@@ -349,8 +348,8 @@ func AssertNotZero(t testRunner, value interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if isZero(value) {
-		internal.Fail(t, "An object that !!should not have it's zero value!!, does have it's zero value.", internal.NewObjectsSingleNamed("object", value))
+	if internal.IsZero(value) {
+		internal.Fail(t, "An object that !!should not have it's zero value!!, does have it's zero value.", internal.NewObjectsSingleNamed("object", value), msg...)
 	}
 }
 
@@ -364,7 +363,7 @@ func AssertEqual(t testRunner, expected interface{}, actual interface{}, msg ...
 		test.Helper()
 	}
 
-	if !isEqual(expected, actual) {
+	if !internal.IsEqual(expected, actual) {
 		internal.Fail(t, "Two objects that !!should be equal!!, are not equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
@@ -379,7 +378,7 @@ func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg 
 		test.Helper()
 	}
 
-	if isEqual(expected, actual) {
+	if internal.IsEqual(expected, actual) {
 		internal.Fail(t, "Two objects that !!should not be equal!!, are equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
@@ -411,7 +410,7 @@ func AssertEqualValues(t testRunner, expected interface{}, actual interface{}, m
 		test.Helper()
 	}
 
-	if !hasEqualValues(expected, actual) {
+	if !internal.HasEqualValues(expected, actual) {
 		internal.Fail(t, "Two objects that !!should have equal values!!, do not have equal values.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
@@ -440,7 +439,7 @@ func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}
 		test.Helper()
 	}
 
-	if hasEqualValues(expected, actual) {
+	if internal.HasEqualValues(expected, actual) {
 		internal.Fail(t, "Two objects that !!should not have equal values!!, do have equal values.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
@@ -458,7 +457,7 @@ func AssertTrue(t testRunner, value interface{}, msg ...interface{}) {
 	}
 
 	if value != true {
-		internal.Fail(t, "Value !!should be true!! but is not.", internal.NewObjectsExpectedActual(true, value))
+		internal.Fail(t, "Value !!should be true!! but is not.", internal.NewObjectsExpectedActual(true, value), msg...)
 	}
 }
 
@@ -475,7 +474,7 @@ func AssertFalse(t testRunner, value interface{}, msg ...interface{}) {
 	}
 
 	if value == true {
-		internal.Fail(t, "Value !!should be false!! but is not.", internal.NewObjectsExpectedActual(false, value))
+		internal.Fail(t, "Value !!should be false!! but is not.", internal.NewObjectsExpectedActual(false, value), msg...)
 	}
 }
 
@@ -489,7 +488,7 @@ func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...
 		test.Helper()
 	}
 
-	if !doesImplement(interfaceObject, object) {
+	if !internal.DoesImplement(interfaceObject, object) {
 		internal.Fail(t, fmt.Sprintf("An object that !!should implement %s!! does not implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
@@ -504,7 +503,7 @@ func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg 
 		test.Helper()
 	}
 
-	if doesImplement(interfaceObject, object) {
+	if internal.DoesImplement(interfaceObject, object) {
 		internal.Fail(t, fmt.Sprintf("An object that !!should not implement %s!! does implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
@@ -520,8 +519,8 @@ func AssertContains(t testRunner, object, element interface{}, msg ...interface{
 		test.Helper()
 	}
 
-	if !doesContain(object, element) {
-		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that is missing in object", Data: element}})
+	if !internal.DoesContain(object, element) {
+		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that is missing in object", Data: element}}, msg...)
 	}
 }
 
@@ -535,8 +534,8 @@ func AssertNotContains(t testRunner, object, element interface{}, msg ...interfa
 		test.Helper()
 	}
 
-	if doesContain(object, element) {
-		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that should not be in object", Data: element}})
+	if internal.DoesContain(object, element) {
+		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that should not be in object", Data: element}}, msg...)
 	}
 }
 
@@ -590,8 +589,8 @@ func AssertNil(t testRunner, object interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if !isNil(object) {
-		internal.Fail(t, "An object that !!should be nil!! is not nil.", internal.NewObjectsExpectedActual(nil, object))
+	if !internal.IsNil(object) {
+		internal.Fail(t, "An object that !!should be nil!! is not nil.", internal.NewObjectsExpectedActual(nil, object), msg...)
 	}
 }
 
@@ -606,8 +605,8 @@ func AssertNotNil(t testRunner, object interface{}, msg ...interface{}) {
 		test.Helper()
 	}
 
-	if isNil(object) {
-		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleNamed("object", object))
+	if internal.IsNil(object) {
+		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleNamed("object", object), msg...)
 	}
 }
 
@@ -626,7 +625,7 @@ func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...in
 		test.Helper()
 	}
 
-	if !completesIn(duration, f) {
+	if !internal.CompletesIn(duration, f) {
 		internal.Fail(t, fmt.Sprintf("The function !!should complete in %s!!, but it did not.", duration), internal.Objects{}, msg...)
 	}
 }
@@ -648,7 +647,7 @@ func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ..
 		test.Helper()
 	}
 
-	if completesIn(duration, f) {
+	if internal.CompletesIn(duration, f) {
 		internal.Fail(t, fmt.Sprintf("The function !!should not complete in %s!!, but it did.", duration), internal.Objects{}, msg...)
 	}
 }
@@ -695,7 +694,7 @@ func AssertGreater(t testRunner, object1, object2 interface{}, msg ...interface{
 	v2, err2 := strconv.ParseFloat(fmt.Sprint(object2), 64)
 
 	if err != nil || err2 != nil {
-		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2))
+		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2), msg...)
 	}
 
 	if !(v1 > v2) {
@@ -717,7 +716,7 @@ func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{}) 
 	v2, err2 := strconv.ParseFloat(fmt.Sprint(object2), 64)
 
 	if err != nil || err2 != nil {
-		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2))
+		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2), msg...)
 	}
 
 	if !(v1 < v2) {
@@ -853,6 +852,124 @@ func AssertDecreasing(t testRunner, object interface{}, msg ...interface{}) {
 	}
 
 	internal.AssertCompareHelper(t, object, -1, msg...)
+}
+
+// AssertRegexp asserts that a string matches a given regexp.
+//
+// Example:
+//  testza.AssertRegexp(t, "^a.*c$", "abc")
+func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	internal.AssertRegexpHelper(t, regex, txt, true, msg...)
+}
+
+// AssertNotRegexp asserts that a string does not match a given regexp.
+//
+// Example:
+//  testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
+func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	internal.AssertRegexpHelper(t, regex, txt, false, msg...)
+}
+
+// AssertFileExists asserts that a file exists.
+//
+// Example:
+//  testza.AssertFileExists(t, "./test.txt")
+//  testza.AssertFileExists(t, "./config.yaml", "the config file is missing")
+func AssertFileExists(t testRunner, file string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	// check if a file does not exists
+	if _, err := os.Stat(file); os.IsNotExist(err) {
+		internal.Fail(t, "A file !!does not exist!!.", internal.NewObjectsSingleNamed("File", file), msg...)
+	}
+}
+
+func AssertNoFileExists(t testRunner, file string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	// check if a file exists
+	if _, err := os.Stat(file); !os.IsNotExist(err) {
+		internal.Fail(t, "A file that !!should not exist!!, does exist.", internal.NewObjectsSingleUnknown(file), msg...)
+	}
+}
+
+// AssertDirExist asserts that a directory exists.
+// The test will pass when the directory exists, and it's visible to the current user.
+// The test will fail, if the path points to a file.
+//
+// Example:
+//  testza.AssertDirExist(t, "FolderName")
+func AssertDirExist(t testRunner, dir string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	stat, err := os.Stat(dir)
+	if os.IsNotExist(err) {
+		internal.Fail(t, "A directory !!does not exist!!.", internal.NewObjectsSingleNamed("Dir", dir), msg...)
+	} else if !stat.IsDir() {
+		internal.Fail(t, "A file !!is not a directory!!.", internal.NewObjectsSingleNamed("Dir", dir), msg...)
+	}
+}
+
+// AssertNoDirExists asserts that a directory does not exists.
+// The test will pass, if the path points to a file, as a directory with the same name, cannot exist.
+//
+// Example:
+//  testza.AssertNoDirExists(t, "FolderName")
+func AssertNoDirExists(t testRunner, dir string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	stat, err := os.Stat(dir)
+	if os.IsNotExist(err) {
+		return
+	}
+	if stat.IsDir() {
+		internal.Fail(t, "A directory that !!should not exist!!, does exist.", internal.NewObjectsSingleUnknown(dir), msg...)
+	}
+}
+
+// AssertDirEmpty asserts that a directory is empty.
+// The test will pass when the directory is empty or does not exist.
+//
+// Example:
+//  testza.AssertDirEmpty(t, "FolderName")
+func AssertDirEmpty(t testRunner, dir string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !internal.AssertDirEmptyHelper(t, dir) {
+		internal.Fail(t, "The directory !!is not!! empty.", internal.NewObjectsSingleNamed("Directory", dir), msg...)
+	}
+}
+
+// AssertDirNotEmpty asserts that a directory is not empty
+//
+// Example:
+//  testza.AssertDirNotEmpty(t, "FolderName")
+func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if internal.AssertDirEmptyHelper(t, dir) {
+		internal.Fail(t, "The directory !!is!! empty.", internal.NewObjectsSingleNamed("Directory", dir), msg...)
+	}
 }
 
 // AssertSameElements asserts that two slices contains same elements (including pointers).

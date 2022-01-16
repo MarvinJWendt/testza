@@ -14,11 +14,11 @@ func MockInputStringEmpty() []string {
 
 // MockInputStringLong returns a test set with long random strings.
 // Returns:
-// - Random string (length: 25)
-// - Random string (length: 50)
-// - Random string (length: 100)
-// - Random string (length: 1,000)
-// - Random string (length: 100,000)
+// [0]: Random string (length: 25)
+// [1]: Random string (length: 50)
+// [2]: Random string (length: 100)
+// [3]: Random string (length: 1,000)
+// [4]: Random string (length: 100,000)
 func MockInputStringLong() (testSet []string) {
 	testSet = append(testSet, MockInputStringGenerateRandom(1, 25)...)
 	testSet = append(testSet, MockInputStringGenerateRandom(1, 50)...)
@@ -43,6 +43,8 @@ func MockInputStringUsernames() []string {
 }
 
 // MockInputStringEmailAddresses returns a test set with valid email addresses.
+// The addresses may look like they are invalid, but they are all conform to RFC 2822 and could be used.
+// You can use this test set to test your email validation process.
 func MockInputStringEmailAddresses() []string {
 	return []string{
 		"hello@world.com",
@@ -86,7 +88,12 @@ func MockInputStringEmailAddresses() []string {
 	}
 }
 
-// MockInputStringHtmlTags returns a test set with html tags.
+// MockInputStringHtmlTags returns a test set with different html tags.
+//
+// Example:
+//  - <script>
+//  - <script>alert('XSS')</script>
+//  - <a href="https://github.com/MarvinJWendt/testza">link</a>
 func MockInputStringHtmlTags() []string {
 	return []string{
 		"<script>alert('XSS')</script>",
@@ -98,6 +105,7 @@ func MockInputStringHtmlTags() []string {
 }
 
 // MockInputStringFull contains all string test sets plus ten generated random strings.
+// This test set is huge and should only be used if you want to make sure that no string, at all, can crash a process.
 func MockInputStringFull() (ret []string) {
 	ret = append(ret, MockInputStringUsernames()...)
 	ret = append(ret, MockInputStringHtmlTags()...)
@@ -126,7 +134,7 @@ func MockInputStringLimit(testSet []string, max int) []string {
 	return testSet[:max]
 }
 
-// MockInputStringGenerateRandom returns random StringsHelper in a test set.
+// MockInputStringGenerateRandom returns random strings in a test set.
 func MockInputStringGenerateRandom(count, length int) (result []string) {
 	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
