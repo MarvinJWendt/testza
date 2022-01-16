@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3126-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3132-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -147,6 +147,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertNoDirExists](https://github.com/MarvinJWendt/testza#AssertNoDirExists)
   - [AssertNoError](https://github.com/MarvinJWendt/testza#AssertNoError)
   - [AssertNoFileExists](https://github.com/MarvinJWendt/testza#AssertNoFileExists)
+  - [AssertNoSubset](https://github.com/MarvinJWendt/testza#AssertNoSubset)
   - [AssertNotCompletesIn](https://github.com/MarvinJWendt/testza#AssertNotCompletesIn)
   - [AssertNotContains](https://github.com/MarvinJWendt/testza#AssertNotContains)
   - [AssertNotEqual](https://github.com/MarvinJWendt/testza#AssertNotEqual)
@@ -164,6 +165,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertPanics](https://github.com/MarvinJWendt/testza#AssertPanics)
   - [AssertRegexp](https://github.com/MarvinJWendt/testza#AssertRegexp)
   - [AssertSameElements](https://github.com/MarvinJWendt/testza#AssertSameElements)
+  - [AssertSubset](https://github.com/MarvinJWendt/testza#AssertSubset)
   - [AssertTestFails](https://github.com/MarvinJWendt/testza#AssertTestFails)
   - [AssertTrue](https://github.com/MarvinJWendt/testza#AssertTrue)
   - [AssertZero](https://github.com/MarvinJWendt/testza#AssertZero)
@@ -589,6 +591,20 @@ func AssertNoFileExists(t testRunner, file string, msg ...interface{})
 
 
 
+#### AssertNoSubset
+
+```go
+func AssertNoSubset(t testRunner, list interface{}, subset interface{}, msg ...interface{})
+```
+
+AssertNoSubset asserts that the second parameter is not a subset of the
+list. The order is irrelevant.
+
+Example:
+
+    testza.AssertNoSubset(t, []int{1, 2, 3}, []int{1, 7})
+    testza.AssertNoSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "John"})
+
 #### AssertNotCompletesIn
 
 ```go
@@ -859,6 +875,20 @@ Example:
     	  a string
      }
      testza.AssertSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}})
+
+#### AssertSubset
+
+```go
+func AssertSubset(t testRunner, list interface{}, subset interface{}, msg ...interface{})
+```
+
+AssertSubset asserts that the second parameter is a subset of the list. The
+order is irrelevant.
+
+Example:
+
+    testza.AssertSubset(t, []int{1, 2, 3}, []int{1, 2})
+    testza.AssertSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "World"})
 
 #### AssertTestFails
 

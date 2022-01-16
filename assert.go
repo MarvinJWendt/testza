@@ -816,3 +816,35 @@ func AssertNotSameElements(t testRunner, expected interface{}, actual interface{
 		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
+
+// AssertSubset asserts that the second parameter is a subset of the list.
+// The order is irrelevant.
+//
+// Example:
+//  testza.AssertSubset(t, []int{1, 2, 3}, []int{1, 2})
+//  testza.AssertSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "World"})
+func AssertSubset(t testRunner, list interface{}, subset interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if !internal.IsSubset(t, list, subset) {
+		internal.Fail(t, "The second parameter !!is not a subset of the list!!, but should be.", internal.Objects{internal.NewObjectsSingleNamed("List", list)[0], internal.NewObjectsSingleNamed("Subset", subset)[0]}, msg...)
+	}
+}
+
+// AssertNoSubset asserts that the second parameter is not a subset of the list.
+// The order is irrelevant.
+//
+// Example:
+//  testza.AssertNoSubset(t, []int{1, 2, 3}, []int{1, 7})
+//  testza.AssertNoSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "John"})
+func AssertNoSubset(t testRunner, list interface{}, subset interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if internal.IsSubset(t, list, subset) {
+		internal.Fail(t, "The second parameter !!is a subset of the list!!, but should not be.", internal.Objects{internal.NewObjectsSingleNamed("List", list)[0], internal.NewObjectsSingleNamed("Subset", subset)[0]}, msg...)
+	}
+}
