@@ -158,10 +158,12 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertNotNumeric](https://github.com/MarvinJWendt/testza#AssertNotNumeric)
   - [AssertNotPanics](https://github.com/MarvinJWendt/testza#AssertNotPanics)
   - [AssertNotRegexp](https://github.com/MarvinJWendt/testza#AssertNotRegexp)
+  - [AssertNotSameElements](https://github.com/MarvinJWendt/testza#AssertNotSameElements)
   - [AssertNotZero](https://github.com/MarvinJWendt/testza#AssertNotZero)
   - [AssertNumeric](https://github.com/MarvinJWendt/testza#AssertNumeric)
   - [AssertPanics](https://github.com/MarvinJWendt/testza#AssertPanics)
   - [AssertRegexp](https://github.com/MarvinJWendt/testza#AssertRegexp)
+  - [AssertSameElements](https://github.com/MarvinJWendt/testza#AssertSameElements)
   - [AssertTestFails](https://github.com/MarvinJWendt/testza#AssertTestFails)
   - [AssertTrue](https://github.com/MarvinJWendt/testza#AssertTrue)
   - [AssertZero](https://github.com/MarvinJWendt/testza#AssertZero)
@@ -762,6 +764,25 @@ Example:
 
     testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
 
+#### AssertNotSameElements
+
+```go
+func AssertNotSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+```
+
+AssertNotSameElements asserts that two slices contains same elements
+(including pointers). The order is irrelevant.
+
+Example:
+
+     testza.AssertNotSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World", "World"})
+     testza.AssertNotSameElements(t, []int{1,2}, []int{1,2,3})
+
+     type A struct {
+    	  a string
+     }
+     testza.AssertNotSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}, {a: "D"}})
+
 #### AssertNotZero
 
 ```go
@@ -818,6 +839,26 @@ AssertRegexp asserts that a string matches a given regexp.
 Example:
 
     testza.AssertRegexp(t, "^a.*c$", "abc")
+
+#### AssertSameElements
+
+```go
+func AssertSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+```
+
+AssertSameElements asserts that two slices contains same elements (including
+pointers). The order is irrelevant.
+
+Example:
+
+     testza.AssertSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World"})
+     testza.AssertSameElements(t, []int{1,2,3}, []int{1,2,3})
+     testza.AssertSameElements(t, []int{1,2}, []int{2,1})
+
+     type A struct {
+    	  a string
+     }
+     testza.AssertSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}})
 
 #### AssertTestFails
 
