@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v0.2.13"></a>
+## [v0.2.13] - 2022-01-16
 ### Features
 - **assert:** added `AssertSubset` and `AssertNoSubset`
 
