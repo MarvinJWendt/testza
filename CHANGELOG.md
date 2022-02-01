@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v0.2.14"></a>
+## [v0.2.14] - 2022-01-16
 ### Features
 - **assert:** added `AssertSubset` and `AssertNoSubset`
 
@@ -239,7 +242,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.13...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.2.14...HEAD
+[v0.2.14]: https://github.com/MarvinJWendt/testza/compare/v0.2.13...v0.2.14
 [v0.2.13]: https://github.com/MarvinJWendt/testza/compare/v0.2.12...v0.2.13
 [v0.2.12]: https://github.com/MarvinJWendt/testza/compare/v0.2.11...v0.2.12
 [v0.2.11]: https://github.com/MarvinJWendt/testza/compare/v0.2.10...v0.2.11
