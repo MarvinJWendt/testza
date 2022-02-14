@@ -17,8 +17,11 @@ var secondary = pterm.LightCyan
 func init() {
 	randomSeed = time.Now().UnixNano()
 	rand.Seed(randomSeed)
-	infoPrinter.WithLevel(1).Println("Running tests with " + secondary("Testza"))
-	infoPrinter.Printfln(`Using seed "%s" for random operations`, secondary(randomSeed))
-	infoPrinter.Printfln(`System info: OS=%s | arch=%s | cpu=%s | go=%s`, secondary(runtime.GOOS), secondary(runtime.GOARCH), secondary(cpuid.CPU.BrandName), secondary(runtime.Version()))
-	fmt.Println()
+
+	if showStartupMessage {
+		infoPrinter.WithLevel(1).Println("Running tests with " + secondary("Testza"))
+		infoPrinter.Printfln(`Using seed "%s" for random operations`, secondary(randomSeed))
+		infoPrinter.Printfln(`System info: OS=%s | arch=%s | cpu=%s | go=%s`, secondary(runtime.GOOS), secondary(runtime.GOARCH), secondary(cpuid.CPU.BrandName), secondary(runtime.Version()))
+		fmt.Println()
+	}
 }

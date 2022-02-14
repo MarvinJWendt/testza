@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3132-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3144-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -114,6 +114,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [SetColorsEnabled](https://github.com/MarvinJWendt/testza#SetColorsEnabled)
   - [SetLineNumbersEnabled](https://github.com/MarvinJWendt/testza#SetLineNumbersEnabled)
   - [SetRandomSeed](https://github.com/MarvinJWendt/testza#SetRandomSeed)
+  - [SetShowStartupMessage](https://github.com/MarvinJWendt/testza#SetShowStartupMessage)
 </td>
 
 </details>
@@ -1374,6 +1375,23 @@ Example:
     init() {
       testza.SetRandomSeed(1337) // Set the seed to 1337
       testza.SetRandomSeed(time.Now().UnixNano()) // Set the seed back to the current time (default | non-deterministic)
+    }
+
+#### SetShowStartupMessage
+
+```go
+func SetShowStartupMessage(show bool)
+```
+
+SetShowStartupMessage controls if the startup message should be printed. You
+should use this in the init() method of the package, which contains your
+tests.
+
+Example:
+
+    init() {
+      testza.SetShowStartupMessage(false) // Disable the startup message
+      testza.SetShowStartupMessage(true)  // Enable the startup message
     }
 
 ### Snapshot

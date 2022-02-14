@@ -7,6 +7,8 @@ import (
 	"github.com/pterm/pterm"
 )
 
+var showStartupMessage = true
+
 // SetColorsEnabled controls if testza should print colored output.
 // You should use this in the init() method of the package, which contains your tests.
 //
@@ -48,4 +50,16 @@ func SetLineNumbersEnabled(enabled bool) {
 func SetRandomSeed(seed int64) {
 	randomSeed = seed
 	rand.Seed(seed)
+}
+
+// SetShowStartupMessage controls if the startup message should be printed.
+// You should use this in the init() method of the package, which contains your tests.
+//
+// Example:
+//  init() {
+//    testza.SetShowStartupMessage(false) // Disable the startup message
+//    testza.SetShowStartupMessage(true)  // Enable the startup message
+//  }
+func SetShowStartupMessage(show bool) {
+	showStartupMessage = show
 }

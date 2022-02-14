@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- **configure:** Added option to disable the startup message
+
 ### Test
 - **capture:** added more tests for output capturing
 
