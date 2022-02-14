@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Test
+- **capture:** added more tests for output capturing
+
 
 <a name="v0.2.14"></a>
 ## [v0.2.14] - 2022-01-16
