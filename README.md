@@ -114,6 +114,7 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [SetColorsEnabled](https://github.com/MarvinJWendt/testza#SetColorsEnabled)
   - [SetLineNumbersEnabled](https://github.com/MarvinJWendt/testza#SetLineNumbersEnabled)
   - [SetRandomSeed](https://github.com/MarvinJWendt/testza#SetRandomSeed)
+  - [SetShowStartupMessage](https://github.com/MarvinJWendt/testza#SetShowStartupMessage)
 </td>
 
 </details>
@@ -1374,6 +1375,23 @@ Example:
     init() {
       testza.SetRandomSeed(1337) // Set the seed to 1337
       testza.SetRandomSeed(time.Now().UnixNano()) // Set the seed back to the current time (default | non-deterministic)
+    }
+
+#### SetShowStartupMessage
+
+```go
+func SetShowStartupMessage(show bool)
+```
+
+SetShowStartupMessage controls if the startup message should be printed. You
+should use this in the init() method of the package, which contains your
+tests.
+
+Example:
+
+    init() {
+      testza.SetShowStartupMessage(false) // Disable the startup message
+      testza.SetShowStartupMessage(true)  // Enable the startup message
     }
 
 ### Snapshot
