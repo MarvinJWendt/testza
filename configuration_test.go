@@ -40,3 +40,20 @@ func TestSetRandomSeed(t *testing.T) {
 	SetRandomSeed(un)
 	AssertEqual(t, un, randomSeed)
 }
+
+func TestSetShowStartupMessage(t *testing.T) {
+	t.Run("Default is true", func(t *testing.T) {
+		AssertTrue(t, showStartupMessage)
+
+	})
+
+	t.Run("Set to false", func(t *testing.T) {
+		SetShowStartupMessage(false)
+		AssertFalse(t, showStartupMessage)
+	})
+
+	t.Run("Set to true", func(t *testing.T) {
+		SetShowStartupMessage(true)
+		AssertTrue(t, showStartupMessage)
+	})
+}
