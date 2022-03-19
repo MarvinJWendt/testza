@@ -204,74 +204,74 @@ testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-Bool">Mock Input Bool</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Input-Bool">Fuzz Input Bool</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [MockInputBoolFull](https://github.com/MarvinJWendt/testza#MockInputBoolFull)
-  - [MockInputBoolModify](https://github.com/MarvinJWendt/testza#MockInputBoolModify)
-  - [MockInputBoolRunTests](https://github.com/MarvinJWendt/testza#MockInputBoolRunTests)
+  - [FuzzInputBoolFull](https://github.com/MarvinJWendt/testza#FuzzInputBoolFull)
+  - [FuzzInputBoolModify](https://github.com/MarvinJWendt/testza#FuzzInputBoolModify)
+  - [FuzzInputBoolRunTests](https://github.com/MarvinJWendt/testza#FuzzInputBoolRunTests)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-String">Mock Input String</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Input-String">Fuzz Input String</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [MockInputStringEmailAddresses](https://github.com/MarvinJWendt/testza#MockInputStringEmailAddresses)
-  - [MockInputStringEmpty](https://github.com/MarvinJWendt/testza#MockInputStringEmpty)
-  - [MockInputStringFull](https://github.com/MarvinJWendt/testza#MockInputStringFull)
-  - [MockInputStringGenerateRandom](https://github.com/MarvinJWendt/testza#MockInputStringGenerateRandom)
-  - [MockInputStringHtmlTags](https://github.com/MarvinJWendt/testza#MockInputStringHtmlTags)
-  - [MockInputStringLimit](https://github.com/MarvinJWendt/testza#MockInputStringLimit)
-  - [MockInputStringLong](https://github.com/MarvinJWendt/testza#MockInputStringLong)
-  - [MockInputStringModify](https://github.com/MarvinJWendt/testza#MockInputStringModify)
-  - [MockInputStringNumeric](https://github.com/MarvinJWendt/testza#MockInputStringNumeric)
-  - [MockInputStringRunTests](https://github.com/MarvinJWendt/testza#MockInputStringRunTests)
-  - [MockInputStringUsernames](https://github.com/MarvinJWendt/testza#MockInputStringUsernames)
+  - [FuzzInputStringEmailAddresses](https://github.com/MarvinJWendt/testza#FuzzInputStringEmailAddresses)
+  - [FuzzInputStringEmpty](https://github.com/MarvinJWendt/testza#FuzzInputStringEmpty)
+  - [FuzzInputStringFull](https://github.com/MarvinJWendt/testza#FuzzInputStringFull)
+  - [FuzzInputStringGenerateRandom](https://github.com/MarvinJWendt/testza#FuzzInputStringGenerateRandom)
+  - [FuzzInputStringHtmlTags](https://github.com/MarvinJWendt/testza#FuzzInputStringHtmlTags)
+  - [FuzzInputStringLimit](https://github.com/MarvinJWendt/testza#FuzzInputStringLimit)
+  - [FuzzInputStringLong](https://github.com/MarvinJWendt/testza#FuzzInputStringLong)
+  - [FuzzInputStringModify](https://github.com/MarvinJWendt/testza#FuzzInputStringModify)
+  - [FuzzInputStringNumeric](https://github.com/MarvinJWendt/testza#FuzzInputStringNumeric)
+  - [FuzzInputStringRunTests](https://github.com/MarvinJWendt/testza#FuzzInputStringRunTests)
+  - [FuzzInputStringUsernames](https://github.com/MarvinJWendt/testza#FuzzInputStringUsernames)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-Float64">Mock Input Float64</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Input-Float64">Fuzz Input Float64</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [MockInputFloat64Full](https://github.com/MarvinJWendt/testza#MockInputFloat64Full)
-  - [MockInputFloat64GenerateRandomNegative](https://github.com/MarvinJWendt/testza#MockInputFloat64GenerateRandomNegative)
-  - [MockInputFloat64GenerateRandomPositive](https://github.com/MarvinJWendt/testza#MockInputFloat64GenerateRandomPositive)
-  - [MockInputFloat64GenerateRandomRange](https://github.com/MarvinJWendt/testza#MockInputFloat64GenerateRandomRange)
-  - [MockInputFloat64Modify](https://github.com/MarvinJWendt/testza#MockInputFloat64Modify)
-  - [MockInputFloat64RunTests](https://github.com/MarvinJWendt/testza#MockInputFloat64RunTests)
+  - [FuzzInputFloat64Full](https://github.com/MarvinJWendt/testza#FuzzInputFloat64Full)
+  - [FuzzInputFloat64GenerateRandomNegative](https://github.com/MarvinJWendt/testza#FuzzInputFloat64GenerateRandomNegative)
+  - [FuzzInputFloat64GenerateRandomPositive](https://github.com/MarvinJWendt/testza#FuzzInputFloat64GenerateRandomPositive)
+  - [FuzzInputFloat64GenerateRandomRange](https://github.com/MarvinJWendt/testza#FuzzInputFloat64GenerateRandomRange)
+  - [FuzzInputFloat64Modify](https://github.com/MarvinJWendt/testza#FuzzInputFloat64Modify)
+  - [FuzzInputFloat64RunTests](https://github.com/MarvinJWendt/testza#FuzzInputFloat64RunTests)
 </td>
 
 </details>
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Mock-Input-Int">Mock Input Int</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Input-Int">Fuzz Input Int</a></td>
 <td>
 
 <details>
 <summary>Click to expand</summary>
 
-  - [MockInputIntFull](https://github.com/MarvinJWendt/testza#MockInputIntFull)
-  - [MockInputIntGenerateRandomNegative](https://github.com/MarvinJWendt/testza#MockInputIntGenerateRandomNegative)
-  - [MockInputIntGenerateRandomPositive](https://github.com/MarvinJWendt/testza#MockInputIntGenerateRandomPositive)
-  - [MockInputIntGenerateRandomRange](https://github.com/MarvinJWendt/testza#MockInputIntGenerateRandomRange)
-  - [MockInputIntModify](https://github.com/MarvinJWendt/testza#MockInputIntModify)
-  - [MockInputIntRunTests](https://github.com/MarvinJWendt/testza#MockInputIntRunTests)
+  - [FuzzInputIntFull](https://github.com/MarvinJWendt/testza#FuzzInputIntFull)
+  - [FuzzInputIntGenerateRandomNegative](https://github.com/MarvinJWendt/testza#FuzzInputIntGenerateRandomNegative)
+  - [FuzzInputIntGenerateRandomPositive](https://github.com/MarvinJWendt/testza#FuzzInputIntGenerateRandomPositive)
+  - [FuzzInputIntGenerateRandomRange](https://github.com/MarvinJWendt/testza#FuzzInputIntGenerateRandomRange)
+  - [FuzzInputIntModify](https://github.com/MarvinJWendt/testza#FuzzInputIntModify)
+  - [FuzzInputIntRunTests](https://github.com/MarvinJWendt/testza#FuzzInputIntRunTests)
 </td>
 
 </details>
@@ -1019,245 +1019,245 @@ Example:
     testza.AssertEqual(t, "Hello", stdout)
     testza.AssertEqual(t, "World", stderr)
 
-### Mock Input Bool
+### Fuzz Input Bool
 
-#### MockInputBoolFull
-
-```go
-func MockInputBoolFull() []bool
-```
-
-MockInputBoolFull returns true and false in a boolean slice.
-
-#### MockInputBoolModify
+#### FuzzInputBoolFull
 
 ```go
-func MockInputBoolModify(inputSlice []bool, modifier func(index int, value bool) bool) (floats []bool)
+func FuzzInputBoolFull() []bool
 ```
 
-MockInputBoolModify returns a modified version of a test set.
+FuzzInputBoolFull returns true and false in a boolean slice.
+
+#### FuzzInputBoolModify
+
+```go
+func FuzzInputBoolModify(inputSlice []bool, modifier func(index int, value bool) bool) (floats []bool)
+```
+
+FuzzInputBoolModify returns a modified version of a test set.
 
 Example:
 
-    testset := testza.MockInputBoolModify(testza.MockInputBoolFull(), func(index int, value bool) bool {
+    testset := testza.FuzzInputBoolModify(testza.FuzzInputBoolFull(), func(index int, value bool) bool {
     	return !value
     })
 
-#### MockInputBoolRunTests
+#### FuzzInputBoolRunTests
 
 ```go
-func MockInputBoolRunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
+func FuzzInputBoolRunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
 ```
 
-MockInputBoolRunTests runs a test for every value in a testset. You can use
+FuzzInputBoolRunTests runs a test for every value in a testset. You can use
 the value as input parameter for your functions, to sanity test against many
 different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
 
-    testza.MockInputBoolRunTests(t, testza.MockInputBoolFull(), func(t *testing.T, index int, b bool) {
+    testza.FuzzInputBoolRunTests(t, testza.FuzzInputBoolFull(), func(t *testing.T, index int, b bool) {
     	// Test logic
     	// err := YourFunction(b)
     	// testza.AssertNoError(t, err)
     	// ...
     })
 
-### Mock Input Float64
+### Fuzz Input Float64
 
-#### MockInputFloat64Full
+#### FuzzInputFloat64Full
 
 ```go
-func MockInputFloat64Full() (floats []float64)
+func FuzzInputFloat64Full() (floats []float64)
 ```
 
-MockInputFloat64Full returns a combination of every float64 testset and some
+FuzzInputFloat64Full returns a combination of every float64 testset and some
 random float64s (positive and negative).
 
-#### MockInputFloat64GenerateRandomNegative
+#### FuzzInputFloat64GenerateRandomNegative
 
 ```go
-func MockInputFloat64GenerateRandomNegative(count int, min float64) (floats []float64)
+func FuzzInputFloat64GenerateRandomNegative(count int, min float64) (floats []float64)
 ```
 
-MockInputFloat64GenerateRandomNegative generates random negative integers
+FuzzInputFloat64GenerateRandomNegative generates random negative integers
 with a minimum of min. If the minimum is positive, it will be converted to a
 negative number. If it is set to 0, there is no limit.
 
-#### MockInputFloat64GenerateRandomPositive
+#### FuzzInputFloat64GenerateRandomPositive
 
 ```go
-func MockInputFloat64GenerateRandomPositive(count int, max float64) (floats []float64)
+func FuzzInputFloat64GenerateRandomPositive(count int, max float64) (floats []float64)
 ```
 
-MockInputFloat64GenerateRandomPositive generates random positive integers
+FuzzInputFloat64GenerateRandomPositive generates random positive integers
 with a maximum of max. If the maximum is 0, or below, the maximum will be
 set to math.MaxInt64.
 
-#### MockInputFloat64GenerateRandomRange
+#### FuzzInputFloat64GenerateRandomRange
 
 ```go
-func MockInputFloat64GenerateRandomRange(count int, min, max float64) (floats []float64)
+func FuzzInputFloat64GenerateRandomRange(count int, min, max float64) (floats []float64)
 ```
 
-MockInputFloat64GenerateRandomRange generates random positive integers with
+FuzzInputFloat64GenerateRandomRange generates random positive integers with
 a maximum of max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### MockInputFloat64Modify
+#### FuzzInputFloat64Modify
 
 ```go
-func MockInputFloat64Modify(inputSlice []float64, modifier func(index int, value float64) float64) (floats []float64)
+func FuzzInputFloat64Modify(inputSlice []float64, modifier func(index int, value float64) float64) (floats []float64)
 ```
 
-MockInputFloat64Modify returns a modified version of a test set.
+FuzzInputFloat64Modify returns a modified version of a test set.
 
 Example:
 
-    testset := testza.MockInputFloat64Modify(testza.MockInputFloat64Full(), func(index int, value float64) float64 {
+    testset := testza.FuzzInputFloat64Modify(testza.FuzzInputFloat64Full(), func(index int, value float64) float64 {
     	return value * 2
     })
 
-#### MockInputFloat64RunTests
+#### FuzzInputFloat64RunTests
 
 ```go
-func MockInputFloat64RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64))
+func FuzzInputFloat64RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64))
 ```
 
-MockInputFloat64RunTests runs a test for every value in a testset. You can
+FuzzInputFloat64RunTests runs a test for every value in a testset. You can
 use the value as input parameter for your functions, to sanity test against
 many different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
 
-    testza.MockInputFloat64RunTests(t, testza.MockInputFloat64Full(), func(t *testing.T, index int, f float64) {
+    testza.FuzzInputFloat64RunTests(t, testza.FuzzInputFloat64Full(), func(t *testing.T, index int, f float64) {
     	// Test logic
     	// err := YourFunction(f)
     	// testza.AssertNoError(t, err)
     	// ...
     })
 
-### Mock Input Int
+### Fuzz Input Int
 
-#### MockInputIntFull
+#### FuzzInputIntFull
 
 ```go
-func MockInputIntFull() (ints []int)
+func FuzzInputIntFull() (ints []int)
 ```
 
-MockInputIntFull returns a combination of every integer testset and some
+FuzzInputIntFull returns a combination of every integer testset and some
 random integers (positive and negative).
 
-#### MockInputIntGenerateRandomNegative
+#### FuzzInputIntGenerateRandomNegative
 
 ```go
-func MockInputIntGenerateRandomNegative(count, min int) (ints []int)
+func FuzzInputIntGenerateRandomNegative(count, min int) (ints []int)
 ```
 
-MockInputIntGenerateRandomNegative generates random negative integers with a
+FuzzInputIntGenerateRandomNegative generates random negative integers with a
 minimum of min. If the minimum is 0, or above, the maximum will be set to
 math.MinInt64.
 
-#### MockInputIntGenerateRandomPositive
+#### FuzzInputIntGenerateRandomPositive
 
 ```go
-func MockInputIntGenerateRandomPositive(count, max int) (ints []int)
+func FuzzInputIntGenerateRandomPositive(count, max int) (ints []int)
 ```
 
-MockInputIntGenerateRandomPositive generates random positive integers with a
+FuzzInputIntGenerateRandomPositive generates random positive integers with a
 maximum of max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### MockInputIntGenerateRandomRange
+#### FuzzInputIntGenerateRandomRange
 
 ```go
-func MockInputIntGenerateRandomRange(count, min, max int) (ints []int)
+func FuzzInputIntGenerateRandomRange(count, min, max int) (ints []int)
 ```
 
-MockInputIntGenerateRandomRange generates random integers with a range of
+FuzzInputIntGenerateRandomRange generates random integers with a range of
 min to max.
 
-#### MockInputIntModify
+#### FuzzInputIntModify
 
 ```go
-func MockInputIntModify(inputSlice []int, modifier func(index int, value int) int) (ints []int)
+func FuzzInputIntModify(inputSlice []int, modifier func(index int, value int) int) (ints []int)
 ```
 
-MockInputIntModify returns a modified version of a test set.
+FuzzInputIntModify returns a modified version of a test set.
 
 Example:
 
-    testset := testza.MockInputIntModify(testza.MockInputIntFull(), func(index int, value int) int {
+    testset := testza.FuzzInputIntModify(testza.FuzzInputIntFull(), func(index int, value int) int {
     	return value * 2
     })
 
-#### MockInputIntRunTests
+#### FuzzInputIntRunTests
 
 ```go
-func MockInputIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int))
+func FuzzInputIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int))
 ```
 
-MockInputIntRunTests runs a test for every value in a testset. You can use
+FuzzInputIntRunTests runs a test for every value in a testset. You can use
 the value as input parameter for your functions, to sanity test against many
 different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
 
-    testza.MockInputIntRunTests(t, testza.MockInputIntFull(), func(t *testing.T, index int, i int) {
+    testza.FuzzInputIntRunTests(t, testza.FuzzInputIntFull(), func(t *testing.T, index int, i int) {
     	// Test logic
     	// err := YourFunction(i)
     	// testza.AssertNoError(t, err)
     	// ...
     })
 
-### Mock Input String
+### Fuzz Input String
 
-#### MockInputStringEmailAddresses
+#### FuzzInputStringEmailAddresses
 
 ```go
-func MockInputStringEmailAddresses() []string
+func FuzzInputStringEmailAddresses() []string
 ```
 
-MockInputStringEmailAddresses returns a test set with valid email addresses.
+FuzzInputStringEmailAddresses returns a test set with valid email addresses.
 The addresses may look like they are invalid, but they are all conform to
 RFC 2822 and could be used. You can use this test set to test your email
 validation process.
 
-#### MockInputStringEmpty
+#### FuzzInputStringEmpty
 
 ```go
-func MockInputStringEmpty() []string
+func FuzzInputStringEmpty() []string
 ```
 
-MockInputStringEmpty returns a test set with a single empty string.
+FuzzInputStringEmpty returns a test set with a single empty string.
 
-#### MockInputStringFull
+#### FuzzInputStringFull
 
 ```go
-func MockInputStringFull() (ret []string)
+func FuzzInputStringFull() (ret []string)
 ```
 
-MockInputStringFull contains all string test sets plus ten generated random
+FuzzInputStringFull contains all string test sets plus ten generated random
 strings. This test set is huge and should only be used if you want to make
 sure that no string, at all, can crash a process.
 
-#### MockInputStringGenerateRandom
+#### FuzzInputStringGenerateRandom
 
 ```go
-func MockInputStringGenerateRandom(count, length int) (result []string)
+func FuzzInputStringGenerateRandom(count, length int) (result []string)
 ```
 
-MockInputStringGenerateRandom returns random strings in a test set.
+FuzzInputStringGenerateRandom returns random strings in a test set.
 
-#### MockInputStringHtmlTags
+#### FuzzInputStringHtmlTags
 
 ```go
-func MockInputStringHtmlTags() []string
+func FuzzInputStringHtmlTags() []string
 ```
 
-MockInputStringHtmlTags returns a test set with different html tags.
+FuzzInputStringHtmlTags returns a test set with different html tags.
 
 Example:
 
@@ -1265,76 +1265,76 @@ Example:
     - <script>alert('XSS')</script>
     - <a href="https://github.com/MarvinJWendt/testza">link</a>
 
-#### MockInputStringLimit
+#### FuzzInputStringLimit
 
 ```go
-func MockInputStringLimit(testSet []string, max int) []string
+func FuzzInputStringLimit(testSet []string, max int) []string
 ```
 
-MockInputStringLimit limits a test set in size.
+FuzzInputStringLimit limits a test set in size.
 
-#### MockInputStringLong
+#### FuzzInputStringLong
 
 ```go
-func MockInputStringLong() (testSet []string)
+func FuzzInputStringLong() (testSet []string)
 ```
 
-MockInputStringLong returns a test set with long random strings. Returns:
+FuzzInputStringLong returns a test set with long random strings. Returns:
 [0]: Random string (length: 25) [1]: Random string (length: 50) [2]: Random
 string (length: 100) [3]: Random string (length: 1,000) [4]: Random string
 (length: 100,000)
 
-#### MockInputStringModify
+#### FuzzInputStringModify
 
 ```go
-func MockInputStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string)
+func FuzzInputStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string)
 ```
 
-MockInputStringModify returns a modified version of a test set.
+FuzzInputStringModify returns a modified version of a test set.
 
 Example:
 
-    testset := testza.MockInputStringModify(testza.MockInputStringFull(), func(index int, value string) string {
+    testset := testza.FuzzInputStringModify(testza.FuzzInputStringFull(), func(index int, value string) string {
     	return value + " some suffix"
     })
 
-#### MockInputStringNumeric
+#### FuzzInputStringNumeric
 
 ```go
-func MockInputStringNumeric() []string
+func FuzzInputStringNumeric() []string
 ```
 
-MockInputStringNumeric returns a test set with strings that are numeric. The
+FuzzInputStringNumeric returns a test set with strings that are numeric. The
 highest number in here is "9223372036854775807", which is equal to the
 maxmim int64.
 
-#### MockInputStringRunTests
+#### FuzzInputStringRunTests
 
 ```go
-func MockInputStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string))
+func FuzzInputStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string))
 ```
 
-MockInputStringRunTests runs a test for every value in a testset. You can
+FuzzInputStringRunTests runs a test for every value in a testset. You can
 use the value as input parameter for your functions, to sanity test against
 many different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
 
-    testza.MockInputStringRunTests(t, testza.MockInputStringFull(), func(t *testing.T, index int, str string) {
+    testza.FuzzInputStringRunTests(t, testza.FuzzInputStringFull(), func(t *testing.T, index int, str string) {
     	// Test logic
     	// err := YourFunction(str)
     	// testza.AssertNoError(t, err)
     	// ...
     })
 
-#### MockInputStringUsernames
+#### FuzzInputStringUsernames
 
 ```go
-func MockInputStringUsernames() []string
+func FuzzInputStringUsernames() []string
 ```
 
-MockInputStringUsernames returns a test set with usernames.
+FuzzInputStringUsernames returns a test set with usernames.
 
 ### Settings
 

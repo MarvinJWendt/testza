@@ -35,7 +35,7 @@ func TestSetLineNumbersEnabled(t *testing.T) {
 func TestSetRandomSeed(t *testing.T) {
 	SetRandomSeed(1337)
 	AssertEqual(t, int64(1337), randomSeed)
-	AssertEqual(t, "4U390O49B9", MockInputStringGenerateRandom(1, 10)[0])
+	AssertEqual(t, "4U390O49B9", FuzzInputStringGenerateRandom(1, 10)[0])
 	un := time.Now().UnixNano()
 	SetRandomSeed(un)
 	AssertEqual(t, un, randomSeed)
