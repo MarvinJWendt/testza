@@ -44,7 +44,18 @@
 
 ---
 
+
 <img align="right" height="400" alt="Screenshot of an example test message" src="https://user-images.githubusercontent.com/31022056/124531029-ea31b780-de0d-11eb-8984-74e679f84aec.png" />
+
+<br/>
+
+<p align="center">
+<a href="https://discord.gg/vE2dNkfAmF">
+<img width="300" src="https://user-images.githubusercontent.com/31022056/158916278-4504b838-7ecb-4ab9-a900-7dc002aade78.png" alt="Join us on Discord!" />
+<br/>
+<b>Join us on Discord for support, discussions, updates and general talk!</b>
+</a>
+</p>
 
 ## Installation
 
@@ -52,6 +63,8 @@
 # Execute this command inside your project
 go get github.com/MarvinJWendt/testza
 ```
+<br/>
+<br/>
 
 ## Description
 
