@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- added better styling for `AssertNoError`
+
 
 <a name="v0.3.0"></a>
 ## [v0.3.0] - 2022-03-20
