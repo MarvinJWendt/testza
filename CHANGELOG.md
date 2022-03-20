@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Code Refactoring
+- renamed `Mock` to `Fuzz`
+
 
 <a name="v0.2.15"></a>
 ## [v0.2.15] - 2022-02-14
