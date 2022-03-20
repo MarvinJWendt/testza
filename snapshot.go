@@ -114,6 +114,9 @@ func snapshotValidateFromDir(dir string, t testRunner, name string, actual inter
 func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg ...interface{}) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
+	if strings.Contains(name, "/") {
+		os.MkdirAll(path.Dir(snapshotPath), 0600)
+	}
 
 	if _, err := os.Stat(snapshotPath); err == nil {
 		err = snapshotValidateFromDir(dir, t, name, object, msg...)
