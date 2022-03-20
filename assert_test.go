@@ -17,6 +17,45 @@ import (
 	. "github.com/MarvinJWendt/testza"
 )
 
+type testMock struct {
+	ErrorCalled  bool
+	ErrorMessage string
+}
+
+func (m *testMock) fail(msg ...interface{}) {
+	m.ErrorCalled = true
+	m.ErrorMessage = fmt.Sprint(msg...)
+}
+
+func (m *testMock) Error(args ...interface{}) {
+	m.fail(args...)
+}
+
+// Errorf is a mock of testing.T.
+func (m *testMock) Errorf(format string, args ...interface{}) {
+	m.fail(fmt.Sprintf(format, args...))
+}
+
+// Fail is a mock of testing.T.
+func (m *testMock) Fail() {
+	m.fail()
+}
+
+// FailNow is a mock of testing.T.
+func (m *testMock) FailNow() {
+	m.fail()
+}
+
+// Fatal is a mock of testing.T.
+func (m *testMock) Fatal(args ...interface{}) {
+	m.fail(args...)
+}
+
+// Fatalf is a mock of testing.T.
+func (m *testMock) Fatalf(format string, args ...interface{}) {
+	m.fail(fmt.Sprintf(format, args...))
+}
+
 type assertionTestStruct struct {
 	Name string
 	Age  int
@@ -1270,5 +1309,37 @@ func TestAssertSubset_fail(t *testing.T) {
 		s3 := generateStruct()
 		s4 := generateStruct()
 		AssertNoSubset(t, []assertionTestStruct{s1, s2, s3}, []assertionTestStruct{s3, s4})
+	})
+}
+
+// -- Assert output consistency --
+func TestOutputConsistency(t *testing.T) {
+	var tm testMock
+
+	t.Run("failed test", func(t *testing.T) {
+		pterm.DisableStyling()
+		AssertEqual(&tm, true, false)
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
+	})
+
+	t.Run("failed test with custom msg", func(t *testing.T) {
+		pterm.DisableStyling()
+		AssertEqual(&tm, true, false, "Custom message!")
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
+	})
+
+	t.Run("failed test with custom formatted msg", func(t *testing.T) {
+		pterm.DisableStyling()
+		AssertEqual(&tm, true, false, "Custom %s!", "message")
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
 	})
 }
