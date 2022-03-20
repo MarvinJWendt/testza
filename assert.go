@@ -514,14 +514,14 @@ func AssertNoError(t testRunner, err error, msg ...interface{}) {
 		internal.Fail(t, "An error that !!should be nil!! is not nil.", internal.Objects{
 			{
 				Name:      "Error message",
-				NameStyle: pterm.NewStyle(pterm.FgRed),
+				NameStyle: pterm.NewStyle(pterm.FgLightRed, pterm.Bold),
 				Data:      fmt.Sprintf("%q\n", err.Error()),
 				DataStyle: pterm.NewStyle(pterm.FgRed),
 				Raw:       true,
 			},
 			{
 				Name:      "Error object",
-				NameStyle: pterm.NewStyle(pterm.FgRed),
+				NameStyle: pterm.NewStyle(pterm.FgLightRed, pterm.Bold),
 				Data:      err,
 				DataStyle: pterm.NewStyle(pterm.FgRed),
 			}}, msg...)
