@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3146-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3140-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -308,6 +308,9 @@ this function to test that functions do not take too long to complete.
 NOTE: Every system takes a different amount of time to complete a function.
 Do not set the duration too low, if you want consistent results.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertCompletesIn(t, 2 * time.Second, func() {
@@ -322,6 +325,9 @@ func AssertContains(t testRunner, object, element interface{}, msg ...interface{
 
 AssertContains asserts that a string/list/array/slice/map contains the
 specified element.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -341,6 +347,9 @@ fails if the values are not in a slice or if the values are not comparable.
 Valid input kinds are: []int, []int8, []int16, []int32, []int64, []uint,
 []uint8, []uint16, []uint32, []uint64, []float32, []float64.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertDecreasing(t, []int{1000, 137, 2, 1})
@@ -354,6 +363,9 @@ func AssertDirEmpty(t testRunner, dir string, msg ...interface{})
 
 AssertDirEmpty asserts that a directory is empty. The test will pass when
 the directory is empty or does not exist.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -369,6 +381,9 @@ AssertDirExist asserts that a directory exists. The test will pass when the
 directory exists, and it's visible to the current user. The test will fail,
 if the path points to a file.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertDirExist(t, "FolderName")
@@ -381,6 +396,9 @@ func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{})
 
 AssertDirNotEmpty asserts that a directory is not empty
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertDirNotEmpty(t, "FolderName")
@@ -392,6 +410,9 @@ func AssertEqual(t testRunner, expected interface{}, actual interface{}, msg ...
 ```
 
 AssertEqual asserts that two objects are equal.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -406,6 +427,9 @@ func AssertEqualValues(t testRunner, expected interface{}, actual interface{}, m
 
 AssertEqualValues asserts that two objects have equal values. The order of
 the values is also validated.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -437,6 +461,9 @@ func AssertErrorIs(t testRunner, err, target error, msg ...interface{})
 
 AssertErrorIs asserts that target is inside the error chain of err.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     var testErr = errors.New("hello world")
@@ -450,6 +477,9 @@ func AssertFalse(t testRunner, value interface{}, msg ...interface{})
 ```
 
 AssertFalse asserts that an expression or object resolves to false.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -466,6 +496,9 @@ func AssertFileExists(t testRunner, file string, msg ...interface{})
 
 AssertFileExists asserts that a file exists.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertFileExists(t, "./test.txt")
@@ -479,6 +512,9 @@ func AssertGreater(t testRunner, object1, object2 interface{}, msg ...interface{
 
 AssertGreater asserts that the first object is greater than the second.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertGreater(t, 5, 1)
@@ -491,6 +527,9 @@ func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...
 ```
 
 AssertImplements asserts that an objects implements an interface.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -509,6 +548,9 @@ fails if the values are not in a slice or if the values are not comparable.
 Valid input kinds are: []int, []int8, []int16, []int32, []int64, []uint,
 []uint8, []uint16, []uint32, []uint64, []float32, []float64.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertIncreasing(t, []int{1, 2, 137, 1000})
@@ -521,6 +563,9 @@ func AssertKindOf(t testRunner, expectedKind reflect.Kind, object interface{}, m
 ```
 
 AssertKindOf asserts that the object is a type of kind exptectedKind.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -538,6 +583,9 @@ func AssertLen(t testRunner, object interface{}, length int, msg ...interface{})
 
 AssertLen asserts that the length of an object is equal to the given length.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertLen(t, "abc", 3)
@@ -553,6 +601,9 @@ func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{})
 
 AssertLess asserts that the first object is less than the second.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertLess(t, 1, 5)
@@ -565,6 +616,9 @@ func AssertNil(t testRunner, object interface{}, msg ...interface{})
 ```
 
 AssertNil asserts that an object is nil.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -580,6 +634,9 @@ AssertNoDirExists asserts that a directory does not exists. The test will
 pass, if the path points to a file, as a directory with the same name,
 cannot exist.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNoDirExists(t, "FolderName")
@@ -591,6 +648,9 @@ func AssertNoError(t testRunner, err error, msg ...interface{})
 ```
 
 AssertNoError asserts that an error is nil.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -614,6 +674,9 @@ func AssertNoSubset(t testRunner, list interface{}, subset interface{}, msg ...i
 AssertNoSubset asserts that the second parameter is not a subset of the
 list. The order is irrelevant.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNoSubset(t, []int{1, 2, 3}, []int{1, 7})
@@ -633,6 +696,9 @@ there might be something wrong.
 NOTE: Every system takes a different amount of time to complete a function.
 Do not set the duration too high, if you want consistent results.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNotCompletesIn(t, 2 * time.Second, func() {
@@ -649,6 +715,9 @@ func AssertNotContains(t testRunner, object, element interface{}, msg ...interfa
 AssertNotContains asserts that a string/list/array/slice/map does not
 contain the specified element.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNotContains(t, []string{"Hello", "World"}, "Spaceship")
@@ -662,6 +731,9 @@ func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg 
 
 AssertNotEqual asserts that two objects are not equal.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNotEqual(t, true, false)
@@ -674,6 +746,9 @@ func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}
 ```
 
 AssertNotEqualValues asserts that two objects do not have equal values.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -703,6 +778,9 @@ func AssertNotErrorIs(t testRunner, err, target error, msg ...interface{})
 
 AssertNotErrorIs
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     var testErr = errors.New("hello world")
@@ -718,6 +796,9 @@ func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg 
 
 AssertNotImplements asserts that an object does not implement an interface.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNotImplements(t, (*YourInterface)(nil), new(YourObject))
@@ -730,6 +811,9 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 ```
 
 AssertNotKindOf asserts that the object is not a type of kind `kind`.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -747,6 +831,9 @@ func AssertNotNil(t testRunner, object interface{}, msg ...interface{})
 
 AssertNotNil asserts that an object is not nil.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNotNil(t, true)
@@ -763,6 +850,9 @@ AssertNotNumeric checks if the object is not a numeric type. Numeric types
 are: Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16,
 Uint32, Uint64, Complex64 and Complex128.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNotNumeric(t, true)
@@ -775,6 +865,9 @@ func AssertNotPanics(t testRunner, f func(), msg ...interface{})
 ```
 
 AssertNotPanics asserts that a function does not panic.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -790,6 +883,9 @@ func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...in
 
 AssertNotRegexp asserts that a string does not match a given regexp.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
@@ -802,6 +898,9 @@ func AssertNotSameElements(t testRunner, expected interface{}, actual interface{
 
 AssertNotSameElements asserts that two slices contains same elements
 (including pointers). The order is irrelevant.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -821,6 +920,9 @@ func AssertNotZero(t testRunner, value interface{}, msg ...interface{})
 
 AssertNotZero asserts that the value is not the zero value for it's type.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNotZero(t, 1337)
@@ -837,6 +939,9 @@ AssertNumeric asserts that the object is a numeric type. Numeric types are:
 Int, Int8, Int16, Int32, Int64, Float32, Float64, Uint, Uint8, Uint16,
 Uint32, Uint64, Complex64 and Complex128.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertNumeric(t, 123)
@@ -850,6 +955,9 @@ func AssertPanics(t testRunner, f func(), msg ...interface{})
 ```
 
 AssertPanics asserts that a function panics.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -866,6 +974,9 @@ func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...inter
 
 AssertRegexp asserts that a string matches a given regexp.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertRegexp(t, "^a.*c$", "abc")
@@ -878,6 +989,9 @@ func AssertSameElements(t testRunner, expected interface{}, actual interface{}, 
 
 AssertSameElements asserts that two slices contains same elements (including
 pointers). The order is irrelevant.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -899,6 +1013,9 @@ func AssertSubset(t testRunner, list interface{}, subset interface{}, msg ...int
 AssertSubset asserts that the second parameter is a subset of the list. The
 order is irrelevant.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertSubset(t, []int{1, 2, 3}, []int{1, 2})
@@ -913,6 +1030,9 @@ func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions),
 AssertTestFails asserts that a unit test fails. A unit test fails if one of
 the following methods is called in the test function: Error, Errorf, Fail,
 FailNow, Fatal, Fatalf
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
@@ -933,6 +1053,9 @@ func AssertTrue(t testRunner, value interface{}, msg ...interface{})
 
 AssertTrue asserts that an expression or object resolves to true.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
 Example:
 
     testza.AssertTrue(t, true)
@@ -947,6 +1070,9 @@ func AssertZero(t testRunner, value interface{}, msg ...interface{})
 ```
 
 AssertZero asserts that the value is the zero value for it's type.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
 
 Example:
 
