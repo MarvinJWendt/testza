@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Features
+- print custom messages
+
 ### Code Refactoring
 - renamed `Mock` to `Fuzz`
 
