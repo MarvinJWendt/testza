@@ -4,12 +4,6 @@
 ### Features
 - print custom messages
 
-### Bug Fixes
-- fixed nested snapshots
-
-### Test
-- added output consistency tests for failed assertions
-
 ### Code Refactoring
 - renamed `Mock` to `Fuzz`
 
