@@ -81,7 +81,9 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 		return Highlight(wrappedText)
 	})
 
-	message = pterm.Sprint(args...) + "\n" + message
+	if len(args) > 0 {
+		message += "\n\n" + pterm.FgMagenta.Sprint("Message: ") + pterm.Sprintf(pterm.Sprint(args[0]), args[1:]...) + "\n"
+	}
 
 	if !strings.HasSuffix(message, "\n") {
 		message += "\n"
@@ -126,7 +128,7 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 	newMessage := "\n"
 	lines := strings.Split(message, "\n")
 	for i, line := range lines {
-		if i > 0 && i < len(lines)-1 {
+		if !(i == 0 && strings.TrimSpace(line) == "") && i < len(lines)-1 {
 			if LineNumbersEnabled {
 				newMessage += pterm.FgGray.Sprintf("%4d| ", i) + line + "\n" + pterm.Reset.Sprint()
 			} else {
