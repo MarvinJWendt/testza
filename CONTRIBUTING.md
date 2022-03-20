@@ -7,18 +7,18 @@ This guide will explain how you can contribute to testza.
 Every function in testza follows a specific name scheme.
 As you can see in the [documentations Table of Contents](https://github.com/MarvinJWendt/testza#documentation), testza has many different modules.
 The first word of a new function, is always the module name (eg. `Assert`, `Capture`, `Snapshot`, etc.).
-If the function is inside a nested sub-module, the module names will be chained as in `MockInputBool`.
+If the function is inside a nested sub-module, the module names will be chained as in `FuzzInputBool`.
 The last word of the function name is the actual function name itself.
 
 ### Example
 
 ```
-  ┌ Mocking part of testza
-  |   ┌ Mock different inputs
-  |   |   ┌ Mock integer inputs
-  |   |   |   ┌ Full set of integer input mocking
+  ┌ Fuzz part of testza
+  |   ┌ Fuzz different inputs
+  |   |   ┌ Fuzz integer inputs
+  |   |   |   ┌ Full set of integer input fuzzing
   |   |   |   |
-MockInputIntFull()
+FuzzInputIntFull()
 ```
 
 ## File Naming

@@ -70,7 +70,7 @@ go get github.com/MarvinJWendt/testza
 
 Testza is a full-featured testing framework for Go.
 It integrates with the default test runner, so you can use it with the standard `go test` tool.
-Testza contains easy to use methods, like assertions, output capturing, mocking, and much more.
+Testza contains easy to use methods, like assertions, output capturing, fuzzing, and much more.
 
 The main goal of testza is to provide an easy and fun experience writing tests and providing a nice, user-friendly output.
 Even developers who never used testza, will get into it quickly.
@@ -93,14 +93,14 @@ testza.AssertEqual(t, object, object) // -> Pass
 terminalOutput, _ := testza.CaptureStdout(func(w io.Writer) error {fmt.Println("Hello"); return nil})
 testza.AssertEqual(t, terminalOutput, "Hello\n") // -> Pass
 
-// - Mocking -
+// - Fuzzing -
 // Testing a function that accepts email addresses as a parameter:
 
 // Testset of many different email addresses
-emailAddresses := testza.MockStringEmailAddresses()
+emailAddresses := testza.FuzzStringEmailAddresses()
 
 // Run a test for every string in the test set
-testza.MockStringRunTests(t, emailAddresses, func(t *testing.T, index int, str string) {
+testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str string) {
   user, domain, err := internal.ParseEmailAddress(str) // Use your function
   testza.AssertNoError(t, err) // Assert that your function does not return an error
   testza.AssertNotZero(t, user) // Assert that the user is returned
