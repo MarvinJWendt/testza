@@ -204,7 +204,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Input-Bool">Fuzz Input Bool</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Booleans">Fuzz Booleans</a></td>
 <td>
 
 <details>
@@ -219,7 +219,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Input-String">Fuzz Input String</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Strings">Fuzz Strings</a></td>
 <td>
 
 <details>
@@ -242,7 +242,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Input-Float64">Fuzz Input Float64</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Float64s">Fuzz Float64s</a></td>
 <td>
 
 <details>
@@ -260,7 +260,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
-<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Input-Int">Fuzz Input Int</a></td>
+<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Integers">Fuzz Integers</a></td>
 <td>
 
 <details>
@@ -1019,7 +1019,7 @@ Example:
     testza.AssertEqual(t, "Hello", stdout)
     testza.AssertEqual(t, "World", stderr)
 
-### Fuzz Input Bool
+### Fuzz Booleans
 
 #### FuzzInputBoolFull
 
@@ -1063,7 +1063,7 @@ Example:
     	// ...
     })
 
-### Fuzz Input Float64
+### Fuzz Float64s
 
 #### FuzzInputFloat64Full
 
@@ -1138,7 +1138,7 @@ Example:
     	// ...
     })
 
-### Fuzz Input Int
+### Fuzz Integers
 
 #### FuzzInputIntFull
 
@@ -1212,7 +1212,7 @@ Example:
     	// ...
     })
 
-### Fuzz Input String
+### Fuzz Strings
 
 #### FuzzInputStringEmailAddresses
 
