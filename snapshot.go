@@ -117,7 +117,7 @@ func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg
 	if strings.Contains(name, "/") {
 		err := os.MkdirAll(path.Dir(snapshotPath), 0600)
 		if err != nil {
-			return err
+			return fmt.Errorf("creating snapshot directories failed: %w", err)
 		}
 	}
 
