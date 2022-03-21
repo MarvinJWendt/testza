@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3148-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3152-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -394,7 +394,9 @@ Example:
 func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{})
 ```
 
-AssertDirNotEmpty asserts that a directory is not empty
+AssertDirNotEmpty asserts that a directory is not empty The test will pass
+when the directory is not empty and will fail if the directory does not
+exist.
 
 When using a custom message, the same formatting as with fmt.Sprintf() is
 used.

@@ -4,6 +4,9 @@
 ### Features
 - added better styling for `AssertNoError`
 
+### Bug Fixes
+- fixed `AssertDirEmpty` failing when dir does not exist
+
 
 <a name="v0.3.0"></a>
 ## [v0.3.0] - 2022-03-20

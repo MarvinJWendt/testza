@@ -270,7 +270,10 @@ func AssertRegexpHelper(t testRunner, regex interface{}, txt interface{}, should
 func AssertDirEmptyHelper(t testRunner, dir string) bool {
 	f, err := os.Open(dir)
 	if err != nil {
-		Fail(t, "Error opening directory specified", NewObjectsSingleNamed("dir", dir))
+		if errors.Is(err, os.ErrNotExist) {
+			return true
+		}
+		Fail(t, "Error opening directory specified", NewObjectsSingleNamed("dir", dir), err.Error())
 	}
 	defer f.Close()
 
