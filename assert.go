@@ -835,6 +835,7 @@ func AssertDirEmpty(t testRunner, dir string, msg ...interface{}) {
 }
 
 // AssertDirNotEmpty asserts that a directory is not empty
+// The test will pass when the directory is not empty and will fail if the directory does not exist.
 //
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
