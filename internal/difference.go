@@ -2,10 +2,11 @@ package internal
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/davecgh/go-spew/spew"
 	"github.com/pterm/pterm"
 	"github.com/sergi/go-diff/diffmatchpatch"
-	"strings"
 )
 
 // GetDifference returns the diff for two projects.
@@ -145,6 +146,8 @@ func GetDifference(a, b interface{}, raw ...bool) string {
 
 	text += expectedGroupBuffer.String()
 	text += actualGroupBuffer.String()
+
+	pterm.Println(FailS(text, Objects{}))
 
 	return text
 }
