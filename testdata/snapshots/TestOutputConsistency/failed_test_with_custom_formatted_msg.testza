@@ -1,1 +1,1 @@
-(string) (len=177) "\n\n   0| Two objects that should be equal, are not equal.\n   1| \n   2| Message: Custom message!\n   3| \n   4| Expected:\n   5| (bool) true\n   6| \n   7| Actual:\n   8| (bool) false\n\n"
+(string) (len=264) "\n\n   0| Two objects that should be equal, are not equal.\n   1| \n   2| Message: Custom message!\n   3| \n   4| Difference:\n   5| (1. ) (bool) true\n   6| (1. ) (bool) false\n   7| (2. ) \n   8| \n   9| Expected:\n  10| (bool) true\n  11| \n  12| Actual:\n  13| (bool) false\n\n"

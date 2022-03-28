@@ -91,7 +91,7 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 
 	if len(objects) == 2 {
 
-		if strings.Count(spew.Sdump(objects[0].Data), "\n")+strings.Count(spew.Sdump(objects[1].Data), "\n") > 4 &&
+		if (len(strings.TrimSpace(spew.Sdump(objects[0].Data))) > 0 || len(strings.TrimSpace(spew.Sdump(objects[1].Data))) > 0) &&
 			objects[0].Name == "Expected" &&
 			objects[1].Name == "Actual" {
 			objects = append(Objects{{
