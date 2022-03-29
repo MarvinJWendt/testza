@@ -1342,4 +1342,59 @@ func TestOutputConsistency(t *testing.T) {
 		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
 		AssertNoError(t, err)
 	})
+
+	t.Run("failed test string", func(t *testing.T) {
+		const expected = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Fusce consectetur quam id turpis blandit, pulvinar fermentum justo sollicitudin.
+Curabitur vehicula eros posuere efficitur egestas.
+
+Duis et lectus in nisi mattis convallis non a odio.
+Proin pulvinar felis consectetur condimentum tincidunt.`
+
+		const actual = `Lorem ipsum sit amet, consechbtetur adipiscing elit.z
+
+zFusce consecetur quam iod turpis blandit, pulvnar fermentum justo sollicitudin.
+Curdabitur veicular eros posuere hello efficitulr egestas.
+Duis et lectus in nisi mattis convallis non a odio.
+Proin puvinar feliss consectetur codiementum tincidunt.`
+
+		pterm.DisableStyling()
+		AssertEqual(&tm, expected, actual)
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
+	})
+
+	t.Run("failed test struct", func(t *testing.T) {
+		pterm.DisableStyling()
+		AssertEqual(&tm, assertionTestStruct{
+			Name: "John",
+			Age:  34,
+			Meta: assertionTestStructNested{
+				ID:    512345,
+				Admin: false,
+			},
+		}, assertionTestStruct{
+			Name: "Bob",
+			Age:  22,
+			Meta: assertionTestStructNested{
+				ID:    123456,
+				Admin: true,
+			},
+		})
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
+	})
+
+	t.Run("failed test slice", func(t *testing.T) {
+		pterm.DisableStyling()
+		AssertEqual(&tm, nil, []int{1, 2, 3})
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
+	})
 }
