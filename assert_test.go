@@ -1397,4 +1397,42 @@ Proin puvinar feliss consectetur codiementum tincidunt.`
 		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
 		AssertNoError(t, err)
 	})
+
+	t.Run("failed test newlines", func(t *testing.T) {
+		pterm.DisableStyling()
+		AssertEqual(&tm, `1234567890`, `1
+2
+3
+4
+5
+6
+7
+8
+9
+0`)
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
+	})
+
+	t.Run("failed test newline start", func(t *testing.T) {
+		pterm.DisableStyling()
+		AssertEqual(&tm, `1`, `
+1`)
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
+	})
+
+	t.Run("failed test newline end", func(t *testing.T) {
+		pterm.DisableStyling()
+		AssertEqual(&tm, `1`, `1
+`)
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
+	})
 }
