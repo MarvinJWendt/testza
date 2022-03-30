@@ -25,6 +25,9 @@ var snapshotObject = snapshotObjectType{
 }
 var snapshotName = "TestSnapshotCreate_file_content"
 
+var snapshotString = `hello world`
+var snapshotNameString = "TestSnapshotCreate_file_content_string"
+
 func TestSnapshotCreate_file_content(t *testing.T) {
 	err := testza.SnapshotCreate(snapshotName, snapshotObject)
 	testza.AssertNoError(t, err)
@@ -35,8 +38,21 @@ func TestSnapshotCreate_file_content(t *testing.T) {
 	testza.AssertEqual(t, spew.Sdump(snapshotObject), string(snapshotContent))
 }
 
+func TestSnapshotCreate_file_content_string(t *testing.T) {
+	err := testza.SnapshotCreate(snapshotNameString, snapshotString)
+	testza.AssertNoError(t, err)
+
+	snapshotContent, err := ioutil.ReadFile(internal.GetCurrentScriptDirectory() + "/testdata/snapshots/" + t.Name() + ".testza")
+	testza.AssertNoError(t, err)
+
+	testza.AssertEqual(t, spew.Sdump(snapshotString), string(snapshotContent))
+}
+
 func TestSnapshotValidate(t *testing.T) {
 	err := testza.SnapshotValidate(t, snapshotName, snapshotObject)
+	testza.AssertNoError(t, err)
+
+	err = testza.SnapshotValidate(t, snapshotNameString, snapshotString)
 	testza.AssertNoError(t, err)
 }
 
@@ -45,6 +61,11 @@ func TestSnapshotValidate_fails(t *testing.T) {
 	modifiedSnapshotObject.Username = "NotMarvinJWendt"
 	testza.AssertTestFails(t, func(t testza.TestingPackageWithFailFunctions) {
 		err := testza.SnapshotValidate(t, snapshotName, modifiedSnapshotObject)
+		testza.AssertNoError(t, err)
+	})
+
+	testza.AssertTestFails(t, func(t testza.TestingPackageWithFailFunctions) {
+		err := testza.SnapshotValidate(t, snapshotNameString, `foo bar`)
 		testza.AssertNoError(t, err)
 	})
 }
