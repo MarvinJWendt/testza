@@ -216,12 +216,10 @@ func (d *diffPrinter) Finalize(operation diffmatchpatch.Operation) string {
 	if DiffContextLines >= 0 {
 		requiredLines := make(map[int]bool)
 
-		if DiffContextLines > 0 {
-			for i, line := range d.Text {
-				if line.Operation != diffmatchpatch.DiffEqual {
-					for j := int(math.Max(0, float64(i-DiffContextLines))); j < int(math.Min(float64(len(d.Text)), float64(i+DiffContextLines+1))); j++ {
-						requiredLines[j] = true
-					}
+		for i, line := range d.Text {
+			if line.Operation != diffmatchpatch.DiffEqual {
+				for j := int(math.Max(0, float64(i-DiffContextLines))); j < int(math.Min(float64(len(d.Text)), float64(i+DiffContextLines+1))); j++ {
+					requiredLines[j] = true
 				}
 			}
 		}
