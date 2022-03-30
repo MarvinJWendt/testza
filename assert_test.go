@@ -9,6 +9,8 @@ import (
 	"os"
 	"reflect"
 	"regexp"
+	"strconv"
+	"strings"
 	"testing"
 	"time"
 
@@ -1430,6 +1432,28 @@ Proin puvinar feliss consectetur codiementum tincidunt.`
 		pterm.DisableStyling()
 		AssertEqual(&tm, `1`, `1
 `)
+		pterm.EnableStyling()
+
+		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)
+		AssertNoError(t, err)
+	})
+
+	t.Run("failed test many matching lines", func(t *testing.T) {
+		dataExpected := make([]string, 50)
+		dataActual := make([]string, 50)
+		for i := 0; i < len(dataExpected); i++ {
+			dataExpected[i] = strconv.Itoa(i)
+			dataActual[i] = dataExpected[i]
+		}
+
+		dataActual[10] = "hello"
+		dataActual[20] = "world"
+		dataActual[30] = "foo"
+		dataActual[40] = "bar"
+
+		SetEqualContextLineCount(2)
+		pterm.DisableStyling()
+		AssertEqual(&tm, strings.Join(dataExpected, "\n"), strings.Join(dataActual, "\n"))
 		pterm.EnableStyling()
 
 		err := SnapshotCreateOrValidate(t, t.Name(), tm.ErrorMessage)

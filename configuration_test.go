@@ -57,3 +57,19 @@ func TestSetShowStartupMessage(t *testing.T) {
 		AssertTrue(t, showStartupMessage)
 	})
 }
+
+func TestSetEqualContextLineCount(t *testing.T) {
+	t.Run("Default is 2", func(t *testing.T) {
+		AssertEqual(t, 2, internal.EqualContextLineCount)
+	})
+
+	t.Run("Set to -1", func(t *testing.T) {
+		SetEqualContextLineCount(-1)
+		AssertEqual(t, -1, internal.EqualContextLineCount)
+	})
+
+	t.Run("Set to 3", func(t *testing.T) {
+		SetEqualContextLineCount(3)
+		AssertEqual(t, 3, internal.EqualContextLineCount)
+	})
+}

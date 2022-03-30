@@ -10,6 +10,17 @@ import (
 	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
+var EqualContextLineCount = 2
+
+func NewDiffObject(expected, actual interface{}, raw ...bool) Object {
+	return Object{
+		Name:      "Difference",
+		NameStyle: pterm.NewStyle(pterm.FgYellow),
+		Data:      GetDifference(expected, actual, raw...),
+		Raw:       true,
+	}
+}
+
 // GetDifference returns the diff for two projects.
 func GetDifference(a, b interface{}, raw ...bool) string {
 	dmp := diffmatchpatch.New()
@@ -33,11 +44,6 @@ func GetDifference(a, b interface{}, raw ...bool) string {
 		diffs = dmp.DiffMain(aString, bString, false)
 	}
 
-	diffLevenshtein := dmp.DiffLevenshtein(diffs)
-	maxInput := math.Max(float64(len(aString)), float64(len(bString)))
-
-	fmt.Println("Diff:", diffLevenshtein, "Max:", maxInput, "Diff/Max:", float64(diffLevenshtein)/maxInput)
-
 	diffs = dmp.DiffCleanupEfficiency(diffs)
 	diffs = dmp.DiffCleanupSemanticLossless(diffs)
 
@@ -49,16 +55,19 @@ func GetDifference(a, b interface{}, raw ...bool) string {
 		UnchangedPrefix: "#",
 		ExpectedPrefix:  pterm.FgRed.Sprint("-"),
 		ActualPrefix:    pterm.FgGreen.Sprint("+"),
-		LineCount:       int(maxNewlines),
+		CounterWidth:    int(math.Log10(maxNewlines)) + 1,
 	}
 
-	d.ProcessDiffs(diffs)
+	return d.ProcessDiffs(diffs)
+}
 
-	return d.Text
+type textLine struct {
+	Text      string
+	Operation diffmatchpatch.Operation
 }
 
 type diffPrinter struct {
-	Text string
+	Text []textLine
 
 	ExpectedI int
 	ActualI   int
@@ -68,8 +77,8 @@ type diffPrinter struct {
 
 	DiffBuffer strings.Builder
 
-	ExpectedGroupBuffer strings.Builder
-	ActualGroupBuffer   strings.Builder
+	ExpectedGroupBuffer []textLine
+	ActualGroupBuffer   []textLine
 
 	ExpectedFlushable bool
 	ActualFlushable   bool
@@ -78,10 +87,10 @@ type diffPrinter struct {
 	ExpectedPrefix  string
 	ActualPrefix    string
 
-	LineCount int
+	CounterWidth int
 }
 
-func (d *diffPrinter) ProcessDiffs(diffs []diffmatchpatch.Diff) {
+func (d *diffPrinter) ProcessDiffs(diffs []diffmatchpatch.Diff) string {
 	for _, diff := range diffs {
 		for _, char := range diff.Text {
 			if char == '\n' {
@@ -100,7 +109,7 @@ func (d *diffPrinter) ProcessDiffs(diffs []diffmatchpatch.Diff) {
 	}
 
 	d.FlushLine(lastOp)
-	d.Finalize(lastOp)
+	return d.Finalize(lastOp)
 }
 
 func (d *diffPrinter) FlushDiff(operation diffmatchpatch.Operation, newLine bool) {
@@ -130,35 +139,51 @@ func (d *diffPrinter) FlushDiff(operation diffmatchpatch.Operation, newLine bool
 func (d *diffPrinter) FlushLine(operation diffmatchpatch.Operation) {
 	if d.ExpectedLine.String() == d.ActualLine.String() {
 		if operation == diffmatchpatch.DiffEqual {
-			d.Text += d.ExpectedGroupBuffer.String()
-			d.Text += d.ActualGroupBuffer.String()
+			d.Text = append(d.Text, d.ExpectedGroupBuffer...)
+			d.Text = append(d.Text, d.ActualGroupBuffer...)
 
-			d.ExpectedGroupBuffer.Reset()
-			d.ActualGroupBuffer.Reset()
+			d.ExpectedGroupBuffer = make([]textLine, 0)
+			d.ActualGroupBuffer = make([]textLine, 0)
 
-			d.Text += pterm.FgGray.Sprintf("(%d. %s) ", d.ActualI, d.UnchangedPrefix) + d.ExpectedLine.String() + "\n"
+			d.Text = append(d.Text, textLine{
+				Text:      pterm.FgGray.Sprintf("(%*d. %s) ", d.CounterWidth, d.ActualI, d.UnchangedPrefix) + d.ExpectedLine.String() + "\n",
+				Operation: operation,
+			})
+
 			d.ActualI++
 			d.ExpectedI = d.ActualI
 
 			d.ExpectedFlushable = true
 			d.ActualFlushable = true
 		} else if operation == diffmatchpatch.DiffDelete {
-			d.ExpectedGroupBuffer.WriteString(pterm.FgGray.Sprintfln("(%d. %s) %s", d.ExpectedI, d.ExpectedPrefix, pterm.FgRed.Sprint(d.ExpectedLine.String())))
+			d.ExpectedGroupBuffer = append(d.ExpectedGroupBuffer, textLine{
+				Text:      pterm.FgGray.Sprintfln("(%*d. %s) %s", d.CounterWidth, d.ExpectedI, d.ExpectedPrefix, pterm.FgRed.Sprint(d.ExpectedLine.String())),
+				Operation: diffmatchpatch.DiffDelete,
+			})
 			d.ExpectedI++
 			d.ExpectedFlushable = true
 		} else {
-			d.ActualGroupBuffer.WriteString(pterm.FgGray.Sprintfln("(%d. %s) %s", d.ActualI, d.ActualPrefix, pterm.FgGreen.Sprint(d.ActualLine.String())))
+			d.ActualGroupBuffer = append(d.ActualGroupBuffer, textLine{
+				Text:      pterm.FgGray.Sprintfln("(%*d. %s) %s", d.CounterWidth, d.ActualI, d.ActualPrefix, pterm.FgGreen.Sprint(d.ActualLine.String())),
+				Operation: diffmatchpatch.DiffInsert,
+			})
 			d.ActualI++
 			d.ActualFlushable = true
 		}
 	} else {
 		if d.ExpectedFlushable {
-			d.ExpectedGroupBuffer.WriteString(pterm.FgGray.Sprintfln("(%d. %s) %s", d.ExpectedI, d.ExpectedPrefix, pterm.FgRed.Sprint(d.ExpectedLine.String())))
+			d.ExpectedGroupBuffer = append(d.ExpectedGroupBuffer, textLine{
+				Text:      pterm.FgGray.Sprintfln("(%*d. %s) %s", d.CounterWidth, d.ExpectedI, d.ExpectedPrefix, pterm.FgRed.Sprint(d.ExpectedLine.String())),
+				Operation: diffmatchpatch.DiffDelete,
+			})
 			d.ExpectedI++
 		}
 
 		if d.ActualFlushable {
-			d.ActualGroupBuffer.WriteString(pterm.FgGray.Sprintfln("(%d. %s) %s", d.ActualI, d.ActualPrefix, pterm.FgGreen.Sprint(d.ActualLine.String())))
+			d.ActualGroupBuffer = append(d.ActualGroupBuffer, textLine{
+				Text:      pterm.FgGray.Sprintfln("(%*d. %s) %s", d.CounterWidth, d.ActualI, d.ActualPrefix, pterm.FgGreen.Sprint(d.ActualLine.String())),
+				Operation: diffmatchpatch.DiffInsert,
+			})
 			d.ActualI++
 		}
 	}
@@ -176,7 +201,7 @@ func (d *diffPrinter) FlushLine(operation diffmatchpatch.Operation) {
 	d.DiffBuffer.Reset()
 }
 
-func (d *diffPrinter) Finalize(operation diffmatchpatch.Operation) {
+func (d *diffPrinter) Finalize(operation diffmatchpatch.Operation) string {
 	d.ExpectedFlushable = true
 	d.ActualFlushable = true
 
@@ -184,6 +209,38 @@ func (d *diffPrinter) Finalize(operation diffmatchpatch.Operation) {
 		d.FlushLine(operation)
 	}
 
-	d.Text += d.ExpectedGroupBuffer.String()
-	d.Text += d.ActualGroupBuffer.String()
+	d.Text = append(d.Text, d.ExpectedGroupBuffer...)
+	d.Text = append(d.Text, d.ActualGroupBuffer...)
+
+	var resultBuffer strings.Builder
+	if EqualContextLineCount >= 0 {
+		requiredLines := make(map[int]bool)
+
+		if EqualContextLineCount > 0 {
+			for i, line := range d.Text {
+				if line.Operation != diffmatchpatch.DiffEqual {
+					for j := int(math.Max(0, float64(i-EqualContextLineCount))); j < int(math.Min(float64(len(d.Text)), float64(i+EqualContextLineCount+1))); j++ {
+						requiredLines[j] = true
+					}
+				}
+			}
+		}
+
+		hasSnip := false
+		for i, line := range d.Text {
+			if _, ok := requiredLines[i]; ok {
+				resultBuffer.WriteString(line.Text)
+				hasSnip = false
+			} else if !hasSnip {
+				resultBuffer.WriteString(pterm.FgMagenta.Sprint("[...]\n"))
+				hasSnip = true
+			}
+		}
+	} else {
+		for _, line := range d.Text {
+			resultBuffer.WriteString(line.Text)
+		}
+	}
+
+	return resultBuffer.String()
 }

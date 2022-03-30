@@ -37,6 +37,24 @@ func NewObjectsExpectedActual(expected, actual interface{}) Objects {
 	}
 }
 
+func NewObjectsExpectedActualWithDiff(expected, actual interface{}) Objects {
+	return Objects{
+		NewDiffObject(expected, actual),
+		{
+			Name:      "Expected",
+			NameStyle: pterm.NewStyle(pterm.FgLightGreen),
+			Data:      expected,
+			DataStyle: pterm.NewStyle(pterm.FgGreen),
+		},
+		{
+			Name:      "Actual",
+			NameStyle: pterm.NewStyle(pterm.FgLightRed),
+			Data:      actual,
+			DataStyle: pterm.NewStyle(pterm.FgRed),
+		},
+	}
+}
+
 func NewObjectsUnknown(objs ...interface{}) Objects {
 	return Objects{
 		{
@@ -87,20 +105,6 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 
 	if !strings.HasSuffix(message, "\n") {
 		message += "\n"
-	}
-
-	if len(objects) == 2 {
-
-		if (len(strings.TrimSpace(spew.Sdump(objects[0].Data))) > 0 || len(strings.TrimSpace(spew.Sdump(objects[1].Data))) > 0) &&
-			objects[0].Name == "Expected" &&
-			objects[1].Name == "Actual" {
-			objects = append(Objects{{
-				Name:      "Difference",
-				NameStyle: pterm.NewStyle(pterm.FgYellow),
-				Data:      GetDifference(objects[0].Data, objects[1].Data),
-				Raw:       true,
-			}}, objects...)
-		}
 	}
 
 	for i, v := range objects {
