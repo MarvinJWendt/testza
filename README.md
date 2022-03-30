@@ -125,6 +125,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <summary>Click to expand</summary>
 
   - [SetColorsEnabled](https://github.com/MarvinJWendt/testza#SetColorsEnabled)
+  - [SetDiffContextLines](https://github.com/MarvinJWendt/testza#SetDiffContextLines)
   - [SetLineNumbersEnabled](https://github.com/MarvinJWendt/testza#SetLineNumbersEnabled)
   - [SetRandomSeed](https://github.com/MarvinJWendt/testza#SetRandomSeed)
   - [SetShowStartupMessage](https://github.com/MarvinJWendt/testza#SetShowStartupMessage)
@@ -1480,6 +1481,23 @@ Example:
     init() {
       testza.SetColorsEnabled(false) // Disable colored output
       testza.SetColorsEnabled(true)  // Enable colored output
+    }
+
+#### SetDiffContextLines
+
+```go
+func SetDiffContextLines(lines int)
+```
+
+SetDiffContextLines controls how many lines are shown around a changed diff
+line. If set to -1 it will show full diff. You should use this in the init()
+method of the package, which contains your tests.
+
+Example:
+
+    init() {
+      testza.SetDiffContextLines(-1) // Show all diff lines
+      testza.SetDiffContextLines(3)  // Show 3 lines around every changed line
     }
 
 #### SetLineNumbersEnabled
