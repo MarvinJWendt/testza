@@ -2,6 +2,19 @@
 ## [Unreleased]
 
 ### Features
+- parse snapshots with regex if they are strings fix: conditional diff rendering fix: hide long common diff lines
+- rich difference detection
+
+### Bug Fixes
+- show 0 context if specified
+- move diff to last object slot chore: rename context line count variable
+- correctly handle newlines in diffs
+- conditional diff buffer flushing
+
+
+<a name="v0.3.1"></a>
+## [v0.3.1] - 2022-03-21
+### Features
 - added better styling for `AssertNoError`
 
 ### Bug Fixes
@@ -276,7 +289,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.3.1...HEAD
+[v0.3.1]: https://github.com/MarvinJWendt/testza/compare/v0.3.0...v0.3.1
 [v0.3.0]: https://github.com/MarvinJWendt/testza/compare/v0.2.15...v0.3.0
 [v0.2.15]: https://github.com/MarvinJWendt/testza/compare/v0.2.14...v0.2.15
 [v0.2.14]: https://github.com/MarvinJWendt/testza/compare/v0.2.13...v0.2.14
