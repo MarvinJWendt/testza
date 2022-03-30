@@ -180,7 +180,7 @@ func AssertEqual(t testRunner, expected interface{}, actual interface{}, msg ...
 	}
 
 	if !internal.IsEqual(expected, actual) {
-		internal.Fail(t, "Two objects that !!should be equal!!, are not equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should be equal!!, are not equal.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
 	}
 }
 
@@ -197,7 +197,7 @@ func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg 
 	}
 
 	if internal.IsEqual(expected, actual) {
-		internal.Fail(t, "Two objects that !!should not be equal!!, are equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should not be equal!!, are equal.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
 	}
 }
 
@@ -231,7 +231,7 @@ func AssertEqualValues(t testRunner, expected interface{}, actual interface{}, m
 	}
 
 	if !internal.HasEqualValues(expected, actual) {
-		internal.Fail(t, "Two objects that !!should have equal values!!, do not have equal values.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should have equal values!!, do not have equal values.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
 	}
 }
 
@@ -262,7 +262,7 @@ func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}
 	}
 
 	if internal.HasEqualValues(expected, actual) {
-		internal.Fail(t, "Two objects that !!should not have equal values!!, do have equal values.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should not have equal values!!, do have equal values.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
 	}
 }
 
@@ -871,7 +871,7 @@ func AssertSameElements(t testRunner, expected interface{}, actual interface{}, 
 	}
 
 	if !internal.HasSameElements(expected, actual) {
-		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
 	}
 }
 
@@ -894,7 +894,7 @@ func AssertNotSameElements(t testRunner, expected interface{}, actual interface{
 	}
 
 	if internal.HasSameElements(expected, actual) {
-		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
 	}
 }
 

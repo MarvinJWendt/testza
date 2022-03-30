@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/MarvinJWendt/testza/internal"
@@ -56,6 +58,8 @@ func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...inte
 	return snapshotValidateFromDir(dir, t, name, actual, msg...)
 }
 
+var snapshotStringMatcher = regexp.MustCompile(`(?m)^\(.+?\)\s\(len=\d+\)\s(".+")$`)
+
 func snapshotValidateFromDir(dir string, t testRunner, name string, actual interface{}, msg ...interface{}) error {
 	snapshotPath := path.Clean(dir + name + ".testza")
 	snapshotContent, err := ioutil.ReadFile(snapshotPath)
@@ -67,17 +71,26 @@ func snapshotValidateFromDir(dir string, t testRunner, name string, actual inter
 	spew.Config.DisablePointerAddresses = true
 
 	if spew.Sdump(actual) != snapshot {
+		var diffObject *internal.Object
+		if strActual, ok := actual.(string); ok {
+			if match := snapshotStringMatcher.FindStringSubmatch(snapshot); len(match) > 0 {
+				if unquoted, err := strconv.Unquote(match[1]); err == nil {
+					object := internal.NewDiffObject(unquoted, strActual, true)
+					diffObject = &object
+				}
+			}
+		}
+
+		if diffObject == nil {
+			object := internal.NewDiffObject(snapshot, spew.Sdump(actual), true)
+			diffObject = &object
+		}
+
 		internal.Fail(t,
 			generateMsg(msg,
 				fmt.Sprintf("Snapshot '%s' failed to validate", name)),
 			internal.Objects{
-				{
-					Name:      "Difference",
-					NameStyle: pterm.NewStyle(pterm.FgLightYellow),
-					Data:      internal.GetDifference(snapshot, spew.Sdump(actual), true),
-					DataStyle: pterm.NewStyle(pterm.FgGreen),
-					Raw:       true,
-				},
+				*diffObject,
 				{
 					Name:      "Expected",
 					NameStyle: pterm.NewStyle(pterm.FgLightGreen),
