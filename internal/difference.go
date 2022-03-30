@@ -10,7 +10,7 @@ import (
 	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
-var EqualContextLineCount = 2
+var DiffContextLines = 2
 
 func NewDiffObject(expected, actual interface{}, raw ...bool) Object {
 	return Object{
@@ -213,13 +213,13 @@ func (d *diffPrinter) Finalize(operation diffmatchpatch.Operation) string {
 	d.Text = append(d.Text, d.ActualGroupBuffer...)
 
 	var resultBuffer strings.Builder
-	if EqualContextLineCount >= 0 {
+	if DiffContextLines >= 0 {
 		requiredLines := make(map[int]bool)
 
-		if EqualContextLineCount > 0 {
+		if DiffContextLines > 0 {
 			for i, line := range d.Text {
 				if line.Operation != diffmatchpatch.DiffEqual {
-					for j := int(math.Max(0, float64(i-EqualContextLineCount))); j < int(math.Min(float64(len(d.Text)), float64(i+EqualContextLineCount+1))); j++ {
+					for j := int(math.Max(0, float64(i-DiffContextLines))); j < int(math.Min(float64(len(d.Text)), float64(i+DiffContextLines+1))); j++ {
 						requiredLines[j] = true
 					}
 				}

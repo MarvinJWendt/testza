@@ -1451,7 +1451,6 @@ Proin puvinar feliss consectetur codiementum tincidunt.`
 		dataActual[30] = "foo"
 		dataActual[40] = "bar"
 
-		SetEqualContextLineCount(2)
 		pterm.DisableStyling()
 		AssertEqual(&tm, strings.Join(dataExpected, "\n"), strings.Join(dataActual, "\n"))
 		pterm.EnableStyling()

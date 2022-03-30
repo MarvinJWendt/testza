@@ -60,16 +60,18 @@ func TestSetShowStartupMessage(t *testing.T) {
 
 func TestSetEqualContextLineCount(t *testing.T) {
 	t.Run("Default is 2", func(t *testing.T) {
-		AssertEqual(t, 2, internal.EqualContextLineCount)
+		AssertEqual(t, 2, internal.DiffContextLines)
 	})
 
 	t.Run("Set to -1", func(t *testing.T) {
-		SetEqualContextLineCount(-1)
-		AssertEqual(t, -1, internal.EqualContextLineCount)
+		SetDiffContextLines(-1)
+		AssertEqual(t, -1, internal.DiffContextLines)
 	})
 
 	t.Run("Set to 3", func(t *testing.T) {
-		SetEqualContextLineCount(3)
-		AssertEqual(t, 3, internal.EqualContextLineCount)
+		SetDiffContextLines(3)
+		AssertEqual(t, 3, internal.DiffContextLines)
 	})
+
+	SetDiffContextLines(2)
 }

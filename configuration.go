@@ -64,15 +64,15 @@ func SetShowStartupMessage(show bool) {
 	showStartupMessage = show
 }
 
-// SetEqualContextLineCount controls how many lines are shown around a changed diff line.
+// SetDiffContextLines controls how many lines are shown around a changed diff line.
 // If set to -1 it will show full diff.
 // You should use this in the init() method of the package, which contains your tests.
 //
 // Example:
 //  init() {
-//    testza.SetEqualContextLineCount(-1) // Show all diff lines
-//    testza.SetEqualContextLineCount(3)  // Show 3 lines around every changed line
+//    testza.SetDiffContextLines(-1) // Show all diff lines
+//    testza.SetDiffContextLines(3)  // Show 3 lines around every changed line
 //  }
-func SetEqualContextLineCount(lines int) {
-	internal.EqualContextLineCount = lines
+func SetDiffContextLines(lines int) {
+	internal.DiffContextLines = lines
 }

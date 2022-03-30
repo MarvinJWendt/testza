@@ -39,7 +39,6 @@ func NewObjectsExpectedActual(expected, actual interface{}) Objects {
 
 func NewObjectsExpectedActualWithDiff(expected, actual interface{}) Objects {
 	return Objects{
-		NewDiffObject(expected, actual),
 		{
 			Name:      "Expected",
 			NameStyle: pterm.NewStyle(pterm.FgLightGreen),
@@ -52,6 +51,7 @@ func NewObjectsExpectedActualWithDiff(expected, actual interface{}) Objects {
 			Data:      actual,
 			DataStyle: pterm.NewStyle(pterm.FgRed),
 		},
+		NewDiffObject(expected, actual),
 	}
 }
 
