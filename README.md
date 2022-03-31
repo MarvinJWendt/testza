@@ -33,9 +33,9 @@
 ---
 
 <p align="center">
-<strong><a href="#install">Get The Module</a></strong>
+<strong><a href="https://github.com/MarvinJWendt/testza#-installation">Get The Module</a></strong>
 |
-<strong><a href="https://github.com/MarvinJWendt/testza#documentation" target="_blank">Documentation</a></strong>
+<strong><a href="https://github.com/MarvinJWendt/testza#-documentation" target="_blank">Documentation</a></strong>
 |
 <strong><a href="https://github.com/atomicgo/atomicgo/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a></strong>
 |
@@ -56,7 +56,7 @@
 </a>
 </p>
 
-## Installation
+## 📦 Installation
 
 ```console
 # Execute this command inside your project
@@ -65,7 +65,7 @@ go get github.com/MarvinJWendt/testza
 <br/>
 <br/>
 
-## Description
+## 📝 Description
 
 Testza is a full-featured testing framework for Go.
 It integrates with the default test runner, so you can use it with the standard `go test` tool.
@@ -74,7 +74,7 @@ Testza contains easy to use methods, like assertions, output capturing, fuzzing,
 The main goal of testza is to provide an easy and fun experience writing tests and providing a nice, user-friendly output.
 Even developers who never used testza, will get into it quickly.
 
-## Features
+## ⭐ Features
 
 | Feature            | Description                                                                                                                                          |
 |--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -87,7 +87,7 @@ Even developers who never used testza, will get into it quickly.
 | Well Documented    | Every function of testza is well documented and contains an example to make usage super easy.                                                        |
 | Customizable       | Testza features customizable settings, if you want to change something.                                                                              |
 
-## Getting Started
+## 🚀 Getting Started
 
 See the examples below for a quick introduction!
 
@@ -122,7 +122,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 // And that's just a few examples of what you can do with Testza!
 ```
 
-## Documentation
+## 📚 Documentation
 
 <!-- docs:start -->
 <table>
