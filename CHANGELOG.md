@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v0.3.2"></a>
+## [v0.3.2] - 2022-03-31
 ### Features
 - parse snapshots with regex if they are strings fix: conditional diff rendering fix: hide long common diff lines
 - rich difference detection
@@ -289,7 +292,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.3.2...HEAD
+[v0.3.2]: https://github.com/MarvinJWendt/testza/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/MarvinJWendt/testza/compare/v0.3.0...v0.3.1
 [v0.3.0]: https://github.com/MarvinJWendt/testza/compare/v0.2.15...v0.3.0
 [v0.2.15]: https://github.com/MarvinJWendt/testza/compare/v0.2.14...v0.2.15
