@@ -74,6 +74,19 @@ Testza contains easy to use methods, like assertions, output capturing, fuzzing,
 The main goal of testza is to provide an easy and fun experience writing tests and providing a nice, user-friendly output.
 Even developers who never used testza, will get into it quickly.
 
+## Features
+
+| Feature            | Description                                                                                                                                          |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Assertions         | Assertions allow you to quickly check objects for expected values.                                                                                   |
+| Fuzzing            | Fuzzing allows you to check functions against sets of generated input parameters.<br/>A couple lines of test code can run thousands of sanity tests. |
+| Output Capture     | Capture and validate output written to the terminal.<br/>Perfect for CLI tools.                                                                      |
+| Snapshots          | Snapshot objects between test runs, to ensure a consistent behaviour.                                                                                |
+| Clean Output       | Clean and colorful output provides you the needed details in an easy-to-understand format.                                                           |
+| System Information | Testza prints information about the system on startup.<br/> You can quickly figure out what's wrong, when a user submits an issue.                   |
+| Well Documented    | Every function of testza is well documented and contains an example to make usage super easy.                                                        |
+| Customizable       | Testza features customizable settings, if you want to change something.                                                                              |
+
 ## Getting Started
 
 See the examples below for a quick introduction!
