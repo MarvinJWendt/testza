@@ -44,7 +44,7 @@
 
 ---
 
-<img align="right" height="400" alt="Screenshot of an example test message" src="https://user-images.githubusercontent.com/31022056/161153080-4b74ad74-7fa9-4bac-9123-e9ed3049c9fc.png" />
+<img align="right" height="300" alt="Screenshot of an example test message" src="https://user-images.githubusercontent.com/31022056/161153080-4b74ad74-7fa9-4bac-9123-e9ed3049c9fc.png" />
 
 <br/>
 
