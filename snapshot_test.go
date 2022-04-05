@@ -88,3 +88,24 @@ func TestSnapshotCreateOrValidate_invalid_name(t *testing.T) {
 	err := testza.SnapshotCreateOrValidate(t, string(rune(0))+"><", snapshotObject)
 	testza.AssertNotNil(t, err)
 }
+
+func TestSnapshotCreateOrValidate_nested_test_name(t *testing.T) {
+	snapshotNestedDirName := t.Name()
+	snapshotName := snapshotNestedDirName + "/nested_name"
+
+	snapshotFullPath := internal.GetCurrentScriptDirectory() + "/testdata/snapshots/" + snapshotNestedDirName
+
+	// ensure snapshot does not exist - remove snapshot and empty parent directory
+	if _, err := os.Stat(snapshotFullPath); err == nil {
+		_ = os.RemoveAll(snapshotFullPath)
+	}
+
+	err := testza.SnapshotCreateOrValidate(t, snapshotName, "snapshot-data")
+
+	// try to clean up before the assert so we leave the working copy clean
+	if _, err := os.Stat(snapshotFullPath); err == nil {
+		_ = os.RemoveAll(snapshotFullPath)
+	}
+
+	testza.AssertNoError(t, err)
+}
