@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3150-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3156-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -33,9 +33,9 @@
 ---
 
 <p align="center">
-<strong><a href="#install">Get The Module</a></strong>
+<strong><a href="https://github.com/MarvinJWendt/testza#-installation">Get The Module</a></strong>
 |
-<strong><a href="https://github.com/MarvinJWendt/testza#documentation" target="_blank">Documentation</a></strong>
+<strong><a href="https://github.com/MarvinJWendt/testza#-documentation" target="_blank">Documentation</a></strong>
 |
 <strong><a href="https://github.com/atomicgo/atomicgo/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a></strong>
 |
@@ -44,8 +44,7 @@
 
 ---
 
-
-<img align="right" height="400" alt="Screenshot of an example test message" src="https://user-images.githubusercontent.com/31022056/124531029-ea31b780-de0d-11eb-8984-74e679f84aec.png" />
+<img align="right" height="400" alt="Screenshot of an example test message" src="https://user-images.githubusercontent.com/31022056/161153895-e772bc61-b751-407f-b526-8f6a66d8f8d5.png" />
 
 <br/>
 
@@ -57,7 +56,7 @@
 </a>
 </p>
 
-## Installation
+## 📦 Installation
 
 ```console
 # Execute this command inside your project
@@ -66,7 +65,7 @@ go get github.com/MarvinJWendt/testza
 <br/>
 <br/>
 
-## Description
+## 📝 Description
 
 Testza is a full-featured testing framework for Go.
 It integrates with the default test runner, so you can use it with the standard `go test` tool.
@@ -75,7 +74,20 @@ Testza contains easy to use methods, like assertions, output capturing, fuzzing,
 The main goal of testza is to provide an easy and fun experience writing tests and providing a nice, user-friendly output.
 Even developers who never used testza, will get into it quickly.
 
-## Getting Started
+## ⭐ Features
+
+| Feature            | Description                                                                                                                                          |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Assertions         | Assertions allow you to quickly check objects for expected values.                                                                                   |
+| Fuzzing            | Fuzzing allows you to check functions against sets of generated input parameters.<br/>A couple lines of test code can run thousands of sanity tests. |
+| Output Capture     | Capture and validate output written to the terminal.<br/>Perfect for CLI tools.                                                                      |
+| Snapshots          | Snapshot objects between test runs, to ensure a consistent behaviour.                                                                                |
+| Clean Output       | Clean and colorful output provides you the needed details in an easy-to-understand format.                                                           |
+| System Information | Testza prints information about the system on startup.<br/> You can quickly figure out what's wrong, when a user submits an issue.                   |
+| Well Documented    | Every function of testza is well documented and contains an example to make usage super easy.                                                        |
+| Customizable       | Testza features customizable settings, if you want to change something.                                                                              |
+
+## 🚀 Getting Started
 
 See the examples below for a quick introduction!
 
@@ -110,7 +122,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 // And that's just a few examples of what you can do with Testza!
 ```
 
-## Documentation
+## 📚 Documentation
 
 <!-- docs:start -->
 <table>

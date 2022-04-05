@@ -197,7 +197,7 @@ func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg 
 	}
 
 	if internal.IsEqual(expected, actual) {
-		internal.Fail(t, "Two objects that !!should not be equal!!, are equal.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should not be equal!!, are equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
 	}
 }
 
