@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Bug Fixes
+- correct file perms on nested snapshot dir
+
 
 <a name="v0.3.2"></a>
 ## [v0.3.2] - 2022-03-31
