@@ -3,11 +3,12 @@ package output
 import (
 	"errors"
 	"fmt"
-	"github.com/MarvinJWendt/testza"
 	"go/types"
 	"reflect"
 	"testing"
 	"time"
+
+	"github.com/MarvinJWendt/testza"
 )
 
 // This file contains all assertions and lets them fail.
