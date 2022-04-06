@@ -16,7 +16,7 @@ import (
 func TestOutput(t *testing.T) {
 	t.Run("AssertCompletesIn", func(t *testing.T) {
 		testza.AssertCompletesIn(t, time.Millisecond, func() {
-			time.Sleep(time.Millisecond * 10)
+			time.Sleep(time.Millisecond * 100)
 		})
 	})
 
