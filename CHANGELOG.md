@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v0.3.3"></a>
+## [v0.3.3] - 2022-04-05
 ### Bug Fixes
 - correct file perms on nested snapshot dir
 
@@ -295,7 +298,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.3.3...HEAD
+[v0.3.3]: https://github.com/MarvinJWendt/testza/compare/v0.3.2...v0.3.3
 [v0.3.2]: https://github.com/MarvinJWendt/testza/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/MarvinJWendt/testza/compare/v0.3.0...v0.3.1
 [v0.3.0]: https://github.com/MarvinJWendt/testza/compare/v0.2.15...v0.3.0
