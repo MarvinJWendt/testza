@@ -197,7 +197,14 @@ func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg 
 	}
 
 	if internal.IsEqual(expected, actual) {
-		internal.Fail(t, "Two objects that !!should not be equal!!, are equal.", internal.NewObjectsExpectedActual(expected, actual), msg...)
+		objects := internal.Objects{
+			{
+				Name:      "Both Objects",
+				NameStyle: pterm.NewStyle(pterm.FgMagenta),
+				Data:      expected,
+			},
+		}
+		internal.Fail(t, "Two objects that !!should not be equal!!, are equal.", objects, msg...)
 	}
 }
 
