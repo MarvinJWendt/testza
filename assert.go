@@ -112,7 +112,7 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 //  testza.AssertNumeric(t, uint(123))
 func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
 	if !internal.IsNumber(object) {
-		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object), msg...)
+		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
 }
 
@@ -127,7 +127,7 @@ func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
 //  testza.AssertNotNumeric(t, "123")
 func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{}) {
 	if internal.IsNumber(object) {
-		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object), msg...)
+		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
 }
 
@@ -269,7 +269,7 @@ func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}
 	}
 
 	if internal.HasEqualValues(expected, actual) {
-		internal.Fail(t, "Two objects that !!should not have equal values!!, do have equal values.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should not have equal values!!, do have equal values.", internal.NewObjectsSingleNamed("Both Objects", actual), msg...)
 	}
 }
 
@@ -455,7 +455,7 @@ func AssertNotNil(t testRunner, object interface{}, msg ...interface{}) {
 	}
 
 	if internal.IsNil(object) {
-		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleNamed("object", object), msg...)
+		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
 }
 
@@ -901,7 +901,7 @@ func AssertNotSameElements(t testRunner, expected interface{}, actual interface{
 	}
 
 	if internal.HasSameElements(expected, actual) {
-		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsSingleNamed("Both Objects", actual), msg...)
 	}
 }
 
