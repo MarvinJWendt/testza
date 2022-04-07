@@ -791,14 +791,14 @@ func AssertNoFileExists(t testRunner, file string, msg ...any) {
 	}
 }
 
-// AssertDirExist asserts that a directory exists.
+// AssertDirExists asserts that a directory exists.
 // The test will pass when the directory exists, and it's visible to the current user.
 // The test will fail, if the path points to a file.
 //
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertDirExist(t, "FolderName")
+//  testza.AssertDirExists(t, "FolderName")
 func AssertDirExist(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
