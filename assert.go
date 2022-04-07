@@ -901,7 +901,7 @@ func AssertNotSameElements(t testRunner, expected interface{}, actual interface{
 	}
 
 	if internal.HasSameElements(expected, actual) {
-		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
+		internal.Fail(t, "Two objects that !!should have the same elements!!, do not have the same elements.", internal.NewObjectsSingleNamed("Both Objects", actual), msg...)
 	}
 }
 
