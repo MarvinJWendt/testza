@@ -675,14 +675,14 @@ func AssertLen(t testRunner, object interface{}, length int, msg ...interface{})
 		internal.Fail(t, "The length of 'object' !!is not!! the expected length.", internal.Objects{
 			{
 				Name:      "Expected length",
-				NameStyle: pterm.NewStyle(pterm.FgRed),
+				NameStyle: pterm.NewStyle(pterm.FgLightGreen),
 				Data:      fmt.Sprint(length) + "\n",
-				DataStyle: pterm.NewStyle(pterm.FgRed),
+				DataStyle: pterm.NewStyle(pterm.FgGreen),
 				Raw:       true,
 			},
 			{
 				Name:      "Actual length",
-				NameStyle: pterm.NewStyle(pterm.FgRed),
+				NameStyle: pterm.NewStyle(pterm.FgLightRed),
 				Data:      fmt.Sprint(v.Len()) + "\n",
 				DataStyle: pterm.NewStyle(pterm.FgRed),
 				Raw:       true,
