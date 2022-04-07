@@ -19,10 +19,10 @@ var Categories = []Category{
 	{Name: "Settings", Prefix: "Set"},
 	{Name: "Assert", Prefix: "Assert"},
 	{Name: "Capture", Prefix: "Capture"},
-	{Name: "Fuzz Booleans", Prefix: "FuzzInputBool"},
-	{Name: "Fuzz Strings", Prefix: "FuzzInputString"},
-	{Name: "Fuzz Float64s", Prefix: "FuzzInputFloat64"},
-	{Name: "Fuzz Integers", Prefix: "FuzzInputInt"},
+	{Name: "Fuzz Booleans", Prefix: "FuzzBool"},
+	{Name: "Fuzz Strings", Prefix: "FuzzString"},
+	{Name: "Fuzz Float64s", Prefix: "FuzzFloat64"},
+	{Name: "Fuzz Integers", Prefix: "FuzzInt"},
 	{Name: "Snapshot", Prefix: "Snapshot"},
 }
 

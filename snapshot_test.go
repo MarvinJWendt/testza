@@ -75,7 +75,7 @@ func TestSnapshotCreateOrValidate(t *testing.T) {
 }
 
 func TestSnapshotCreateOrValidate_create_random(t *testing.T) {
-	name := t.Name() + testza.FuzzInputStringGenerateRandom(1, rand.Intn(10))[0]
+	name := t.Name() + testza.FuzzStringGenerateRandom(1, rand.Intn(10))[0]
 	err := testza.SnapshotCreateOrValidate(t, name, snapshotObject)
 	testza.AssertNoError(t, err)
 

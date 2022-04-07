@@ -7,45 +7,45 @@ import (
 	"github.com/MarvinJWendt/testza/internal"
 )
 
-// FuzzInputStringEmpty returns a test set with a single empty string.
-func FuzzInputStringEmpty() []string {
+// FuzzStringEmpty returns a test set with a single empty string.
+func FuzzStringEmpty() []string {
 	return []string{""}
 }
 
-// FuzzInputStringLong returns a test set with long random strings.
+// FuzzStringLong returns a test set with long random strings.
 // Returns:
 // [0]: Random string (length: 25)
 // [1]: Random string (length: 50)
 // [2]: Random string (length: 100)
 // [3]: Random string (length: 1,000)
 // [4]: Random string (length: 100,000)
-func FuzzInputStringLong() (testSet []string) {
-	testSet = append(testSet, FuzzInputStringGenerateRandom(1, 25)...)
-	testSet = append(testSet, FuzzInputStringGenerateRandom(1, 50)...)
-	testSet = append(testSet, FuzzInputStringGenerateRandom(1, 100)...)
-	testSet = append(testSet, FuzzInputStringGenerateRandom(1, 1_000)...)
-	testSet = append(testSet, FuzzInputStringGenerateRandom(1, 100_000)...)
+func FuzzStringLong() (testSet []string) {
+	testSet = append(testSet, FuzzStringGenerateRandom(1, 25)...)
+	testSet = append(testSet, FuzzStringGenerateRandom(1, 50)...)
+	testSet = append(testSet, FuzzStringGenerateRandom(1, 100)...)
+	testSet = append(testSet, FuzzStringGenerateRandom(1, 1_000)...)
+	testSet = append(testSet, FuzzStringGenerateRandom(1, 100_000)...)
 
 	return
 }
 
-// FuzzInputStringNumeric returns a test set with strings that are numeric.
+// FuzzStringNumeric returns a test set with strings that are numeric.
 // The highest number in here is "9223372036854775807", which is equal to the maxmim int64.
-func FuzzInputStringNumeric() []string {
+func FuzzStringNumeric() []string {
 	positiveNumbers := []string{"0", "1", "2", "3", "100", "1.1", "1337", "13.37", "0.000000000001", "9223372036854775807"}
-	negativeNumbers := FuzzInputStringModify(positiveNumbers, func(index int, value string) string { return "-" + value })
+	negativeNumbers := FuzzStringModify(positiveNumbers, func(index int, value string) string { return "-" + value })
 	return append(positiveNumbers, negativeNumbers...)
 }
 
-// FuzzInputStringUsernames returns a test set with usernames.
-func FuzzInputStringUsernames() []string {
+// FuzzStringUsernames returns a test set with usernames.
+func FuzzStringUsernames() []string {
 	return []string{"MarvinJWendt", "Zipper1337", "n00b", "l33t", "j0rgan", "test", "test123", "TEST", "test_", "TEST_"}
 }
 
-// FuzzInputStringEmailAddresses returns a test set with valid email addresses.
+// FuzzStringEmailAddresses returns a test set with valid email addresses.
 // The addresses may look like they are invalid, but they are all conform to RFC 2822 and could be used.
 // You can use this test set to test your email validation process.
-func FuzzInputStringEmailAddresses() []string {
+func FuzzStringEmailAddresses() []string {
 	return []string{
 		"hello@world.com",
 		"hello+world@example.com",
@@ -88,13 +88,13 @@ func FuzzInputStringEmailAddresses() []string {
 	}
 }
 
-// FuzzInputStringHtmlTags returns a test set with different html tags.
+// FuzzStringHtmlTags returns a test set with different html tags.
 //
 // Example:
 //  - <script>
 //  - <script>alert('XSS')</script>
 //  - <a href="https://github.com/MarvinJWendt/testza">link</a>
-func FuzzInputStringHtmlTags() []string {
+func FuzzStringHtmlTags() []string {
 	return []string{
 		"<script>alert('XSS')</script>",
 		"<script>",
@@ -104,25 +104,25 @@ func FuzzInputStringHtmlTags() []string {
 	}
 }
 
-// FuzzInputStringFull contains all string test sets plus ten generated random strings.
+// FuzzStringFull contains all string test sets plus ten generated random strings.
 // This test set is huge and should only be used if you want to make sure that no string, at all, can crash a process.
-func FuzzInputStringFull() (ret []string) {
-	ret = append(ret, FuzzInputStringUsernames()...)
-	ret = append(ret, FuzzInputStringHtmlTags()...)
-	ret = append(ret, FuzzInputStringEmailAddresses()...)
-	ret = append(ret, FuzzInputStringEmpty()...)
-	ret = append(ret, FuzzInputStringNumeric()...)
-	ret = append(ret, FuzzInputStringLong()...)
+func FuzzStringFull() (ret []string) {
+	ret = append(ret, FuzzStringUsernames()...)
+	ret = append(ret, FuzzStringHtmlTags()...)
+	ret = append(ret, FuzzStringEmailAddresses()...)
+	ret = append(ret, FuzzStringEmpty()...)
+	ret = append(ret, FuzzStringNumeric()...)
+	ret = append(ret, FuzzStringLong()...)
 
 	for i := 0; i < 10; i++ {
-		ret = append(ret, FuzzInputStringGenerateRandom(1, i)...)
+		ret = append(ret, FuzzStringGenerateRandom(1, i)...)
 	}
 
 	return
 }
 
-// FuzzInputStringLimit limits a test set in size.
-func FuzzInputStringLimit(testSet []string, max int) []string {
+// FuzzStringLimit limits a test set in size.
+func FuzzStringLimit(testSet []string, max int) []string {
 	if len(testSet) <= max {
 		return testSet
 	}
@@ -134,8 +134,8 @@ func FuzzInputStringLimit(testSet []string, max int) []string {
 	return testSet[:max]
 }
 
-// FuzzInputStringGenerateRandom returns random strings in a test set.
-func FuzzInputStringGenerateRandom(count, length int) (result []string) {
+// FuzzStringGenerateRandom returns random strings in a test set.
+func FuzzStringGenerateRandom(count, length int) (result []string) {
 	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 	for i := 0; i < count; i++ {
@@ -149,18 +149,18 @@ func FuzzInputStringGenerateRandom(count, length int) (result []string) {
 	return
 }
 
-// FuzzInputStringRunTests runs a test for every value in a testset.
+// FuzzStringRunTests runs a test for every value in a testset.
 // You can use the value as input parameter for your functions, to sanity test against many different cases.
 // This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
 //
 // Example:
-//  testza.FuzzInputStringRunTests(t, testza.FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+//  testza.FuzzStringRunTests(t, testza.FuzzStringFull(), func(t *testing.T, index int, str string) {
 //  	// Test logic
 //  	// err := YourFunction(str)
 //  	// testza.AssertNoError(t, err)
 //  	// ...
 //  })
-func FuzzInputStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string)) {
+func FuzzStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -180,13 +180,13 @@ func FuzzInputStringRunTests(t testRunner, testSet []string, testFunc func(t *te
 	}
 }
 
-// FuzzInputStringModify returns a modified version of a test set.
+// FuzzStringModify returns a modified version of a test set.
 //
 // Example:
-//  testset := testza.FuzzInputStringModify(testza.FuzzInputStringFull(), func(index int, value string) string {
+//  testset := testza.FuzzStringModify(testza.FuzzStringFull(), func(index int, value string) string {
 //  	return value + " some suffix"
 //  })
-func FuzzInputStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string) {
+func FuzzStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string) {
 	for i, str := range inputSlice {
 		ret = append(ret, modifier(i, str))
 	}

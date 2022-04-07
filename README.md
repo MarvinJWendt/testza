@@ -226,9 +226,9 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <details>
 <summary>Click to expand</summary>
 
-  - [FuzzInputBoolFull](https://github.com/MarvinJWendt/testza#FuzzInputBoolFull)
-  - [FuzzInputBoolModify](https://github.com/MarvinJWendt/testza#FuzzInputBoolModify)
-  - [FuzzInputBoolRunTests](https://github.com/MarvinJWendt/testza#FuzzInputBoolRunTests)
+  - [FuzzBoolFull](https://github.com/MarvinJWendt/testza#FuzzBoolFull)
+  - [FuzzBoolModify](https://github.com/MarvinJWendt/testza#FuzzBoolModify)
+  - [FuzzBoolRunTests](https://github.com/MarvinJWendt/testza#FuzzBoolRunTests)
 </td>
 
 </details>
@@ -241,17 +241,17 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <details>
 <summary>Click to expand</summary>
 
-  - [FuzzInputStringEmailAddresses](https://github.com/MarvinJWendt/testza#FuzzInputStringEmailAddresses)
-  - [FuzzInputStringEmpty](https://github.com/MarvinJWendt/testza#FuzzInputStringEmpty)
-  - [FuzzInputStringFull](https://github.com/MarvinJWendt/testza#FuzzInputStringFull)
-  - [FuzzInputStringGenerateRandom](https://github.com/MarvinJWendt/testza#FuzzInputStringGenerateRandom)
-  - [FuzzInputStringHtmlTags](https://github.com/MarvinJWendt/testza#FuzzInputStringHtmlTags)
-  - [FuzzInputStringLimit](https://github.com/MarvinJWendt/testza#FuzzInputStringLimit)
-  - [FuzzInputStringLong](https://github.com/MarvinJWendt/testza#FuzzInputStringLong)
-  - [FuzzInputStringModify](https://github.com/MarvinJWendt/testza#FuzzInputStringModify)
-  - [FuzzInputStringNumeric](https://github.com/MarvinJWendt/testza#FuzzInputStringNumeric)
-  - [FuzzInputStringRunTests](https://github.com/MarvinJWendt/testza#FuzzInputStringRunTests)
-  - [FuzzInputStringUsernames](https://github.com/MarvinJWendt/testza#FuzzInputStringUsernames)
+  - [FuzzStringEmailAddresses](https://github.com/MarvinJWendt/testza#FuzzStringEmailAddresses)
+  - [FuzzStringEmpty](https://github.com/MarvinJWendt/testza#FuzzStringEmpty)
+  - [FuzzStringFull](https://github.com/MarvinJWendt/testza#FuzzStringFull)
+  - [FuzzStringGenerateRandom](https://github.com/MarvinJWendt/testza#FuzzStringGenerateRandom)
+  - [FuzzStringHtmlTags](https://github.com/MarvinJWendt/testza#FuzzStringHtmlTags)
+  - [FuzzStringLimit](https://github.com/MarvinJWendt/testza#FuzzStringLimit)
+  - [FuzzStringLong](https://github.com/MarvinJWendt/testza#FuzzStringLong)
+  - [FuzzStringModify](https://github.com/MarvinJWendt/testza#FuzzStringModify)
+  - [FuzzStringNumeric](https://github.com/MarvinJWendt/testza#FuzzStringNumeric)
+  - [FuzzStringRunTests](https://github.com/MarvinJWendt/testza#FuzzStringRunTests)
+  - [FuzzStringUsernames](https://github.com/MarvinJWendt/testza#FuzzStringUsernames)
 </td>
 
 </details>
@@ -264,12 +264,12 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <details>
 <summary>Click to expand</summary>
 
-  - [FuzzInputFloat64Full](https://github.com/MarvinJWendt/testza#FuzzInputFloat64Full)
-  - [FuzzInputFloat64GenerateRandomNegative](https://github.com/MarvinJWendt/testza#FuzzInputFloat64GenerateRandomNegative)
-  - [FuzzInputFloat64GenerateRandomPositive](https://github.com/MarvinJWendt/testza#FuzzInputFloat64GenerateRandomPositive)
-  - [FuzzInputFloat64GenerateRandomRange](https://github.com/MarvinJWendt/testza#FuzzInputFloat64GenerateRandomRange)
-  - [FuzzInputFloat64Modify](https://github.com/MarvinJWendt/testza#FuzzInputFloat64Modify)
-  - [FuzzInputFloat64RunTests](https://github.com/MarvinJWendt/testza#FuzzInputFloat64RunTests)
+  - [FuzzFloat64Full](https://github.com/MarvinJWendt/testza#FuzzFloat64Full)
+  - [FuzzFloat64GenerateRandomNegative](https://github.com/MarvinJWendt/testza#FuzzFloat64GenerateRandomNegative)
+  - [FuzzFloat64GenerateRandomPositive](https://github.com/MarvinJWendt/testza#FuzzFloat64GenerateRandomPositive)
+  - [FuzzFloat64GenerateRandomRange](https://github.com/MarvinJWendt/testza#FuzzFloat64GenerateRandomRange)
+  - [FuzzFloat64Modify](https://github.com/MarvinJWendt/testza#FuzzFloat64Modify)
+  - [FuzzFloat64RunTests](https://github.com/MarvinJWendt/testza#FuzzFloat64RunTests)
 </td>
 
 </details>
@@ -282,12 +282,12 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <details>
 <summary>Click to expand</summary>
 
-  - [FuzzInputIntFull](https://github.com/MarvinJWendt/testza#FuzzInputIntFull)
-  - [FuzzInputIntGenerateRandomNegative](https://github.com/MarvinJWendt/testza#FuzzInputIntGenerateRandomNegative)
-  - [FuzzInputIntGenerateRandomPositive](https://github.com/MarvinJWendt/testza#FuzzInputIntGenerateRandomPositive)
-  - [FuzzInputIntGenerateRandomRange](https://github.com/MarvinJWendt/testza#FuzzInputIntGenerateRandomRange)
-  - [FuzzInputIntModify](https://github.com/MarvinJWendt/testza#FuzzInputIntModify)
-  - [FuzzInputIntRunTests](https://github.com/MarvinJWendt/testza#FuzzInputIntRunTests)
+  - [FuzzIntFull](https://github.com/MarvinJWendt/testza#FuzzIntFull)
+  - [FuzzIntGenerateRandomNegative](https://github.com/MarvinJWendt/testza#FuzzIntGenerateRandomNegative)
+  - [FuzzIntGenerateRandomPositive](https://github.com/MarvinJWendt/testza#FuzzIntGenerateRandomPositive)
+  - [FuzzIntGenerateRandomRange](https://github.com/MarvinJWendt/testza#FuzzIntGenerateRandomRange)
+  - [FuzzIntModify](https://github.com/MarvinJWendt/testza#FuzzIntModify)
+  - [FuzzIntRunTests](https://github.com/MarvinJWendt/testza#FuzzIntRunTests)
 </td>
 
 </details>
@@ -1165,42 +1165,42 @@ Example:
 
 ### Fuzz Booleans
 
-#### FuzzInputBoolFull
+#### FuzzBoolFull
 
 ```go
-func FuzzInputBoolFull() []bool
+func FuzzBoolFull() []bool
 ```
 
-FuzzInputBoolFull returns true and false in a boolean slice.
+FuzzBoolFull returns true and false in a boolean slice.
 
-#### FuzzInputBoolModify
+#### FuzzBoolModify
 
 ```go
-func FuzzInputBoolModify(inputSlice []bool, modifier func(index int, value bool) bool) (floats []bool)
+func FuzzBoolModify(inputSlice []bool, modifier func(index int, value bool) bool) (floats []bool)
 ```
 
-FuzzInputBoolModify returns a modified version of a test set.
+FuzzBoolModify returns a modified version of a test set.
 
 Example:
 
-    testset := testza.FuzzInputBoolModify(testza.FuzzInputBoolFull(), func(index int, value bool) bool {
+    testset := testza.FuzzBoolModify(testza.FuzzBoolFull(), func(index int, value bool) bool {
     	return !value
     })
 
-#### FuzzInputBoolRunTests
+#### FuzzBoolRunTests
 
 ```go
-func FuzzInputBoolRunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
+func FuzzBoolRunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
 ```
 
-FuzzInputBoolRunTests runs a test for every value in a testset. You can use
+FuzzBoolRunTests runs a test for every value in a testset. You can use
 the value as input parameter for your functions, to sanity test against many
 different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
 
-    testza.FuzzInputBoolRunTests(t, testza.FuzzInputBoolFull(), func(t *testing.T, index int, b bool) {
+    testza.FuzzBoolRunTests(t, testza.FuzzBoolFull(), func(t *testing.T, index int, b bool) {
     	// Test logic
     	// err := YourFunction(b)
     	// testza.AssertNoError(t, err)
@@ -1209,73 +1209,73 @@ Example:
 
 ### Fuzz Float64s
 
-#### FuzzInputFloat64Full
+#### FuzzFloat64Full
 
 ```go
-func FuzzInputFloat64Full() (floats []float64)
+func FuzzFloat64Full() (floats []float64)
 ```
 
-FuzzInputFloat64Full returns a combination of every float64 testset and some
+FuzzFloat64Full returns a combination of every float64 testset and some
 random float64s (positive and negative).
 
-#### FuzzInputFloat64GenerateRandomNegative
+#### FuzzFloat64GenerateRandomNegative
 
 ```go
-func FuzzInputFloat64GenerateRandomNegative(count int, min float64) (floats []float64)
+func FuzzFloat64GenerateRandomNegative(count int, min float64) (floats []float64)
 ```
 
-FuzzInputFloat64GenerateRandomNegative generates random negative integers
+FuzzFloat64GenerateRandomNegative generates random negative integers
 with a minimum of min. If the minimum is positive, it will be converted to a
 negative number. If it is set to 0, there is no limit.
 
-#### FuzzInputFloat64GenerateRandomPositive
+#### FuzzFloat64GenerateRandomPositive
 
 ```go
-func FuzzInputFloat64GenerateRandomPositive(count int, max float64) (floats []float64)
+func FuzzFloat64GenerateRandomPositive(count int, max float64) (floats []float64)
 ```
 
-FuzzInputFloat64GenerateRandomPositive generates random positive integers
+FuzzFloat64GenerateRandomPositive generates random positive integers
 with a maximum of max. If the maximum is 0, or below, the maximum will be
 set to math.MaxInt64.
 
-#### FuzzInputFloat64GenerateRandomRange
+#### FuzzFloat64GenerateRandomRange
 
 ```go
-func FuzzInputFloat64GenerateRandomRange(count int, min, max float64) (floats []float64)
+func FuzzFloat64GenerateRandomRange(count int, min, max float64) (floats []float64)
 ```
 
-FuzzInputFloat64GenerateRandomRange generates random positive integers with
+FuzzFloat64GenerateRandomRange generates random positive integers with
 a maximum of max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### FuzzInputFloat64Modify
+#### FuzzFloat64Modify
 
 ```go
-func FuzzInputFloat64Modify(inputSlice []float64, modifier func(index int, value float64) float64) (floats []float64)
+func FuzzFloat64Modify(inputSlice []float64, modifier func(index int, value float64) float64) (floats []float64)
 ```
 
-FuzzInputFloat64Modify returns a modified version of a test set.
+FuzzFloat64Modify returns a modified version of a test set.
 
 Example:
 
-    testset := testza.FuzzInputFloat64Modify(testza.FuzzInputFloat64Full(), func(index int, value float64) float64 {
+    testset := testza.FuzzFloat64Modify(testza.FuzzFloat64Full(), func(index int, value float64) float64 {
     	return value * 2
     })
 
-#### FuzzInputFloat64RunTests
+#### FuzzFloat64RunTests
 
 ```go
-func FuzzInputFloat64RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64))
+func FuzzFloat64RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64))
 ```
 
-FuzzInputFloat64RunTests runs a test for every value in a testset. You can
+FuzzFloat64RunTests runs a test for every value in a testset. You can
 use the value as input parameter for your functions, to sanity test against
 many different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
 
-    testza.FuzzInputFloat64RunTests(t, testza.FuzzInputFloat64Full(), func(t *testing.T, index int, f float64) {
+    testza.FuzzFloat64RunTests(t, testza.FuzzFloat64Full(), func(t *testing.T, index int, f float64) {
     	// Test logic
     	// err := YourFunction(f)
     	// testza.AssertNoError(t, err)
@@ -1284,72 +1284,72 @@ Example:
 
 ### Fuzz Integers
 
-#### FuzzInputIntFull
+#### FuzzIntFull
 
 ```go
-func FuzzInputIntFull() (ints []int)
+func FuzzIntFull() (ints []int)
 ```
 
-FuzzInputIntFull returns a combination of every integer testset and some
+FuzzIntFull returns a combination of every integer testset and some
 random integers (positive and negative).
 
-#### FuzzInputIntGenerateRandomNegative
+#### FuzzIntGenerateRandomNegative
 
 ```go
-func FuzzInputIntGenerateRandomNegative(count, min int) (ints []int)
+func FuzzIntGenerateRandomNegative(count, min int) (ints []int)
 ```
 
-FuzzInputIntGenerateRandomNegative generates random negative integers with a
+FuzzIntGenerateRandomNegative generates random negative integers with a
 minimum of min. If the minimum is 0, or above, the maximum will be set to
 math.MinInt64.
 
-#### FuzzInputIntGenerateRandomPositive
+#### FuzzIntGenerateRandomPositive
 
 ```go
-func FuzzInputIntGenerateRandomPositive(count, max int) (ints []int)
+func FuzzIntGenerateRandomPositive(count, max int) (ints []int)
 ```
 
-FuzzInputIntGenerateRandomPositive generates random positive integers with a
+FuzzIntGenerateRandomPositive generates random positive integers with a
 maximum of max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### FuzzInputIntGenerateRandomRange
+#### FuzzIntGenerateRandomRange
 
 ```go
-func FuzzInputIntGenerateRandomRange(count, min, max int) (ints []int)
+func FuzzIntGenerateRandomRange(count, min, max int) (ints []int)
 ```
 
-FuzzInputIntGenerateRandomRange generates random integers with a range of
+FuzzIntGenerateRandomRange generates random integers with a range of
 min to max.
 
-#### FuzzInputIntModify
+#### FuzzIntModify
 
 ```go
-func FuzzInputIntModify(inputSlice []int, modifier func(index int, value int) int) (ints []int)
+func FuzzIntModify(inputSlice []int, modifier func(index int, value int) int) (ints []int)
 ```
 
-FuzzInputIntModify returns a modified version of a test set.
+FuzzIntModify returns a modified version of a test set.
 
 Example:
 
-    testset := testza.FuzzInputIntModify(testza.FuzzInputIntFull(), func(index int, value int) int {
+    testset := testza.FuzzIntModify(testza.FuzzIntFull(), func(index int, value int) int {
     	return value * 2
     })
 
-#### FuzzInputIntRunTests
+#### FuzzIntRunTests
 
 ```go
-func FuzzInputIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int))
+func FuzzIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int))
 ```
 
-FuzzInputIntRunTests runs a test for every value in a testset. You can use
+FuzzIntRunTests runs a test for every value in a testset. You can use
 the value as input parameter for your functions, to sanity test against many
 different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
 
-    testza.FuzzInputIntRunTests(t, testza.FuzzInputIntFull(), func(t *testing.T, index int, i int) {
+    testza.FuzzIntRunTests(t, testza.FuzzIntFull(), func(t *testing.T, index int, i int) {
     	// Test logic
     	// err := YourFunction(i)
     	// testza.AssertNoError(t, err)
@@ -1358,50 +1358,50 @@ Example:
 
 ### Fuzz Strings
 
-#### FuzzInputStringEmailAddresses
+#### FuzzStringEmailAddresses
 
 ```go
-func FuzzInputStringEmailAddresses() []string
+func FuzzStringEmailAddresses() []string
 ```
 
-FuzzInputStringEmailAddresses returns a test set with valid email addresses.
+FuzzStringEmailAddresses returns a test set with valid email addresses.
 The addresses may look like they are invalid, but they are all conform to
 RFC 2822 and could be used. You can use this test set to test your email
 validation process.
 
-#### FuzzInputStringEmpty
+#### FuzzStringEmpty
 
 ```go
-func FuzzInputStringEmpty() []string
+func FuzzStringEmpty() []string
 ```
 
-FuzzInputStringEmpty returns a test set with a single empty string.
+FuzzStringEmpty returns a test set with a single empty string.
 
-#### FuzzInputStringFull
+#### FuzzStringFull
 
 ```go
-func FuzzInputStringFull() (ret []string)
+func FuzzStringFull() (ret []string)
 ```
 
-FuzzInputStringFull contains all string test sets plus ten generated random
+FuzzStringFull contains all string test sets plus ten generated random
 strings. This test set is huge and should only be used if you want to make
 sure that no string, at all, can crash a process.
 
-#### FuzzInputStringGenerateRandom
+#### FuzzStringGenerateRandom
 
 ```go
-func FuzzInputStringGenerateRandom(count, length int) (result []string)
+func FuzzStringGenerateRandom(count, length int) (result []string)
 ```
 
-FuzzInputStringGenerateRandom returns random strings in a test set.
+FuzzStringGenerateRandom returns random strings in a test set.
 
-#### FuzzInputStringHtmlTags
+#### FuzzStringHtmlTags
 
 ```go
-func FuzzInputStringHtmlTags() []string
+func FuzzStringHtmlTags() []string
 ```
 
-FuzzInputStringHtmlTags returns a test set with different html tags.
+FuzzStringHtmlTags returns a test set with different html tags.
 
 Example:
 
@@ -1409,76 +1409,76 @@ Example:
     - <script>alert('XSS')</script>
     - <a href="https://github.com/MarvinJWendt/testza">link</a>
 
-#### FuzzInputStringLimit
+#### FuzzStringLimit
 
 ```go
-func FuzzInputStringLimit(testSet []string, max int) []string
+func FuzzStringLimit(testSet []string, max int) []string
 ```
 
-FuzzInputStringLimit limits a test set in size.
+FuzzStringLimit limits a test set in size.
 
-#### FuzzInputStringLong
+#### FuzzStringLong
 
 ```go
-func FuzzInputStringLong() (testSet []string)
+func FuzzStringLong() (testSet []string)
 ```
 
-FuzzInputStringLong returns a test set with long random strings. Returns:
+FuzzStringLong returns a test set with long random strings. Returns:
 [0]: Random string (length: 25) [1]: Random string (length: 50) [2]: Random
 string (length: 100) [3]: Random string (length: 1,000) [4]: Random string
 (length: 100,000)
 
-#### FuzzInputStringModify
+#### FuzzStringModify
 
 ```go
-func FuzzInputStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string)
+func FuzzStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string)
 ```
 
-FuzzInputStringModify returns a modified version of a test set.
+FuzzStringModify returns a modified version of a test set.
 
 Example:
 
-    testset := testza.FuzzInputStringModify(testza.FuzzInputStringFull(), func(index int, value string) string {
+    testset := testza.FuzzStringModify(testza.FuzzStringFull(), func(index int, value string) string {
     	return value + " some suffix"
     })
 
-#### FuzzInputStringNumeric
+#### FuzzStringNumeric
 
 ```go
-func FuzzInputStringNumeric() []string
+func FuzzStringNumeric() []string
 ```
 
-FuzzInputStringNumeric returns a test set with strings that are numeric. The
+FuzzStringNumeric returns a test set with strings that are numeric. The
 highest number in here is "9223372036854775807", which is equal to the
 maxmim int64.
 
-#### FuzzInputStringRunTests
+#### FuzzStringRunTests
 
 ```go
-func FuzzInputStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string))
+func FuzzStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string))
 ```
 
-FuzzInputStringRunTests runs a test for every value in a testset. You can
+FuzzStringRunTests runs a test for every value in a testset. You can
 use the value as input parameter for your functions, to sanity test against
 many different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
 
-    testza.FuzzInputStringRunTests(t, testza.FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+    testza.FuzzStringRunTests(t, testza.FuzzStringFull(), func(t *testing.T, index int, str string) {
     	// Test logic
     	// err := YourFunction(str)
     	// testza.AssertNoError(t, err)
     	// ...
     })
 
-#### FuzzInputStringUsernames
+#### FuzzStringUsernames
 
 ```go
-func FuzzInputStringUsernames() []string
+func FuzzStringUsernames() []string
 ```
 
-FuzzInputStringUsernames returns a test set with usernames.
+FuzzStringUsernames returns a test set with usernames.
 
 ### Settings
 

@@ -70,7 +70,7 @@ type assertionTestStructNested struct {
 }
 
 func randomString() string {
-	return FuzzInputStringGenerateRandom(1, rand.Intn(10))[0]
+	return FuzzStringGenerateRandom(1, rand.Intn(10))[0]
 }
 
 func generateStruct() (ret assertionTestStruct) {
@@ -331,7 +331,7 @@ func TestAssertNotZero_fails(t *testing.T) {
 
 func TestAssertEqual(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			t.Helper()
 
 			testEqual(t, str, str)
@@ -364,7 +364,7 @@ func TestAssertEqual(t *testing.T) {
 
 func TestAssertEqual_fails(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
 				AssertEqual(t, str, str+" addon")
 			})
@@ -393,7 +393,7 @@ func TestAssertEqual_fails(t *testing.T) {
 
 func TestAssertNotEqual(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			AssertNotEqual(t, str, str+" addon")
 		})
 	})
@@ -416,7 +416,7 @@ func TestAssertNotEqual(t *testing.T) {
 
 func TestAssertNotEqual_fails(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			t.Helper()
 
 			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
@@ -459,7 +459,7 @@ func TestAssertNotEqual_fails(t *testing.T) {
 
 func TestAssertEqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			AssertEqualValues(t, str, str)
 		})
 	})
@@ -467,7 +467,7 @@ func TestAssertEqualValues(t *testing.T) {
 
 func TestAssertEqualValues_fails(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
 				AssertEqualValues(t, str, str+" addon")
 			})
@@ -477,7 +477,7 @@ func TestAssertEqualValues_fails(t *testing.T) {
 
 func TestAssertNotEqualValues(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			AssertNotEqualValues(t, str, str+" addon")
 		})
 	})
@@ -485,7 +485,7 @@ func TestAssertNotEqualValues(t *testing.T) {
 
 func TestAssertNotEqualValues_fails(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
 				AssertNotEqualValues(t, str, str)
 			})
@@ -863,7 +863,7 @@ func TestAssertLen_fails(t *testing.T) {
 }
 
 func TestAssertLen_full(t *testing.T) {
-	FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+	FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 		AssertLen(t, str, len(str))
 	})
 }
@@ -992,7 +992,7 @@ func TestAssertIsDecreasing_fail(t *testing.T) {
 
 func TestAssertSameElements(t *testing.T) {
 	t.Run("String", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			t.Helper()
 
 			testEqual(t, str, str)
@@ -1042,7 +1042,7 @@ func TestAssertSameElements(t *testing.T) {
 
 func TestAssertSameElementsFails(t *testing.T) {
 	t.Run("Not an array", func(t *testing.T) {
-		FuzzInputStringRunTests(t, FuzzInputStringFull(), func(t *testing.T, index int, str string) {
+		FuzzStringRunTests(t, FuzzStringFull(), func(t *testing.T, index int, str string) {
 			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
 				AssertSameElements(t, str, str)
 			})
