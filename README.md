@@ -1193,8 +1193,8 @@ Example:
 func FuzzBoolRunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
 ```
 
-FuzzBoolRunTests runs a test for every value in a testset. You can use
-the value as input parameter for your functions, to sanity test against many
+FuzzBoolRunTests runs a test for every value in a testset. You can use the
+value as input parameter for your functions, to sanity test against many
 different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
@@ -1224,8 +1224,8 @@ random float64s (positive and negative).
 func FuzzFloat64GenerateRandomNegative(count int, min float64) (floats []float64)
 ```
 
-FuzzFloat64GenerateRandomNegative generates random negative integers
-with a minimum of min. If the minimum is positive, it will be converted to a
+FuzzFloat64GenerateRandomNegative generates random negative integers with a
+minimum of min. If the minimum is positive, it will be converted to a
 negative number. If it is set to 0, there is no limit.
 
 #### FuzzFloat64GenerateRandomPositive
@@ -1234,9 +1234,9 @@ negative number. If it is set to 0, there is no limit.
 func FuzzFloat64GenerateRandomPositive(count int, max float64) (floats []float64)
 ```
 
-FuzzFloat64GenerateRandomPositive generates random positive integers
-with a maximum of max. If the maximum is 0, or below, the maximum will be
-set to math.MaxInt64.
+FuzzFloat64GenerateRandomPositive generates random positive integers with a
+maximum of max. If the maximum is 0, or below, the maximum will be set to
+math.MaxInt64.
 
 #### FuzzFloat64GenerateRandomRange
 
@@ -1244,8 +1244,8 @@ set to math.MaxInt64.
 func FuzzFloat64GenerateRandomRange(count int, min, max float64) (floats []float64)
 ```
 
-FuzzFloat64GenerateRandomRange generates random positive integers with
-a maximum of max. If the maximum is 0, or below, the maximum will be set to
+FuzzFloat64GenerateRandomRange generates random positive integers with a
+maximum of max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
 #### FuzzFloat64Modify
@@ -1268,9 +1268,9 @@ Example:
 func FuzzFloat64RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64))
 ```
 
-FuzzFloat64RunTests runs a test for every value in a testset. You can
-use the value as input parameter for your functions, to sanity test against
-many different cases. This ensures that your functions have a correct error
+FuzzFloat64RunTests runs a test for every value in a testset. You can use
+the value as input parameter for your functions, to sanity test against many
+different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
@@ -1290,8 +1290,8 @@ Example:
 func FuzzIntFull() (ints []int)
 ```
 
-FuzzIntFull returns a combination of every integer testset and some
-random integers (positive and negative).
+FuzzIntFull returns a combination of every integer testset and some random
+integers (positive and negative).
 
 #### FuzzIntGenerateRandomNegative
 
@@ -1319,8 +1319,8 @@ math.MaxInt64.
 func FuzzIntGenerateRandomRange(count, min, max int) (ints []int)
 ```
 
-FuzzIntGenerateRandomRange generates random integers with a range of
-min to max.
+FuzzIntGenerateRandomRange generates random integers with a range of min to
+max.
 
 #### FuzzIntModify
 
@@ -1342,8 +1342,8 @@ Example:
 func FuzzIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int))
 ```
 
-FuzzIntRunTests runs a test for every value in a testset. You can use
-the value as input parameter for your functions, to sanity test against many
+FuzzIntRunTests runs a test for every value in a testset. You can use the
+value as input parameter for your functions, to sanity test against many
 different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
@@ -1364,9 +1364,9 @@ Example:
 func FuzzStringEmailAddresses() []string
 ```
 
-FuzzStringEmailAddresses returns a test set with valid email addresses.
-The addresses may look like they are invalid, but they are all conform to
-RFC 2822 and could be used. You can use this test set to test your email
+FuzzStringEmailAddresses returns a test set with valid email addresses. The
+addresses may look like they are invalid, but they are all conform to RFC
+2822 and could be used. You can use this test set to test your email
 validation process.
 
 #### FuzzStringEmpty
@@ -1423,8 +1423,8 @@ FuzzStringLimit limits a test set in size.
 func FuzzStringLong() (testSet []string)
 ```
 
-FuzzStringLong returns a test set with long random strings. Returns:
-[0]: Random string (length: 25) [1]: Random string (length: 50) [2]: Random
+FuzzStringLong returns a test set with long random strings. Returns: [0]:
+Random string (length: 25) [1]: Random string (length: 50) [2]: Random
 string (length: 100) [3]: Random string (length: 1,000) [4]: Random string
 (length: 100,000)
 
@@ -1458,9 +1458,9 @@ maxmim int64.
 func FuzzStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string))
 ```
 
-FuzzStringRunTests runs a test for every value in a testset. You can
-use the value as input parameter for your functions, to sanity test against
-many different cases. This ensures that your functions have a correct error
+FuzzStringRunTests runs a test for every value in a testset. You can use the
+value as input parameter for your functions, to sanity test against many
+different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
