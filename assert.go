@@ -127,7 +127,7 @@ func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
 //  testza.AssertNotNumeric(t, "123")
 func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{}) {
 	if internal.IsNumber(object) {
-		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleNamed("object", object), msg...)
+		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
 }
 
