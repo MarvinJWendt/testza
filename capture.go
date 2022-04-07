@@ -3,7 +3,6 @@ package testza
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 )
 
@@ -35,7 +34,7 @@ func CaptureStdout(capture func(w io.Writer) error) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("could not capture stdout: %w", err)
 	}
-	out, err := ioutil.ReadAll(r)
+	out, err := io.ReadAll(r)
 	if err != nil {
 		return "", fmt.Errorf("could not capture stdout: %w", err)
 	}
@@ -77,7 +76,7 @@ func CaptureStderr(capture func(w io.Writer) error) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("could not capture stderr: %w", err)
 	}
-	out, err := ioutil.ReadAll(r)
+	out, err := io.ReadAll(r)
 	if err != nil {
 		return "", fmt.Errorf("could not capture stderr: %w", err)
 	}
@@ -135,12 +134,12 @@ func CaptureStdoutAndStderr(capture func(stdoutWriter, stderrWriter io.Writer) e
 		return "", "", fmt.Errorf("could not capture stdout or stderr: %w", err)
 	}
 
-	stdoutOut, err := ioutil.ReadAll(stdoutR)
+	stdoutOut, err := io.ReadAll(stdoutR)
 	if err != nil {
 		return "", "", fmt.Errorf("could not capture stdout or stderr: %w", err)
 	}
 
-	stderrOut, err := ioutil.ReadAll(stderrR)
+	stderrOut, err := io.ReadAll(stderrR)
 	if err != nil {
 		return "", "", fmt.Errorf("could not capture stdout or stderr: %w", err)
 	}
