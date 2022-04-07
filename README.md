@@ -86,6 +86,7 @@ Even developers who never used testza, will get into it quickly.
 | System Information | Testza prints information about the system on startup.<br/> You can quickly figure out what's wrong, when a user submits an issue.                   |
 | Well Documented    | Every function of testza is well documented and contains an example to make usage super easy.                                                        |
 | Customizable       | Testza features customizable settings, if you want to change something.                                                                              |
+| Test flags         | You can configure testza via flags too!<br/>That makes it super simple to change test runs, or output, without touching code!                        |
 
 ## 🚀 Getting Started
 
