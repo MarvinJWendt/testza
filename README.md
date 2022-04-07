@@ -1489,6 +1489,9 @@ func SetColorsEnabled(enabled bool)
 SetColorsEnabled controls if testza should print colored output. You should
 use this in the init() method of the package, which contains your tests.
 
+> This setting can also be set by the command line flag
+--testza.disable-color.
+
 Example:
 
     init() {
@@ -1506,6 +1509,9 @@ SetDiffContextLines controls how many lines are shown around a changed diff
 line. If set to -1 it will show full diff. You should use this in the init()
 method of the package, which contains your tests.
 
+> This setting can also be set by the command line flag
+--testza.diff-context-lines.
+
 Example:
 
     init() {
@@ -1522,6 +1528,9 @@ func SetLineNumbersEnabled(enabled bool)
 SetLineNumbersEnabled controls if line numbers should be printed in failing
 tests. You should use this in the init() method of the package, which
 contains your tests.
+
+> This setting can also be set by the command line flag
+--testza.disable-line-numbers.
 
 Example:
 
@@ -1542,6 +1551,8 @@ guarantee a reproducible test run. Use this setting, if you want a 100%
 deterministic test. You should use this in the init() method of the package,
 which contains your tests.
 
+> This setting can also be set by the command line flag --testza.seed.
+
 Example:
 
     init() {
@@ -1558,6 +1569,9 @@ func SetShowStartupMessage(show bool)
 SetShowStartupMessage controls if the startup message should be printed. You
 should use this in the init() method of the package, which contains your
 tests.
+
+> This setting can also be set by the command line flag
+--testza.disable-startup-message.
 
 Example:
 
