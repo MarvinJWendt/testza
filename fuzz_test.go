@@ -57,13 +57,13 @@ func TestFuzzUtilLimit(t *testing.T) {
 func TestFuzzStringGenerateRandom(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		t.Run(fmt.Sprintf("Length=%d", i), func(t *testing.T) {
-			AssertEqual(t, i, len(FuzzStringGenerateRandom(1, i)[0]))
+			AssertLen(t, FuzzStringGenerateRandom(1, i)[0], i)
 		})
 	}
 
 	for i := 0; i < 100; i++ {
 		t.Run(fmt.Sprintf("Count=%d", i), func(t *testing.T) {
-			AssertEqual(t, i, len(FuzzStringGenerateRandom(i, 5)))
+			AssertLen(t, FuzzStringGenerateRandom(i, 5), i)
 		})
 	}
 }
