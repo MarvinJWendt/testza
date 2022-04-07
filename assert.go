@@ -455,7 +455,7 @@ func AssertNotNil(t testRunner, object interface{}, msg ...interface{}) {
 	}
 
 	if internal.IsNil(object) {
-		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleNamed("object", object), msg...)
+		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
 }
 
