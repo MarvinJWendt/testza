@@ -160,7 +160,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertContains](https://github.com/MarvinJWendt/testza#AssertContains)
   - [AssertDecreasing](https://github.com/MarvinJWendt/testza#AssertDecreasing)
   - [AssertDirEmpty](https://github.com/MarvinJWendt/testza#AssertDirEmpty)
-  - [AssertDirExist](https://github.com/MarvinJWendt/testza#AssertDirExist)
+  - [AssertDirExists](https://github.com/MarvinJWendt/testza#AssertDirExists)
   - [AssertDirNotEmpty](https://github.com/MarvinJWendt/testza#AssertDirNotEmpty)
   - [AssertEqual](https://github.com/MarvinJWendt/testza#AssertEqual)
   - [AssertEqualValues](https://github.com/MarvinJWendt/testza#AssertEqualValues)
@@ -387,13 +387,13 @@ Example:
 
     testza.AssertDirEmpty(t, "FolderName")
 
-#### AssertDirExist
+#### AssertDirExists
 
 ```go
-func AssertDirExist(t testRunner, dir string, msg ...interface{})
+func AssertDirExists(t testRunner, dir string, msg ...interface{})
 ```
 
-AssertDirExist asserts that a directory exists. The test will pass when the
+AssertDirExists asserts that a directory exists. The test will pass when the
 directory exists, and it's visible to the current user. The test will fail,
 if the path points to a file.
 
@@ -402,7 +402,7 @@ used.
 
 Example:
 
-    testza.AssertDirExist(t, "FolderName")
+    testza.AssertDirExists(t, "FolderName")
 
 #### AssertDirNotEmpty
 
