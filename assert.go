@@ -94,7 +94,10 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 	if internal.IsKind(kind, object) {
 		internal.Fail(t,
 			fmt.Sprintf("A value that !!should not be a type of kind %s!! is a type of kind %s.", kind.String(), reflect.TypeOf(object).Kind().String()),
-			internal.NewObjectsExpectedActual(kind, object),
+			internal.Objects{
+				internal.NewObjectsSingleNamed("Should not be", kind)[0],
+				internal.NewObjectsSingleNamed("Actual", object)[0],
+			},
 			msg...,
 		)
 	}
@@ -678,14 +681,14 @@ func AssertLen(t testRunner, object interface{}, length int, msg ...interface{})
 		internal.Fail(t, "The length of 'object' !!is not!! the expected length.", internal.Objects{
 			{
 				Name:      "Expected length",
-				NameStyle: pterm.NewStyle(pterm.FgRed),
+				NameStyle: pterm.NewStyle(pterm.FgLightGreen),
 				Data:      fmt.Sprint(length) + "\n",
-				DataStyle: pterm.NewStyle(pterm.FgRed),
+				DataStyle: pterm.NewStyle(pterm.FgGreen),
 				Raw:       true,
 			},
 			{
 				Name:      "Actual length",
-				NameStyle: pterm.NewStyle(pterm.FgRed),
+				NameStyle: pterm.NewStyle(pterm.FgLightRed),
 				Data:      fmt.Sprint(v.Len()) + "\n",
 				DataStyle: pterm.NewStyle(pterm.FgRed),
 				Raw:       true,
