@@ -393,7 +393,7 @@ Example:
 func AssertDirExist(t testRunner, dir string, msg ...any)
 ```
 
-AssertDirExist asserts that a directory exists. The test will pass when the
+AssertDirExists asserts that a directory exists. The test will pass when the
 directory exists, and it's visible to the current user. The test will fail,
 if the path points to a file.
 
@@ -402,7 +402,7 @@ used.
 
 Example:
 
-    testza.AssertDirExist(t, "FolderName")
+    testza.AssertDirExists(t, "FolderName")
 
 #### AssertDirNotEmpty
 
