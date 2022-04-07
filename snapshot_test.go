@@ -1,7 +1,6 @@
 package testza_test
 
 import (
-	"io/ioutil"
 	"math/rand"
 	"os"
 	"testing"
@@ -32,7 +31,7 @@ func TestSnapshotCreate_file_content(t *testing.T) {
 	err := testza.SnapshotCreate(snapshotName, snapshotObject)
 	testza.AssertNoError(t, err)
 
-	snapshotContent, err := ioutil.ReadFile(internal.GetCurrentScriptDirectory() + "/testdata/snapshots/" + t.Name() + ".testza")
+	snapshotContent, err := os.ReadFile(internal.GetCurrentScriptDirectory() + "/testdata/snapshots/" + t.Name() + ".testza")
 	testza.AssertNoError(t, err)
 
 	testza.AssertEqual(t, spew.Sdump(snapshotObject), string(snapshotContent))
@@ -42,7 +41,7 @@ func TestSnapshotCreate_file_content_string(t *testing.T) {
 	err := testza.SnapshotCreate(snapshotNameString, snapshotString)
 	testza.AssertNoError(t, err)
 
-	snapshotContent, err := ioutil.ReadFile(internal.GetCurrentScriptDirectory() + "/testdata/snapshots/" + t.Name() + ".testza")
+	snapshotContent, err := os.ReadFile(internal.GetCurrentScriptDirectory() + "/testdata/snapshots/" + t.Name() + ".testza")
 	testza.AssertNoError(t, err)
 
 	testza.AssertEqual(t, spew.Sdump(snapshotString), string(snapshotContent))

@@ -2,7 +2,6 @@ package testza
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"regexp"
@@ -36,7 +35,7 @@ func snapshotCreateForDir(dir string, name string, snapshotObject any) error {
 	originalSpewConfig := spew.Config.DisablePointerAddresses
 	spew.Config.DisablePointerAddresses = true
 	dump := strings.ReplaceAll(spew.Sdump(snapshotObject), "\r\n", "\n")
-	err = ioutil.WriteFile(path.Clean(dir+name+".testza"), []byte(dump), 0755)
+	err = os.WriteFile(path.Clean(dir+name+".testza"), []byte(dump), 0755)
 	if err != nil {
 		return fmt.Errorf("creating snapshot failed: %w", err)
 	}
@@ -62,7 +61,7 @@ var snapshotStringMatcher = regexp.MustCompile(`(?m)^\(.+?\)\s\(len=\d+\)\s(".+"
 
 func snapshotValidateFromDir(dir string, t testRunner, name string, actual any, msg ...any) error {
 	snapshotPath := path.Clean(dir + name + ".testza")
-	snapshotContent, err := ioutil.ReadFile(snapshotPath)
+	snapshotContent, err := os.ReadFile(snapshotPath)
 	snapshot := strings.ReplaceAll(string(snapshotContent), "\r\n", "\n")
 	if err != nil {
 		return fmt.Errorf("validating snapshot failed: %w", err)
