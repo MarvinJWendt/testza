@@ -220,6 +220,19 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 </tr>
 <tr>
+<td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Utils">Fuzz Utils</a></td>
+<td>
+
+<details>
+<summary>Click to expand</summary>
+
+  - [FuzzUtilModifySet](https://github.com/MarvinJWendt/testza#FuzzUtilModifySet)
+</td>
+
+</details>
+
+</tr>
+<tr>
 <td><a href="https://github.com/MarvinJWendt/testza#Fuzz-Booleans">Fuzz Booleans</a></td>
 <td>
 
@@ -227,7 +240,6 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <summary>Click to expand</summary>
 
   - [FuzzBoolFull](https://github.com/MarvinJWendt/testza#FuzzBoolFull)
-  - [FuzzBoolModify](https://github.com/MarvinJWendt/testza#FuzzBoolModify)
   - [FuzzBoolRunTests](https://github.com/MarvinJWendt/testza#FuzzBoolRunTests)
 </td>
 
@@ -248,7 +260,6 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [FuzzStringHtmlTags](https://github.com/MarvinJWendt/testza#FuzzStringHtmlTags)
   - [FuzzStringLimit](https://github.com/MarvinJWendt/testza#FuzzStringLimit)
   - [FuzzStringLong](https://github.com/MarvinJWendt/testza#FuzzStringLong)
-  - [FuzzStringModify](https://github.com/MarvinJWendt/testza#FuzzStringModify)
   - [FuzzStringNumeric](https://github.com/MarvinJWendt/testza#FuzzStringNumeric)
   - [FuzzStringRunTests](https://github.com/MarvinJWendt/testza#FuzzStringRunTests)
   - [FuzzStringUsernames](https://github.com/MarvinJWendt/testza#FuzzStringUsernames)
@@ -268,7 +279,6 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [FuzzFloat64GenerateRandomNegative](https://github.com/MarvinJWendt/testza#FuzzFloat64GenerateRandomNegative)
   - [FuzzFloat64GenerateRandomPositive](https://github.com/MarvinJWendt/testza#FuzzFloat64GenerateRandomPositive)
   - [FuzzFloat64GenerateRandomRange](https://github.com/MarvinJWendt/testza#FuzzFloat64GenerateRandomRange)
-  - [FuzzFloat64Modify](https://github.com/MarvinJWendt/testza#FuzzFloat64Modify)
   - [FuzzFloat64RunTests](https://github.com/MarvinJWendt/testza#FuzzFloat64RunTests)
 </td>
 
@@ -286,7 +296,6 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [FuzzIntGenerateRandomNegative](https://github.com/MarvinJWendt/testza#FuzzIntGenerateRandomNegative)
   - [FuzzIntGenerateRandomPositive](https://github.com/MarvinJWendt/testza#FuzzIntGenerateRandomPositive)
   - [FuzzIntGenerateRandomRange](https://github.com/MarvinJWendt/testza#FuzzIntGenerateRandomRange)
-  - [FuzzIntModify](https://github.com/MarvinJWendt/testza#FuzzIntModify)
   - [FuzzIntRunTests](https://github.com/MarvinJWendt/testza#FuzzIntRunTests)
 </td>
 
@@ -1173,20 +1182,6 @@ func FuzzBoolFull() []bool
 
 FuzzBoolFull returns true and false in a boolean slice.
 
-#### FuzzBoolModify
-
-```go
-func FuzzBoolModify(inputSlice []bool, modifier func(index int, value bool) bool) (floats []bool)
-```
-
-FuzzBoolModify returns a modified version of a test set.
-
-Example:
-
-    testset := testza.FuzzBoolModify(testza.FuzzBoolFull(), func(index int, value bool) bool {
-    	return !value
-    })
-
 #### FuzzBoolRunTests
 
 ```go
@@ -1248,20 +1243,6 @@ FuzzFloat64GenerateRandomRange generates random positive integers with a
 maximum of max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
-#### FuzzFloat64Modify
-
-```go
-func FuzzFloat64Modify(inputSlice []float64, modifier func(index int, value float64) float64) (floats []float64)
-```
-
-FuzzFloat64Modify returns a modified version of a test set.
-
-Example:
-
-    testset := testza.FuzzFloat64Modify(testza.FuzzFloat64Full(), func(index int, value float64) float64 {
-    	return value * 2
-    })
-
 #### FuzzFloat64RunTests
 
 ```go
@@ -1321,20 +1302,6 @@ func FuzzIntGenerateRandomRange(count, min, max int) (ints []int)
 
 FuzzIntGenerateRandomRange generates random integers with a range of min to
 max.
-
-#### FuzzIntModify
-
-```go
-func FuzzIntModify(inputSlice []int, modifier func(index int, value int) int) (ints []int)
-```
-
-FuzzIntModify returns a modified version of a test set.
-
-Example:
-
-    testset := testza.FuzzIntModify(testza.FuzzIntFull(), func(index int, value int) int {
-    	return value * 2
-    })
 
 #### FuzzIntRunTests
 
@@ -1428,20 +1395,6 @@ Random string (length: 25) [1]: Random string (length: 50) [2]: Random
 string (length: 100) [3]: Random string (length: 1,000) [4]: Random string
 (length: 100,000)
 
-#### FuzzStringModify
-
-```go
-func FuzzStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string)
-```
-
-FuzzStringModify returns a modified version of a test set.
-
-Example:
-
-    testset := testza.FuzzStringModify(testza.FuzzStringFull(), func(index int, value string) string {
-    	return value + " some suffix"
-    })
-
 #### FuzzStringNumeric
 
 ```go
@@ -1479,6 +1432,22 @@ func FuzzStringUsernames() []string
 ```
 
 FuzzStringUsernames returns a test set with usernames.
+
+### Fuzz Utils
+
+#### FuzzUtilModifySet
+
+```go
+func FuzzUtilModifySet[setType any](inputSet []setType, modifier func(index int, value setType) setType) (floats []setType)
+```
+
+FuzzUtilModifySet returns a modified version of a test set.
+
+Example:
+
+     modifiedSet := testza.FuzzUtilModifySet(testza.FuzzIntFull(), func(i int, value int) int {
+    		return i * 2 // double every value in the test set
+    	})
 
 ### Settings
 
