@@ -94,7 +94,10 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 	if internal.IsKind(kind, object) {
 		internal.Fail(t,
 			fmt.Sprintf("A value that !!should not be a type of kind %s!! is a type of kind %s.", kind.String(), reflect.TypeOf(object).Kind().String()),
-			internal.NewObjectsExpectedActual(kind, object),
+			internal.Objects{
+				internal.NewObjectsSingleNamed("Should not be", kind)[0],
+				internal.NewObjectsSingleNamed("Actual", object)[0],
+			},
 			msg...,
 		)
 	}
