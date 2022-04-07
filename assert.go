@@ -18,17 +18,17 @@ type testMock struct {
 	ErrorMessage string
 }
 
-func (m *testMock) fail(msg ...interface{}) {
+func (m *testMock) fail(msg ...any) {
 	m.ErrorCalled = true
 	m.ErrorMessage = fmt.Sprint(msg...)
 }
 
-func (m *testMock) Error(args ...interface{}) {
+func (m *testMock) Error(args ...any) {
 	m.fail(args...)
 }
 
 // Errorf is a mock of testing.T.
-func (m *testMock) Errorf(format string, args ...interface{}) {
+func (m *testMock) Errorf(format string, args ...any) {
 	m.fail(fmt.Sprintf(format, args...))
 }
 
@@ -43,12 +43,12 @@ func (m *testMock) FailNow() {
 }
 
 // Fatal is a mock of testing.T.
-func (m *testMock) Fatal(args ...interface{}) {
+func (m *testMock) Fatal(args ...any) {
 	m.fail(args...)
 }
 
 // Fatalf is a mock of testing.T.
-func (m *testMock) Fatalf(format string, args ...interface{}) {
+func (m *testMock) Fatalf(format string, args ...any) {
 	m.fail(fmt.Sprintf(format, args...))
 }
 
@@ -62,7 +62,7 @@ func (m *testMock) Fatalf(format string, args ...interface{}) {
 //  testza.AssertKindOf(t, reflect.Int, 1337)
 //  testza.AssertKindOf(t, reflect.Bool, true)
 //  testza.AssertKindOf(t, reflect.Map, map[string]bool{})
-func AssertKindOf(t testRunner, expectedKind reflect.Kind, object interface{}, msg ...interface{}) {
+func AssertKindOf(t testRunner, expectedKind reflect.Kind, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -86,7 +86,7 @@ func AssertKindOf(t testRunner, expectedKind reflect.Kind, object interface{}, m
 //  testza.AssertNotKindOf(t, reflect.Int, 13.37)
 //  testza.AssertNotKindOf(t, reflect.Bool, map[string]bool{})
 //  testza.AssertNotKindOf(t, reflect.Map, false)
-func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ...interface{}) {
+func AssertNotKindOf(t testRunner, kind reflect.Kind, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -113,7 +113,7 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 //  testza.AssertNumeric(t, 123)
 //  testza.AssertNumeric(t, 1.23)
 //  testza.AssertNumeric(t, uint(123))
-func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
+func AssertNumeric(t testRunner, object any, msg ...any) {
 	if !internal.IsNumber(object) {
 		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
@@ -128,7 +128,7 @@ func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
 // Example:
 //  testza.AssertNotNumeric(t, true)
 //  testza.AssertNotNumeric(t, "123")
-func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{}) {
+func AssertNotNumeric(t testRunner, object any, msg ...any) {
 	if internal.IsNumber(object) {
 		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
@@ -142,7 +142,7 @@ func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{}) {
 //  testza.AssertZero(t, 0)
 //  testza.AssertZero(t, false)
 //  testza.AssertZero(t, "")
-func AssertZero(t testRunner, value interface{}, msg ...interface{}) {
+func AssertZero(t testRunner, value any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -160,7 +160,7 @@ func AssertZero(t testRunner, value interface{}, msg ...interface{}) {
 //  testza.AssertNotZero(t, 1337)
 //  testza.AssertNotZero(t, true)
 //  testza.AssertNotZero(t, "Hello, World")
-func AssertNotZero(t testRunner, value interface{}, msg ...interface{}) {
+func AssertNotZero(t testRunner, value any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -177,7 +177,7 @@ func AssertNotZero(t testRunner, value interface{}, msg ...interface{}) {
 // Example:
 //  testza.AssertEqual(t, "Hello, World!", "Hello, World!")
 //  testza.AssertEqual(t, true, true)
-func AssertEqual(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+func AssertEqual(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -194,7 +194,7 @@ func AssertEqual(t testRunner, expected interface{}, actual interface{}, msg ...
 // Example:
 //  testza.AssertNotEqual(t, true, false)
 //  testza.AssertNotEqual(t, "Hello", "World")
-func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+func AssertNotEqual(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -235,7 +235,7 @@ func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg 
 //  }
 //
 //  testza.AssertEqualValues(t, person1, person2)
-func AssertEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+func AssertEqualValues(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -266,7 +266,7 @@ func AssertEqualValues(t testRunner, expected interface{}, actual interface{}, m
 //  }
 //
 //  testza.AssertNotEqualValues(t, person1, person2)
-func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+func AssertNotEqualValues(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -285,7 +285,7 @@ func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}
 //  testza.AssertTrue(t, 1 == 1)
 //  testza.AssertTrue(t, 2 != 3)
 //  testza.AssertTrue(t, 1 > 0 && 4 < 5)
-func AssertTrue(t testRunner, value interface{}, msg ...interface{}) {
+func AssertTrue(t testRunner, value any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -304,7 +304,7 @@ func AssertTrue(t testRunner, value interface{}, msg ...interface{}) {
 //  testza.AssertFalse(t, 1 == 2)
 //  testza.AssertFalse(t, 2 != 2)
 //  testza.AssertFalse(t, 1 > 5 && 4 < 0)
-func AssertFalse(t testRunner, value interface{}, msg ...interface{}) {
+func AssertFalse(t testRunner, value any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -321,7 +321,7 @@ func AssertFalse(t testRunner, value interface{}, msg ...interface{}) {
 // Example:
 //  testza.AssertImplements(t, (*YourInterface)(nil), new(YourObject))
 //  testza.AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
-func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{}) {
+func AssertImplements(t testRunner, interfaceObject, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -338,7 +338,7 @@ func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...
 // Example:
 //  testza.AssertNotImplements(t, (*YourInterface)(nil), new(YourObject))
 //  testza.AssertNotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
-func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{}) {
+func AssertNotImplements(t testRunner, interfaceObject, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -356,7 +356,7 @@ func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg 
 //  testza.AssertContains(t, []int{1,2,3}, 2)
 //  testza.AssertContains(t, []string{"Hello", "World"}, "World")
 //  testza.AssertContains(t, "Hello, World!", "World")
-func AssertContains(t testRunner, object, element interface{}, msg ...interface{}) {
+func AssertContains(t testRunner, object, element any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -373,7 +373,7 @@ func AssertContains(t testRunner, object, element interface{}, msg ...interface{
 // Example:
 //  testza.AssertNotContains(t, []string{"Hello", "World"}, "Spaceship")
 //  testza.AssertNotContains(t, "Hello, World!", "Spaceship")
-func AssertNotContains(t testRunner, object, element interface{}, msg ...interface{}) {
+func AssertNotContains(t testRunner, object, element any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -395,7 +395,7 @@ func AssertNotContains(t testRunner, object, element interface{}, msg ...interfa
 //  	// ...
 //  	panic("some panic")
 //  }) // => PASS
-func AssertPanics(t testRunner, f func(), msg ...interface{}) {
+func AssertPanics(t testRunner, f func(), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -417,7 +417,7 @@ func AssertPanics(t testRunner, f func(), msg ...interface{}) {
 //  testza.AssertNotPanics(t, func() {
 //  	// some code that does not call a panic...
 //  }) // => PASS
-func AssertNotPanics(t testRunner, f func(), msg ...interface{}) {
+func AssertNotPanics(t testRunner, f func(), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -437,7 +437,7 @@ func AssertNotPanics(t testRunner, f func(), msg ...interface{}) {
 //
 // Example:
 //  testza.AssertNil(t, nil)
-func AssertNil(t testRunner, object interface{}, msg ...interface{}) {
+func AssertNil(t testRunner, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -455,7 +455,7 @@ func AssertNil(t testRunner, object interface{}, msg ...interface{}) {
 //  testza.AssertNotNil(t, true)
 //  testza.AssertNotNil(t, "Hello, World!")
 //  testza.AssertNotNil(t, 0)
-func AssertNotNil(t testRunner, object interface{}, msg ...interface{}) {
+func AssertNotNil(t testRunner, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -477,7 +477,7 @@ func AssertNotNil(t testRunner, object interface{}, msg ...interface{}) {
 //  testza.AssertCompletesIn(t, 2 * time.Second, func() {
 //  	// some code that should take less than 2 seconds...
 //  }) // => PASS
-func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{}) {
+func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -501,7 +501,7 @@ func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...in
 //  	// some code that should take more than 2 seconds...
 //  	time.Sleep(3 * time.Second)
 //  }) // => PASS
-func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{}) {
+func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -518,7 +518,7 @@ func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ..
 // Example:
 //  err := nil
 //  testza.AssertNoError(t, err)
-func AssertNoError(t testRunner, err error, msg ...interface{}) {
+func AssertNoError(t testRunner, err error, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -548,7 +548,7 @@ func AssertNoError(t testRunner, err error, msg ...interface{}) {
 // Example:
 //  testza.AssertGreater(t, 5, 1)
 //  testza.AssertGreater(t, 10, -10)
-func AssertGreater(t testRunner, object1, object2 interface{}, msg ...interface{}) {
+func AssertGreater(t testRunner, object1, object2 any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -572,7 +572,7 @@ func AssertGreater(t testRunner, object1, object2 interface{}, msg ...interface{
 // Example:
 //  testza.AssertLess(t, 1, 5)
 //  testza.AssertLess(t, -10, 10)
-func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{}) {
+func AssertLess(t testRunner, object1, object2 any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -606,7 +606,7 @@ func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{}) 
 //  	// ...
 //  	t.Fail() // Or any other failing method.
 //  }) // => Pass
-func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions), msg ...interface{}) {
+func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -627,7 +627,7 @@ func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions),
 //  var testErr = errors.New("hello world")
 //  var testErrWrapped = fmt.Errorf("test err: %w", testErr)
 //  testza.AssertErrorIs(t, testErrWrapped ,testErr)
-func AssertErrorIs(t testRunner, err, target error, msg ...interface{}) {
+func AssertErrorIs(t testRunner, err, target error, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -646,7 +646,7 @@ func AssertErrorIs(t testRunner, err, target error, msg ...interface{}) {
 //  var test2Err = errors.New("hello world 2")
 //  var testErrWrapped = fmt.Errorf("test err: %w", testErr)
 //  testza.AssertNotErrorIs(t, testErrWrapped, test2Err)
-func AssertNotErrorIs(t testRunner, err, target error, msg ...interface{}) {
+func AssertNotErrorIs(t testRunner, err, target error, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -665,7 +665,7 @@ func AssertNotErrorIs(t testRunner, err, target error, msg ...interface{}) {
 //  testza.AssertLen(t, "Assert", 6)
 //  testza.AssertLen(t, []int{1, 2, 1337, 25}, 4)
 //  testza.AssertLen(t, map[string]int{"asd": 1, "test": 1337}, 2)
-func AssertLen(t testRunner, object interface{}, length int, msg ...interface{}) {
+func AssertLen(t testRunner, object any, length int, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -708,7 +708,7 @@ func AssertLen(t testRunner, object interface{}, length int, msg ...interface{})
 // Example:
 //  testza.AssertIncreasing(t, []int{1, 2, 137, 1000})
 //  testza.AssertIncreasing(t, []float32{-10.3, 0.1, 7, 13.5})
-func AssertIncreasing(t testRunner, object interface{}, msg ...interface{}) {
+func AssertIncreasing(t testRunner, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -726,7 +726,7 @@ func AssertIncreasing(t testRunner, object interface{}, msg ...interface{}) {
 // Example:
 //  testza.AssertDecreasing(t, []int{1000, 137, 2, 1})
 //  testza.AssertDecreasing(t, []float32{13.5, 7, 0.1, -10.3})
-func AssertDecreasing(t testRunner, object interface{}, msg ...interface{}) {
+func AssertDecreasing(t testRunner, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -740,7 +740,7 @@ func AssertDecreasing(t testRunner, object interface{}, msg ...interface{}) {
 //
 // Example:
 //  testza.AssertRegexp(t, "^a.*c$", "abc")
-func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{}) {
+func AssertRegexp(t testRunner, regex any, txt any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -754,7 +754,7 @@ func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...inter
 //
 // Example:
 //  testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
-func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{}) {
+func AssertNotRegexp(t testRunner, regex any, txt any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -769,7 +769,7 @@ func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...in
 // Example:
 //  testza.AssertFileExists(t, "./test.txt")
 //  testza.AssertFileExists(t, "./config.yaml", "the config file is missing")
-func AssertFileExists(t testRunner, file string, msg ...interface{}) {
+func AssertFileExists(t testRunner, file string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -780,7 +780,7 @@ func AssertFileExists(t testRunner, file string, msg ...interface{}) {
 	}
 }
 
-func AssertNoFileExists(t testRunner, file string, msg ...interface{}) {
+func AssertNoFileExists(t testRunner, file string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -799,7 +799,7 @@ func AssertNoFileExists(t testRunner, file string, msg ...interface{}) {
 //
 // Example:
 //  testza.AssertDirExist(t, "FolderName")
-func AssertDirExist(t testRunner, dir string, msg ...interface{}) {
+func AssertDirExist(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -819,7 +819,7 @@ func AssertDirExist(t testRunner, dir string, msg ...interface{}) {
 //
 // Example:
 //  testza.AssertNoDirExists(t, "FolderName")
-func AssertNoDirExists(t testRunner, dir string, msg ...interface{}) {
+func AssertNoDirExists(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -840,7 +840,7 @@ func AssertNoDirExists(t testRunner, dir string, msg ...interface{}) {
 //
 // Example:
 //  testza.AssertDirEmpty(t, "FolderName")
-func AssertDirEmpty(t testRunner, dir string, msg ...interface{}) {
+func AssertDirEmpty(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -857,7 +857,7 @@ func AssertDirEmpty(t testRunner, dir string, msg ...interface{}) {
 //
 // Example:
 //  testza.AssertDirNotEmpty(t, "FolderName")
-func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{}) {
+func AssertDirNotEmpty(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -881,7 +881,7 @@ func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{}) {
 //	  a string
 //  }
 //  testza.AssertSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}})
-func AssertSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+func AssertSameElements(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -904,7 +904,7 @@ func AssertSameElements(t testRunner, expected interface{}, actual interface{}, 
 //	  a string
 //  }
 //  testza.AssertNotSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}, {a: "D"}})
-func AssertNotSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{}) {
+func AssertNotSameElements(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -922,7 +922,7 @@ func AssertNotSameElements(t testRunner, expected interface{}, actual interface{
 // Example:
 //  testza.AssertSubset(t, []int{1, 2, 3}, []int{1, 2})
 //  testza.AssertSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "World"})
-func AssertSubset(t testRunner, list interface{}, subset interface{}, msg ...interface{}) {
+func AssertSubset(t testRunner, list any, subset any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -940,7 +940,7 @@ func AssertSubset(t testRunner, list interface{}, subset interface{}, msg ...int
 // Example:
 //  testza.AssertNoSubset(t, []int{1, 2, 3}, []int{1, 7})
 //  testza.AssertNoSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "John"})
-func AssertNoSubset(t testRunner, list interface{}, subset interface{}, msg ...interface{}) {
+func AssertNoSubset(t testRunner, list any, subset any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}

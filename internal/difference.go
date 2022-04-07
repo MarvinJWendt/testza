@@ -12,7 +12,7 @@ import (
 
 var DiffContextLines = 2
 
-func NewDiffObject(expected, actual interface{}, raw ...bool) Object {
+func NewDiffObject(expected, actual any, raw ...bool) Object {
 	return Object{
 		Name:      "Difference",
 		NameStyle: pterm.NewStyle(pterm.FgYellow),
@@ -22,7 +22,7 @@ func NewDiffObject(expected, actual interface{}, raw ...bool) Object {
 }
 
 // GetDifference returns the diff for two projects.
-func GetDifference(a, b interface{}, raw ...bool) string {
+func GetDifference(a, b any, raw ...bool) string {
 	dmp := diffmatchpatch.New()
 
 	var aString, bString string

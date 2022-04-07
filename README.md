@@ -315,7 +315,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 #### AssertCompletesIn
 
 ```go
-func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{})
+func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...any)
 ```
 
 AssertCompletesIn asserts that a function completes in a given time. Use
@@ -336,7 +336,7 @@ Example:
 #### AssertContains
 
 ```go
-func AssertContains(t testRunner, object, element interface{}, msg ...interface{})
+func AssertContains(t testRunner, object, element any, msg ...any)
 ```
 
 AssertContains asserts that a string/list/array/slice/map contains the
@@ -354,7 +354,7 @@ Example:
 #### AssertDecreasing
 
 ```go
-func AssertDecreasing(t testRunner, object interface{}, msg ...interface{})
+func AssertDecreasing(t testRunner, object any, msg ...any)
 ```
 
 AssertDecreasing asserts that the values in a slice are decreasing. the test
@@ -374,7 +374,7 @@ Example:
 #### AssertDirEmpty
 
 ```go
-func AssertDirEmpty(t testRunner, dir string, msg ...interface{})
+func AssertDirEmpty(t testRunner, dir string, msg ...any)
 ```
 
 AssertDirEmpty asserts that a directory is empty. The test will pass when
@@ -390,7 +390,7 @@ Example:
 #### AssertDirExist
 
 ```go
-func AssertDirExist(t testRunner, dir string, msg ...interface{})
+func AssertDirExist(t testRunner, dir string, msg ...any)
 ```
 
 AssertDirExist asserts that a directory exists. The test will pass when the
@@ -407,7 +407,7 @@ Example:
 #### AssertDirNotEmpty
 
 ```go
-func AssertDirNotEmpty(t testRunner, dir string, msg ...interface{})
+func AssertDirNotEmpty(t testRunner, dir string, msg ...any)
 ```
 
 AssertDirNotEmpty asserts that a directory is not empty The test will pass
@@ -424,7 +424,7 @@ Example:
 #### AssertEqual
 
 ```go
-func AssertEqual(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertEqual(t testRunner, expected any, actual any, msg ...any)
 ```
 
 AssertEqual asserts that two objects are equal.
@@ -440,7 +440,7 @@ Example:
 #### AssertEqualValues
 
 ```go
-func AssertEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertEqualValues(t testRunner, expected any, actual any, msg ...any)
 ```
 
 AssertEqualValues asserts that two objects have equal values. The order of
@@ -474,7 +474,7 @@ Comparing struct values:
 #### AssertErrorIs
 
 ```go
-func AssertErrorIs(t testRunner, err, target error, msg ...interface{})
+func AssertErrorIs(t testRunner, err, target error, msg ...any)
 ```
 
 AssertErrorIs asserts that target is inside the error chain of err.
@@ -491,7 +491,7 @@ Example:
 #### AssertFalse
 
 ```go
-func AssertFalse(t testRunner, value interface{}, msg ...interface{})
+func AssertFalse(t testRunner, value any, msg ...any)
 ```
 
 AssertFalse asserts that an expression or object resolves to false.
@@ -509,7 +509,7 @@ Example:
 #### AssertFileExists
 
 ```go
-func AssertFileExists(t testRunner, file string, msg ...interface{})
+func AssertFileExists(t testRunner, file string, msg ...any)
 ```
 
 AssertFileExists asserts that a file exists.
@@ -525,7 +525,7 @@ Example:
 #### AssertGreater
 
 ```go
-func AssertGreater(t testRunner, object1, object2 interface{}, msg ...interface{})
+func AssertGreater(t testRunner, object1, object2 any, msg ...any)
 ```
 
 AssertGreater asserts that the first object is greater than the second.
@@ -541,7 +541,7 @@ Example:
 #### AssertImplements
 
 ```go
-func AssertImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
+func AssertImplements(t testRunner, interfaceObject, object any, msg ...any)
 ```
 
 AssertImplements asserts that an objects implements an interface.
@@ -557,7 +557,7 @@ Example:
 #### AssertIncreasing
 
 ```go
-func AssertIncreasing(t testRunner, object interface{}, msg ...interface{})
+func AssertIncreasing(t testRunner, object any, msg ...any)
 ```
 
 AssertIncreasing asserts that the values in a slice are increasing. the test
@@ -577,7 +577,7 @@ Example:
 #### AssertKindOf
 
 ```go
-func AssertKindOf(t testRunner, expectedKind reflect.Kind, object interface{}, msg ...interface{})
+func AssertKindOf(t testRunner, expectedKind reflect.Kind, object any, msg ...any)
 ```
 
 AssertKindOf asserts that the object is a type of kind exptectedKind.
@@ -596,7 +596,7 @@ Example:
 #### AssertLen
 
 ```go
-func AssertLen(t testRunner, object interface{}, length int, msg ...interface{})
+func AssertLen(t testRunner, object any, length int, msg ...any)
 ```
 
 AssertLen asserts that the length of an object is equal to the given length.
@@ -614,7 +614,7 @@ Example:
 #### AssertLess
 
 ```go
-func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{})
+func AssertLess(t testRunner, object1, object2 any, msg ...any)
 ```
 
 AssertLess asserts that the first object is less than the second.
@@ -630,7 +630,7 @@ Example:
 #### AssertNil
 
 ```go
-func AssertNil(t testRunner, object interface{}, msg ...interface{})
+func AssertNil(t testRunner, object any, msg ...any)
 ```
 
 AssertNil asserts that an object is nil.
@@ -645,7 +645,7 @@ Example:
 #### AssertNoDirExists
 
 ```go
-func AssertNoDirExists(t testRunner, dir string, msg ...interface{})
+func AssertNoDirExists(t testRunner, dir string, msg ...any)
 ```
 
 AssertNoDirExists asserts that a directory does not exists. The test will
@@ -662,7 +662,7 @@ Example:
 #### AssertNoError
 
 ```go
-func AssertNoError(t testRunner, err error, msg ...interface{})
+func AssertNoError(t testRunner, err error, msg ...any)
 ```
 
 AssertNoError asserts that an error is nil.
@@ -678,7 +678,7 @@ Example:
 #### AssertNoFileExists
 
 ```go
-func AssertNoFileExists(t testRunner, file string, msg ...interface{})
+func AssertNoFileExists(t testRunner, file string, msg ...any)
 ```
 
 
@@ -686,7 +686,7 @@ func AssertNoFileExists(t testRunner, file string, msg ...interface{})
 #### AssertNoSubset
 
 ```go
-func AssertNoSubset(t testRunner, list interface{}, subset interface{}, msg ...interface{})
+func AssertNoSubset(t testRunner, list any, subset any, msg ...any)
 ```
 
 AssertNoSubset asserts that the second parameter is not a subset of the
@@ -703,7 +703,7 @@ Example:
 #### AssertNotCompletesIn
 
 ```go
-func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ...interface{})
+func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ...any)
 ```
 
 AssertNotCompletesIn asserts that a function does not complete in a given
@@ -727,7 +727,7 @@ Example:
 #### AssertNotContains
 
 ```go
-func AssertNotContains(t testRunner, object, element interface{}, msg ...interface{})
+func AssertNotContains(t testRunner, object, element any, msg ...any)
 ```
 
 AssertNotContains asserts that a string/list/array/slice/map does not
@@ -744,7 +744,7 @@ Example:
 #### AssertNotEqual
 
 ```go
-func AssertNotEqual(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertNotEqual(t testRunner, expected any, actual any, msg ...any)
 ```
 
 AssertNotEqual asserts that two objects are not equal.
@@ -760,7 +760,7 @@ Example:
 #### AssertNotEqualValues
 
 ```go
-func AssertNotEqualValues(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertNotEqualValues(t testRunner, expected any, actual any, msg ...any)
 ```
 
 AssertNotEqualValues asserts that two objects do not have equal values.
@@ -791,7 +791,7 @@ Comparing struct values:
 #### AssertNotErrorIs
 
 ```go
-func AssertNotErrorIs(t testRunner, err, target error, msg ...interface{})
+func AssertNotErrorIs(t testRunner, err, target error, msg ...any)
 ```
 
 AssertNotErrorIs
@@ -809,7 +809,7 @@ Example:
 #### AssertNotImplements
 
 ```go
-func AssertNotImplements(t testRunner, interfaceObject, object interface{}, msg ...interface{})
+func AssertNotImplements(t testRunner, interfaceObject, object any, msg ...any)
 ```
 
 AssertNotImplements asserts that an object does not implement an interface.
@@ -825,7 +825,7 @@ Example:
 #### AssertNotKindOf
 
 ```go
-func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ...interface{})
+func AssertNotKindOf(t testRunner, kind reflect.Kind, object any, msg ...any)
 ```
 
 AssertNotKindOf asserts that the object is not a type of kind `kind`.
@@ -844,7 +844,7 @@ Example:
 #### AssertNotNil
 
 ```go
-func AssertNotNil(t testRunner, object interface{}, msg ...interface{})
+func AssertNotNil(t testRunner, object any, msg ...any)
 ```
 
 AssertNotNil asserts that an object is not nil.
@@ -861,7 +861,7 @@ Example:
 #### AssertNotNumeric
 
 ```go
-func AssertNotNumeric(t testRunner, object interface{}, msg ...interface{})
+func AssertNotNumeric(t testRunner, object any, msg ...any)
 ```
 
 AssertNotNumeric checks if the object is not a numeric type. Numeric types
@@ -879,7 +879,7 @@ Example:
 #### AssertNotPanics
 
 ```go
-func AssertNotPanics(t testRunner, f func(), msg ...interface{})
+func AssertNotPanics(t testRunner, f func(), msg ...any)
 ```
 
 AssertNotPanics asserts that a function does not panic.
@@ -896,7 +896,7 @@ Example:
 #### AssertNotRegexp
 
 ```go
-func AssertNotRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
+func AssertNotRegexp(t testRunner, regex any, txt any, msg ...any)
 ```
 
 AssertNotRegexp asserts that a string does not match a given regexp.
@@ -911,7 +911,7 @@ Example:
 #### AssertNotSameElements
 
 ```go
-func AssertNotSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertNotSameElements(t testRunner, expected any, actual any, msg ...any)
 ```
 
 AssertNotSameElements asserts that two slices contains same elements
@@ -933,7 +933,7 @@ Example:
 #### AssertNotZero
 
 ```go
-func AssertNotZero(t testRunner, value interface{}, msg ...interface{})
+func AssertNotZero(t testRunner, value any, msg ...any)
 ```
 
 AssertNotZero asserts that the value is not the zero value for it's type.
@@ -950,7 +950,7 @@ Example:
 #### AssertNumeric
 
 ```go
-func AssertNumeric(t testRunner, object interface{}, msg ...interface{})
+func AssertNumeric(t testRunner, object any, msg ...any)
 ```
 
 AssertNumeric asserts that the object is a numeric type. Numeric types are:
@@ -969,7 +969,7 @@ Example:
 #### AssertPanics
 
 ```go
-func AssertPanics(t testRunner, f func(), msg ...interface{})
+func AssertPanics(t testRunner, f func(), msg ...any)
 ```
 
 AssertPanics asserts that a function panics.
@@ -987,7 +987,7 @@ Example:
 #### AssertRegexp
 
 ```go
-func AssertRegexp(t testRunner, regex interface{}, txt interface{}, msg ...interface{})
+func AssertRegexp(t testRunner, regex any, txt any, msg ...any)
 ```
 
 AssertRegexp asserts that a string matches a given regexp.
@@ -1002,7 +1002,7 @@ Example:
 #### AssertSameElements
 
 ```go
-func AssertSameElements(t testRunner, expected interface{}, actual interface{}, msg ...interface{})
+func AssertSameElements(t testRunner, expected any, actual any, msg ...any)
 ```
 
 AssertSameElements asserts that two slices contains same elements (including
@@ -1025,7 +1025,7 @@ Example:
 #### AssertSubset
 
 ```go
-func AssertSubset(t testRunner, list interface{}, subset interface{}, msg ...interface{})
+func AssertSubset(t testRunner, list any, subset any, msg ...any)
 ```
 
 AssertSubset asserts that the second parameter is a subset of the list. The
@@ -1042,7 +1042,7 @@ Example:
 #### AssertTestFails
 
 ```go
-func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions), msg ...interface{})
+func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions), msg ...any)
 ```
 
 AssertTestFails asserts that a unit test fails. A unit test fails if one of
@@ -1066,7 +1066,7 @@ Example:
 #### AssertTrue
 
 ```go
-func AssertTrue(t testRunner, value interface{}, msg ...interface{})
+func AssertTrue(t testRunner, value any, msg ...any)
 ```
 
 AssertTrue asserts that an expression or object resolves to true.
@@ -1084,7 +1084,7 @@ Example:
 #### AssertZero
 
 ```go
-func AssertZero(t testRunner, value interface{}, msg ...interface{})
+func AssertZero(t testRunner, value any, msg ...any)
 ```
 
 AssertZero asserts that the value is the zero value for it's type.
@@ -1587,7 +1587,7 @@ Example:
 #### SnapshotCreate
 
 ```go
-func SnapshotCreate(name string, snapshotObject interface{}) error
+func SnapshotCreate(name string, snapshotObject any) error
 ```
 
 SnapshotCreate creates a snapshot of an object, which can be validated in
@@ -1605,7 +1605,7 @@ Example:
 #### SnapshotCreateOrValidate
 
 ```go
-func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg ...interface{}) error
+func SnapshotCreateOrValidate(t testRunner, name string, object any, msg ...any) error
 ```
 
 SnapshotCreateOrValidate creates a snapshot of an object which can be used
@@ -1627,7 +1627,7 @@ Example:
 #### SnapshotValidate
 
 ```go
-func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error
+func SnapshotValidate(t testRunner, name string, actual any, msg ...any) error
 ```
 
 SnapshotValidate validates an already exisiting snapshot of an object. You
