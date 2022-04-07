@@ -1,12 +1,8 @@
 package testza
 
 import (
-	"fmt"
 	"math"
 	"math/rand"
-	"testing"
-
-	"github.com/MarvinJWendt/testza/internal"
 )
 
 // FuzzIntFull returns a combination of every integer testset and some random integers (positive and negative).
@@ -57,35 +53,4 @@ func FuzzIntGenerateRandomNegative(count, min int) (ints []int) {
 	}
 
 	return
-}
-
-// FuzzIntRunTests runs a test for every value in a testset.
-// You can use the value as input parameter for your functions, to sanity test against many different cases.
-// This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
-//
-// Example:
-//  testza.FuzzIntRunTests(t, testza.FuzzIntFull(), func(t *testing.T, index int, i int) {
-//  	// Test logic
-//  	// err := YourFunction(i)
-//  	// testza.AssertNoError(t, err)
-//  	// ...
-//  })
-func FuzzIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.T, index int, i int)) {
-	if test, ok := t.(helper); ok {
-		test.Helper()
-	}
-
-	test := internal.GetTest(t)
-	if test == nil {
-		t.Error(internal.ErrCanNotRunIfNotBuiltinTesting)
-		return
-	}
-
-	for i, v := range testSet {
-		test.Run(fmt.Sprint(v), func(t *testing.T) {
-			t.Helper()
-
-			testFunc(t, i, v)
-		})
-	}
 }

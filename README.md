@@ -228,7 +228,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
   - [FuzzBoolFull](https://github.com/MarvinJWendt/testza#FuzzBoolFull)
   - [FuzzBoolModify](https://github.com/MarvinJWendt/testza#FuzzBoolModify)
-  - [FuzzBoolRunTests](https://github.com/MarvinJWendt/testza#FuzzBoolRunTests)
+  - [FuzzUtilRunTests](https://github.com/MarvinJWendt/testza#FuzzUtilRunTests)
 </td>
 
 </details>
@@ -1187,20 +1187,20 @@ Example:
     	return !value
     })
 
-#### FuzzBoolRunTests
+#### FuzzUtilRunTests
 
 ```go
-func FuzzBoolRunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
+func FuzzUtilRunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, index int, f bool))
 ```
 
-FuzzBoolRunTests runs a test for every value in a testset. You can use the
+FuzzUtilRunTests runs a test for every value in a testset. You can use the
 value as input parameter for your functions, to sanity test against many
 different cases. This ensures that your functions have a correct error
 handling and enables you to test against hunderts of cases easily.
 
 Example:
 
-    testza.FuzzBoolRunTests(t, testza.FuzzBoolFull(), func(t *testing.T, index int, b bool) {
+    testza.FuzzUtilRunTests(t, testza.FuzzBoolFull(), func(t *testing.T, index int, b bool) {
     	// Test logic
     	// err := YourFunction(b)
     	// testza.AssertNoError(t, err)

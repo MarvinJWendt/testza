@@ -2,9 +2,6 @@ package testza
 
 import (
 	"math/rand"
-	"testing"
-
-	"github.com/MarvinJWendt/testza/internal"
 )
 
 // FuzzStringEmpty returns a test set with a single empty string.
@@ -147,35 +144,4 @@ func FuzzStringGenerateRandom(count, length int) (result []string) {
 		result = append(result, string(str))
 	}
 	return
-}
-
-// FuzzStringRunTests runs a test for every value in a testset.
-// You can use the value as input parameter for your functions, to sanity test against many different cases.
-// This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
-//
-// Example:
-//  testza.FuzzStringRunTests(t, testza.FuzzStringFull(), func(t *testing.T, index int, str string) {
-//  	// Test logic
-//  	// err := YourFunction(str)
-//  	// testza.AssertNoError(t, err)
-//  	// ...
-//  })
-func FuzzStringRunTests(t testRunner, testSet []string, testFunc func(t *testing.T, index int, str string)) {
-	if test, ok := t.(helper); ok {
-		test.Helper()
-	}
-
-	test := internal.GetTest(t)
-	if test == nil {
-		t.Error(internal.ErrCanNotRunIfNotBuiltinTesting)
-		return
-	}
-
-	for i, str := range testSet {
-		test.Run(str, func(t *testing.T) {
-			t.Helper()
-
-			testFunc(t, i, str)
-		})
-	}
 }

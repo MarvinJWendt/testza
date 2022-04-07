@@ -79,7 +79,7 @@ func TestFuzzBoolFull(t *testing.T) {
 }
 
 func TestFuzzBoolRunTests(t *testing.T) {
-	FuzzBoolRunTests(t, FuzzBoolFull(), func(t *testing.T, index int, f bool) {
+	FuzzUtilRunTests(t, FuzzBoolFull(), func(t *testing.T, index int, f bool) {
 		AssertNotNil(t, f)
 	})
 }
@@ -100,8 +100,8 @@ func TestFuzzIntFull(t *testing.T) {
 	AssertGreater(t, len(FuzzIntFull()), 0)
 }
 
-func TestFuzzIntRunTests(t *testing.T) {
-	FuzzIntRunTests(t, FuzzIntFull(), func(t *testing.T, index int, f int) {
+func TestFuzzUtilRunTests(t *testing.T) {
+	FuzzUtilRunTests(t, FuzzIntFull(), func(t *testing.T, index int, f int) {
 		AssertNotNil(t, f)
 	})
 }
@@ -124,7 +124,7 @@ func TestFuzzFloat64Full(t *testing.T) {
 }
 
 func TestFuzzFloat64RunTests(t *testing.T) {
-	FuzzFloat64RunTests(t, FuzzFloat64Full(), func(t *testing.T, index int, f float64) {
+	FuzzUtilRunTests(t, FuzzFloat64Full(), func(t *testing.T, index int, f float64) {
 		AssertNotNil(t, f)
 	})
 }

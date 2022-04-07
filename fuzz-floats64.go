@@ -1,12 +1,8 @@
 package testza
 
 import (
-	"fmt"
 	"math"
 	"math/rand"
-	"testing"
-
-	"github.com/MarvinJWendt/testza/internal"
 )
 
 // FuzzFloat64Full returns a combination of every float64 testset and some random float64s (positive and negative).
@@ -55,35 +51,4 @@ func FuzzFloat64GenerateRandomNegative(count int, min float64) (floats []float64
 	floats = append(floats, FuzzFloat64GenerateRandomRange(count, min, 0)...)
 
 	return
-}
-
-// FuzzFloat64RunTests runs a test for every value in a testset.
-// You can use the value as input parameter for your functions, to sanity test against many different cases.
-// This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
-//
-// Example:
-//  testza.FuzzFloat64RunTests(t, testza.FuzzFloat64Full(), func(t *testing.T, index int, f float64) {
-//  	// Test logic
-//  	// err := YourFunction(f)
-//  	// testza.AssertNoError(t, err)
-//  	// ...
-//  })
-func FuzzFloat64RunTests(t testRunner, testSet []float64, testFunc func(t *testing.T, index int, f float64)) {
-	if test, ok := t.(helper); ok {
-		test.Helper()
-	}
-
-	test := internal.GetTest(t)
-	if test == nil {
-		t.Error(internal.ErrCanNotRunIfNotBuiltinTesting)
-		return
-	}
-
-	for i, v := range testSet {
-		test.Run(fmt.Sprint(v), func(t *testing.T) {
-			t.Helper()
-
-			testFunc(t, i, v)
-		})
-	}
 }
