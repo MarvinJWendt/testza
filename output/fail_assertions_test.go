@@ -33,8 +33,8 @@ func TestOutput(t *testing.T) {
 		testza.AssertDirEmpty(t, ".")
 	})
 
-	t.Run("AssertDirExist", func(t *testing.T) {
-		testza.AssertDirExist(t, ".")
+	t.Run("AssertDirExists", func(t *testing.T) {
+		testza.AssertDirExists(t, ".")
 	})
 
 	t.Run("AssertDirNotEmpty", func(t *testing.T) {

@@ -1221,7 +1221,7 @@ func TestAssertNoFileExists_fail(t *testing.T) {
 func TestAssertDirExists(t *testing.T) {
 	for _, dir := range []string{"ci", "internal", "testdata", os.TempDir()} {
 		t.Run(dir, func(t *testing.T) {
-			AssertDirExist(t, dir)
+			AssertDirExists(t, dir)
 		})
 	}
 }
@@ -1230,7 +1230,7 @@ func TestAssertDirExists_fail(t *testing.T) {
 	for _, dir := range []string{"asdasdasdasd", "LICENSE", "CHANGELOG.md"} {
 		t.Run(dir, func(t *testing.T) {
 			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
-				AssertDirExist(t, dir)
+				AssertDirExists(t, dir)
 			})
 		})
 	}
