@@ -59,6 +59,8 @@ func init() {
 // SetColorsEnabled controls if testza should print colored output.
 // You should use this in the init() method of the package, which contains your tests.
 //
+// > This setting can also be set by the command line flag --testza.disable-color.
+//
 // Example:
 //  init() {
 //    testza.SetColorsEnabled(false) // Disable colored output
@@ -75,6 +77,8 @@ func SetColorsEnabled(enabled bool) {
 // SetLineNumbersEnabled controls if line numbers should be printed in failing tests.
 // You should use this in the init() method of the package, which contains your tests.
 //
+// > This setting can also be set by the command line flag --testza.disable-line-numbers.
+//
 // Example:
 //  init() {
 //    testza.SetLineNumbersEnabled(false) // Disable line numbers
@@ -89,6 +93,8 @@ func SetLineNumbersEnabled(enabled bool) {
 // Use this setting, if you want a 100% deterministic test.
 // You should use this in the init() method of the package, which contains your tests.
 //
+// > This setting can also be set by the command line flag --testza.seed.
+//
 // Example:
 //  init() {
 //    testza.SetRandomSeed(1337) // Set the seed to 1337
@@ -102,6 +108,8 @@ func SetRandomSeed(seed int64) {
 // SetShowStartupMessage controls if the startup message should be printed.
 // You should use this in the init() method of the package, which contains your tests.
 //
+// > This setting can also be set by the command line flag --testza.disable-startup-message.
+//
 // Example:
 //  init() {
 //    testza.SetShowStartupMessage(false) // Disable the startup message
@@ -114,6 +122,8 @@ func SetShowStartupMessage(show bool) {
 // SetDiffContextLines controls how many lines are shown around a changed diff line.
 // If set to -1 it will show full diff.
 // You should use this in the init() method of the package, which contains your tests.
+//
+// > This setting can also be set by the command line flag --testza.diff-context-lines.
 //
 // Example:
 //  init() {
