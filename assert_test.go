@@ -542,17 +542,39 @@ func TestAssertNotImplements_fails(t *testing.T) {
 }
 
 func TestAssertContains(t *testing.T) {
-	s := []string{"Hello", "World"}
-
-	AssertContains(t, s, "World")
+	tests := []struct {
+		name     string
+		obj      interface{}
+		contains interface{}
+	}{
+		{name: "String Slice", obj: []string{"Hello", "World", "!"}, contains: "World"},
+		{name: "Int Slice", obj: []int{1, 2, 3, 4, 5, 6, 7, 8}, contains: 4},
+		{name: "String", obj: "Hello, World!", contains: "World"},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			AssertContains(t, test.obj, test.contains)
+		})
+	}
 }
 
 func TestAssertContains_fails(t *testing.T) {
-	s := []string{"Hello", "World"}
-
-	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
-		AssertContains(t, s, "asdasd")
-	})
+	tests := []struct {
+		name     string
+		obj      interface{}
+		contains interface{}
+	}{
+		{name: "String Slice", obj: []string{"Hello", "World", "!"}, contains: "asdasdasd"},
+		{name: "Int Slice", obj: []int{1, 2, 3, 4, 5, 6, 7, 8}, contains: 1337},
+		{name: "String", obj: "Hello, World!", contains: "asdasdasd"},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+				AssertContains(t, test.obj, test.contains)
+			})
+		})
+	}
 }
 
 func TestAssertNotContains(t *testing.T) {
