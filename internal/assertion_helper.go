@@ -237,6 +237,10 @@ func AssertCompareHelper(t testRunner, object interface{}, option int, msg ...in
 }
 
 func AssertRegexpHelper(t testRunner, regex interface{}, txt interface{}, shouldMatch bool, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
 	regexString := fmt.Sprint(regex)
 	txtString := fmt.Sprint(txt)
 	match, _ := regexp.MatchString(regexString, txtString)
@@ -254,6 +258,10 @@ func AssertRegexpHelper(t testRunner, regex interface{}, txt interface{}, should
 
 // AssertDirEmptyHelper checks for io.EOF to determine if directory empty or not
 func AssertDirEmptyHelper(t testRunner, dir string) bool {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
 	f, err := os.Open(dir)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
@@ -327,6 +335,10 @@ func HasSameElements(expected interface{}, actual interface{}) bool {
 }
 
 func IsSubset(t testRunner, list interface{}, subset interface{}) bool {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
 	if IsNil(subset) {
 		return true
 	}
