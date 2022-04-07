@@ -125,6 +125,8 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
 ## 📚 Documentation
 
+[**➡️ See examples in our wiki!**](https://github.com/MarvinJWendt/testza/wiki)
+
 <!-- docs:start -->
 <table>
   <tr>
