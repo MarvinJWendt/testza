@@ -226,6 +226,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <details>
 <summary>Click to expand</summary>
 
+  - [FuzzUtilLimitSet](https://github.com/MarvinJWendt/testza#FuzzUtilLimitSet)
   - [FuzzUtilModifySet](https://github.com/MarvinJWendt/testza#FuzzUtilModifySet)
   - [FuzzUtilRunTests](https://github.com/MarvinJWendt/testza#FuzzUtilRunTests)
 </td>
@@ -258,7 +259,6 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [FuzzStringFull](https://github.com/MarvinJWendt/testza#FuzzStringFull)
   - [FuzzStringGenerateRandom](https://github.com/MarvinJWendt/testza#FuzzStringGenerateRandom)
   - [FuzzStringHtmlTags](https://github.com/MarvinJWendt/testza#FuzzStringHtmlTags)
-  - [FuzzStringLimit](https://github.com/MarvinJWendt/testza#FuzzStringLimit)
   - [FuzzStringLong](https://github.com/MarvinJWendt/testza#FuzzStringLong)
   - [FuzzStringNumeric](https://github.com/MarvinJWendt/testza#FuzzStringNumeric)
   - [FuzzStringUsernames](https://github.com/MarvinJWendt/testza#FuzzStringUsernames)
@@ -1313,14 +1313,6 @@ Example:
     - <script>alert('XSS')</script>
     - <a href="https://github.com/MarvinJWendt/testza">link</a>
 
-#### FuzzStringLimit
-
-```go
-func FuzzStringLimit(testSet []string, max int) []string
-```
-
-FuzzStringLimit limits a test set in size.
-
 #### FuzzStringLong
 
 ```go
@@ -1351,6 +1343,18 @@ func FuzzStringUsernames() []string
 FuzzStringUsernames returns a test set with usernames.
 
 ### Fuzz Utils
+
+#### FuzzUtilLimitSet
+
+```go
+func FuzzUtilLimitSet[setType any](testSet []setType, max int) []setType
+```
+
+FuzzUtilLimitSet limits a test set in size.
+
+Example:
+
+    limitedSet := testza.FuzzUtilLimitSet(testza.FuzzStringFull(), 10)
 
 #### FuzzUtilModifySet
 
