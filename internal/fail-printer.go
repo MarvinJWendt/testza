@@ -129,12 +129,13 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 		}
 	}
 
+	// Prepend line numbers
 	newMessage := "\n"
 	lines := strings.Split(message, "\n")
 	for i, line := range lines {
 		if !(i == 0 && strings.TrimSpace(line) == "") && i < len(lines)-1 {
 			if LineNumbersEnabled {
-				newMessage += pterm.FgGray.Sprintf("%4d| ", i) + line + "\n" + pterm.Reset.Sprint()
+				newMessage += pterm.FgGray.Sprintf("%4d| ", i+1) + line + "\n" + pterm.Reset.Sprint()
 			} else {
 				newMessage += line + "\n"
 			}
