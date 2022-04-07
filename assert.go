@@ -582,7 +582,10 @@ func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{}) 
 	}
 
 	if !(v1 < v2) {
-		internal.Fail(t, "An object that !!should be less!! than the second object is not.", internal.Objects{{Name: "Object 1", Data: object1}, {Name: "Should be less than object 2", Data: object2}}, msg...)
+		internal.Fail(t, "An object that !!should be less!! than the second object is not.", internal.Objects{
+			internal.NewObjectsSingleNamed("Should be less than", object1)[0],
+			internal.NewObjectsSingleNamed("Actual", object2)[0],
+		}, msg...)
 	}
 }
 
