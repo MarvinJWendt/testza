@@ -69,13 +69,11 @@ func TestFuzzStringGenerateRandom(t *testing.T) {
 }
 
 func TestFuzzStringNumeric(t *testing.T) {
-	for _, v := range FuzzStringNumeric() {
-		t.Run(v, func(t *testing.T) {
-			f, err := strconv.ParseFloat(v, 64)
-			AssertNumeric(t, f)
-			AssertNoError(t, err)
-		})
-	}
+	FuzzUtilRunTests(t, FuzzStringNumeric(), func(t *testing.T, index int, v string) {
+		f, err := strconv.ParseFloat(v, 64)
+		AssertNumeric(t, f)
+		AssertNoError(t, err)
+	})
 }
 
 func TestFuzzStringFull(t *testing.T) {
