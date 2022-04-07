@@ -379,7 +379,10 @@ func AssertNotContains(t testRunner, object, element interface{}, msg ...interfa
 	}
 
 	if internal.DoesContain(object, element) {
-		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that should not be in object", Data: element}}, msg...)
+		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{
+			internal.NewObjectsSingleUnknown(object)[0],
+			internal.NewObjectsSingleNamed("Element that should not be in the object", element)[0],
+		}, msg...)
 	}
 }
 
