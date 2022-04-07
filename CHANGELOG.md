@@ -2,6 +2,9 @@
 ## [Unreleased]
 
 
+<a name="v0.3.4"></a>
+## [v0.3.4] - 2022-04-07
+
 <a name="v0.3.3"></a>
 ## [v0.3.3] - 2022-04-05
 ### Bug Fixes
@@ -298,7 +301,8 @@ Functions have a new structure.
 - **internal:** rewrite `Fail` for a nicer output
 
 
-[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.3.3...HEAD
+[Unreleased]: https://github.com/MarvinJWendt/testza/compare/v0.3.4...HEAD
+[v0.3.4]: https://github.com/MarvinJWendt/testza/compare/v0.3.3...v0.3.4
 [v0.3.3]: https://github.com/MarvinJWendt/testza/compare/v0.3.2...v0.3.3
 [v0.3.2]: https://github.com/MarvinJWendt/testza/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/MarvinJWendt/testza/compare/v0.3.0...v0.3.1
