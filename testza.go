@@ -18,8 +18,10 @@ var infoPrinter = pterm.DefaultSection.WithStyle(pterm.NewStyle(pterm.FgMagenta)
 var secondary = pterm.LightCyan
 
 func init() {
-	randomSeed = time.Now().UnixNano()
-	rand.Seed(randomSeed)
+	if randomSeed == 0 {
+		randomSeed = time.Now().UnixNano()
+		rand.Seed(randomSeed)
+	}
 
 	if showStartupMessage {
 		infoPrinter.WithLevel(1).Println("Running tests with " + secondary("Testza"))

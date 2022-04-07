@@ -1,13 +1,60 @@
 package testza
 
 import (
+	"flag"
 	"math/rand"
+	"os"
+	"strconv"
+	"strings"
 
 	"github.com/MarvinJWendt/testza/internal"
 	"github.com/pterm/pterm"
 )
 
 var showStartupMessage = true
+
+func init() {
+	// Defining flags to show up in the help message
+	flag.Bool("testza.disable-color", false, "disables colored output")
+	flag.Bool("testza.disable-line-numbers", false, "disables line numbers in output")
+	flag.Bool("testza.disable-startup-message", false, "disable the startup message")
+	flag.Int64("testza.seed", 0, "seed used for random operations")
+	flag.Int("testza.diff-context-lines", 2, "sets the context line count in difference output")
+
+	for i, arg := range os.Args {
+		// Check if the argument is a flag
+		if !strings.HasPrefix(arg, "--") {
+			continue
+		}
+
+		// Figure out if the flag has a value
+		var value string
+		if i != len(os.Args)-1 {
+			value = os.Args[i+1]
+			if strings.HasPrefix(value, "-") {
+				value = ""
+			}
+		}
+
+		// Check for set flags and run the appropriate function
+		switch strings.TrimPrefix(arg, "--testza.") {
+		case "disable-color":
+			SetColorsEnabled(false)
+		case "disable-line-numbers":
+			SetLineNumbersEnabled(false)
+		case "disable-startup-message":
+			SetShowStartupMessage(false)
+		case "seed":
+			seed, err := strconv.Atoi(value)
+			pterm.Fatal.PrintOnError(err)
+			SetRandomSeed(int64(seed))
+		case "diff-context-lines":
+			v, err := strconv.Atoi(value)
+			pterm.Fatal.PrintOnError(err)
+			SetDiffContextLines(v)
+		}
+	}
+}
 
 // SetColorsEnabled controls if testza should print colored output.
 // You should use this in the init() method of the package, which contains your tests.
