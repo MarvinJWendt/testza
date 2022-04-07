@@ -69,8 +69,8 @@ func NewObjectsSingleUnknown(obj interface{}) Objects {
 	return Objects{
 		{
 			Name:      "Object",
+			NameStyle: pterm.NewStyle(pterm.FgMagenta),
 			Data:      obj,
-			DataStyle: pterm.NewStyle(pterm.FgYellow),
 		},
 	}
 }
@@ -78,8 +78,9 @@ func NewObjectsSingleUnknown(obj interface{}) Objects {
 func NewObjectsSingleNamed(name string, obj interface{}) Objects {
 	return Objects{
 		{
-			Name: name,
-			Data: obj,
+			Name:      name,
+			NameStyle: pterm.NewStyle(pterm.FgMagenta),
+			Data:      obj,
 		},
 	}
 }

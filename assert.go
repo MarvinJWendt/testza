@@ -145,7 +145,7 @@ func AssertZero(t testRunner, value interface{}, msg ...interface{}) {
 	}
 
 	if !internal.IsZero(value) {
-		internal.Fail(t, "An object that !!should have it's zero value!!, does not have it's zero value.", internal.NewObjectsSingleNamed("object", value), msg...)
+		internal.Fail(t, "An object that !!should have its zero value!!, does not have its zero value.", internal.NewObjectsSingleUnknown(value), msg...)
 	}
 }
 
@@ -163,7 +163,7 @@ func AssertNotZero(t testRunner, value interface{}, msg ...interface{}) {
 	}
 
 	if internal.IsZero(value) {
-		internal.Fail(t, "An object that !!should not have it's zero value!!, does have it's zero value.", internal.NewObjectsSingleNamed("object", value), msg...)
+		internal.Fail(t, "An object that !!should not have its zero value!!, does have its zero value.", internal.NewObjectsSingleUnknown(value), msg...)
 	}
 }
 
