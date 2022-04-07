@@ -33,7 +33,7 @@ func FuzzStringLong() (testSet []string) {
 // The highest number in here is "9223372036854775807", which is equal to the maxmim int64.
 func FuzzStringNumeric() []string {
 	positiveNumbers := []string{"0", "1", "2", "3", "100", "1.1", "1337", "13.37", "0.000000000001", "9223372036854775807"}
-	negativeNumbers := FuzzStringModify(positiveNumbers, func(index int, value string) string { return "-" + value })
+	negativeNumbers := FuzzUtilModifySet(positiveNumbers, func(index int, value string) string { return "-" + value })
 	return append(positiveNumbers, negativeNumbers...)
 }
 
@@ -178,18 +178,4 @@ func FuzzStringRunTests(t testRunner, testSet []string, testFunc func(t *testing
 			testFunc(t, i, str)
 		})
 	}
-}
-
-// FuzzStringModify returns a modified version of a test set.
-//
-// Example:
-//  testset := testza.FuzzStringModify(testza.FuzzStringFull(), func(index int, value string) string {
-//  	return value + " some suffix"
-//  })
-func FuzzStringModify(inputSlice []string, modifier func(index int, value string) string) (ret []string) {
-	for i, str := range inputSlice {
-		ret = append(ret, modifier(i, str))
-	}
-
-	return
 }

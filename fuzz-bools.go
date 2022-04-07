@@ -42,17 +42,3 @@ func FuzzBoolRunTests(t testRunner, testSet []bool, testFunc func(t *testing.T, 
 		})
 	}
 }
-
-// FuzzBoolModify returns a modified version of a test set.
-//
-// Example:
-//  testset := testza.FuzzBoolModify(testza.FuzzBoolFull(), func(index int, value bool) bool {
-//  	return !value
-//  })
-func FuzzBoolModify(inputSlice []bool, modifier func(index int, value bool) bool) (floats []bool) {
-	for i, input := range inputSlice {
-		floats = append(floats, modifier(i, input))
-	}
-
-	return
-}

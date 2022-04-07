@@ -89,17 +89,3 @@ func FuzzIntRunTests(t testRunner, testSet []int, testFunc func(t *testing.T, in
 		})
 	}
 }
-
-// FuzzIntModify returns a modified version of a test set.
-//
-// Example:
-//  testset := testza.FuzzIntModify(testza.FuzzIntFull(), func(index int, value int) int {
-//  	return value * 2
-//  })
-func FuzzIntModify(inputSlice []int, modifier func(index int, value int) int) (ints []int) {
-	for i, input := range inputSlice {
-		ints = append(ints, modifier(i, input))
-	}
-
-	return
-}

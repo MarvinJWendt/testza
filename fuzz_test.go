@@ -9,15 +9,33 @@ import (
 	. "github.com/MarvinJWendt/testza"
 )
 
-func TestFuzzStringModify(t *testing.T) {
-	stringSlice := []string{"Hello", "World", "TeSt"}
-	expected := []string{"hello", "world", "test"}
-
-	input := FuzzStringModify(stringSlice, func(index int, value string) string {
-		return strings.ToLower(value)
+func TestFuzzUtilModify(t *testing.T) {
+	t.Run("String Slice", func(t *testing.T) {
+		slice := []string{"Hello", "World", "TeSt"}
+		expected := []string{"hello", "world", "test"}
+		input := FuzzUtilModifySet(slice, func(index int, value string) string {
+			return strings.ToLower(value)
+		})
+		AssertEqual(t, expected, input)
 	})
 
-	AssertEqual(t, expected, input)
+	t.Run("Int Slice", func(t *testing.T) {
+		slice := []int{1, 2, 3, 4, 5}
+		expected := []int{2, 4, 6, 8, 10}
+		input := FuzzUtilModifySet(slice, func(index int, value int) int {
+			return value * 2
+		})
+		AssertEqual(t, expected, input)
+	})
+
+	t.Run("Bool Slice", func(t *testing.T) {
+		slice := []bool{true, false}
+		expected := []bool{false, true}
+		input := FuzzUtilModifySet(slice, func(index int, value bool) bool {
+			return !value
+		})
+		AssertEqual(t, expected, input)
+	})
 }
 
 func TestFuzzStringLimit(t *testing.T) {
@@ -90,7 +108,7 @@ func TestFuzzIntRunTests(t *testing.T) {
 
 func TestFuzzIntModify(t *testing.T) {
 	testSet := FuzzIntFull()
-	s := FuzzIntModify(testSet, func(index int, value int) int {
+	s := FuzzUtilModifySet(testSet, func(index int, value int) int {
 		return value * -1
 	})
 
@@ -127,24 +145,4 @@ func TestFuzzFloat64GenerateRandomPositive(t *testing.T) {
 			AssertGreater(t, n, 0)
 		})
 	}
-}
-
-func TestFuzzFloat64Modify(t *testing.T) {
-	testSet := FuzzFloat64Full()
-	s := FuzzFloat64Modify(testSet, func(index int, value float64) float64 {
-		return value * -1
-	})
-
-	for i, f := range testSet {
-		t.Run("Number should be inverted", func(t *testing.T) {
-			AssertEqual(t, f, s[i]*-1)
-		})
-	}
-}
-
-func TestFuzzBoolModify(t *testing.T) {
-	s := FuzzBoolModify(FuzzBoolFull(), func(index int, value bool) bool {
-		return !value
-	})
-	AssertEqual(t, []bool{false, true}, s)
 }
