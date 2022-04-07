@@ -38,10 +38,18 @@ func TestFuzzUtilModify(t *testing.T) {
 	})
 }
 
-func TestFuzzStringLimit(t *testing.T) {
+func TestFuzzUtilLimit(t *testing.T) {
 	for i := 0; i < 10; i++ {
-		t.Run(fmt.Sprintf("Limit=%d", i), func(t *testing.T) {
-			AssertEqual(t, i, len(FuzzStringLimit(FuzzStringFull(), i)))
+		t.Run(fmt.Sprintf("String (Limit=%d)", i), func(t *testing.T) {
+			AssertLen(t, FuzzUtilLimitSet(FuzzStringFull(), i), i)
+		})
+
+		t.Run(fmt.Sprintf("Int (Limit=%d)", i), func(t *testing.T) {
+			AssertLen(t, FuzzUtilLimitSet(FuzzIntFull(), i), i)
+		})
+
+		t.Run(fmt.Sprintf("Float64 (Limit=%d)", i), func(t *testing.T) {
+			AssertLen(t, FuzzUtilLimitSet(FuzzFloat64Full(), i), i)
 		})
 	}
 }

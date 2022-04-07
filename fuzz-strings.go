@@ -118,19 +118,6 @@ func FuzzStringFull() (ret []string) {
 	return
 }
 
-// FuzzStringLimit limits a test set in size.
-func FuzzStringLimit(testSet []string, max int) []string {
-	if len(testSet) <= max {
-		return testSet
-	}
-
-	if max <= 0 {
-		return []string{}
-	}
-
-	return testSet[:max]
-}
-
 // FuzzStringGenerateRandom returns random strings in a test set.
 func FuzzStringGenerateRandom(count, length int) (result []string) {
 	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
