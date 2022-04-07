@@ -799,7 +799,7 @@ func AssertNoFileExists(t testRunner, file string, msg ...any) {
 //
 // Example:
 //  testza.AssertDirExists(t, "FolderName")
-func AssertDirExist(t testRunner, dir string, msg ...any) {
+func AssertDirExists(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
