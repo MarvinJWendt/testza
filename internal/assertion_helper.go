@@ -10,8 +10,6 @@ import (
 	"regexp"
 	"strings"
 	"time"
-
-	"github.com/pterm/pterm"
 )
 
 // IsKind returns if an object is kind of a specific kind.
@@ -248,20 +246,8 @@ func AssertRegexpHelper(t testRunner, regex interface{}, txt interface{}, should
 			failText = "!!does match!! the string, but !!should not!!."
 		}
 		Fail(t, "The regex pattern "+failText, Objects{
-			{
-				Name:      "Regex Pattern",
-				NameStyle: pterm.NewStyle(pterm.FgRed),
-				Data:      regexString + "\n",
-				DataStyle: pterm.NewStyle(pterm.FgRed),
-				Raw:       true,
-			},
-			{
-				Name:      "String",
-				NameStyle: pterm.NewStyle(pterm.FgRed),
-				Data:      txtString + "\n",
-				DataStyle: pterm.NewStyle(pterm.FgRed),
-				Raw:       true,
-			},
+			NewObjectsSingleNamed("Regex Pattern", regexString+"\n")[0],
+			NewObjectsSingleNamed("String", txtString+"\n")[0],
 		}, msg...)
 	}
 }
