@@ -112,7 +112,7 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object interface{}, msg ..
 //  testza.AssertNumeric(t, uint(123))
 func AssertNumeric(t testRunner, object interface{}, msg ...interface{}) {
 	if !internal.IsNumber(object) {
-		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleNamed("object", object), msg...)
+		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
 }
 
