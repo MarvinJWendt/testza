@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3205-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3201-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -86,6 +86,7 @@ Even developers who never used testza, will get into it quickly.
 | System Information | Testza prints information about the system on startup.<br/> You can quickly figure out what's wrong, when a user submits an issue.                   |
 | Well Documented    | Every function of testza is well documented and contains an example to make usage super easy.                                                        |
 | Customizable       | Testza features customizable settings, if you want to change something.                                                                              |
+| Test flags         | You can configure testza via flags too!<br/>That makes it super simple to change test runs, or output, without touching code!                        |
 
 ## 🚀 Getting Started
 
@@ -1488,6 +1489,9 @@ func SetColorsEnabled(enabled bool)
 SetColorsEnabled controls if testza should print colored output. You should
 use this in the init() method of the package, which contains your tests.
 
+> This setting can also be set by the command line flag
+--testza.disable-color.
+
 Example:
 
     init() {
@@ -1505,6 +1509,9 @@ SetDiffContextLines controls how many lines are shown around a changed diff
 line. If set to -1 it will show full diff. You should use this in the init()
 method of the package, which contains your tests.
 
+> This setting can also be set by the command line flag
+--testza.diff-context-lines.
+
 Example:
 
     init() {
@@ -1521,6 +1528,9 @@ func SetLineNumbersEnabled(enabled bool)
 SetLineNumbersEnabled controls if line numbers should be printed in failing
 tests. You should use this in the init() method of the package, which
 contains your tests.
+
+> This setting can also be set by the command line flag
+--testza.disable-line-numbers.
 
 Example:
 
@@ -1541,6 +1551,8 @@ guarantee a reproducible test run. Use this setting, if you want a 100%
 deterministic test. You should use this in the init() method of the package,
 which contains your tests.
 
+> This setting can also be set by the command line flag --testza.seed.
+
 Example:
 
     init() {
@@ -1557,6 +1569,9 @@ func SetShowStartupMessage(show bool)
 SetShowStartupMessage controls if the startup message should be printed. You
 should use this in the init() method of the package, which contains your
 tests.
+
+> This setting can also be set by the command line flag
+--testza.disable-startup-message.
 
 Example:
 
