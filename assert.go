@@ -362,7 +362,10 @@ func AssertContains(t testRunner, object, element any, msg ...any) {
 	}
 
 	if !internal.DoesContain(object, element) {
-		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{{Name: "object", Data: object}, {Name: "element that is missing in object", Data: element}}, msg...)
+		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{
+			internal.NewObjectsSingleNamed("Missing Object", element)[0],
+			internal.NewObjectsSingleNamed("Full Object", object)[0],
+		}, msg...)
 	}
 }
 

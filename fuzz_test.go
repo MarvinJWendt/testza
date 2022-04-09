@@ -9,6 +9,7 @@ import (
 	. "github.com/MarvinJWendt/testza"
 )
 
+//region FuzzUtil
 func TestFuzzUtilModify(t *testing.T) {
 	t.Run("String Slice", func(t *testing.T) {
 		slice := []string{"Hello", "World", "TeSt"}
@@ -54,6 +55,9 @@ func TestFuzzUtilLimit(t *testing.T) {
 	}
 }
 
+//endregion
+
+//region FuzzString
 func TestFuzzStringGenerateRandom(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		t.Run(fmt.Sprintf("Length=%d", i), func(t *testing.T) {
@@ -80,17 +84,62 @@ func TestFuzzStringFull(t *testing.T) {
 	AssertGreater(t, len(FuzzStringFull()), 0)
 }
 
+func TestFuzzStringEmpty(t *testing.T) {
+	AssertEqual(t, FuzzStringEmpty()[0], "")
+	AssertLen(t, FuzzStringEmpty(), 1)
+}
+
+func TestFuzzStringEmailAddresses(t *testing.T) {
+	t.Run("Must contain @", func(t *testing.T) {
+		FuzzUtilRunTests(t, FuzzStringEmailAddresses(), func(t *testing.T, index int, v string) {
+			AssertContains(t, v, "@")
+		})
+	})
+}
+
+func TestFuzzStringHtmlTags(t *testing.T) {
+	t.Run("Must contain < and >", func(t *testing.T) {
+		FuzzUtilRunTests(t, FuzzStringHtmlTags(), func(t *testing.T, index int, v string) {
+			AssertContains(t, v, "<")
+			AssertContains(t, v, ">")
+		})
+	})
+}
+
+func TestFuzzStringLong(t *testing.T) {
+	t.Run("Length fits docs", func(t *testing.T) {
+		set := FuzzStringLong()
+		AssertLen(t, set[0], 25)
+		AssertLen(t, set[1], 50)
+		AssertLen(t, set[2], 100)
+		AssertLen(t, set[3], 1_000)
+		AssertLen(t, set[4], 100_000)
+	})
+}
+
+func TestFuzzStringUsernames(t *testing.T) {
+	AssertGreater(t, len(FuzzStringUsernames()), 0)
+}
+
+//endregion
+
+//region FuzzBool
+
 func TestFuzzBoolFull(t *testing.T) {
 	AssertEqual(t, []bool{true, false}, FuzzBoolFull())
 }
 
 func TestFuzzBoolRunTests(t *testing.T) {
+	AssertGreater(t, len(FuzzBoolFull()), 0)
 	FuzzUtilRunTests(t, FuzzBoolFull(), func(t *testing.T, index int, f bool) {
 		AssertNotNil(t, f)
 	})
 }
 
-func TestFuzzIntGenerateRandomPositive(t *testing.T) {
+//endregion
+
+//region FuzzInt
+func TestFuzzIntGenerateRandom(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		t.Run("GenerateRandomPositive generates positive numbers only", func(t *testing.T) {
 			AssertGreater(t, FuzzIntGenerateRandomPositive(1, 100)[0], 0)
@@ -106,25 +155,17 @@ func TestFuzzIntFull(t *testing.T) {
 	AssertGreater(t, len(FuzzIntFull()), 0)
 }
 
-func TestFuzzUtilRunTests(t *testing.T) {
-	FuzzUtilRunTests(t, FuzzIntFull(), func(t *testing.T, index int, f int) {
-		AssertNotNil(t, f)
-	})
-}
-
-func TestFuzzIntModify(t *testing.T) {
-	testSet := FuzzIntFull()
-	s := FuzzUtilModifySet(testSet, func(index int, value int) int {
-		return value * -1
-	})
-
-	for i, f := range testSet {
-		t.Run("Number should be inverted", func(t *testing.T) {
-			AssertEqual(t, f, s[i]*-1)
-		})
+func TestFuzzIntGenerateRandomRange(t *testing.T) {
+	for i := 0; i < 1000; i++ {
+		generated := FuzzIntGenerateRandomRange(1, i*10, i*10+10)[0]
+		AssertGreater(t, generated, i*10-1)
+		AssertLess(t, generated, i*10+10+1)
 	}
 }
 
+//endregion
+
+//region FuzzFloat64
 func TestFuzzFloat64Full(t *testing.T) {
 	AssertGreater(t, len(FuzzFloat64Full()), 0)
 }
@@ -138,7 +179,7 @@ func TestFuzzFloat64RunTests(t *testing.T) {
 func TestFuzzFloat64GenerateRandomNegative(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		n := FuzzFloat64GenerateRandomNegative(1, 0)[0]
-		t.Run(fmt.Sprintf("%v must be negative", n), func(t *testing.T) {
+		t.Run(fmt.Sprintf("%v", n), func(t *testing.T) {
 			AssertLess(t, n, 0)
 		})
 	}
@@ -147,8 +188,10 @@ func TestFuzzFloat64GenerateRandomNegative(t *testing.T) {
 func TestFuzzFloat64GenerateRandomPositive(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		n := FuzzFloat64GenerateRandomPositive(1, 0)[0]
-		t.Run(fmt.Sprintf("%v must be positive", n), func(t *testing.T) {
+		t.Run(fmt.Sprintf("%v", n), func(t *testing.T) {
 			AssertGreater(t, n, 0)
 		})
 	}
 }
+
+//endregion
