@@ -192,6 +192,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertNotPanics](https://github.com/MarvinJWendt/testza#AssertNotPanics)
   - [AssertNotRegexp](https://github.com/MarvinJWendt/testza#AssertNotRegexp)
   - [AssertNotSameElements](https://github.com/MarvinJWendt/testza#AssertNotSameElements)
+  - [AssertNotUnique](https://github.com/MarvinJWendt/testza#AssertNotUnique)
   - [AssertNotZero](https://github.com/MarvinJWendt/testza#AssertNotZero)
   - [AssertNumeric](https://github.com/MarvinJWendt/testza#AssertNumeric)
   - [AssertPanics](https://github.com/MarvinJWendt/testza#AssertPanics)
@@ -200,6 +201,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertSubset](https://github.com/MarvinJWendt/testza#AssertSubset)
   - [AssertTestFails](https://github.com/MarvinJWendt/testza#AssertTestFails)
   - [AssertTrue](https://github.com/MarvinJWendt/testza#AssertTrue)
+  - [AssertUnique](https://github.com/MarvinJWendt/testza#AssertUnique)
   - [AssertZero](https://github.com/MarvinJWendt/testza#AssertZero)
 </td>
 
@@ -976,6 +978,21 @@ Example:
      }
      testza.AssertNotSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}, {a: "D"}})
 
+#### AssertNotUnique
+
+```go
+func AssertNotUnique[elementType comparable](t testRunner, list []elementType, msg ...any)
+```
+
+AssertNotUnique asserts that the elements in a list are not unique.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
+Example:
+
+    testza.AssertNotUnique(t, []int{1, 2, 3, 3})
+
 #### AssertNotZero
 
 ```go
@@ -1126,6 +1143,23 @@ Example:
     testza.AssertTrue(t, 1 == 1)
     testza.AssertTrue(t, 2 != 3)
     testza.AssertTrue(t, 1 > 0 && 4 < 5)
+
+#### AssertUnique
+
+```go
+func AssertUnique[elementType comparable](t testRunner, list []elementType, msg ...any)
+```
+
+AssertUnique asserts that the list contains only unique elements. The order
+is irrelevant.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
+Example:
+
+    testza.AssertUnique(t, []int{1, 2, 3})
+    testza.AssertUnique(t, []string{"Hello", "World", "!"})
 
 #### AssertZero
 
