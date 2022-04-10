@@ -168,11 +168,13 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertFalse](https://github.com/MarvinJWendt/testza#AssertFalse)
   - [AssertFileExists](https://github.com/MarvinJWendt/testza#AssertFileExists)
   - [AssertGreater](https://github.com/MarvinJWendt/testza#AssertGreater)
+  - [AssertGreaterOrLess](https://github.com/MarvinJWendt/testza#AssertGreaterOrLess)
   - [AssertImplements](https://github.com/MarvinJWendt/testza#AssertImplements)
   - [AssertIncreasing](https://github.com/MarvinJWendt/testza#AssertIncreasing)
   - [AssertKindOf](https://github.com/MarvinJWendt/testza#AssertKindOf)
   - [AssertLen](https://github.com/MarvinJWendt/testza#AssertLen)
   - [AssertLess](https://github.com/MarvinJWendt/testza#AssertLess)
+  - [AssertLessOrEqual](https://github.com/MarvinJWendt/testza#AssertLessOrEqual)
   - [AssertNil](https://github.com/MarvinJWendt/testza#AssertNil)
   - [AssertNoDirExists](https://github.com/MarvinJWendt/testza#AssertNoDirExists)
   - [AssertNoError](https://github.com/MarvinJWendt/testza#AssertNoError)
@@ -538,6 +540,14 @@ Example:
     testza.AssertGreater(t, 5, 1)
     testza.AssertGreater(t, 10, -10)
 
+#### AssertGreaterOrLess
+
+```go
+func AssertGreaterOrLess(t testRunner, object1, object2 interface{}, msg ...interface{})
+```
+
+
+
 #### AssertImplements
 
 ```go
@@ -626,6 +636,14 @@ Example:
 
     testza.AssertLess(t, 1, 5)
     testza.AssertLess(t, -10, 10)
+
+#### AssertLessOrEqual
+
+```go
+func AssertLessOrEqual(t testRunner, object1, object2 interface{}, msg ...interface{})
+```
+
+
 
 #### AssertNil
 
