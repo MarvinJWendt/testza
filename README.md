@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2979-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2995-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -192,6 +192,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertNotPanics](https://github.com/MarvinJWendt/testza#AssertNotPanics)
   - [AssertNotRegexp](https://github.com/MarvinJWendt/testza#AssertNotRegexp)
   - [AssertNotSameElements](https://github.com/MarvinJWendt/testza#AssertNotSameElements)
+  - [AssertNotUnique](https://github.com/MarvinJWendt/testza#AssertNotUnique)
   - [AssertNotZero](https://github.com/MarvinJWendt/testza#AssertNotZero)
   - [AssertNumeric](https://github.com/MarvinJWendt/testza#AssertNumeric)
   - [AssertPanics](https://github.com/MarvinJWendt/testza#AssertPanics)
@@ -200,6 +201,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertSubset](https://github.com/MarvinJWendt/testza#AssertSubset)
   - [AssertTestFails](https://github.com/MarvinJWendt/testza#AssertTestFails)
   - [AssertTrue](https://github.com/MarvinJWendt/testza#AssertTrue)
+  - [AssertUnique](https://github.com/MarvinJWendt/testza#AssertUnique)
   - [AssertZero](https://github.com/MarvinJWendt/testza#AssertZero)
 </td>
 
@@ -228,6 +230,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <details>
 <summary>Click to expand</summary>
 
+  - [FuzzUtilDistinctSet](https://github.com/MarvinJWendt/testza#FuzzUtilDistinctSet)
   - [FuzzUtilLimitSet](https://github.com/MarvinJWendt/testza#FuzzUtilLimitSet)
   - [FuzzUtilModifySet](https://github.com/MarvinJWendt/testza#FuzzUtilModifySet)
   - [FuzzUtilRunTests](https://github.com/MarvinJWendt/testza#FuzzUtilRunTests)
@@ -975,6 +978,21 @@ Example:
      }
      testza.AssertNotSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}, {a: "D"}})
 
+#### AssertNotUnique
+
+```go
+func AssertNotUnique[elementType comparable](t testRunner, list []elementType, msg ...any)
+```
+
+AssertNotUnique asserts that the elements in a list are not unique.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
+Example:
+
+    testza.AssertNotUnique(t, []int{1, 2, 3, 3})
+
 #### AssertNotZero
 
 ```go
@@ -1125,6 +1143,23 @@ Example:
     testza.AssertTrue(t, 1 == 1)
     testza.AssertTrue(t, 2 != 3)
     testza.AssertTrue(t, 1 > 0 && 4 < 5)
+
+#### AssertUnique
+
+```go
+func AssertUnique[elementType comparable](t testRunner, list []elementType, msg ...any)
+```
+
+AssertUnique asserts that the list contains only unique elements. The order
+is irrelevant.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
+Example:
+
+    testza.AssertUnique(t, []int{1, 2, 3})
+    testza.AssertUnique(t, []string{"Hello", "World", "!"})
 
 #### AssertZero
 
@@ -1382,6 +1417,19 @@ func FuzzStringUsernames() []string
 FuzzStringUsernames returns a test set with usernames.
 
 ### Fuzz Utils
+
+#### FuzzUtilDistinctSet
+
+```go
+func FuzzUtilDistinctSet[setType comparable](testSet []setType) []setType
+```
+
+FuzzUtilDistinctSet returns a set with removed duplicates.
+
+Example:
+
+    uniqueSet := testza.FuzzUtilDistinctSet([]string{"A", "C", "A", "B", "A", "B", "C"})
+    // uniqueSet => []string{"A", "C", "B"}
 
 #### FuzzUtilLimitSet
 

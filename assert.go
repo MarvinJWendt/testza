@@ -1005,3 +1005,37 @@ func AssertNoSubset(t testRunner, list any, subset any, msg ...any) {
 		internal.Fail(t, "The second parameter !!is a subset of the list!!, but should not be.", internal.Objects{internal.NewObjectsSingleNamed("List", list)[0], internal.NewObjectsSingleNamed("Subset", subset)[0]}, msg...)
 	}
 }
+
+// AssertUnique asserts that the list contains only unique elements.
+// The order is irrelevant.
+//
+// When using a custom message, the same formatting as with fmt.Sprintf() is used.
+//
+// Example:
+//  testza.AssertUnique(t, []int{1, 2, 3})
+//  testza.AssertUnique(t, []string{"Hello", "World", "!"})
+func AssertUnique[elementType comparable](t testRunner, list []elementType, msg ...any) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if len(FuzzUtilDistinctSet(list)) != len(list) {
+		internal.Fail(t, "The list is !!not unique!!.", internal.NewObjectsSingleNamed("List", list), msg...)
+	}
+}
+
+// AssertNotUnique asserts that the elements in a list are not unique.
+//
+// When using a custom message, the same formatting as with fmt.Sprintf() is used.
+//
+// Example:
+//  testza.AssertNotUnique(t, []int{1, 2, 3, 3})
+func AssertNotUnique[elementType comparable](t testRunner, list []elementType, msg ...any) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if len(FuzzUtilDistinctSet(list)) == len(list) {
+		internal.Fail(t, "The list !!is unique!!, but should not.", internal.NewObjectsSingleNamed("List", list), msg...)
+	}
+}

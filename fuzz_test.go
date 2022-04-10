@@ -10,7 +10,7 @@ import (
 )
 
 //region FuzzUtil
-func TestFuzzUtilModify(t *testing.T) {
+func TestFuzzUtilModifySet(t *testing.T) {
 	t.Run("String Slice", func(t *testing.T) {
 		slice := []string{"Hello", "World", "TeSt"}
 		expected := []string{"hello", "world", "test"}
@@ -39,7 +39,7 @@ func TestFuzzUtilModify(t *testing.T) {
 	})
 }
 
-func TestFuzzUtilLimit(t *testing.T) {
+func TestFuzzUtilLimitSet(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		t.Run(fmt.Sprintf("String (Limit=%d)", i), func(t *testing.T) {
 			AssertLen(t, FuzzUtilLimitSet(FuzzStringFull(), i), i)
