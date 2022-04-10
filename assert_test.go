@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/pterm/pterm"
+	"github.com/stretchr/testify/assert"
 
 	. "github.com/MarvinJWendt/testza"
 )
@@ -717,6 +718,26 @@ func TestAssertGreater_fails(t *testing.T) {
 	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
 		AssertGreater(t, 4, 5)
 	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertGreater(t, 5, 5)
+	})
+}
+
+func TestAssertGreaterOrEqual(t *testing.T) {
+	assert.GreaterOrEqual(t, 2, 1)
+	assert.GreaterOrEqual(t, 5, 4)
+	assert.GreaterOrEqual(t, 5, 5)
+}
+
+func TestAssertGreaterOrEqual_fails(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		assert.GreaterOrEqual(t, 1, 2)
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		assert.GreaterOrEqual(t, 4, 5)
+	})
 }
 
 func TestAssertLess(t *testing.T) {
@@ -731,6 +752,26 @@ func TestAssertLess_fails(t *testing.T) {
 
 	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
 		AssertLess(t, 5, 4)
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertLess(t, 5, 5)
+	})
+}
+
+func TestAssertLessOrEqual(t *testing.T) {
+	AssertLessOrEqual(t, 1, 2)
+	AssertLessOrEqual(t, 4, 5)
+	AssertLessOrEqual(t, 5, 5)
+}
+
+func TestAssertLessOrEqual_fails(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertLessOrEqual(t, 2, 1)
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertLessOrEqual(t, 5, 4)
 	})
 }
 

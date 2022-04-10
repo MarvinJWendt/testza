@@ -7,6 +7,7 @@ require (
 	github.com/klauspost/cpuid/v2 v2.0.12
 	github.com/pterm/pterm v0.12.40
 	github.com/sergi/go-diff v1.2.0
+	github.com/stretchr/testify v1.7.0
 )
 
 require (
