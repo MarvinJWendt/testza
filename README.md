@@ -168,7 +168,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertFalse](https://github.com/MarvinJWendt/testza#AssertFalse)
   - [AssertFileExists](https://github.com/MarvinJWendt/testza#AssertFileExists)
   - [AssertGreater](https://github.com/MarvinJWendt/testza#AssertGreater)
-  - [AssertGreaterOrLess](https://github.com/MarvinJWendt/testza#AssertGreaterOrLess)
+  - [AssertGreaterOrEqual](https://github.com/MarvinJWendt/testza#AssertGreaterOrEqual)
   - [AssertImplements](https://github.com/MarvinJWendt/testza#AssertImplements)
   - [AssertIncreasing](https://github.com/MarvinJWendt/testza#AssertIncreasing)
   - [AssertKindOf](https://github.com/MarvinJWendt/testza#AssertKindOf)
@@ -540,13 +540,24 @@ Example:
     testza.AssertGreater(t, 5, 1)
     testza.AssertGreater(t, 10, -10)
 
-#### AssertGreaterOrLess
+#### AssertGreaterOrEqual
 
 ```go
-func AssertGreaterOrLess(t testRunner, object1, object2 interface{}, msg ...interface{})
+func AssertGreaterOrEqual(t testRunner, object1, object2 interface{}, msg ...interface{})
 ```
 
+AssertGreaterOrEqual asserts that the first object is greater than or equal
+to the second.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
+Example:
+
+    testza.AssertGreaterOrEqual(t, 5, 1)
+    testza.AssertGreaterOrEqual(t, 10, -10)
+
+testza.AssertGreaterOrEqual(t, 10, 10)
 
 #### AssertImplements
 
@@ -643,7 +654,17 @@ Example:
 func AssertLessOrEqual(t testRunner, object1, object2 interface{}, msg ...interface{})
 ```
 
+AssertLessOrEqual asserts that the first object is less than or equal to the
+second.
 
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
+Example:
+
+    testza.AssertLessOrEqual(t, 1, 5)
+    testza.AssertLessOrEqual(t, -10, 10)
+    testza.AssertLessOrEqual(t, 1, 1)
 
 #### AssertNil
 
