@@ -67,3 +67,22 @@ func FuzzUtilLimitSet[setType any](testSet []setType, max int) []setType {
 
 	return testSet[:max]
 }
+
+// FuzzUtilDistinctSet returns a set with removed duplicates.
+//
+// Example:
+//  uniqueSet := testza.FuzzUtilDistinctSet([]string{"A", "C", "A", "B", "A", "B", "C"})
+//  // uniqueSet => []string{"A", "C", "B"}
+func FuzzUtilDistinctSet[setType comparable](testSet []setType) []setType {
+	seen := map[setType]bool{}
+	var result []setType
+
+	for _, v := range testSet {
+		if !seen[v] {
+			seen[v] = true
+			result = append(result, v)
+		}
+	}
+
+	return result
+}
