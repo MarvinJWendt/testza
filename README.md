@@ -228,6 +228,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <details>
 <summary>Click to expand</summary>
 
+  - [FuzzUtilDistinctSet](https://github.com/MarvinJWendt/testza#FuzzUtilDistinctSet)
   - [FuzzUtilLimitSet](https://github.com/MarvinJWendt/testza#FuzzUtilLimitSet)
   - [FuzzUtilModifySet](https://github.com/MarvinJWendt/testza#FuzzUtilModifySet)
   - [FuzzUtilRunTests](https://github.com/MarvinJWendt/testza#FuzzUtilRunTests)
@@ -1382,6 +1383,19 @@ func FuzzStringUsernames() []string
 FuzzStringUsernames returns a test set with usernames.
 
 ### Fuzz Utils
+
+#### FuzzUtilDistinctSet
+
+```go
+func FuzzUtilDistinctSet[setType comparable](testSet []setType) []setType
+```
+
+FuzzUtilDistinctSet returns a set with removed duplicates.
+
+Example:
+
+    uniqueSet := testza.FuzzUtilDistinctSet([]string{"A", "C", "A", "B", "A", "B", "C"})
+    // uniqueSet => []string{"A", "C", "B"}
 
 #### FuzzUtilLimitSet
 
