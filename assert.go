@@ -565,6 +565,31 @@ func AssertGreater(t testRunner, object1, object2 interface{}, msg ...interface{
 	}
 }
 
+// AssertGreaterOrEqual asserts that the first object is greater than or equal to the second.
+//
+// When using a custom message, the same formatting as with fmt.Sprintf() is used.
+//
+// Example:
+//  testza.AssertGreaterOrEqual(t, 5, 1)
+//  testza.AssertGreaterOrEqual(t, 10, -10)
+// testza.AssertGreaterOrEqual(t, 10, 10)
+func AssertGreaterOrEqual(t testRunner, object1, object2 interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	v1, err := strconv.ParseFloat(fmt.Sprint(object1), 64)
+	v2, err2 := strconv.ParseFloat(fmt.Sprint(object2), 64)
+
+	if err != nil || err2 != nil {
+		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2), msg...)
+	}
+
+	if !(v1 >= v2) {
+		internal.Fail(t, "An object that !!should be greater!! than the second object is not.", internal.Objects{{Name: "Object 1", Data: object1}, {Name: "Should be greater than object 2", Data: object2}}, msg...)
+	}
+}
+
 // AssertLess asserts that the first object is less than the second.
 //
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
@@ -587,6 +612,34 @@ func AssertLess(t testRunner, object1, object2 interface{}, msg ...interface{}) 
 	if !(v1 < v2) {
 		internal.Fail(t, "An object that !!should be less!! than the second object is not.", internal.Objects{
 			internal.NewObjectsSingleNamed("Should be less than", object1)[0],
+			internal.NewObjectsSingleNamed("Actual", object2)[0],
+		}, msg...)
+	}
+}
+
+// AssertLessOrEqual asserts that the first object is less than or equal to the second.
+//
+// When using a custom message, the same formatting as with fmt.Sprintf() is used.
+//
+// Example:
+//  testza.AssertLessOrEqual(t, 1, 5)
+//  testza.AssertLessOrEqual(t, -10, 10)
+//  testza.AssertLessOrEqual(t, 1, 1)
+func AssertLessOrEqual(t testRunner, object1, object2 interface{}, msg ...interface{}) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	v1, err := strconv.ParseFloat(fmt.Sprint(object1), 64)
+	v2, err2 := strconv.ParseFloat(fmt.Sprint(object2), 64)
+
+	if err != nil || err2 != nil {
+		internal.Fail(t, "An error occurred while parsing the objects as numbers.", internal.NewObjectsUnknown(object1, object2), msg...)
+	}
+
+	if !(v1 <= v2) {
+		internal.Fail(t, "An object that !!should be less or equal!! than the second object is not.", internal.Objects{
+			internal.NewObjectsSingleNamed("Should be less or equal to", object1)[0],
 			internal.NewObjectsSingleNamed("Actual", object2)[0],
 		}, msg...)
 	}
