@@ -13,12 +13,12 @@ import (
 )
 
 // IsKind returns if an object is kind of a specific kind.
-func IsKind(expectedKind reflect.Kind, value interface{}) bool {
+func IsKind(expectedKind reflect.Kind, value any) bool {
 	return reflect.TypeOf(value).Kind() == expectedKind
 }
 
 // IsNil checks if an object is nil.
-func IsNil(object interface{}) bool {
+func IsNil(object any) bool {
 	if object == nil {
 		return true
 	}
@@ -32,7 +32,7 @@ func IsNil(object interface{}) bool {
 }
 
 // IsNumber checks if the value is of a numeric kind.
-func IsNumber(value interface{}) bool {
+func IsNumber(value any) bool {
 	numberKinds := []reflect.Kind{
 		reflect.Int,
 		reflect.Int8,
@@ -76,12 +76,12 @@ func CompletesIn(duration time.Duration, f func()) bool {
 }
 
 // IsZero checks if a value is the zero value of its type.
-func IsZero(value interface{}) bool {
+func IsZero(value any) bool {
 	return value == nil || reflect.DeepEqual(value, reflect.Zero(reflect.TypeOf(value)).Interface())
 }
 
 // IsEqual checks if two objects are equal.
-func IsEqual(expected interface{}, actual interface{}) bool {
+func IsEqual(expected any, actual any) bool {
 	if expected == nil || actual == nil {
 		return expected == actual
 	}
@@ -103,7 +103,7 @@ func IsEqual(expected interface{}, actual interface{}) bool {
 }
 
 // HasEqualValues checks if two objects have equal values.
-func HasEqualValues(expected interface{}, actual interface{}) bool {
+func HasEqualValues(expected any, actual any) bool {
 	if IsEqual(expected, actual) {
 		return true
 	}
@@ -122,7 +122,7 @@ func HasEqualValues(expected interface{}, actual interface{}) bool {
 }
 
 // DoesImplement checks if an objects implements an interface.
-func DoesImplement(interfaceObject, object interface{}) bool {
+func DoesImplement(interfaceObject, object any) bool {
 	interfaceType := reflect.TypeOf(interfaceObject).Elem()
 
 	if object == nil {
@@ -136,7 +136,7 @@ func DoesImplement(interfaceObject, object interface{}) bool {
 }
 
 // DoesContain checks that ab objects contains an element.
-func DoesContain(object, element interface{}) bool {
+func DoesContain(object, element any) bool {
 	objectValue := reflect.ValueOf(object)
 	objectKind := reflect.TypeOf(object).Kind()
 
@@ -156,7 +156,7 @@ func DoesContain(object, element interface{}) bool {
 }
 
 // AssertCompareHelper option: 1 = increasing, 0 = equal, -1 = decreasing
-func AssertCompareHelper(t testRunner, object interface{}, option int, msg ...interface{}) {
+func AssertCompareHelper(t testRunner, object any, option int, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -236,7 +236,7 @@ func AssertCompareHelper(t testRunner, object interface{}, option int, msg ...in
 	}
 }
 
-func AssertRegexpHelper(t testRunner, regex interface{}, txt interface{}, shouldMatch bool, msg ...interface{}) {
+func AssertRegexpHelper(t testRunner, regex any, txt any, shouldMatch bool, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
@@ -275,7 +275,7 @@ func AssertDirEmptyHelper(t testRunner, dir string) bool {
 	return errors.Is(err, io.EOF)
 }
 
-func IsList(list interface{}) bool {
+func IsList(list any) bool {
 	kind := reflect.TypeOf(list).Kind()
 	if kind != reflect.Array && kind != reflect.Slice {
 		return false
@@ -284,7 +284,7 @@ func IsList(list interface{}) bool {
 	return true
 }
 
-func HasSameElements(expected interface{}, actual interface{}) bool {
+func HasSameElements(expected any, actual any) bool {
 	if IsNil(expected) || IsNil(actual) {
 		return expected == actual
 	}
@@ -301,7 +301,7 @@ func HasSameElements(expected interface{}, actual interface{}) bool {
 
 	visited := make([]bool, actualLen)
 
-	var extraA, extraB []interface{}
+	var extraA, extraB []any
 	for i := 0; i < expectedLen; i++ {
 		element := expectedValue.Index(i).Interface()
 		found := false
@@ -334,7 +334,7 @@ func HasSameElements(expected interface{}, actual interface{}) bool {
 	return false
 }
 
-func IsSubset(t testRunner, list interface{}, subset interface{}) bool {
+func IsSubset(t testRunner, list any, subset any) bool {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}

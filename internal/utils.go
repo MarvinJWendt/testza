@@ -8,7 +8,7 @@ import (
 )
 
 type testRunner interface {
-	Error(args ...interface{})
+	Error(args ...any)
 }
 
 type helper interface {

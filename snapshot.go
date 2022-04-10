@@ -2,7 +2,6 @@ package testza
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"regexp"
@@ -22,12 +21,12 @@ import (
 //
 // Example:
 //  testza.SnapshotCreate(t.Name(), objectToBeSnapshotted)
-func SnapshotCreate(name string, snapshotObject interface{}) error {
+func SnapshotCreate(name string, snapshotObject any) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	return snapshotCreateForDir(dir, name, snapshotObject)
 }
 
-func snapshotCreateForDir(dir string, name string, snapshotObject interface{}) error {
+func snapshotCreateForDir(dir string, name string, snapshotObject any) error {
 	err := os.MkdirAll(dir, 0755)
 	if err != nil {
 		return fmt.Errorf("creating snapshot failed: %w", err)
@@ -36,7 +35,7 @@ func snapshotCreateForDir(dir string, name string, snapshotObject interface{}) e
 	originalSpewConfig := spew.Config.DisablePointerAddresses
 	spew.Config.DisablePointerAddresses = true
 	dump := strings.ReplaceAll(spew.Sdump(snapshotObject), "\r\n", "\n")
-	err = ioutil.WriteFile(path.Clean(dir+name+".testza"), []byte(dump), 0755)
+	err = os.WriteFile(path.Clean(dir+name+".testza"), []byte(dump), 0755)
 	if err != nil {
 		return fmt.Errorf("creating snapshot failed: %w", err)
 	}
@@ -53,16 +52,16 @@ func snapshotCreateForDir(dir string, name string, snapshotObject interface{}) e
 // Example:
 //  testza.SnapshotValidate(t, t.Name(), objectToBeValidated)
 //  testza.SnapshotValidate(t, t.Name(), objectToBeValidated, "Optional message")
-func SnapshotValidate(t testRunner, name string, actual interface{}, msg ...interface{}) error {
+func SnapshotValidate(t testRunner, name string, actual any, msg ...any) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	return snapshotValidateFromDir(dir, t, name, actual, msg...)
 }
 
 var snapshotStringMatcher = regexp.MustCompile(`(?m)^\(.+?\)\s\(len=\d+\)\s(".+")$`)
 
-func snapshotValidateFromDir(dir string, t testRunner, name string, actual interface{}, msg ...interface{}) error {
+func snapshotValidateFromDir(dir string, t testRunner, name string, actual any, msg ...any) error {
 	snapshotPath := path.Clean(dir + name + ".testza")
-	snapshotContent, err := ioutil.ReadFile(snapshotPath)
+	snapshotContent, err := os.ReadFile(snapshotPath)
 	snapshot := strings.ReplaceAll(string(snapshotContent), "\r\n", "\n")
 	if err != nil {
 		return fmt.Errorf("validating snapshot failed: %w", err)
@@ -124,7 +123,7 @@ func snapshotValidateFromDir(dir string, t testRunner, name string, actual inter
 // Example:
 //  testza.SnapshotCreateOrValidate(t, t.Name(), object)
 //  testza.SnapshotCreateOrValidate(t, t.Name(), object, "Optional Message")
-func SnapshotCreateOrValidate(t testRunner, name string, object interface{}, msg ...interface{}) error {
+func SnapshotCreateOrValidate(t testRunner, name string, object any, msg ...any) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
 	if strings.Contains(name, "/") {

@@ -13,14 +13,14 @@ var Highlight = pterm.NewStyle(pterm.FgLightRed).Sprint
 type Object struct {
 	Name      string
 	NameStyle *pterm.Style
-	Data      interface{}
+	Data      any
 	DataStyle *pterm.Style
 	Raw       bool
 }
 
 type Objects []Object
 
-func NewObjectsExpectedActual(expected, actual interface{}) Objects {
+func NewObjectsExpectedActual(expected, actual any) Objects {
 	return Objects{
 		{
 			Name:      "Expected",
@@ -37,7 +37,7 @@ func NewObjectsExpectedActual(expected, actual interface{}) Objects {
 	}
 }
 
-func NewObjectsExpectedActualWithDiff(expected, actual interface{}) Objects {
+func NewObjectsExpectedActualWithDiff(expected, actual any) Objects {
 	return Objects{
 		{
 			Name:      "Expected",
@@ -55,7 +55,7 @@ func NewObjectsExpectedActualWithDiff(expected, actual interface{}) Objects {
 	}
 }
 
-func NewObjectsUnknown(objs ...interface{}) Objects {
+func NewObjectsUnknown(objs ...any) Objects {
 	return Objects{
 		{
 			Name:      "Object",
@@ -65,7 +65,7 @@ func NewObjectsUnknown(objs ...interface{}) Objects {
 	}
 }
 
-func NewObjectsSingleUnknown(obj interface{}) Objects {
+func NewObjectsSingleUnknown(obj any) Objects {
 	return Objects{
 		{
 			Name:      "Object",
@@ -75,7 +75,7 @@ func NewObjectsSingleUnknown(obj interface{}) Objects {
 	}
 }
 
-func NewObjectsSingleNamed(name string, obj interface{}) Objects {
+func NewObjectsSingleNamed(name string, obj any) Objects {
 	return Objects{
 		{
 			Name:      name,
@@ -95,7 +95,7 @@ func ModifyWrappedText(text, wrappingString string, modifier func(wrappedText st
 	return strings.ReplaceAll(res, wrappingString, "")
 }
 
-func FailS(message string, objects Objects, args ...interface{}) string {
+func FailS(message string, objects Objects, args ...any) string {
 	message = ModifyWrappedText(message, "!!", func(wrappedText string) string {
 		return Highlight(wrappedText)
 	})
@@ -147,7 +147,7 @@ func FailS(message string, objects Objects, args ...interface{}) string {
 	return message
 }
 
-func Fail(t testRunner, message string, objects Objects, args ...interface{}) {
+func Fail(t testRunner, message string, objects Objects, args ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
 	}
