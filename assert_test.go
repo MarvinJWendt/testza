@@ -1520,3 +1520,53 @@ Proin puvinar feliss consectetur codiementum tincidunt.`
 		AssertNoError(t, err)
 	})
 }
+
+func TestAssertUnique(t *testing.T) {
+	AssertUnique(t, []int{1, 2, 3, 4, 5})
+	AssertUnique(t, []string{"foo", "bar", "baz"})
+	AssertUnique(t, []bool{true, false})
+	AssertUnique(t, []float64{1.1, 1.2, 1.3, 1.4, 1.5})
+}
+
+func TestAssertUnique_fails(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertUnique(t, []int{1, 2, 3, 4, 5, 1})
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertUnique(t, []string{"foo", "bar", "baz", "foo"})
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertUnique(t, []bool{true, false, true})
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertUnique(t, []float64{1.1, 1.2, 1.3, 1.4, 1.5, 1.1})
+	})
+}
+
+func TestAssertNotUnique(t *testing.T) {
+	AssertNotUnique(t, []int{1, 2, 3, 4, 5, 1})
+	AssertNotUnique(t, []string{"foo", "bar", "baz", "foo"})
+	AssertNotUnique(t, []bool{true, false, true})
+	AssertNotUnique(t, []float64{1.1, 1.2, 1.3, 1.4, 1.5, 1.1})
+}
+
+func TestAssertNotUnique_fails(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertNotUnique(t, []int{1, 2, 3, 4, 5})
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertNotUnique(t, []string{"foo", "bar", "baz"})
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertNotUnique(t, []bool{true, false})
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertNotUnique(t, []float64{1.1, 1.2, 1.3, 1.4, 1.5})
+	})
+}
