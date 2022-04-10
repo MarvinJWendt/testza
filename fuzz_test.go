@@ -55,6 +55,11 @@ func TestFuzzUtilLimitSet(t *testing.T) {
 	}
 }
 
+func TestFuzzUtilDistinctSet(t *testing.T) {
+	AssertEqual(t, FuzzUtilDistinctSet([]string{"A", "B", "B", "A", "C"}), []string{"A", "B", "C"})
+	AssertEqual(t, FuzzUtilDistinctSet([]int{1, 2, 2, 1, 3}), []int{1, 2, 3})
+}
+
 //endregion
 
 //region FuzzString
