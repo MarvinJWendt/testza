@@ -158,8 +158,8 @@ func TestFuzzIntFull(t *testing.T) {
 func TestFuzzIntGenerateRandomRange(t *testing.T) {
 	for i := 0; i < 1000; i++ {
 		generated := FuzzIntGenerateRandomRange(1, i*10, i*10+10)[0]
-		AssertGreater(t, generated, i*10-1)
-		AssertLess(t, generated, i*10+10+1)
+		AssertGreaterOrEqual(t, generated, i*10)
+		AssertLessOrEqual(t, generated, i*10+10)
 	}
 }
 
@@ -191,6 +191,14 @@ func TestFuzzFloat64GenerateRandomPositive(t *testing.T) {
 		t.Run(fmt.Sprintf("%v", n), func(t *testing.T) {
 			AssertGreater(t, n, 0)
 		})
+	}
+}
+
+func TestFuzzFloat64GenerateRandomRange(t *testing.T) {
+	for i := 0; i < 1000; i++ {
+		generated := FuzzFloat64GenerateRandomRange(1, float64(i*10), float64(i*10+10))[0]
+		AssertGreaterOrEqual(t, generated, i*10)
+		AssertLessOrEqual(t, generated, i*10+10)
 	}
 }
 

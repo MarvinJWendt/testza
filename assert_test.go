@@ -14,10 +14,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pterm/pterm"
-	"github.com/stretchr/testify/assert"
-
 	. "github.com/MarvinJWendt/testza"
+	"github.com/pterm/pterm"
 )
 
 type testMock struct {
@@ -725,18 +723,18 @@ func TestAssertGreater_fails(t *testing.T) {
 }
 
 func TestAssertGreaterOrEqual(t *testing.T) {
-	assert.GreaterOrEqual(t, 2, 1)
-	assert.GreaterOrEqual(t, 5, 4)
-	assert.GreaterOrEqual(t, 5, 5)
+	AssertGreaterOrEqual(t, 2, 1)
+	AssertGreaterOrEqual(t, 5, 4)
+	AssertGreaterOrEqual(t, 5, 5)
 }
 
 func TestAssertGreaterOrEqual_fails(t *testing.T) {
 	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
-		assert.GreaterOrEqual(t, 1, 2)
+		AssertGreaterOrEqual(t, 1, 2)
 	})
 
 	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
-		assert.GreaterOrEqual(t, 4, 5)
+		AssertGreaterOrEqual(t, 4, 5)
 	})
 }
 
