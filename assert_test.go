@@ -292,10 +292,10 @@ func TestAssertZero(t *testing.T) {
 }
 
 func TestAssertZero_fails(t *testing.T) {
-	var zeroValues []any
-	zeroValues = append(zeroValues, true, "asd", 123, 1.5, 'a')
+	var nonZeroValues []any
+	nonZeroValues = append(nonZeroValues, true, "asd", 123, 1.5, 'a')
 
-	for i, value := range zeroValues {
+	for i, value := range nonZeroValues {
 		t.Run(fmt.Sprint(i), func(t *testing.T) {
 			AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
 				AssertZero(t, value)
@@ -305,10 +305,10 @@ func TestAssertZero_fails(t *testing.T) {
 }
 
 func TestAssertNotZero(t *testing.T) {
-	var zeroValues []any
-	zeroValues = append(zeroValues, true, "asd", 123, 1.5, 'a')
+	var nonZeroValues []any
+	nonZeroValues = append(nonZeroValues, true, "asd", 123, 1.5, 'a')
 
-	for i, value := range zeroValues {
+	for i, value := range nonZeroValues {
 		t.Run(fmt.Sprint(i), func(t *testing.T) {
 			AssertNotZero(t, value)
 		})
