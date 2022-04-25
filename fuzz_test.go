@@ -10,6 +10,23 @@ import (
 )
 
 //region FuzzUtil
+
+func TestFuzzUtilMergeSets(t *testing.T) {
+	t.Run("String", func(t *testing.T) {
+		set1 := []string{"A", "B", "C"}
+		set2 := []string{"D", "E", "F"}
+		expected := []string{"A", "B", "C", "D", "E", "F"}
+		AssertEqual(t, expected, FuzzUtilMergeSets(set1, set2))
+	})
+
+	t.Run("Int", func(t *testing.T) {
+		set1 := []int{1, 2, 3}
+		set2 := []int{4, 5, 6}
+		expected := []int{1, 2, 3, 4, 5, 6}
+		AssertEqual(t, expected, FuzzUtilMergeSets(set1, set2))
+	})
+}
+
 func TestFuzzUtilModifySet(t *testing.T) {
 	t.Run("String Slice", func(t *testing.T) {
 		slice := []string{"Hello", "World", "TeSt"}
