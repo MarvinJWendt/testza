@@ -232,6 +232,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 
   - [FuzzUtilDistinctSet](https://github.com/MarvinJWendt/testza#FuzzUtilDistinctSet)
   - [FuzzUtilLimitSet](https://github.com/MarvinJWendt/testza#FuzzUtilLimitSet)
+  - [FuzzUtilMergeSets](https://github.com/MarvinJWendt/testza#FuzzUtilMergeSets)
   - [FuzzUtilModifySet](https://github.com/MarvinJWendt/testza#FuzzUtilModifySet)
   - [FuzzUtilRunTests](https://github.com/MarvinJWendt/testza#FuzzUtilRunTests)
 </td>
@@ -1442,6 +1443,19 @@ FuzzUtilLimitSet limits a test set in size.
 Example:
 
     limitedSet := testza.FuzzUtilLimitSet(testza.FuzzStringFull(), 10)
+
+#### FuzzUtilMergeSets
+
+```go
+func FuzzUtilMergeSets[setType any](sets ...[]setType) (merged []setType)
+```
+
+FuzzUtilMergeSets merges multiple test sets into one. All test sets must
+have the same type.
+
+Example:
+
+    mergedSet := testza.FuzzUtilMergeSets(testza.FuzzIntGenerateRandomNegative(3, 0), testza.FuzzIntGenerateRandomPositive(2, 0))
 
 #### FuzzUtilModifySet
 
