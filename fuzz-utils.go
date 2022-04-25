@@ -7,6 +7,19 @@ import (
 	"github.com/MarvinJWendt/testza/internal"
 )
 
+// FuzzUtilMergeSets merges multiple test sets into one.
+// All test sets must have the same type.
+//
+// Example:
+//  mergedSet := testza.FuzzUtilMergeSets(testza.FuzzIntGenerateRandomNegative(3, 0), testza.FuzzIntGenerateRandomPositive(2, 0))
+func FuzzUtilMergeSets[setType any](sets ...[]setType) (merged []setType) {
+	for _, set := range sets {
+		merged = append(merged, set...)
+	}
+
+	return merged
+}
+
 // FuzzUtilRunTests runs a test for every value in a testset.
 // You can use the value as input parameter for your functions, to sanity test against many different cases.
 // This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
