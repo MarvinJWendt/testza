@@ -2,15 +2,20 @@ package testza
 
 import (
 	"flag"
+	"fmt"
 	"math/rand"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/MarvinJWendt/testza/internal"
+	"github.com/klauspost/cpuid/v2"
 	"github.com/pterm/pterm"
 )
 
+var randomSeed int64
 var showStartupMessage = true
 
 func init() {
@@ -54,6 +59,22 @@ func init() {
 			SetDiffContextLines(v)
 		}
 	}
+
+	// Print header and set values
+	// This is in a goroutine to give the parent init (defined by users) a chance to configure those values.
+	go func() {
+		if randomSeed == 0 {
+			randomSeed = time.Now().UnixNano()
+			rand.Seed(randomSeed)
+		}
+
+		if showStartupMessage {
+			infoPrinter.WithLevel(1).Println("Running tests with " + secondary("Testza"))
+			infoPrinter.Printfln(`Using seed "%s" for random operations`, secondary(randomSeed))
+			infoPrinter.Printfln(`System info: OS=%s | arch=%s | cpu=%s | go=%s`, secondary(runtime.GOOS), secondary(runtime.GOARCH), secondary(cpuid.CPU.BrandName), secondary(runtime.Version()))
+			fmt.Println()
+		}
+	}()
 }
 
 // SetColorsEnabled controls if testza should print colored output.
