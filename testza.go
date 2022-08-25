@@ -4,8 +4,12 @@ Package testza is a full-featured testing framework for Go. It integrates with t
 package testza
 
 import (
+	"sync"
+
 	"github.com/pterm/pterm"
 )
 
 var infoPrinter = pterm.DefaultSection.WithStyle(pterm.NewStyle(pterm.FgMagenta)).WithLevel(2).WithBottomPadding(0).WithTopPadding(0)
 var secondary = pterm.LightCyan
+
+var initSync sync.Mutex
