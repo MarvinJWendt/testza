@@ -2,18 +2,26 @@ package testza
 
 import (
 	"flag"
+	"fmt"
 	"math/rand"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/MarvinJWendt/testza/internal"
+	"github.com/klauspost/cpuid/v2"
 	"github.com/pterm/pterm"
 )
 
+var randomSeed int64
 var showStartupMessage = true
 
 func init() {
+	initSync.Lock()
+	defer initSync.Unlock()
+
 	// Defining flags to show up in the help message
 	flag.Bool("testza.disable-color", false, "disables colored output")
 	flag.Bool("testza.disable-line-numbers", false, "disables line numbers in output")
@@ -54,6 +62,25 @@ func init() {
 			SetDiffContextLines(v)
 		}
 	}
+
+	go func() {
+		initSync.Lock()
+		defer initSync.Unlock()
+
+		if randomSeed == 0 {
+			randomSeed = time.Now().UnixNano()
+			rand.Seed(randomSeed)
+		}
+
+		if showStartupMessage {
+			var startupMessage string
+			startupMessage += infoPrinter.WithLevel(1).Sprintln("Running tests with " + secondary("Testza"))
+			startupMessage += infoPrinter.Sprintfln(`Using seed "%s" for random operations`, secondary(randomSeed))
+			startupMessage += infoPrinter.Sprintfln(`System info: OS=%s | arch=%s | cpu=%s | go=%s`, secondary(runtime.GOOS), secondary(runtime.GOARCH), secondary(cpuid.CPU.BrandName), secondary(runtime.Version()))
+			startupMessage += fmt.Sprintln()
+			pterm.Println(startupMessage)
+		}
+	}()
 }
 
 // SetColorsEnabled controls if testza should print colored output.
@@ -68,6 +95,9 @@ func init() {
 //	  testza.SetColorsEnabled(true)  // Enable colored output
 //	}
 func SetColorsEnabled(enabled bool) {
+	initSync.Lock()
+	defer initSync.Unlock()
+
 	if enabled {
 		pterm.EnableColor()
 	} else {
@@ -87,6 +117,9 @@ func SetColorsEnabled(enabled bool) {
 //	  testza.SetLineNumbersEnabled(true)  // Enable line numbers
 //	}
 func SetLineNumbersEnabled(enabled bool) {
+	initSync.Lock()
+	defer initSync.Unlock()
+
 	internal.LineNumbersEnabled = enabled
 }
 
@@ -104,6 +137,9 @@ func SetLineNumbersEnabled(enabled bool) {
 //	  testza.SetRandomSeed(time.Now().UnixNano()) // Set the seed back to the current time (default | non-deterministic)
 //	}
 func SetRandomSeed(seed int64) {
+	initSync.Lock()
+	defer initSync.Unlock()
+
 	randomSeed = seed
 	rand.Seed(seed)
 }
@@ -120,6 +156,9 @@ func SetRandomSeed(seed int64) {
 //	  testza.SetShowStartupMessage(true)  // Enable the startup message
 //	}
 func SetShowStartupMessage(show bool) {
+	initSync.Lock()
+	defer initSync.Unlock()
+
 	showStartupMessage = show
 }
 
@@ -136,5 +175,8 @@ func SetShowStartupMessage(show bool) {
 //	  testza.SetDiffContextLines(3)  // Show 3 lines around every changed line
 //	}
 func SetDiffContextLines(lines int) {
+	initSync.Lock()
+	defer initSync.Unlock()
+
 	internal.DiffContextLines = lines
 }
