@@ -11,7 +11,8 @@ import (
 // All test sets must have the same type.
 //
 // Example:
-//  mergedSet := testza.FuzzUtilMergeSets(testza.FuzzIntGenerateRandomNegative(3, 0), testza.FuzzIntGenerateRandomPositive(2, 0))
+//
+//	mergedSet := testza.FuzzUtilMergeSets(testza.FuzzIntGenerateRandomNegative(3, 0), testza.FuzzIntGenerateRandomPositive(2, 0))
 func FuzzUtilMergeSets[setType any](sets ...[]setType) (merged []setType) {
 	for _, set := range sets {
 		merged = append(merged, set...)
@@ -25,12 +26,13 @@ func FuzzUtilMergeSets[setType any](sets ...[]setType) (merged []setType) {
 // This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
 //
 // Example:
-//  testza.FuzzUtilRunTests(t, testza.FuzzStringEmailAddresses(), func(t *testing.T, index int, emailAddress string) {
-//  	// Test logic
-//  	// err := YourFunction(emailAddress)
-//  	// testza.AssertNoError(t, err)
-//  	// ...
-//  })
+//
+//	testza.FuzzUtilRunTests(t, testza.FuzzStringEmailAddresses(), func(t *testing.T, index int, emailAddress string) {
+//		// Test logic
+//		// err := YourFunction(emailAddress)
+//		// testza.AssertNoError(t, err)
+//		// ...
+//	})
 func FuzzUtilRunTests[setType any](t testRunner, testSet []setType, testFunc func(t *testing.T, index int, f setType)) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -54,9 +56,10 @@ func FuzzUtilRunTests[setType any](t testRunner, testSet []setType, testFunc fun
 // FuzzUtilModifySet returns a modified version of a test set.
 //
 // Example:
-//  modifiedSet := testza.FuzzUtilModifySet(testza.FuzzIntFull(), func(i int, value int) int {
-//		return i * 2 // double every value in the test set
-//	})
+//
+//	 modifiedSet := testza.FuzzUtilModifySet(testza.FuzzIntFull(), func(i int, value int) int {
+//			return i * 2 // double every value in the test set
+//		})
 func FuzzUtilModifySet[setType any](inputSet []setType, modifier func(index int, value setType) setType) (floats []setType) {
 	for i, input := range inputSet {
 		floats = append(floats, modifier(i, input))
@@ -68,7 +71,8 @@ func FuzzUtilModifySet[setType any](inputSet []setType, modifier func(index int,
 // FuzzUtilLimitSet limits a test set in size.
 //
 // Example:
-//  limitedSet := testza.FuzzUtilLimitSet(testza.FuzzStringFull(), 10)
+//
+//	limitedSet := testza.FuzzUtilLimitSet(testza.FuzzStringFull(), 10)
 func FuzzUtilLimitSet[setType any](testSet []setType, max int) []setType {
 	if len(testSet) <= max {
 		return testSet
@@ -84,8 +88,9 @@ func FuzzUtilLimitSet[setType any](testSet []setType, max int) []setType {
 // FuzzUtilDistinctSet returns a set with removed duplicates.
 //
 // Example:
-//  uniqueSet := testza.FuzzUtilDistinctSet([]string{"A", "C", "A", "B", "A", "B", "C"})
-//  // uniqueSet => []string{"A", "C", "B"}
+//
+//	uniqueSet := testza.FuzzUtilDistinctSet([]string{"A", "C", "A", "B", "A", "B", "C"})
+//	// uniqueSet => []string{"A", "C", "B"}
 func FuzzUtilDistinctSet[setType comparable](testSet []setType) []setType {
 	seen := map[setType]bool{}
 	var result []setType
