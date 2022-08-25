@@ -79,7 +79,7 @@ func TestFuzzUtilDistinctSet(t *testing.T) {
 
 //endregion
 
-//region FuzzString
+// region FuzzString
 func TestFuzzStringGenerateRandom(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		t.Run(fmt.Sprintf("Length=%d", i), func(t *testing.T) {
@@ -160,7 +160,7 @@ func TestFuzzBoolRunTests(t *testing.T) {
 
 //endregion
 
-//region FuzzInt
+// region FuzzInt
 func TestFuzzIntGenerateRandom(t *testing.T) {
 	for i := 0; i < 100; i++ {
 		t.Run("GenerateRandomPositive generates positive numbers only", func(t *testing.T) {
@@ -187,7 +187,7 @@ func TestFuzzIntGenerateRandomRange(t *testing.T) {
 
 //endregion
 
-//region FuzzFloat64
+// region FuzzFloat64
 func TestFuzzFloat64Full(t *testing.T) {
 	AssertGreater(t, len(FuzzFloat64Full()), 0)
 }

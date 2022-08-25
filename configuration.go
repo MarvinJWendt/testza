@@ -62,10 +62,11 @@ func init() {
 // > This setting can also be set by the command line flag --testza.disable-color.
 //
 // Example:
-//  init() {
-//    testza.SetColorsEnabled(false) // Disable colored output
-//    testza.SetColorsEnabled(true)  // Enable colored output
-//  }
+//
+//	init() {
+//	  testza.SetColorsEnabled(false) // Disable colored output
+//	  testza.SetColorsEnabled(true)  // Enable colored output
+//	}
 func SetColorsEnabled(enabled bool) {
 	if enabled {
 		pterm.EnableColor()
@@ -80,10 +81,11 @@ func SetColorsEnabled(enabled bool) {
 // > This setting can also be set by the command line flag --testza.disable-line-numbers.
 //
 // Example:
-//  init() {
-//    testza.SetLineNumbersEnabled(false) // Disable line numbers
-//    testza.SetLineNumbersEnabled(true)  // Enable line numbers
-//  }
+//
+//	init() {
+//	  testza.SetLineNumbersEnabled(false) // Disable line numbers
+//	  testza.SetLineNumbersEnabled(true)  // Enable line numbers
+//	}
 func SetLineNumbersEnabled(enabled bool) {
 	internal.LineNumbersEnabled = enabled
 }
@@ -96,10 +98,11 @@ func SetLineNumbersEnabled(enabled bool) {
 // > This setting can also be set by the command line flag --testza.seed.
 //
 // Example:
-//  init() {
-//    testza.SetRandomSeed(1337) // Set the seed to 1337
-//    testza.SetRandomSeed(time.Now().UnixNano()) // Set the seed back to the current time (default | non-deterministic)
-//  }
+//
+//	init() {
+//	  testza.SetRandomSeed(1337) // Set the seed to 1337
+//	  testza.SetRandomSeed(time.Now().UnixNano()) // Set the seed back to the current time (default | non-deterministic)
+//	}
 func SetRandomSeed(seed int64) {
 	randomSeed = seed
 	rand.Seed(seed)
@@ -111,10 +114,11 @@ func SetRandomSeed(seed int64) {
 // > This setting can also be set by the command line flag --testza.disable-startup-message.
 //
 // Example:
-//  init() {
-//    testza.SetShowStartupMessage(false) // Disable the startup message
-//    testza.SetShowStartupMessage(true)  // Enable the startup message
-//  }
+//
+//	init() {
+//	  testza.SetShowStartupMessage(false) // Disable the startup message
+//	  testza.SetShowStartupMessage(true)  // Enable the startup message
+//	}
 func SetShowStartupMessage(show bool) {
 	showStartupMessage = show
 }
@@ -126,10 +130,11 @@ func SetShowStartupMessage(show bool) {
 // > This setting can also be set by the command line flag --testza.diff-context-lines.
 //
 // Example:
-//  init() {
-//    testza.SetDiffContextLines(-1) // Show all diff lines
-//    testza.SetDiffContextLines(3)  // Show 3 lines around every changed line
-//  }
+//
+//	init() {
+//	  testza.SetDiffContextLines(-1) // Show all diff lines
+//	  testza.SetDiffContextLines(3)  // Show 3 lines around every changed line
+//	}
 func SetDiffContextLines(lines int) {
 	internal.DiffContextLines = lines
 }
