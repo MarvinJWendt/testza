@@ -57,11 +57,12 @@ func (m *testMock) Fatalf(format string, args ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertKindOf(t, reflect.Slice, []int{1,2,3})
-//  testza.AssertKindOf(t, reflect.Slice, []string{"Hello", "World"})
-//  testza.AssertKindOf(t, reflect.Int, 1337)
-//  testza.AssertKindOf(t, reflect.Bool, true)
-//  testza.AssertKindOf(t, reflect.Map, map[string]bool{})
+//
+//	testza.AssertKindOf(t, reflect.Slice, []int{1,2,3})
+//	testza.AssertKindOf(t, reflect.Slice, []string{"Hello", "World"})
+//	testza.AssertKindOf(t, reflect.Int, 1337)
+//	testza.AssertKindOf(t, reflect.Bool, true)
+//	testza.AssertKindOf(t, reflect.Map, map[string]bool{})
 func AssertKindOf(t testRunner, expectedKind reflect.Kind, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -81,11 +82,12 @@ func AssertKindOf(t testRunner, expectedKind reflect.Kind, object any, msg ...an
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotKindOf(t, reflect.Slice, "Hello, World")
-//  testza.AssertNotKindOf(t, reflect.Slice, true)
-//  testza.AssertNotKindOf(t, reflect.Int, 13.37)
-//  testza.AssertNotKindOf(t, reflect.Bool, map[string]bool{})
-//  testza.AssertNotKindOf(t, reflect.Map, false)
+//
+//	testza.AssertNotKindOf(t, reflect.Slice, "Hello, World")
+//	testza.AssertNotKindOf(t, reflect.Slice, true)
+//	testza.AssertNotKindOf(t, reflect.Int, 13.37)
+//	testza.AssertNotKindOf(t, reflect.Bool, map[string]bool{})
+//	testza.AssertNotKindOf(t, reflect.Map, false)
 func AssertNotKindOf(t testRunner, kind reflect.Kind, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -110,9 +112,10 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNumeric(t, 123)
-//  testza.AssertNumeric(t, 1.23)
-//  testza.AssertNumeric(t, uint(123))
+//
+//	testza.AssertNumeric(t, 123)
+//	testza.AssertNumeric(t, 1.23)
+//	testza.AssertNumeric(t, uint(123))
 func AssertNumeric(t testRunner, object any, msg ...any) {
 	if !internal.IsNumber(object) {
 		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
@@ -126,8 +129,9 @@ func AssertNumeric(t testRunner, object any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotNumeric(t, true)
-//  testza.AssertNotNumeric(t, "123")
+//
+//	testza.AssertNotNumeric(t, true)
+//	testza.AssertNotNumeric(t, "123")
 func AssertNotNumeric(t testRunner, object any, msg ...any) {
 	if internal.IsNumber(object) {
 		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
@@ -139,9 +143,10 @@ func AssertNotNumeric(t testRunner, object any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertZero(t, 0)
-//  testza.AssertZero(t, false)
-//  testza.AssertZero(t, "")
+//
+//	testza.AssertZero(t, 0)
+//	testza.AssertZero(t, false)
+//	testza.AssertZero(t, "")
 func AssertZero(t testRunner, value any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -157,9 +162,10 @@ func AssertZero(t testRunner, value any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotZero(t, 1337)
-//  testza.AssertNotZero(t, true)
-//  testza.AssertNotZero(t, "Hello, World")
+//
+//	testza.AssertNotZero(t, 1337)
+//	testza.AssertNotZero(t, true)
+//	testza.AssertNotZero(t, "Hello, World")
 func AssertNotZero(t testRunner, value any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -175,8 +181,9 @@ func AssertNotZero(t testRunner, value any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertEqual(t, "Hello, World!", "Hello, World!")
-//  testza.AssertEqual(t, true, true)
+//
+//	testza.AssertEqual(t, "Hello, World!", "Hello, World!")
+//	testza.AssertEqual(t, true, true)
 func AssertEqual(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -192,8 +199,9 @@ func AssertEqual(t testRunner, expected any, actual any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotEqual(t, true, false)
-//  testza.AssertNotEqual(t, "Hello", "World")
+//
+//	testza.AssertNotEqual(t, true, false)
+//	testza.AssertNotEqual(t, "Hello", "World")
 func AssertNotEqual(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -217,24 +225,26 @@ func AssertNotEqual(t testRunner, expected any, actual any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertEqualValues(t, []string{"Hello", "World"}, []string{"Hello", "World"})
-//  testza.AssertEqualValues(t, []int{1,2}, []int{1,2})
-//  testza.AssertEqualValues(t, []int{1,2}, []int{2,1}) // FAILS (wrong order)
+//
+//	testza.AssertEqualValues(t, []string{"Hello", "World"}, []string{"Hello", "World"})
+//	testza.AssertEqualValues(t, []int{1,2}, []int{1,2})
+//	testza.AssertEqualValues(t, []int{1,2}, []int{2,1}) // FAILS (wrong order)
 //
 // Comparing struct values:
-//  person1 := Person{
-//    Name:   "Marvin Wendt",
-//    Age:    20,
-//    Gender: "male",
-//  }
 //
-//  person2 := Person{
-//    Name:   "Marvin Wendt",
-//    Age:    20,
-//    Gender: "male",
-//  }
+//	person1 := Person{
+//	  Name:   "Marvin Wendt",
+//	  Age:    20,
+//	  Gender: "male",
+//	}
 //
-//  testza.AssertEqualValues(t, person1, person2)
+//	person2 := Person{
+//	  Name:   "Marvin Wendt",
+//	  Age:    20,
+//	  Gender: "male",
+//	}
+//
+//	testza.AssertEqualValues(t, person1, person2)
 func AssertEqualValues(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -250,22 +260,24 @@ func AssertEqualValues(t testRunner, expected any, actual any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotEqualValues(t, []int{1,2}, []int{3,4})
+//
+//	testza.AssertNotEqualValues(t, []int{1,2}, []int{3,4})
 //
 // Comparing struct values:
-//  person1 := Person{
-//    Name:   "Marvin Wendt",
-//    Age:    20,
-//    Gender: "male",
-//  }
 //
-//  person2 := Person{
-//    Name:   "Marvin Wendt",
-//    Age:    20,
-//    Gender: "female", // <-- CHANGED
-//  }
+//	person1 := Person{
+//	  Name:   "Marvin Wendt",
+//	  Age:    20,
+//	  Gender: "male",
+//	}
 //
-//  testza.AssertNotEqualValues(t, person1, person2)
+//	person2 := Person{
+//	  Name:   "Marvin Wendt",
+//	  Age:    20,
+//	  Gender: "female", // <-- CHANGED
+//	}
+//
+//	testza.AssertNotEqualValues(t, person1, person2)
 func AssertNotEqualValues(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -281,10 +293,11 @@ func AssertNotEqualValues(t testRunner, expected any, actual any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertTrue(t, true)
-//  testza.AssertTrue(t, 1 == 1)
-//  testza.AssertTrue(t, 2 != 3)
-//  testza.AssertTrue(t, 1 > 0 && 4 < 5)
+//
+//	testza.AssertTrue(t, true)
+//	testza.AssertTrue(t, 1 == 1)
+//	testza.AssertTrue(t, 2 != 3)
+//	testza.AssertTrue(t, 1 > 0 && 4 < 5)
 func AssertTrue(t testRunner, value any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -300,10 +313,11 @@ func AssertTrue(t testRunner, value any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertFalse(t, false)
-//  testza.AssertFalse(t, 1 == 2)
-//  testza.AssertFalse(t, 2 != 2)
-//  testza.AssertFalse(t, 1 > 5 && 4 < 0)
+//
+//	testza.AssertFalse(t, false)
+//	testza.AssertFalse(t, 1 == 2)
+//	testza.AssertFalse(t, 2 != 2)
+//	testza.AssertFalse(t, 1 > 5 && 4 < 0)
 func AssertFalse(t testRunner, value any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -319,8 +333,9 @@ func AssertFalse(t testRunner, value any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertImplements(t, (*YourInterface)(nil), new(YourObject))
-//  testza.AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
+//
+//	testza.AssertImplements(t, (*YourInterface)(nil), new(YourObject))
+//	testza.AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
 func AssertImplements(t testRunner, interfaceObject, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -336,8 +351,9 @@ func AssertImplements(t testRunner, interfaceObject, object any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotImplements(t, (*YourInterface)(nil), new(YourObject))
-//  testza.AssertNotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
+//
+//	testza.AssertNotImplements(t, (*YourInterface)(nil), new(YourObject))
+//	testza.AssertNotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
 func AssertNotImplements(t testRunner, interfaceObject, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -353,9 +369,10 @@ func AssertNotImplements(t testRunner, interfaceObject, object any, msg ...any) 
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertContains(t, []int{1,2,3}, 2)
-//  testza.AssertContains(t, []string{"Hello", "World"}, "World")
-//  testza.AssertContains(t, "Hello, World!", "World")
+//
+//	testza.AssertContains(t, []int{1,2,3}, 2)
+//	testza.AssertContains(t, []string{"Hello", "World"}, "World")
+//	testza.AssertContains(t, "Hello, World!", "World")
 func AssertContains(t testRunner, object, element any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -374,8 +391,9 @@ func AssertContains(t testRunner, object, element any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotContains(t, []string{"Hello", "World"}, "Spaceship")
-//  testza.AssertNotContains(t, "Hello, World!", "Spaceship")
+//
+//	testza.AssertNotContains(t, []string{"Hello", "World"}, "Spaceship")
+//	testza.AssertNotContains(t, "Hello, World!", "Spaceship")
 func AssertNotContains(t testRunner, object, element any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -394,10 +412,11 @@ func AssertNotContains(t testRunner, object, element any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertPanics(t, func() {
-//  	// ...
-//  	panic("some panic")
-//  }) // => PASS
+//
+//	testza.AssertPanics(t, func() {
+//		// ...
+//		panic("some panic")
+//	}) // => PASS
 func AssertPanics(t testRunner, f func(), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -417,9 +436,10 @@ func AssertPanics(t testRunner, f func(), msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotPanics(t, func() {
-//  	// some code that does not call a panic...
-//  }) // => PASS
+//
+//	testza.AssertNotPanics(t, func() {
+//		// some code that does not call a panic...
+//	}) // => PASS
 func AssertNotPanics(t testRunner, f func(), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -439,7 +459,8 @@ func AssertNotPanics(t testRunner, f func(), msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNil(t, nil)
+//
+//	testza.AssertNil(t, nil)
 func AssertNil(t testRunner, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -455,9 +476,10 @@ func AssertNil(t testRunner, object any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotNil(t, true)
-//  testza.AssertNotNil(t, "Hello, World!")
-//  testza.AssertNotNil(t, 0)
+//
+//	testza.AssertNotNil(t, true)
+//	testza.AssertNotNil(t, "Hello, World!")
+//	testza.AssertNotNil(t, 0)
 func AssertNotNil(t testRunner, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -477,9 +499,10 @@ func AssertNotNil(t testRunner, object any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertCompletesIn(t, 2 * time.Second, func() {
-//  	// some code that should take less than 2 seconds...
-//  }) // => PASS
+//
+//	testza.AssertCompletesIn(t, 2 * time.Second, func() {
+//		// some code that should take less than 2 seconds...
+//	}) // => PASS
 func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -500,10 +523,11 @@ func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...an
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotCompletesIn(t, 2 * time.Second, func() {
-//  	// some code that should take more than 2 seconds...
-//  	time.Sleep(3 * time.Second)
-//  }) // => PASS
+//
+//	testza.AssertNotCompletesIn(t, 2 * time.Second, func() {
+//		// some code that should take more than 2 seconds...
+//		time.Sleep(3 * time.Second)
+//	}) // => PASS
 func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -519,8 +543,9 @@ func AssertNotCompletesIn(t testRunner, duration time.Duration, f func(), msg ..
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  err := nil
-//  testza.AssertNoError(t, err)
+//
+//	err := nil
+//	testza.AssertNoError(t, err)
 func AssertNoError(t testRunner, err error, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -549,8 +574,9 @@ func AssertNoError(t testRunner, err error, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertGreater(t, 5, 1)
-//  testza.AssertGreater(t, 10, -10)
+//
+//	testza.AssertGreater(t, 5, 1)
+//	testza.AssertGreater(t, 10, -10)
 func AssertGreater(t testRunner, object1, object2 any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -573,8 +599,10 @@ func AssertGreater(t testRunner, object1, object2 any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertGreaterOrEqual(t, 5, 1)
-//  testza.AssertGreaterOrEqual(t, 10, -10)
+//
+//	testza.AssertGreaterOrEqual(t, 5, 1)
+//	testza.AssertGreaterOrEqual(t, 10, -10)
+//
 // testza.AssertGreaterOrEqual(t, 10, 10)
 func AssertGreaterOrEqual(t testRunner, object1, object2 interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
@@ -598,8 +626,9 @@ func AssertGreaterOrEqual(t testRunner, object1, object2 interface{}, msg ...int
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertLess(t, 1, 5)
-//  testza.AssertLess(t, -10, 10)
+//
+//	testza.AssertLess(t, 1, 5)
+//	testza.AssertLess(t, -10, 10)
 func AssertLess(t testRunner, object1, object2 any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -625,9 +654,10 @@ func AssertLess(t testRunner, object1, object2 any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertLessOrEqual(t, 1, 5)
-//  testza.AssertLessOrEqual(t, -10, 10)
-//  testza.AssertLessOrEqual(t, 1, 1)
+//
+//	testza.AssertLessOrEqual(t, 1, 5)
+//	testza.AssertLessOrEqual(t, -10, 10)
+//	testza.AssertLessOrEqual(t, 1, 1)
 func AssertLessOrEqual(t testRunner, object1, object2 interface{}, msg ...interface{}) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -654,14 +684,15 @@ func AssertLessOrEqual(t testRunner, object1, object2 interface{}, msg ...interf
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertTestFails(t, func(t testza.TestingPackageWithFailFunctions) {
-//  	testza.AssertTrue(t, false)
-//  }) // => Pass
 //
-//  testza.AssertTestFails(t, func(t testza.TestingPackageWithFailFunctions) {
-//  	// ...
-//  	t.Fail() // Or any other failing method.
-//  }) // => Pass
+//	testza.AssertTestFails(t, func(t testza.TestingPackageWithFailFunctions) {
+//		testza.AssertTrue(t, false)
+//	}) // => Pass
+//
+//	testza.AssertTestFails(t, func(t testza.TestingPackageWithFailFunctions) {
+//		// ...
+//		t.Fail() // Or any other failing method.
+//	}) // => Pass
 func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions), msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -680,9 +711,10 @@ func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions),
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  var testErr = errors.New("hello world")
-//  var testErrWrapped = fmt.Errorf("test err: %w", testErr)
-//  testza.AssertErrorIs(t, testErrWrapped ,testErr)
+//
+//	var testErr = errors.New("hello world")
+//	var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+//	testza.AssertErrorIs(t, testErrWrapped ,testErr)
 func AssertErrorIs(t testRunner, err, target error, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -698,10 +730,11 @@ func AssertErrorIs(t testRunner, err, target error, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  var testErr = errors.New("hello world")
-//  var test2Err = errors.New("hello world 2")
-//  var testErrWrapped = fmt.Errorf("test err: %w", testErr)
-//  testza.AssertNotErrorIs(t, testErrWrapped, test2Err)
+//
+//	var testErr = errors.New("hello world")
+//	var test2Err = errors.New("hello world 2")
+//	var testErrWrapped = fmt.Errorf("test err: %w", testErr)
+//	testza.AssertNotErrorIs(t, testErrWrapped, test2Err)
 func AssertNotErrorIs(t testRunner, err, target error, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -717,10 +750,11 @@ func AssertNotErrorIs(t testRunner, err, target error, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertLen(t, "abc", 3)
-//  testza.AssertLen(t, "Assert", 6)
-//  testza.AssertLen(t, []int{1, 2, 1337, 25}, 4)
-//  testza.AssertLen(t, map[string]int{"asd": 1, "test": 1337}, 2)
+//
+//	testza.AssertLen(t, "abc", 3)
+//	testza.AssertLen(t, "Assert", 6)
+//	testza.AssertLen(t, []int{1, 2, 1337, 25}, 4)
+//	testza.AssertLen(t, map[string]int{"asd": 1, "test": 1337}, 2)
 func AssertLen(t testRunner, object any, length int, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -762,8 +796,9 @@ func AssertLen(t testRunner, object any, length int, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertIncreasing(t, []int{1, 2, 137, 1000})
-//  testza.AssertIncreasing(t, []float32{-10.3, 0.1, 7, 13.5})
+//
+//	testza.AssertIncreasing(t, []int{1, 2, 137, 1000})
+//	testza.AssertIncreasing(t, []float32{-10.3, 0.1, 7, 13.5})
 func AssertIncreasing(t testRunner, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -780,8 +815,9 @@ func AssertIncreasing(t testRunner, object any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertDecreasing(t, []int{1000, 137, 2, 1})
-//  testza.AssertDecreasing(t, []float32{13.5, 7, 0.1, -10.3})
+//
+//	testza.AssertDecreasing(t, []int{1000, 137, 2, 1})
+//	testza.AssertDecreasing(t, []float32{13.5, 7, 0.1, -10.3})
 func AssertDecreasing(t testRunner, object any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -795,7 +831,8 @@ func AssertDecreasing(t testRunner, object any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertRegexp(t, "^a.*c$", "abc")
+//
+//	testza.AssertRegexp(t, "^a.*c$", "abc")
 func AssertRegexp(t testRunner, regex any, txt any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -809,7 +846,8 @@ func AssertRegexp(t testRunner, regex any, txt any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
+//
+//	testza.AssertNotRegexp(t, "ab.*", "Hello, World!")
 func AssertNotRegexp(t testRunner, regex any, txt any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -823,8 +861,9 @@ func AssertNotRegexp(t testRunner, regex any, txt any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertFileExists(t, "./test.txt")
-//  testza.AssertFileExists(t, "./config.yaml", "the config file is missing")
+//
+//	testza.AssertFileExists(t, "./test.txt")
+//	testza.AssertFileExists(t, "./config.yaml", "the config file is missing")
 func AssertFileExists(t testRunner, file string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -854,7 +893,8 @@ func AssertNoFileExists(t testRunner, file string, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertDirExists(t, "FolderName")
+//
+//	testza.AssertDirExists(t, "FolderName")
 func AssertDirExists(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -874,7 +914,8 @@ func AssertDirExists(t testRunner, dir string, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNoDirExists(t, "FolderName")
+//
+//	testza.AssertNoDirExists(t, "FolderName")
 func AssertNoDirExists(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -895,7 +936,8 @@ func AssertNoDirExists(t testRunner, dir string, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertDirEmpty(t, "FolderName")
+//
+//	testza.AssertDirEmpty(t, "FolderName")
 func AssertDirEmpty(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -912,7 +954,8 @@ func AssertDirEmpty(t testRunner, dir string, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertDirNotEmpty(t, "FolderName")
+//
+//	testza.AssertDirNotEmpty(t, "FolderName")
 func AssertDirNotEmpty(t testRunner, dir string, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -929,14 +972,15 @@ func AssertDirNotEmpty(t testRunner, dir string, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World"})
-//  testza.AssertSameElements(t, []int{1,2,3}, []int{1,2,3})
-//  testza.AssertSameElements(t, []int{1,2}, []int{2,1})
 //
-//  type A struct {
-//	  a string
-//  }
-//  testza.AssertSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}})
+//	 testza.AssertSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World"})
+//	 testza.AssertSameElements(t, []int{1,2,3}, []int{1,2,3})
+//	 testza.AssertSameElements(t, []int{1,2}, []int{2,1})
+//
+//	 type A struct {
+//		  a string
+//	 }
+//	 testza.AssertSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}})
 func AssertSameElements(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -953,13 +997,14 @@ func AssertSameElements(t testRunner, expected any, actual any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World", "World"})
-//  testza.AssertNotSameElements(t, []int{1,2}, []int{1,2,3})
 //
-//  type A struct {
-//	  a string
-//  }
-//  testza.AssertNotSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}, {a: "D"}})
+//	 testza.AssertNotSameElements(t, []string{"Hello", "World"}, []string{"Hello", "World", "World"})
+//	 testza.AssertNotSameElements(t, []int{1,2}, []int{1,2,3})
+//
+//	 type A struct {
+//		  a string
+//	 }
+//	 testza.AssertNotSameElements(t, []*A{{a: "A"}, {a: "B"}, {a: "C"}}, []*A{{a: "A"}, {a: "B"}, {a: "C"}, {a: "D"}})
 func AssertNotSameElements(t testRunner, expected any, actual any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -976,8 +1021,9 @@ func AssertNotSameElements(t testRunner, expected any, actual any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertSubset(t, []int{1, 2, 3}, []int{1, 2})
-//  testza.AssertSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "World"})
+//
+//	testza.AssertSubset(t, []int{1, 2, 3}, []int{1, 2})
+//	testza.AssertSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "World"})
 func AssertSubset(t testRunner, list any, subset any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -994,8 +1040,9 @@ func AssertSubset(t testRunner, list any, subset any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNoSubset(t, []int{1, 2, 3}, []int{1, 7})
-//  testza.AssertNoSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "John"})
+//
+//	testza.AssertNoSubset(t, []int{1, 2, 3}, []int{1, 7})
+//	testza.AssertNoSubset(t, []string{"Hello", "World", "Test"}, []string{"Test", "John"})
 func AssertNoSubset(t testRunner, list any, subset any, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -1012,8 +1059,9 @@ func AssertNoSubset(t testRunner, list any, subset any, msg ...any) {
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertUnique(t, []int{1, 2, 3})
-//  testza.AssertUnique(t, []string{"Hello", "World", "!"})
+//
+//	testza.AssertUnique(t, []int{1, 2, 3})
+//	testza.AssertUnique(t, []string{"Hello", "World", "!"})
 func AssertUnique[elementType comparable](t testRunner, list []elementType, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()
@@ -1029,7 +1077,8 @@ func AssertUnique[elementType comparable](t testRunner, list []elementType, msg 
 // When using a custom message, the same formatting as with fmt.Sprintf() is used.
 //
 // Example:
-//  testza.AssertNotUnique(t, []int{1, 2, 3, 3})
+//
+//	testza.AssertNotUnique(t, []int{1, 2, 3, 3})
 func AssertNotUnique[elementType comparable](t testRunner, list []elementType, msg ...any) {
 	if test, ok := t.(helper); ok {
 		test.Helper()

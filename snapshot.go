@@ -20,7 +20,8 @@ import (
 // NOTICE: \r\n will be replaced with \n to make the files consistent between operating systems.
 //
 // Example:
-//  testza.SnapshotCreate(t.Name(), objectToBeSnapshotted)
+//
+//	testza.SnapshotCreate(t.Name(), objectToBeSnapshotted)
 func SnapshotCreate(name string, snapshotObject any) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	return snapshotCreateForDir(dir, name, snapshotObject)
@@ -50,8 +51,9 @@ func snapshotCreateForDir(dir string, name string, snapshotObject any) error {
 // NOTICE: \r\n will be replaced with \n to make the files consistent between operating systems.
 //
 // Example:
-//  testza.SnapshotValidate(t, t.Name(), objectToBeValidated)
-//  testza.SnapshotValidate(t, t.Name(), objectToBeValidated, "Optional message")
+//
+//	testza.SnapshotValidate(t, t.Name(), objectToBeValidated)
+//	testza.SnapshotValidate(t, t.Name(), objectToBeValidated, "Optional message")
 func SnapshotValidate(t testRunner, name string, actual any, msg ...any) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	return snapshotValidateFromDir(dir, t, name, actual, msg...)
@@ -121,8 +123,9 @@ func snapshotValidateFromDir(dir string, t testRunner, name string, actual any, 
 // NOTICE: \r\n will be replaced with \n to make the files consistent between operating systems.
 //
 // Example:
-//  testza.SnapshotCreateOrValidate(t, t.Name(), object)
-//  testza.SnapshotCreateOrValidate(t, t.Name(), object, "Optional Message")
+//
+//	testza.SnapshotCreateOrValidate(t, t.Name(), object)
+//	testza.SnapshotCreateOrValidate(t, t.Name(), object, "Optional Message")
 func SnapshotCreateOrValidate(t testRunner, name string, object any, msg ...any) error {
 	dir := getCurrentScriptDirectory() + "/testdata/snapshots/"
 	snapshotPath := path.Clean(dir + name + ".testza")
