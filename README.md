@@ -330,8 +330,8 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 func AssertCompletesIn(t testRunner, duration time.Duration, f func(), msg ...any)
 ```
 
-AssertCompletesIn asserts that a function completes in a given time. Use
-this function to test that functions do not take too long to complete.
+AssertCompletesIn asserts that a function completes in a given time.
+Use this function to test that functions do not take too long to complete.
 
 NOTE: Every system takes a different amount of time to complete a function.
 Do not set the duration too low, if you want consistent results.
@@ -1092,8 +1092,8 @@ Example:
 func AssertSubset(t testRunner, list any, subset any, msg ...any)
 ```
 
-AssertSubset asserts that the second parameter is a subset of the list. The
-order is irrelevant.
+AssertSubset asserts that the second parameter is a subset of the list.
+The order is irrelevant.
 
 When using a custom message, the same formatting as with fmt.Sprintf() is
 used.
@@ -1271,8 +1271,8 @@ random float64s (positive and negative).
 func FuzzFloat64GenerateRandomNegative(count int, min float64) (floats []float64)
 ```
 
-FuzzFloat64GenerateRandomNegative generates random negative integers with a
-minimum of min. If the minimum is positive, it will be converted to a
+FuzzFloat64GenerateRandomNegative generates random negative integers with
+a minimum of min. If the minimum is positive, it will be converted to a
 negative number. If it is set to 0, there is no limit.
 
 #### FuzzFloat64GenerateRandomPositive
@@ -1281,8 +1281,8 @@ negative number. If it is set to 0, there is no limit.
 func FuzzFloat64GenerateRandomPositive(count int, max float64) (floats []float64)
 ```
 
-FuzzFloat64GenerateRandomPositive generates random positive integers with a
-maximum of max. If the maximum is 0, or below, the maximum will be set to
+FuzzFloat64GenerateRandomPositive generates random positive integers with
+a maximum of max. If the maximum is 0, or below, the maximum will be set to
 math.MaxInt64.
 
 #### FuzzFloat64GenerateRandomRange
@@ -1343,9 +1343,9 @@ max.
 func FuzzStringEmailAddresses() []string
 ```
 
-FuzzStringEmailAddresses returns a test set with valid email addresses. The
-addresses may look like they are invalid, but they are all conform to RFC
-2822 and could be used. You can use this test set to test your email
+FuzzStringEmailAddresses returns a test set with valid email addresses.
+The addresses may look like they are invalid, but they are all conform to
+RFC 2822 and could be used. You can use this test set to test your email
 validation process.
 
 #### FuzzStringEmpty
@@ -1383,10 +1383,9 @@ func FuzzStringHtmlTags() []string
 FuzzStringHtmlTags returns a test set with different html tags.
 
 Example:
-
-    - <script>
-    - <script>alert('XSS')</script>
-    - <a href="https://github.com/MarvinJWendt/testza">link</a>
+  - <script>
+  - <script>alert('XSS')</script>
+  - <a href="https://github.com/MarvinJWendt/testza">link</a>
 
 #### FuzzStringLong
 
@@ -1405,8 +1404,8 @@ string (length: 100) [3]: Random string (length: 1,000) [4]: Random string
 func FuzzStringNumeric() []string
 ```
 
-FuzzStringNumeric returns a test set with strings that are numeric. The
-highest number in here is "9223372036854775807", which is equal to the
+FuzzStringNumeric returns a test set with strings that are numeric.
+The highest number in here is "9223372036854775807", which is equal to the
 maxmim int64.
 
 #### FuzzStringUsernames
@@ -1538,9 +1537,9 @@ Example:
 func SetLineNumbersEnabled(enabled bool)
 ```
 
-SetLineNumbersEnabled controls if line numbers should be printed in failing
-tests. You should use this in the init() method of the package, which
-contains your tests.
+SetLineNumbersEnabled controls if line numbers should be printed in
+failing tests. You should use this in the init() method of the package,
+which contains your tests.
 
 > This setting can also be set by the command line flag
 --testza.disable-line-numbers.
@@ -1558,8 +1557,8 @@ Example:
 func SetRandomSeed(seed int64)
 ```
 
-SetRandomSeed sets the seed for the random generator used in testza. Using
-the same seed will result in the same random sequences each time and
+SetRandomSeed sets the seed for the random generator used in testza.
+Using the same seed will result in the same random sequences each time and
 guarantee a reproducible test run. Use this setting, if you want a 100%
 deterministic test. You should use this in the init() method of the package,
 which contains your tests.
@@ -1579,8 +1578,8 @@ Example:
 func SetShowStartupMessage(show bool)
 ```
 
-SetShowStartupMessage controls if the startup message should be printed. You
-should use this in the init() method of the package, which contains your
+SetShowStartupMessage controls if the startup message should be printed.
+You should use this in the init() method of the package, which contains your
 tests.
 
 > This setting can also be set by the command line flag
@@ -1601,9 +1600,9 @@ Example:
 func SnapshotCreate(name string, snapshotObject any) error
 ```
 
-SnapshotCreate creates a snapshot of an object, which can be validated in
-future test runs. Using this function directly will override previous
-snapshots with the same name. You most likely want to use
+SnapshotCreate creates a snapshot of an object, which can be validated
+in future test runs. Using this function directly will override
+previous snapshots with the same name. You most likely want to use
 SnapshotCreateOrValidate.
 
 NOTICE: \r\n will be replaced with \n to make the files consistent between
@@ -1620,8 +1619,8 @@ func SnapshotCreateOrValidate(t testRunner, name string, object any, msg ...any)
 ```
 
 SnapshotCreateOrValidate creates a snapshot of an object which can be used
-in future test runs. It is good practice to name your snapshots the same as
-the test they are created in. You can do that automatically by using
+in future test runs. It is good practice to name your snapshots the same
+as the test they are created in. You can do that automatically by using
 t.Name() as the second parameter, if you are using the inbuilt test system
 of Go. If a snapshot already exists, the function will not create a new one,
 but validate the exisiting one. To re-create a snapshot, you can delete the
@@ -1641,8 +1640,8 @@ Example:
 func SnapshotValidate(t testRunner, name string, actual any, msg ...any) error
 ```
 
-SnapshotValidate validates an already exisiting snapshot of an object. You
-most likely want to use SnapshotCreateOrValidate.
+SnapshotValidate validates an already exisiting snapshot of an object.
+You most likely want to use SnapshotCreateOrValidate.
 
 NOTICE: \r\n will be replaced with \n to make the files consistent between
 operating systems.
