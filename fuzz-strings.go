@@ -88,9 +88,9 @@ func FuzzStringEmailAddresses() []string {
 // FuzzStringHtmlTags returns a test set with different html tags.
 //
 // Example:
-//  - <script>
-//  - <script>alert('XSS')</script>
-//  - <a href="https://github.com/MarvinJWendt/testza">link</a>
+//   - <script>
+//   - <script>alert('XSS')</script>
+//   - <a href="https://github.com/MarvinJWendt/testza">link</a>
 func FuzzStringHtmlTags() []string {
 	return []string{
 		"<script>alert('XSS')</script>",
