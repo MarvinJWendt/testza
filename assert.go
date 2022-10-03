@@ -1088,3 +1088,45 @@ func AssertNotUnique[elementType comparable](t testRunner, list []elementType, m
 		internal.Fail(t, "The list !!is unique!!, but should not.", internal.NewObjectsSingleNamed("List", list), msg...)
 	}
 }
+
+// AssertInRange asserts that the value is in the range.
+//
+// When using a custom message, the same formatting as with fmt.Sprintf() is used.
+//
+// Example:
+//
+//	testza.AssertInRange(t, 5, 1, 10)
+func AssertInRange[T number](t testRunner, value T, min T, max T, msg ...any) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if min >= max {
+		internal.Fail(t, "The minimum value is greater than or equal to the maximum value.", internal.Objects{internal.NewObjectsSingleNamed("Min", min)[0], internal.NewObjectsSingleNamed("Max", max)[0]}, msg...)
+	}
+
+	if value < min || value > max {
+		internal.Fail(t, "The value is !!not in range!!, but should be.", internal.Objects{internal.NewObjectsSingleNamed("Value", value)[0], internal.NewObjectsSingleNamed("Min", min)[0], internal.NewObjectsSingleNamed("Max", max)[0]}, msg...)
+	}
+}
+
+// AssertNotInRange asserts that the value is not in the range.
+//
+// When using a custom message, the same formatting as with fmt.Sprintf() is used.
+//
+// Example:
+//
+//	testza.AssertNotInRange(t, 5, 1, 10)
+func AssertNotInRange[T number](t testRunner, value T, min T, max T, msg ...any) {
+	if test, ok := t.(helper); ok {
+		test.Helper()
+	}
+
+	if min >= max {
+		internal.Fail(t, "The minimum value is greater than or equal to the maximum value.", internal.Objects{internal.NewObjectsSingleNamed("Min", min)[0], internal.NewObjectsSingleNamed("Max", max)[0]}, msg...)
+	}
+
+	if value >= min && value <= max {
+		internal.Fail(t, "The value is in range, but should not be.", internal.Objects{internal.NewObjectsSingleNamed("Value", value)[0], internal.NewObjectsSingleNamed("Min", min)[0], internal.NewObjectsSingleNamed("Max", max)[0]}, msg...)
+	}
+}
