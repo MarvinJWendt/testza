@@ -1570,3 +1570,33 @@ func TestAssertNotUnique_fails(t *testing.T) {
 		AssertNotUnique(t, []float64{1.1, 1.2, 1.3, 1.4, 1.5})
 	})
 }
+
+func TestAssertInRange(t *testing.T) {
+	AssertInRange(t, 2, 1, 3)
+	AssertInRange(t, 1, 1, 3)
+}
+
+func TestAssertInRange_fails(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertNotInRange(t, 1, 1, 3)
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertNotInRange(t, 2, 1, 3)
+	})
+}
+
+func TestAssertNotInRange(t *testing.T) {
+	AssertNotInRange(t, 4, 1, 3)
+	AssertNotInRange(t, 0, 1, 3)
+}
+
+func TestAssertNotInRange_fails(t *testing.T) {
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertInRange(t, 4, 1, 3)
+	})
+
+	AssertTestFails(t, func(t TestingPackageWithFailFunctions) {
+		AssertInRange(t, 0, 1, 3)
+	})
+}
