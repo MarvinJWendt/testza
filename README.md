@@ -168,6 +168,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertGreater](https://github.com/MarvinJWendt/testza#AssertGreater)
   - [AssertGreaterOrEqual](https://github.com/MarvinJWendt/testza#AssertGreaterOrEqual)
   - [AssertImplements](https://github.com/MarvinJWendt/testza#AssertImplements)
+  - [AssertInRange](https://github.com/MarvinJWendt/testza#AssertInRange)
   - [AssertIncreasing](https://github.com/MarvinJWendt/testza#AssertIncreasing)
   - [AssertKindOf](https://github.com/MarvinJWendt/testza#AssertKindOf)
   - [AssertLen](https://github.com/MarvinJWendt/testza#AssertLen)
@@ -184,6 +185,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
   - [AssertNotEqualValues](https://github.com/MarvinJWendt/testza#AssertNotEqualValues)
   - [AssertNotErrorIs](https://github.com/MarvinJWendt/testza#AssertNotErrorIs)
   - [AssertNotImplements](https://github.com/MarvinJWendt/testza#AssertNotImplements)
+  - [AssertNotInRange](https://github.com/MarvinJWendt/testza#AssertNotInRange)
   - [AssertNotKindOf](https://github.com/MarvinJWendt/testza#AssertNotKindOf)
   - [AssertNotNil](https://github.com/MarvinJWendt/testza#AssertNotNil)
   - [AssertNotNumeric](https://github.com/MarvinJWendt/testza#AssertNotNumeric)
@@ -583,6 +585,21 @@ Example:
     testza.AssertImplements(t, (*YourInterface)(nil), new(YourObject))
     testza.AssertImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => pass
 
+#### AssertInRange
+
+```go
+func AssertInRange[T number](t testRunner, value T, min T, max T, msg ...any)
+```
+
+AssertInRange asserts that the value is in the range.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
+Example:
+
+    testza.AssertInRange(t, 5, 1, 10)
+
 #### AssertIncreasing
 
 ```go
@@ -868,6 +885,21 @@ Example:
 
     testza.AssertNotImplements(t, (*YourInterface)(nil), new(YourObject))
     testza.AssertNotImplements(t, (*fmt.Stringer)(nil), new(types.Const)) => fail, because types.Const does implement fmt.Stringer.
+
+#### AssertNotInRange
+
+```go
+func AssertNotInRange[T number](t testRunner, value T, min T, max T, msg ...any)
+```
+
+AssertNotInRange asserts that the value is not in the range.
+
+When using a custom message, the same formatting as with fmt.Sprintf() is
+used.
+
+Example:
+
+    testza.AssertNotInRange(t, 5, 1, 10)
 
 #### AssertNotKindOf
 
