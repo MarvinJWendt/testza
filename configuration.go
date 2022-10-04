@@ -105,6 +105,15 @@ func SetColorsEnabled(enabled bool) {
 	}
 }
 
+// GetColorsEnabled returns current value of ColorsEnabled setting.
+// ColorsEnabled controls if testza should print colored output.
+func GetColorsEnabled() bool {
+	initSync.Lock()
+	defer initSync.Unlock()
+
+	return pterm.PrintColor
+}
+
 // SetLineNumbersEnabled controls if line numbers should be printed in failing tests.
 // You should use this in the init() method of the package, which contains your tests.
 //
@@ -121,6 +130,15 @@ func SetLineNumbersEnabled(enabled bool) {
 	defer initSync.Unlock()
 
 	internal.LineNumbersEnabled = enabled
+}
+
+// GetLineNumbersEnabled returns current value of LineNumbersEnabled setting.
+// LineNumbersEnabled controls if line numbers should be printed in failing tests.
+func GetLineNumbersEnabled() bool {
+	initSync.Lock()
+	defer initSync.Unlock()
+
+	return internal.LineNumbersEnabled
 }
 
 // SetRandomSeed sets the seed for the random generator used in testza.
@@ -144,6 +162,14 @@ func SetRandomSeed(seed int64) {
 	rand.Seed(seed)
 }
 
+// GetRandomSeed returns current value of the random seed setting.
+func GetRandomSeed() int64 {
+	initSync.Lock()
+	defer initSync.Unlock()
+
+	return randomSeed
+}
+
 // SetShowStartupMessage controls if the startup message should be printed.
 // You should use this in the init() method of the package, which contains your tests.
 //
@@ -160,6 +186,15 @@ func SetShowStartupMessage(show bool) {
 	defer initSync.Unlock()
 
 	showStartupMessage = show
+}
+
+// GetShowStartupMessage returns current value of showStartupMessage setting.
+// showStartupMessage setting controls if the startup message should be printed.
+func GetShowStartupMessage() bool {
+	initSync.Lock()
+	defer initSync.Unlock()
+
+	return showStartupMessage
 }
 
 // SetDiffContextLines controls how many lines are shown around a changed diff line.
@@ -179,4 +214,14 @@ func SetDiffContextLines(lines int) {
 	defer initSync.Unlock()
 
 	internal.DiffContextLines = lines
+}
+
+// GetDiffContextLines returns current value of DiffContextLines setting.
+// DiffContextLines setting controls how many lines are shown around a changed diff line.
+// If set to -1 it will show full diff.
+func GetDiffContextLines() int {
+	initSync.Lock()
+	defer initSync.Unlock()
+
+	return internal.DiffContextLines
 }
