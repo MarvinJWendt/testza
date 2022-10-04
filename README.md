@@ -24,7 +24,7 @@
 </a>
 
 <a href="https://goreportcard.com/report/github.com/MarvinJWendt/testza" target="_blank">
-<img src="https://goreportcard.com/badge/github.com/MarvinJWendt/testza" alt="Go report">
+<img src="https://goreportcard.com/badge/github.com/MarvinJWendt/testza?style=flat-square" alt="Go report">
 </a>  
 
 </p>
