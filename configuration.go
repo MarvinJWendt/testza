@@ -108,9 +108,6 @@ func SetColorsEnabled(enabled bool) {
 // GetColorsEnabled returns current value of ColorsEnabled setting.
 // ColorsEnabled controls if testza should print colored output.
 func GetColorsEnabled() bool {
-	initSync.Lock()
-	defer initSync.Unlock()
-
 	return pterm.PrintColor
 }
 
@@ -135,9 +132,6 @@ func SetLineNumbersEnabled(enabled bool) {
 // GetLineNumbersEnabled returns current value of LineNumbersEnabled setting.
 // LineNumbersEnabled controls if line numbers should be printed in failing tests.
 func GetLineNumbersEnabled() bool {
-	initSync.Lock()
-	defer initSync.Unlock()
-
 	return internal.LineNumbersEnabled
 }
 
@@ -164,9 +158,6 @@ func SetRandomSeed(seed int64) {
 
 // GetRandomSeed returns current value of the random seed setting.
 func GetRandomSeed() int64 {
-	initSync.Lock()
-	defer initSync.Unlock()
-
 	return randomSeed
 }
 
@@ -191,9 +182,6 @@ func SetShowStartupMessage(show bool) {
 // GetShowStartupMessage returns current value of showStartupMessage setting.
 // showStartupMessage setting controls if the startup message should be printed.
 func GetShowStartupMessage() bool {
-	initSync.Lock()
-	defer initSync.Unlock()
-
 	return showStartupMessage
 }
 
@@ -220,8 +208,5 @@ func SetDiffContextLines(lines int) {
 // DiffContextLines setting controls how many lines are shown around a changed diff line.
 // If set to -1 it will show full diff.
 func GetDiffContextLines() int {
-	initSync.Lock()
-	defer initSync.Unlock()
-
 	return internal.DiffContextLines
 }
