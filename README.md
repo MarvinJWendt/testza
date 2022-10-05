@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2997-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3013-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
@@ -24,7 +24,7 @@
 </a>
 
 <a href="https://goreportcard.com/report/github.com/MarvinJWendt/testza" target="_blank">
-<img src="https://goreportcard.com/badge/github.com/MarvinJWendt/testza" alt="Go report">
+<img src="https://goreportcard.com/badge/github.com/MarvinJWendt/testza?style=flat-square" alt="Go report">
 </a>  
 
 </p>
