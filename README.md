@@ -1520,6 +1520,55 @@ Example:
     	// ...
     })
 
+### 
+
+#### GetColorsEnabled
+
+```go
+func GetColorsEnabled() bool
+```
+
+GetColorsEnabled returns current value of ColorsEnabled setting.
+ColorsEnabled controls if testza should print colored output.
+
+#### GetDiffContextLines
+
+```go
+func GetDiffContextLines() int
+```
+
+GetDiffContextLines returns current value of DiffContextLines setting.
+DiffContextLines setting controls how many lines are shown around a changed
+diff line. If set to -1 it will show full diff.
+
+#### GetLineNumbersEnabled
+
+```go
+func GetLineNumbersEnabled() bool
+```
+
+GetLineNumbersEnabled returns current value of LineNumbersEnabled setting.
+LineNumbersEnabled controls if line numbers should be printed in failing
+tests.
+
+#### GetRandomSeed
+
+```go
+func GetRandomSeed() int64
+```
+
+GetRandomSeed returns current value of the random seed setting.
+
+#### GetShowStartupMessage
+
+```go
+func GetShowStartupMessage() bool
+```
+
+GetShowStartupMessage returns current value of showStartupMessage setting.
+showStartupMessage setting controls if the startup message should be
+printed.
+
 ### Settings
 
 #### SetColorsEnabled
