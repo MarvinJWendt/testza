@@ -149,12 +149,9 @@ func SnapshotCreateOrValidate(t testRunner, name string, object any, msg ...any)
 }
 
 func createSnapshotText(object any) string {
-	originalSpewConfig := spew.Config.DisablePointerAddresses
-	defer (func() {
-		spew.Config.DisablePointerAddresses = originalSpewConfig
-	})()
+	cfg := spew.NewDefaultConfig()
 
-	spew.Config.DisablePointerAddresses = true
+	cfg.DisablePointerAddresses = true
 
-	return spew.Sdump(object)
+	return cfg.Sdump(object)
 }
