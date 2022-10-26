@@ -5,7 +5,7 @@
  Nested: (struct { ChildName string; PointerField *string; Set []int }) {
   ChildName: (string) (len=15) "as yet untitled",
   PointerField: (*string)((len=11) "hello world"),
-  Set: ([]int) (len=7 cap=7) {
+  Set: ([]int) (len=7) {
    (int) 1,
    (int) 2,
    (int) 3,

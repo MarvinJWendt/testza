@@ -152,6 +152,7 @@ func createSnapshotText(object any) string {
 	cfg := spew.NewDefaultConfig()
 
 	cfg.DisablePointerAddresses = true
+	cfg.DisableCapacities = true
 
 	return cfg.Sdump(object)
 }
