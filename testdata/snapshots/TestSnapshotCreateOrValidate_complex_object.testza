@@ -1,0 +1,18 @@
+(testza_test.snapshotComplexObjectType) {
+ Name: (string) (len=12) "Marvin Wendt",
+ Username: (string) (len=12) "MarvinJWendt",
+ Birthday: (time.Time) 2001-01-24 00:00:00 +0000 UTC,
+ Nested: (struct { ChildName string; PointerField *string; Set []int }) {
+  ChildName: (string) (len=15) "as yet untitled",
+  PointerField: (*string)((len=11) "hello world"),
+  Set: ([]int) (len=7) {
+   (int) 1,
+   (int) 2,
+   (int) 3,
+   (int) 4,
+   (int) 3,
+   (int) 2,
+   (int) 1
+  }
+ }
+}

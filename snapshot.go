@@ -33,14 +33,11 @@ func snapshotCreateForDir(dir string, name string, snapshotObject any) error {
 		return fmt.Errorf("creating snapshot failed: %w", err)
 	}
 
-	originalSpewConfig := spew.Config.DisablePointerAddresses
-	spew.Config.DisablePointerAddresses = true
-	dump := strings.ReplaceAll(spew.Sdump(snapshotObject), "\r\n", "\n")
+	dump := strings.ReplaceAll(createSnapshotText(snapshotObject), "\r\n", "\n")
 	err = os.WriteFile(path.Clean(dir+name+".testza"), []byte(dump), 0755)
 	if err != nil {
 		return fmt.Errorf("creating snapshot failed: %w", err)
 	}
-	spew.Config.DisablePointerAddresses = originalSpewConfig
 
 	return nil
 }
@@ -64,14 +61,14 @@ var snapshotStringMatcher = regexp.MustCompile(`(?m)^\(.+?\)\s\(len=\d+\)\s(".+"
 func snapshotValidateFromDir(dir string, t testRunner, name string, actual any, msg ...any) error {
 	snapshotPath := path.Clean(dir + name + ".testza")
 	snapshotContent, err := os.ReadFile(snapshotPath)
-	snapshot := strings.ReplaceAll(string(snapshotContent), "\r\n", "\n")
 	if err != nil {
 		return fmt.Errorf("validating snapshot failed: %w", err)
 	}
-	originalSpewConfig := spew.Config.DisablePointerAddresses
-	spew.Config.DisablePointerAddresses = true
+	snapshot := strings.ReplaceAll(string(snapshotContent), "\r\n", "\n")
 
-	if spew.Sdump(actual) != snapshot {
+	actualSnapshot := createSnapshotText(actual)
+
+	if actualSnapshot != snapshot {
 		var diffObject *internal.Object
 		if strActual, ok := actual.(string); ok {
 			if match := snapshotStringMatcher.FindStringSubmatch(snapshot); len(match) > 0 {
@@ -83,7 +80,7 @@ func snapshotValidateFromDir(dir string, t testRunner, name string, actual any, 
 		}
 
 		if diffObject == nil {
-			object := internal.NewDiffObject(snapshot, spew.Sdump(actual), true)
+			object := internal.NewDiffObject(snapshot, actualSnapshot, true)
 			diffObject = &object
 		}
 
@@ -102,14 +99,12 @@ func snapshotValidateFromDir(dir string, t testRunner, name string, actual any, 
 				{
 					Name:      "Actual",
 					NameStyle: pterm.NewStyle(pterm.FgLightRed),
-					Data:      spew.Sdump(actual),
+					Data:      actualSnapshot,
 					DataStyle: pterm.NewStyle(pterm.FgRed),
 					Raw:       true,
 				},
 			})
 	}
-
-	spew.Config.DisablePointerAddresses = originalSpewConfig
 
 	return nil
 }
@@ -151,4 +146,13 @@ func SnapshotCreateOrValidate(t testRunner, name string, object any, msg ...any)
 	}
 
 	return nil
+}
+
+func createSnapshotText(object any) string {
+	cfg := spew.NewDefaultConfig()
+
+	cfg.DisablePointerAddresses = true
+	cfg.DisableCapacities = true
+
+	return cfg.Sdump(object)
 }

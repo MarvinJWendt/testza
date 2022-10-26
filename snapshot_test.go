@@ -17,6 +17,17 @@ type snapshotObjectType struct {
 	Birthday time.Time
 }
 
+type snapshotComplexObjectType struct {
+	Name     string
+	Username string
+	Birthday time.Time
+	Nested   struct {
+		ChildName    string
+		PointerField *string
+		Set          []int
+	}
+}
+
 var snapshotObject = snapshotObjectType{
 	Name:     "Marvin Wendt",
 	Username: "MarvinJWendt",
@@ -26,6 +37,21 @@ var snapshotName = "TestSnapshotCreate_file_content"
 
 var snapshotString = `hello world`
 var snapshotNameString = "TestSnapshotCreate_file_content_string"
+
+var snapshotComplexObject = snapshotComplexObjectType{
+	Name:     "Marvin Wendt",
+	Username: "MarvinJWendt",
+	Birthday: time.Date(2001, time.January, 24, 0, 0, 0, 0, time.UTC),
+	Nested: struct {
+		ChildName    string
+		PointerField *string
+		Set          []int
+	}{
+		ChildName:    "as yet untitled",
+		PointerField: &snapshotString,
+		Set:          []int{1, 2, 3, 4, 3, 2, 1},
+	},
+}
 
 func TestSnapshotCreate_file_content(t *testing.T) {
 	err := testza.SnapshotCreate(snapshotName, snapshotObject)
@@ -71,6 +97,11 @@ func TestSnapshotValidate_fails(t *testing.T) {
 
 func TestSnapshotCreateOrValidate(t *testing.T) {
 	err := testza.SnapshotCreateOrValidate(t, t.Name(), snapshotObject)
+	testza.AssertNoError(t, err)
+}
+
+func TestSnapshotCreateOrValidate_complex_object(t *testing.T) {
+	err := testza.SnapshotCreateOrValidate(t, t.Name(), snapshotComplexObject)
 	testza.AssertNoError(t, err)
 }
 
