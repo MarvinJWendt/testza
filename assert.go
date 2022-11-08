@@ -7,6 +7,8 @@ import (
 	"reflect"
 	"strconv"
 	"time"
+	//"testing"
+
 
 	"github.com/pterm/pterm"
 
@@ -25,6 +27,7 @@ func (m *testMock) fail(msg ...any) {
 
 func (m *testMock) Error(args ...any) {
 	m.fail(args...)
+
 }
 
 // Errorf is a mock of testing.T.
@@ -50,6 +53,7 @@ func (m *testMock) Fatal(args ...any) {
 // Fatalf is a mock of testing.T.
 func (m *testMock) Fatalf(format string, args ...any) {
 	m.fail(fmt.Sprintf(format, args...))
+
 }
 
 // AssertKindOf asserts that the object is a type of kind exptectedKind.
@@ -700,9 +704,15 @@ func AssertTestFails(t testRunner, test func(t TestingPackageWithFailFunctions),
 
 	var mock testMock
 	test(&mock)
+	testing := internal.GetTest(t)
 
 	if !mock.ErrorCalled {
 		internal.Fail(t, "A test that !!should fail!! did not fail.", []internal.Object{}, msg...)
+		
+		name := testing.Name()
+		testing.Logf("This test failed: %s", name)
+
+		
 	}
 }
 
