@@ -153,6 +153,7 @@ func createSnapshotText(object any) string {
 
 	cfg.DisablePointerAddresses = true
 	cfg.DisableCapacities = true
+	cfg.SortKeys = true
 
 	return cfg.Sdump(object)
 }
