@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	atomicgo.dev/assert v0.0.2 // indirect
 	atomicgo.dev/cursor v0.1.1 // indirect
 	atomicgo.dev/keyboard v0.2.8 // indirect
 	github.com/containerd/console v1.0.3 // indirect

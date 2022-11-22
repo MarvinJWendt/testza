@@ -1,6 +1,7 @@
 package testza
 
 import (
+	"atomicgo.dev/assert"
 	"errors"
 	"fmt"
 	"os"
@@ -68,7 +69,7 @@ func AssertKindOf(t testRunner, expectedKind reflect.Kind, object any, msg ...an
 		test.Helper()
 	}
 
-	if !internal.IsKind(expectedKind, object) {
+	if !assert.Kind(object, expectedKind) {
 		internal.Fail(t,
 			fmt.Sprintf("A value that !!should be a type of kind %s!! is a type of kind %s.", expectedKind.String(), reflect.TypeOf(object).Kind().String()),
 			internal.NewObjectsExpectedActual(expectedKind, object),
@@ -93,7 +94,7 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object any, msg ...any) {
 		test.Helper()
 	}
 
-	if internal.IsKind(kind, object) {
+	if assert.Kind(object, kind) {
 		internal.Fail(t,
 			fmt.Sprintf("A value that !!should not be a type of kind %s!! is a type of kind %s.", kind.String(), reflect.TypeOf(object).Kind().String()),
 			internal.Objects{
@@ -117,7 +118,7 @@ func AssertNotKindOf(t testRunner, kind reflect.Kind, object any, msg ...any) {
 //	testza.AssertNumeric(t, 1.23)
 //	testza.AssertNumeric(t, uint(123))
 func AssertNumeric(t testRunner, object any, msg ...any) {
-	if !internal.IsNumber(object) {
+	if !assert.Number(object) {
 		internal.Fail(t, "An object that !!should be a number!! is not of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
 }
@@ -133,7 +134,7 @@ func AssertNumeric(t testRunner, object any, msg ...any) {
 //	testza.AssertNotNumeric(t, true)
 //	testza.AssertNotNumeric(t, "123")
 func AssertNotNumeric(t testRunner, object any, msg ...any) {
-	if internal.IsNumber(object) {
+	if assert.Number(object) {
 		internal.Fail(t, "An object that !!should not be a number!! is of a numeric type.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
 }
@@ -152,7 +153,7 @@ func AssertZero(t testRunner, value any, msg ...any) {
 		test.Helper()
 	}
 
-	if !internal.IsZero(value) {
+	if !assert.Zero(value) {
 		internal.Fail(t, "An object that !!should have its zero value!!, does not have its zero value.", internal.NewObjectsSingleUnknown(value), msg...)
 	}
 }
@@ -171,7 +172,7 @@ func AssertNotZero(t testRunner, value any, msg ...any) {
 		test.Helper()
 	}
 
-	if internal.IsZero(value) {
+	if assert.Zero(value) {
 		internal.Fail(t, "An object that !!should not have its zero value!!, does have its zero value.", internal.NewObjectsSingleUnknown(value), msg...)
 	}
 }
@@ -189,7 +190,7 @@ func AssertEqual(t testRunner, expected any, actual any, msg ...any) {
 		test.Helper()
 	}
 
-	if !internal.IsEqual(expected, actual) {
+	if !assert.Equal(expected, actual) {
 		internal.Fail(t, "Two objects that !!should be equal!!, are not equal.", internal.NewObjectsExpectedActualWithDiff(expected, actual), msg...)
 	}
 }
@@ -207,7 +208,7 @@ func AssertNotEqual(t testRunner, expected any, actual any, msg ...any) {
 		test.Helper()
 	}
 
-	if internal.IsEqual(expected, actual) {
+	if assert.Equal(expected, actual) {
 		objects := internal.Objects{
 			{
 				Name:      "Both Objects",
@@ -341,7 +342,7 @@ func AssertImplements(t testRunner, interfaceObject, object any, msg ...any) {
 		test.Helper()
 	}
 
-	if !internal.DoesImplement(interfaceObject, object) {
+	if !assert.Implements(interfaceObject, object) {
 		internal.Fail(t, fmt.Sprintf("An object that !!should implement %s!! does not implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
@@ -359,7 +360,7 @@ func AssertNotImplements(t testRunner, interfaceObject, object any, msg ...any) 
 		test.Helper()
 	}
 
-	if internal.DoesImplement(interfaceObject, object) {
+	if assert.Implements(interfaceObject, object) {
 		internal.Fail(t, fmt.Sprintf("An object that !!should not implement %s!! does implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
@@ -378,7 +379,7 @@ func AssertContains(t testRunner, object, element any, msg ...any) {
 		test.Helper()
 	}
 
-	if !internal.DoesContain(object, element) {
+	if !assert.Contains(object, element) {
 		internal.Fail(t, "An object !!does not contain!! the object it should contain.", internal.Objects{
 			internal.NewObjectsSingleNamed("Missing Object", element)[0],
 			internal.NewObjectsSingleNamed("Full Object", object)[0],
@@ -399,7 +400,7 @@ func AssertNotContains(t testRunner, object, element any, msg ...any) {
 		test.Helper()
 	}
 
-	if internal.DoesContain(object, element) {
+	if assert.Contains(object, element) {
 		internal.Fail(t, "An object !!does contain!! an object it should not contain.", internal.Objects{
 			internal.NewObjectsSingleUnknown(object)[0],
 			internal.NewObjectsSingleNamed("Element that should not be in the object", element)[0],
@@ -422,13 +423,9 @@ func AssertPanics(t testRunner, f func(), msg ...any) {
 		test.Helper()
 	}
 
-	defer func() {
-		if r := recover(); r == nil {
-			internal.Fail(t, "A function that !!should panic!! did not panic.", internal.Objects{}, msg...)
-		}
-	}()
-
-	f()
+	if !assert.Panic(f) {
+		internal.Fail(t, "A function that !!should panic!! did not panic.", internal.Objects{}, msg...)
+	}
 }
 
 // AssertNotPanics asserts that a function does not panic.
@@ -445,13 +442,9 @@ func AssertNotPanics(t testRunner, f func(), msg ...any) {
 		test.Helper()
 	}
 
-	defer func() {
-		if r := recover(); r != nil {
-			internal.Fail(t, "A function that !!should not panic!! did panic.", internal.Objects{}, msg...)
-		}
-	}()
-
-	f()
+	if assert.Panic(f) {
+		internal.Fail(t, "A function that !!should not panic!! did panic.", internal.Objects{}, msg...)
+	}
 }
 
 // AssertNil asserts that an object is nil.
@@ -466,7 +459,7 @@ func AssertNil(t testRunner, object any, msg ...any) {
 		test.Helper()
 	}
 
-	if !internal.IsNil(object) {
+	if !assert.Nil(object) {
 		internal.Fail(t, "An object that !!should be nil!! is not nil.", internal.NewObjectsExpectedActual(nil, object), msg...)
 	}
 }
@@ -485,7 +478,7 @@ func AssertNotNil(t testRunner, object any, msg ...any) {
 		test.Helper()
 	}
 
-	if internal.IsNil(object) {
+	if assert.Nil(object) {
 		internal.Fail(t, "An object that !!should not be nil!! is nil.", internal.NewObjectsSingleUnknown(object), msg...)
 	}
 }
@@ -1067,7 +1060,7 @@ func AssertUnique[elementType comparable](t testRunner, list []elementType, msg 
 		test.Helper()
 	}
 
-	if len(FuzzUtilDistinctSet(list)) != len(list) {
+	if !assert.Unique(list) {
 		internal.Fail(t, "The list is !!not unique!!.", internal.NewObjectsSingleNamed("List", list), msg...)
 	}
 }
@@ -1084,7 +1077,7 @@ func AssertNotUnique[elementType comparable](t testRunner, list []elementType, m
 		test.Helper()
 	}
 
-	if len(FuzzUtilDistinctSet(list)) == len(list) {
+	if assert.Unique(list) {
 		internal.Fail(t, "The list !!is unique!!, but should not.", internal.NewObjectsSingleNamed("List", list), msg...)
 	}
 }
