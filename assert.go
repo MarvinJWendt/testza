@@ -342,7 +342,7 @@ func AssertImplements(t testRunner, interfaceObject, object any, msg ...any) {
 		test.Helper()
 	}
 
-	if !assert.Implements(interfaceObject, object) {
+	if !assert.Implements(object, interfaceObject) {
 		internal.Fail(t, fmt.Sprintf("An object that !!should implement %s!! does not implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
@@ -360,7 +360,7 @@ func AssertNotImplements(t testRunner, interfaceObject, object any, msg ...any) 
 		test.Helper()
 	}
 
-	if assert.Implements(interfaceObject, object) {
+	if assert.Implements(object, interfaceObject) {
 		internal.Fail(t, fmt.Sprintf("An object that !!should not implement %s!! does implement it.", reflect.TypeOf(interfaceObject).String()), internal.Objects{}, msg...)
 	}
 }
