@@ -3,6 +3,7 @@ module github.com/MarvinJWendt/testza
 go 1.18
 
 require (
+	atomicgo.dev/assert v0.0.2
 	github.com/davecgh/go-spew v1.1.1
 	github.com/klauspost/cpuid/v2 v2.2.0
 	github.com/pterm/pterm v0.12.49

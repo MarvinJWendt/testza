@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"atomicgo.dev/assert"
 	"bytes"
 	"errors"
 	"fmt"
@@ -11,53 +12,6 @@ import (
 	"strings"
 	"time"
 )
-
-// IsKind returns if an object is kind of a specific kind.
-func IsKind(expectedKind reflect.Kind, value any) bool {
-	return reflect.TypeOf(value).Kind() == expectedKind
-}
-
-// IsNil checks if an object is nil.
-func IsNil(object any) bool {
-	if object == nil {
-		return true
-	}
-
-	switch reflect.ValueOf(object).Kind() {
-	case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice:
-		return reflect.ValueOf(object).IsNil()
-	}
-
-	return false
-}
-
-// IsNumber checks if the value is of a numeric kind.
-func IsNumber(value any) bool {
-	numberKinds := []reflect.Kind{
-		reflect.Int,
-		reflect.Int8,
-		reflect.Int16,
-		reflect.Int32,
-		reflect.Int64,
-		reflect.Float32,
-		reflect.Float64,
-		reflect.Uint,
-		reflect.Uint8,
-		reflect.Uint16,
-		reflect.Uint32,
-		reflect.Uint64,
-		reflect.Complex64,
-		reflect.Complex128,
-	}
-
-	for _, k := range numberKinds {
-		if IsKind(k, value) {
-			return true
-		}
-	}
-
-	return false
-}
 
 // CompletesIn returns if a function completes in a specific time.
 func CompletesIn(duration time.Duration, f func()) bool {
@@ -73,11 +27,6 @@ func CompletesIn(duration time.Duration, f func()) bool {
 	case <-done:
 		return true
 	}
-}
-
-// IsZero checks if a value is the zero value of its type.
-func IsZero(value any) bool {
-	return value == nil || reflect.DeepEqual(value, reflect.Zero(reflect.TypeOf(value)).Interface())
 }
 
 // IsEqual checks if two objects are equal.
@@ -119,20 +68,6 @@ func HasEqualValues(expected any, actual any) bool {
 	}
 
 	return false
-}
-
-// DoesImplement checks if an objects implements an interface.
-func DoesImplement(interfaceObject, object any) bool {
-	interfaceType := reflect.TypeOf(interfaceObject).Elem()
-
-	if object == nil {
-		return false
-	}
-	if !reflect.TypeOf(object).Implements(interfaceType) {
-		return false
-	}
-
-	return true
 }
 
 // DoesContain checks that ab objects contains an element.
@@ -285,7 +220,7 @@ func IsList(list any) bool {
 }
 
 func HasSameElements(expected any, actual any) bool {
-	if IsNil(expected) || IsNil(actual) {
+	if assert.Nil(expected) || assert.Nil(actual) {
 		return expected == actual
 	}
 
@@ -339,7 +274,7 @@ func IsSubset(t testRunner, list any, subset any) bool {
 		test.Helper()
 	}
 
-	if IsNil(subset) {
+	if assert.Nil(subset) {
 		return true
 	}
 
