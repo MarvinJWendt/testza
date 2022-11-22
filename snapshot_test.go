@@ -139,3 +139,39 @@ func TestSnapshotCreateOrValidate_nested_test_name(t *testing.T) {
 
 	testza.AssertNoError(t, err)
 }
+
+func TestSnapshotCreateOrValidate_key_order_stability_with_map(t *testing.T) {
+	// unsorted stable test data
+	data := []string{
+		"257ad566-2f5e-431e-b50a-d30c64849fb1",
+		"67b2fc0f-ab4a-4305-b240-deff819bb080",
+		"5778dc84-8a74-486d-ac08-ec7ff2f53348",
+		"b27e2155-af0a-46a5-ac8c-73f6d497c95c",
+		"b822f4da-57bc-4057-8c7f-7f63e71752c5",
+		"8227c74f-e621-44b8-be21-5a53f3504659",
+		"9021c878-425d-4b26-91b8-fa4c670ad111",
+		"dfc0583a-f36c-4b75-9277-98796cf5421a",
+		"5137c065-a216-45b7-a0c9-58b9425c1416",
+		"0dea5e9e-361c-4c17-87cc-fee3e41dc92d",
+		"619bbea9-bd2e-4a19-b085-33a2677ced7e",
+		"45e032f2-8eaf-4d17-9a8d-55688da19104",
+		"7591cb03-b561-4ed9-8d3f-76ee0f578d34",
+		"12787615-054e-4b09-b7ea-b81a6d30a0a1",
+		"a3563ca3-daaf-4591-afc0-f393c8b66993",
+		"e83adea8-0cd0-4fb8-843a-8f438f9f6054",
+		"78f2ab90-084b-4afc-801d-5d06d00f0761",
+		"a240ecc3-f77a-4a8b-922a-b9cde7ac7416",
+		"fc54c8c7-9a30-4b9f-a9c3-bd97df9e899b",
+		"9f58c6b7-9555-458c-9eb9-8ff400d53819",
+	}
+
+	// Create a map from unsorted data, where the value is the insertion order.
+	// Ordering stability of maps is not guaranteed.
+	snapshotMap := make(map[string]int, len(data))
+	for i, d := range data {
+		snapshotMap[d] = i
+	}
+
+	err := testza.SnapshotCreateOrValidate(t, t.Name(), snapshotMap)
+	testza.AssertNoError(t, err)
+}
