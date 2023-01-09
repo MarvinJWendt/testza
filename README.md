@@ -8,7 +8,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza" target="_blank">
-<img src="https://img.shields.io/github/workflow/status/MarvinJWendt/testza/Go?label=tests&style=flat-square" alt="Tests">
+<img src="https://img.shields.io/github/actions/workflow/status/MarvinJWendt/testza/go.yml?label=tests&style=flat-square" alt="Tests">
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza" target="_blank">
