@@ -8,7 +8,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza" target="_blank">
-<img src="https://img.shields.io/github/workflow/status/MarvinJWendt/testza/Go?label=tests&style=flat-square" alt="Tests">
+<img src="https://img.shields.io/github/actions/workflow/status/MarvinJWendt/testza/go.yml?label=tests&style=flat-square" alt="Tests">
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza" target="_blank">
@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/MarvinJWendt/testza">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-3009-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-2997-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
   
 <a href="https://pkg.go.dev/github.com/MarvinJWendt/testza" target="_blank">
