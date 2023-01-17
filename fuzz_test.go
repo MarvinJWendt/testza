@@ -70,11 +70,35 @@ func TestFuzzUtilLimitSet(t *testing.T) {
 			AssertLen(t, FuzzUtilLimitSet(FuzzFloat64Full(), i), i)
 		})
 	}
+
+	t.Run(fmt.Sprintf("Max bigger than len (Limit=%d)", 10), func(t *testing.T) {
+		AssertLen(t, FuzzUtilLimitSet([]string{"a", "b", "c"}, 10), 3)
+	})
 }
 
 func TestFuzzUtilDistinctSet(t *testing.T) {
 	AssertEqual(t, FuzzUtilDistinctSet([]string{"A", "B", "B", "A", "C"}), []string{"A", "B", "C"})
 	AssertEqual(t, FuzzUtilDistinctSet([]int{1, 2, 2, 1, 3}), []int{1, 2, 3})
+}
+
+func TestFuzzUtilLimit(t *testing.T) {
+	for i := 0; i < 10; i++ {
+		t.Run(fmt.Sprintf("String (Limit=%d)", i), func(t *testing.T) {
+			AssertLen(t, FuzzUtilLimit(FuzzStringFull(), i), i)
+		})
+
+		t.Run(fmt.Sprintf("Int (Limit=%d)", i), func(t *testing.T) {
+			AssertLen(t, FuzzUtilLimit(FuzzIntFull(), i), i)
+		})
+
+		t.Run(fmt.Sprintf("Float64 (Limit=%d)", i), func(t *testing.T) {
+			AssertLen(t, FuzzUtilLimit(FuzzFloat64Full(), i), i)
+		})
+	}
+
+	t.Run(fmt.Sprintf("Limit bigger than length (Limit=%d)", 10), func(t *testing.T) {
+		AssertLen(t, FuzzUtilLimit([]string{"a", "b", "c"}, 10), 3)
+	})
 }
 
 // endregion
@@ -221,21 +245,5 @@ func TestFuzzFloat64GenerateRandomRange(t *testing.T) {
 		generated := FuzzFloat64GenerateRandomRange(1, float64(i*10), float64(i*10+10))[0]
 		AssertGreaterOrEqual(t, generated, i*10)
 		AssertLessOrEqual(t, generated, i*10+10)
-	}
-}
-
-func TestFuzzUtilLimit(t *testing.T) {
-	for i := 0; i < 10; i++ {
-		t.Run(fmt.Sprintf("String (Limit=%d)", i), func(t *testing.T) {
-			AssertLen(t, FuzzUtilLimit(FuzzStringFull(), i), i)
-		})
-
-		t.Run(fmt.Sprintf("Int (Limit=%d)", i), func(t *testing.T) {
-			AssertLen(t, FuzzUtilLimit(FuzzIntFull(), i), i)
-		})
-
-		t.Run(fmt.Sprintf("Float64 (Limit=%d)", i), func(t *testing.T) {
-			AssertLen(t, FuzzUtilLimit(FuzzFloat64Full(), i), i)
-		})
 	}
 }
