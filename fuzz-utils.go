@@ -2,6 +2,7 @@ package testza
 
 import (
 	"fmt"
+	"math/rand"
 	"testing"
 
 	"github.com/MarvinJWendt/testza/internal"
@@ -103,4 +104,18 @@ func FuzzUtilDistinctSet[setType comparable](testSet []setType) []setType {
 	}
 
 	return result
+}
+
+func FuzzUtilLimit[setType any](testSet []setType, limit int) []setType {
+	if len(testSet) <= limit {
+		return testSet
+	}
+
+	if limit <= 0 {
+		return []setType{}
+	}
+
+	rand.Shuffle(len(testSet), func(i, j int) { testSet[i], testSet[j] = testSet[j], testSet[i] })
+
+	return testSet[:limit]
 }
