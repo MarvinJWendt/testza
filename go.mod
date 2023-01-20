@@ -7,7 +7,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1
 	github.com/klauspost/cpuid/v2 v2.2.3
 	github.com/pterm/pterm v0.12.53
-	github.com/sergi/go-diff v1.2.0
+	github.com/sergi/go-diff v1.3.1
 )
 
 require (
