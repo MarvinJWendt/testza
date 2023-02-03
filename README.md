@@ -231,6 +231,7 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <summary>Click to expand</summary>
 
   - [FuzzUtilDistinctSet](https://github.com/MarvinJWendt/testza#FuzzUtilDistinctSet)
+  - [FuzzUtilLimit](https://github.com/MarvinJWendt/testza#FuzzUtilLimit)
   - [FuzzUtilLimitSet](https://github.com/MarvinJWendt/testza#FuzzUtilLimitSet)
   - [FuzzUtilMergeSets](https://github.com/MarvinJWendt/testza#FuzzUtilMergeSets)
   - [FuzzUtilModifySet](https://github.com/MarvinJWendt/testza#FuzzUtilModifySet)
@@ -1461,6 +1462,18 @@ Example:
     uniqueSet := testza.FuzzUtilDistinctSet([]string{"A", "C", "A", "B", "A", "B", "C"})
     // uniqueSet => []string{"A", "C", "B"}
 
+#### FuzzUtilLimit
+
+```go
+func FuzzUtilLimit[setType any](testSet []setType, limit int) []setType
+```
+
+FuzzUtilLimit returns a random piece of input set.
+
+Example:
+
+    limited := testza.FuzzUtilLimit(testza.FuzzStringFull(), 10)
+
 #### FuzzUtilLimitSet
 
 ```go
@@ -1506,10 +1519,10 @@ Example:
 func FuzzUtilRunTests[setType any](t testRunner, testSet []setType, testFunc func(t *testing.T, index int, f setType))
 ```
 
-FuzzUtilRunTests runs a test for every value in a testset. You can use the
-value as input parameter for your functions, to sanity test against many
-different cases. This ensures that your functions have a correct error
-handling and enables you to test against hunderts of cases easily.
+FuzzUtilRunTests runs a test for every value in a test set. You can use
+the value as input parameter for your functions, to sanity test against
+many different cases. This ensures that your functions have a correct error
+handling and enables you to test against hundreds of cases easily.
 
 Example:
 
