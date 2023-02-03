@@ -69,7 +69,7 @@ func FuzzUtilModifySet[setType any](inputSet []setType, modifier func(index int,
 	return
 }
 
-// FuzzUtilLimitSet limits a test set in size.
+// FuzzUtilLimitSet returns a random sample of a test set with a maximal size.
 //
 // Example:
 //
@@ -82,6 +82,8 @@ func FuzzUtilLimitSet[setType any](testSet []setType, max int) []setType {
 	if max <= 0 {
 		return []setType{}
 	}
+
+	rand.Shuffle(len(testSet), func(i, j int) { testSet[i], testSet[j] = testSet[j], testSet[i] })
 
 	return testSet[:max]
 }
@@ -104,23 +106,4 @@ func FuzzUtilDistinctSet[setType comparable](testSet []setType) []setType {
 	}
 
 	return result
-}
-
-// FuzzUtilLimit returns a random piece of input set.
-//
-// Example:
-//
-//	limited := testza.FuzzUtilLimit(testza.FuzzStringFull(), 10)
-func FuzzUtilLimit[setType any](testSet []setType, limit int) []setType {
-	if len(testSet) <= limit {
-		return testSet
-	}
-
-	if limit <= 0 {
-		return []setType{}
-	}
-
-	rand.Shuffle(len(testSet), func(i, j int) { testSet[i], testSet[j] = testSet[j], testSet[i] })
-
-	return testSet[:limit]
 }
