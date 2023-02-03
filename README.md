@@ -231,7 +231,6 @@ testza.FuzzStringRunTests(t, emailAddresses, func(t *testing.T, index int, str s
 <summary>Click to expand</summary>
 
   - [FuzzUtilDistinctSet](https://github.com/MarvinJWendt/testza#FuzzUtilDistinctSet)
-  - [FuzzUtilLimit](https://github.com/MarvinJWendt/testza#FuzzUtilLimit)
   - [FuzzUtilLimitSet](https://github.com/MarvinJWendt/testza#FuzzUtilLimitSet)
   - [FuzzUtilMergeSets](https://github.com/MarvinJWendt/testza#FuzzUtilMergeSets)
   - [FuzzUtilModifySet](https://github.com/MarvinJWendt/testza#FuzzUtilModifySet)
@@ -1462,25 +1461,13 @@ Example:
     uniqueSet := testza.FuzzUtilDistinctSet([]string{"A", "C", "A", "B", "A", "B", "C"})
     // uniqueSet => []string{"A", "C", "B"}
 
-#### FuzzUtilLimit
-
-```go
-func FuzzUtilLimit[setType any](testSet []setType, limit int) []setType
-```
-
-FuzzUtilLimit returns a random piece of input set.
-
-Example:
-
-    limited := testza.FuzzUtilLimit(testza.FuzzStringFull(), 10)
-
 #### FuzzUtilLimitSet
 
 ```go
 func FuzzUtilLimitSet[setType any](testSet []setType, max int) []setType
 ```
 
-FuzzUtilLimitSet limits a test set in size.
+FuzzUtilLimitSet returns a random sample of a test set with a maximal size.
 
 Example:
 
