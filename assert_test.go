@@ -14,8 +14,9 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/MarvinJWendt/testza"
 	"github.com/pterm/pterm"
+
+	. "github.com/MarvinJWendt/testza"
 )
 
 type testMock struct {
@@ -681,7 +682,7 @@ func TestAssertCompletesIn_fails(t *testing.T) {
 
 func TestAssertNotCompletesIn(t *testing.T) {
 	AssertNotCompletesIn(t, 10*time.Microsecond, func() {
-		time.Sleep(15 * time.Millisecond)
+		time.Sleep(20 * time.Millisecond)
 	})
 }
 

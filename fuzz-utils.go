@@ -2,6 +2,7 @@ package testza
 
 import (
 	"fmt"
+	"math/rand"
 	"testing"
 
 	"github.com/MarvinJWendt/testza/internal"
@@ -21,9 +22,9 @@ func FuzzUtilMergeSets[setType any](sets ...[]setType) (merged []setType) {
 	return merged
 }
 
-// FuzzUtilRunTests runs a test for every value in a testset.
+// FuzzUtilRunTests runs a test for every value in a test set.
 // You can use the value as input parameter for your functions, to sanity test against many different cases.
-// This ensures that your functions have a correct error handling and enables you to test against hunderts of cases easily.
+// This ensures that your functions have a correct error handling and enables you to test against hundreds of cases easily.
 //
 // Example:
 //
@@ -103,4 +104,23 @@ func FuzzUtilDistinctSet[setType comparable](testSet []setType) []setType {
 	}
 
 	return result
+}
+
+// FuzzUtilLimit returns a random piece of input set.
+//
+// Example:
+//
+//	limited := testza.FuzzUtilLimit(testza.FuzzStringFull(), 10)
+func FuzzUtilLimit[setType any](testSet []setType, limit int) []setType {
+	if len(testSet) <= limit {
+		return testSet
+	}
+
+	if limit <= 0 {
+		return []setType{}
+	}
+
+	rand.Shuffle(len(testSet), func(i, j int) { testSet[i], testSet[j] = testSet[j], testSet[i] })
+
+	return testSet[:limit]
 }
